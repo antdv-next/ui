@@ -1,0 +1,23 @@
+{
+  "name": "playground",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "h3": "catalog:",
+    "mock-h3": "catalog:",
+    "unplugin-vue-router": "catalog:",
+    "vite": "catalog:",
+    "vue-router": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

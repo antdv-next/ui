@@ -1,0 +1,26 @@
+{
+  "name": "ui",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm -F playground dev",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "eslint": "catalog:",
+    "jiti": "catalog:",
+    "jsdom": "^26.1.0",
+    "less": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "unplugin-vue": "catalog:",
+    "vite": "catalog:",
+    "vitest": "^3.2.4",
+    "vue-tsc": "catalog:"
+  }
+}
