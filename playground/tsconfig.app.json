@@ -18,7 +18,8 @@
     }
   },
   "files": [
-    "types/vite-env.d.ts"
+    "types/vite-env.d.ts",
+    "types/antd.d.ts"
   ],
   "include": [
     "src/**/*.ts",

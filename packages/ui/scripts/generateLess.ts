@@ -1,7 +1,8 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
-import { genCSSVar, genMapToken, parseStyle } from '../src'
+import { genCSSVar, genMapToken } from '../src/theme/cssvar/genCssvar'
+import { parseStyle } from '../src/theme/cssvar/parseStyle'
 import compactDerivative from '../src/theme/themes/compact'
 import darkDerivative from '../src/theme/themes/dark'
 import derivative from '../src/theme/themes/default'
@@ -32,7 +33,7 @@ async function generateLess() {
     ':root': cssVars,
   }
   const code = parseStyle(styles, 'ant')
-  const rootOutputFile = path.resolve(baseUrl, `../src/style/css-vars.less`)
+  const rootOutputFile = path.resolve(baseUrl, `../src/style/pure/css-vars.css`)
   if (!fs.existsSync(rootOutputFile)) {
     await fs.outputFile(rootOutputFile, code, 'utf-8')
   }
@@ -57,7 +58,7 @@ async function generateDarkLess() {
   }
   const code = parseStyle(styles, 'ant')
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
-  const rootOutputFile = path.resolve(baseUrl, `../src/style/css-vars-dark.less`)
+  const rootOutputFile = path.resolve(baseUrl, `../src/style/pure/css-vars-dark.css`)
   if (!fs.existsSync(rootOutputFile)) {
     await fs.outputFile(rootOutputFile, code, 'utf-8')
   }
@@ -68,13 +69,12 @@ async function generateCompactLess() {
   // 最后输出全局的css-var的样式
   const { cssVars } = genCSSVar<any>(mapToken, 'ant')
   const _cssVars = removeNullAndUndefined(cssVars)
-  console.log(_cssVars)
   const styles = {
     ':root': _cssVars,
   }
   const code = parseStyle(styles, 'ant')
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
-  const rootOutputFile = path.resolve(baseUrl, `../src/style/css-vars-compact.less`)
+  const rootOutputFile = path.resolve(baseUrl, `../src/style/pure/css-vars-compact.css`)
   if (!fs.existsSync(rootOutputFile)) {
     await fs.outputFile(rootOutputFile, code, 'utf-8')
   }

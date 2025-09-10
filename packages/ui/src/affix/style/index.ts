@@ -1,6 +1,5 @@
 import type { CSSObject } from '../../theme/cssvar/parseStyle.ts'
-import type { GenerateStyle } from '../../theme/interface'
-import type { FullToken, GetDefaultToken } from '../../theme/interface/cssinjs-utils.ts'
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface'
 import { genStyleHooks } from '../../theme/cssvar/genStyleHooks.ts'
 
 export interface ComponentToken {
