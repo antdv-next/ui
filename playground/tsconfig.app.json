@@ -9,7 +9,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "antdv-next": ["../packages/ui/src"],
+      "antdv-next/*": ["../packages/ui/src/*"]
+    }
   },
   "files": [
     "types/vite-env.d.ts"

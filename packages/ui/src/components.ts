@@ -1,0 +1,1 @@
+export { Affix } from './affix'
