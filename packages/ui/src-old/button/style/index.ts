@@ -812,7 +812,7 @@ export default genStyleHooks(
       genButtonCompactStyle(buttonToken),
     ]
   },
-  prepareComponentToken,
+  prepareComponentToken as any,
   {
     unitless: {
       fontWeight: true,
