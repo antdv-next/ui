@@ -1,7 +1,9 @@
 import type { CSSProperties, InjectionKey } from 'vue'
 import type { ButtonProps } from '../button/define.ts'
-import { inject, provide } from 'vue'
+import { computed, inject, provide } from 'vue'
 import { generateKey } from '../_utils/env.ts'
+
+export type DirectionType = 'ltr' | 'rtl' | undefined
 
 export interface ConfigComponentProps {
   // input?: InputConfig;
@@ -88,7 +90,7 @@ export interface ConfigConsumerProps extends ConfigComponentProps {
   // variant?: Variant;
   virtual?: boolean
   // locale?: Locale;
-  // direction?: DirectionType;
+  direction?: DirectionType
   popupMatchSelectWidth?: boolean
   // popupOverflow?: PopupOverflow;
   // theme?: ThemeConfig;
@@ -109,6 +111,8 @@ function defaultGetPrefixCls(suffixCls?: string, customizePrefixCls?: string) {
   }
   return suffixCls ? `${defaultPrefixCls}-${suffixCls}` : defaultPrefixCls
 }
+
+const EMPTY_OBJECT = {}
 
 let globalPrefixCls: string
 let globalIconPrefixCls: string
@@ -164,6 +168,22 @@ export function useConfigContext() {
     getPrefixCls: defaultGetPrefixCls,
     iconPrefixCls: defaultIconPrefixCls,
   } as ConfigConsumerProps)
+}
+
+export function useComponentConfig<T extends keyof ConfigComponentProps>(propName: T) {
+  const context = useConfigContext()
+  return computed(() => {
+    const propValue = context[propName]
+
+    return {
+      classNames: EMPTY_OBJECT,
+      styles: EMPTY_OBJECT,
+      ...propValue,
+      getPrefixCls: context.getPrefixCls,
+      direction: context.direction,
+      getPopupContainer: context.getPopupContainer,
+    }
+  })
 }
 
 export interface ComponentStyleConfig {

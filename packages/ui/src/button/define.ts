@@ -1,4 +1,5 @@
-import type { CSSProperties, VNodeChild } from 'vue'
+import type { VueNode } from '@v-c/util/dist/type'
+import type { CSSProperties } from 'vue'
 import type { SizeType } from '../config-provider/size-context.ts'
 import type { ButtonColorType, ButtonHTMLType, ButtonShape, ButtonType, ButtonVariantType } from './buttonHelpers.ts'
 
@@ -9,9 +10,9 @@ export interface BaseButtonProps {
   iconPosition?: 'start' | 'end'
   shape?: ButtonShape
   size?: SizeType
-  icon?: VNodeChild
+  icon?: VueNode | (() => VueNode)
   disabled?: boolean
-  loading?: boolean | { delay?: number, icon?: VNodeChild }
+  loading?: boolean | { delay?: number, icon?: VueNode | (() => VueNode) }
   prefixCls?: string
   className?: string
   rootClassName?: string
@@ -38,6 +39,7 @@ export interface ButtonProps extends BaseButtonProps {
  */
 export interface ButtonSlots {
   icon?: () => any
+  loadingIcon?: () => any
   default?: () => any
 }
 

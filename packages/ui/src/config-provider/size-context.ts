@@ -14,6 +14,6 @@ export function useSizeProvider(props: SizeContextProps) {
   provide(SizeContext, props)
 }
 
-export function useSizeContext() {
+export function useSize() {
   return inject(SizeContext, { size: ref<SizeType>() } as SizeContextProps)
 }
