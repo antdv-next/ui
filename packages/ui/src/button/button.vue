@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="ant-button ant-button-color-primary ant-button-variant-dashed">
+  <div class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid">
     <slot />
   </div>
 </template>
