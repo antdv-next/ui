@@ -5,6 +5,7 @@ import { useConfigContext } from '../config-provider/context.ts'
 import { PresetColors } from '../themes/interface/base'
 import { genCssVar } from '../themes/utils/genCssVar'
 import Wave from '../wave/wave.vue'
+import { isUnBorderedButtonVariant } from './buttonHelpers.ts'
 import { ButtonTypeMap } from './define'
 
 defineOptions({
@@ -119,6 +120,7 @@ const cssVars = computed(() => {
     :disabled="mergedDisabled"
   >
     <Wave
+      v-if="!isUnBorderedButtonVariant(mergeTypes[1])"
       component="Button"
       :node="domRef"
     />

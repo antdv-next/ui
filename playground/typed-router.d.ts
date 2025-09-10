@@ -21,6 +21,7 @@ declare module 'vue-router/auto-routes' {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/affix/basic': RouteRecordInfo<'/affix/basic', '/affix/basic', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
+    '/button/variant': RouteRecordInfo<'/button/variant', '/button/variant', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -44,6 +45,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/button/basic.vue': {
       routes: '/button/basic'
+      views: never
+    }
+    'src/pages/button/variant.vue': {
+      routes: '/button/variant'
       views: never
     }
   }

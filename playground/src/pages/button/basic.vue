@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="p-4">
+  <div class="p-4 flex gap-4">
     <a-button>
       Button Basic
     </a-button>
@@ -17,6 +17,10 @@
     </a-button>
 
     <a-button type="text">
+      Button Text
+    </a-button>
+
+    <a-button type="link">
       Button Text
     </a-button>
   </div>
