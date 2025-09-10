@@ -29,7 +29,7 @@ function onClick(e: MouseEvent) {
   }
   showWave(e)
 }
-useEventListener('click', onClick, node, { passive: true })
+useEventListener(node, 'click', onClick, { passive: true })
 </script>
 
 <template>
