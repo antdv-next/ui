@@ -443,6 +443,7 @@ export function parseStyleToLess(
 export function parseStyle(
   styles: Record<string, any>,
   prefixCls: string = 'ant',
+  config?: any,
 ): string {
-  return parseStyleToLess(styles as CSSObject, { prefixCls })
+  return parseStyleToLess(styles as CSSObject, { prefixCls, ...config })
 }

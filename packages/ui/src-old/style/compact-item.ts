@@ -101,7 +101,7 @@ export function genCompactItemStyle<T extends OverrideComponent>(
 
   return {
     [compactCls]: {
-      ...compactItemBorder(token, compactCls, options, componentCls),
+      ...compactItemBorder(token as any, compactCls, options, componentCls),
       ...compactItemBorderRadius(componentCls, compactCls, options),
     },
   }

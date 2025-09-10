@@ -1,24 +1,24 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
-import { genCSSVar, genMapToken } from '../src/theme/cssvar/genCssvar'
-import { parseStyle } from '../src/theme/cssvar/parseStyle'
-import compactDerivative from '../src/theme/themes/compact'
-import darkDerivative from '../src/theme/themes/dark'
-import derivative from '../src/theme/themes/default'
-import seedToken from '../src/theme/themes/seed'
+import { genCSSVar, genMapToken } from '../src-old/theme/cssvar/genCssvar'
+import { parseStyle } from '../src-old/theme/cssvar/parseStyle'
+import compactDerivative from '../src-old/theme/themes/compact'
+import darkDerivative from '../src-old/theme/themes/dark'
+import derivative from '../src-old/theme/themes/default'
+import seedToken from '../src-old/theme/themes/seed'
 
 async function generateLess() {
   const components = [
     'affix',
-    // "button",
+    'button',
     'color-picker',
   ]
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
   const mapToken = genMapToken(seedToken, derivative)
   const mapTokenCssVar = genCSSVar<any>(mapToken, 'ant')
   for (const component of components) {
-    const styleFn = (await import(`../src/${component}/style/index.ts`)).default
+    const styleFn = (await import(`../src-old/${component}/style/index.ts`)).default
     const { code } = styleFn(mapToken, mapTokenCssVar.cssToken)
     // 输出目录
     const outputFile = path.resolve(baseUrl, `../src/${component}/style/index.less`)
@@ -33,7 +33,7 @@ async function generateLess() {
     ':root': cssVars,
   }
   const code = parseStyle(styles, 'ant')
-  const rootOutputFile = path.resolve(baseUrl, `../src/style/pure/css-vars.css`)
+  const rootOutputFile = path.resolve(baseUrl, `../src/style/css-vars.css`)
   if (!fs.existsSync(rootOutputFile)) {
     await fs.outputFile(rootOutputFile, code, 'utf-8')
   }
@@ -58,7 +58,7 @@ async function generateDarkLess() {
   }
   const code = parseStyle(styles, 'ant')
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
-  const rootOutputFile = path.resolve(baseUrl, `../src/style/pure/css-vars-dark.css`)
+  const rootOutputFile = path.resolve(baseUrl, `../src/style/css-vars-dark.css`)
   if (!fs.existsSync(rootOutputFile)) {
     await fs.outputFile(rootOutputFile, code, 'utf-8')
   }

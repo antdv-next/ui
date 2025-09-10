@@ -3,10 +3,8 @@
 </script>
 
 <template>
-  <div>
-    <a-button>
-      Button Basic
-    </a-button>
+  <div class="ant-button ant-button-color-primary ant-button-variant-dashed">
+    <slot />
   </div>
 </template>
 

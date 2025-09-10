@@ -3,7 +3,12 @@ import { camelCase, kebabCase } from 'es-toolkit/compat'
 import { genCSSVar } from './genCssvar.ts'
 import { parseStyle } from './parseStyle.ts'
 
-export function genStyleHooks<K extends OverrideComponent>(component: K, styleFn: (...args: any) => any, tokenFn: (...args: any) => any) {
+export function genStyleHooks<K extends OverrideComponent>(
+  component: K,
+  styleFn: (...args: any) => any,
+  tokenFn: (...args: any) => any,
+  config?: any,
+) {
   return (defaultToken: any, cssVarToken: any) => {
     const componentToken = tokenFn(defaultToken)
     const componentBaseCls = kebabCase(component)
