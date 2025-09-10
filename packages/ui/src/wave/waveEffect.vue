@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import raf from '@v-c/util/dist/raf'
-import { computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { useResizeObserver } from '@vueuse/core'
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 import { TARGET_CLS } from './interface.ts'
 import { getTargetWaveColor } from './util.ts'
 
@@ -26,10 +27,10 @@ const enabled = shallowRef(false)
 const show = shallowRef(true)
 const waveStyle = computed(() => {
   return {
-    left: left.value,
-    top: top.value,
-    width: width.value,
-    height: width.value,
+    left: `${left.value}px`,
+    top: `${top.value}px`,
+    width: `${width.value}px`,
+    height: `${height.value}px`,
     borderRadius: borderRadius.value.map(radius => `${radius}px`).join(' '),
     '--wave-color': color.value,
   } as CSSProperties
@@ -65,26 +66,25 @@ function syncPos() {
 }
 
 // Add resize observer to follow size
-let resizeObserver: ResizeObserver
 let id: any
+useResizeObserver(target, () => {
+  if (id) {
+    raf.cancel(id)
+    id = null
+  }
+  id = raf(() => {
+    syncPos()
+  })
+})
+
 onMounted(() => {
   if (target) {
-    id = raf(() => {
-      syncPos()
-      enabled.value = true
-    })
-
-    if (typeof ResizeObserver !== 'undefined') {
-      resizeObserver = new ResizeObserver(syncPos)
-
-      resizeObserver.observe(target)
-    }
+    enabled.value = true
   }
 })
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   raf.cancel(id)
-  resizeObserver?.disconnect()
 })
 const isSmallComponent = computed(() => (component === 'Checkbox' || component === 'Radio') && target?.classList.contains(TARGET_CLS))
 function handleAfterLeave() {

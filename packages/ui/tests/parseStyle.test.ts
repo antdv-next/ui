@@ -1,6 +1,6 @@
-import type { CSSObject, ParseConfig } from '../src'
+import type { CSSObject, ParseConfig } from '../src-old/theme/cssvar/parseStyle.ts'
 import { describe, expect, it } from 'vitest'
-import { parseStyle, parseStyleInterpolation, parseStyleToLess } from '../src'
+import { parseStyle, parseStyleInterpolation, parseStyleToLess } from '../src-old/theme/cssvar/parseStyle.ts'
 
 describe('parseStyle', () => {
   it('should parse basic CSS properties', () => {

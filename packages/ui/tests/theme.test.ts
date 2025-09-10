@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { genMapToken } from '../src'
-import derivative from '../src/theme/themes/default'
-import seedToken from '../src/theme/themes/seed'
+import { genMapToken } from '../src-old/theme/cssvar/genCssvar.ts'
+import derivative from '../src-old/theme/themes/default'
+import seedToken from '../src-old/theme/themes/seed'
 
 describe('theme test', () => {
   it('default theme ', () => {

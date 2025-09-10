@@ -3,6 +3,9 @@
   "compilerOptions": {
 
   },
+  "files": [
+    "./client.d.ts"
+  ],
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",

@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { genCSSVar, genMapToken, parseStyle } from '../src'
-import affixStyleFn from '../src/affix/style'
-import colorPickerStyleFn from '../src/color-picker/style'
-import derivative from '../src/theme/themes/default'
-import seedToken from '../src/theme/themes/seed'
+import affixStyleFn from '../src-old/affix/style'
+import colorPickerStyleFn from '../src-old/color-picker/style'
+import { genCSSVar, genMapToken } from '../src-old/theme/cssvar/genCssvar.ts'
+import { parseStyle } from '../src-old/theme/cssvar/parseStyle.ts'
+import derivative from '../src-old/theme/themes/default'
+import seedToken from '../src-old/theme/themes/seed'
 
 describe('genLess', () => {
   const mapToken = genMapToken(seedToken, derivative)

@@ -15,6 +15,7 @@
     "@vue/tsconfig": "catalog:",
     "h3": "catalog:",
     "mock-h3": "catalog:",
+    "unocss": "^66.5.1",
     "unplugin-vue-router": "catalog:",
     "vite": "catalog:",
     "vue-router": "catalog:",

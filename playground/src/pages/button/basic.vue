@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="p-4">
     <a-button>
       Button Basic
     </a-button>

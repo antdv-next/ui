@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ButtonEvents, ButtonProps, ButtonSlots, ColorVariantPairType } from './define.ts'
 import { computed, shallowRef } from 'vue'
+import { useConfigContext } from '../config-provider/context.ts'
 import { PresetColors } from '../themes/interface/base'
 import { genCssVar } from '../themes/utils/genCssVar'
 import Wave from '../wave/wave.vue'
@@ -25,6 +26,8 @@ const mergedType = computed(() => type || 'default')
 const shape = computed(() => customizeShape || 'default')
 const domRef = shallowRef<HTMLElement>()
 
+const context = useConfigContext()
+
 const mergeTypes = computed<ColorVariantPairType>(() => {
   // >>>>> Local
   // Color & Variant
@@ -40,11 +43,11 @@ const mergeTypes = computed<ColorVariantPairType>(() => {
     }
     return colorVariantPair
   }
-
+  const button = context.button
   // >>> Context fallback
-  // if (button?.color && button?.variant) {
-  //   return [button.color, button.variant];
-  // }
+  if (button?.color && button?.variant) {
+    return [button.color, button.variant]
+  }
 
   return ['default', 'outlined']
 })
@@ -62,6 +65,7 @@ const linkButtonRestProps = computed(() => {
     href: rest.href,
   }
 })
+// const {size} = useSizeContext()
 
 const prefixCls = `ant-btn`
 const cls = computed(() => {
@@ -69,10 +73,14 @@ const cls = computed(() => {
   return {
     [prefixCls]: true,
     [`${prefixCls}-${shape.value}`]: shape.value !== 'default',
+
     [`${prefixCls}-${type}`]: !!type,
     [`${prefixCls}-dangerous`]: isDanger.value,
+
     [`${prefixCls}-color-${mergedColorText.value}`]: !!mergedColorText.value,
     [`${prefixCls}-variant-${variant}`]: !!variant,
+    // [`${prefixCls}-${sizeCls}`]: sizeCls,
+
   }
 })
 

@@ -1,5 +1,5 @@
-import type { VNodeChild } from 'vue'
-import type { SizeType } from '../_utils/size.ts'
+import type { CSSProperties, VNodeChild } from 'vue'
+import type { SizeType } from '../config-provider/size-context.ts'
 import type { ButtonColorType, ButtonHTMLType, ButtonShape, ButtonType, ButtonVariantType } from './buttonHelpers.ts'
 
 export interface BaseButtonProps {
@@ -19,6 +19,8 @@ export interface BaseButtonProps {
   danger?: boolean
   block?: boolean
   [key: `data-${string}`]: string
+  classNames?: { icon: string }
+  styles?: { icon: CSSProperties }
 }
 
 /**
