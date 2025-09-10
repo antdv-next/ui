@@ -4,7 +4,7 @@ import { genCSSVar } from './genCssvar.ts'
 import { parseStyle } from './parseStyle.ts'
 
 export function genStyleHooks<K extends OverrideComponent>(
-  component: K,
+  component: string,
   styleFn: (...args: any) => any,
   tokenFn: (...args: any) => any,
   config?: any,
@@ -20,6 +20,7 @@ export function genStyleHooks<K extends OverrideComponent>(
       componentCls: `.${componentCls}`,
       componentBaseCls,
       antCls: `.${defaultToken.prefixCls}`,
+      iconCls: `.anticon`,
       ...cssVarToken,
       ...componentCSSVar.cssToken,
     }
@@ -46,7 +47,7 @@ export function genStyleHooks<K extends OverrideComponent>(
       }
     }
 
-    const cssCode = parseStyle(styles, componentCls)
+    const cssCode = parseStyle(styles, componentCls, config)
     return {
       cssVar: componentCSSVar.cssVars,
       styles,
