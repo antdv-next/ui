@@ -1,8 +1,8 @@
-import type { FullToken, MapToken, SeedToken } from '../interface'
+import type { FullToken, MapToken, OverrideComponent, SeedToken } from '../interface'
 import type { GenerateThemeDerivative } from '../interface/presetColors'
 import formatToken from '../util/alias'
-
-const toPx = (num: unknown) => (typeof num === 'number' ? `${num}px` : num)
+import genCalc from './calc'
+import { unit } from './unit'
 
 export function token2CSSVar(token: string, prefix = '') {
   return `--${prefix ? `${prefix}-` : ''}${token}`
@@ -12,37 +12,40 @@ export function token2CSSVar(token: string, prefix = '') {
     .toLowerCase()
 }
 
-export function genCssvar(seedToken: SeedToken, ...derivatives: GenerateThemeDerivative[]) {
+export function genMapToken(seedToken: SeedToken, ...derivatives: GenerateThemeDerivative[]) {
   // 执行对应的 derivative 方法，生成最终的 MapToken
   const mapToken = derivatives.reduce((result, derivative) => derivative(seedToken, result), {} as MapToken)
-  const formatMapToken = formatToken({ ...mapToken, override: {} }) as FullToken<'Affix'>
-  const skipKeys = ['wireframe', 'motion']
+  const formatMapToken = formatToken({ ...mapToken, override: {} })
+  return {
+    ...formatMapToken,
+    prefixCls: 'ant',
+    calc: (number: string) => genCalc('css', new Set())(number),
+    unit,
+  }
+}
+
+export function genCSSVar<T extends OverrideComponent>(token: FullToken<T>, prefixCls?: string, component?: string) {
+  const skipKeys = ['wireframe', 'motion', 'prefixCls', 'componentCls', 'antCls', 'calc', 'unit']
   const _cssVars: Record<string, any> = {}
-  const cssToken: Record<string, string> = {}
-  for (const cssVarsKey in formatMapToken) {
+  const cssToken: Record<string, any> = {}
+  for (const cssVarsKey in token) {
+    const value = (token as any)[cssVarsKey as keyof typeof token]
+
     if (skipKeys.includes(cssVarsKey)) {
+      cssToken[cssVarsKey] = value
       continue
     }
-    const value = formatMapToken[cssVarsKey as keyof typeof formatMapToken]
-    const _key = token2CSSVar(cssVarsKey, 'ant')
+    let _cssVarsKey = cssVarsKey
+    if (component) {
+      _cssVarsKey = cssVarsKey.startsWith(component) ? cssVarsKey.replace(component!, '') : cssVarsKey
+    }
+    const _key = token2CSSVar(_cssVarsKey, prefixCls ?? token.prefixCls ?? 'ant')
     if (cssVarsKey.startsWith('zIndex')) {
       _cssVars[_key] = value
     } else {
-      _cssVars[_key] = toPx(value)
+      _cssVars[_key] = value
     }
     cssToken[cssVarsKey] = `var(${_key})`
   }
-
-  formatMapToken.componentCls = 'ant-affix'
-  formatMapToken.antCls = 'ant'
-  formatMapToken.prefixCls = 'ant'
-  return {
-    cssVar: _cssVars,
-    cssToken,
-    mapToken: formatMapToken,
-  } as {
-    cssVar: Record<string, string>
-    cssToken: Record<keyof MapToken, string>
-    mapToken: FullToken<any>
-  }
+  return { cssToken, cssVars: _cssVars }
 }

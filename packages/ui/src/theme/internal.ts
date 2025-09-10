@@ -13,6 +13,7 @@ import type {
 } from './interface'
 
 import { genCalc as calc, mergeToken, statistic, statisticToken } from '@ant-design/cssinjs-utils'
+import { genStyleHooks } from './cssvar/genStyleHooks.ts'
 import { PresetColors } from './interface'
 import { getLineHeight } from './themes/shared/genFontSizes'
 import genPresetColor from './util/genPresetColor'
@@ -23,7 +24,7 @@ export {
   // generators
   // genComponentStyleHook,
   genPresetColor,
-  // genStyleHooks,
+  genStyleHooks,
   // genSubStyleComponent,
   getLineHeight,
   // utils

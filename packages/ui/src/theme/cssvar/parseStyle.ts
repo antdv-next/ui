@@ -1,5 +1,5 @@
 import type { CSSObject as AntdCSSObject } from '@ant-design/cssinjs'
-import type { AliasToken } from '../interface'
+import { token2CSSVar } from './genCssvar.ts'
 // CSS 相关类型定义
 export type CSSObject = AntdCSSObject
 
@@ -25,6 +25,8 @@ export interface ParseConfig {
   hashPriority?: 'low' | 'high'
   transformers?: Transformer[]
   linters?: Linter[]
+  prefixCls?: string
+  formatStyle?: boolean // 是否格式化CSS样式
 }
 
 // 解析信息
@@ -104,6 +106,19 @@ const unitless: Record<string, boolean> = {
   strokeMiterlimit: true,
   strokeOpacity: true,
   strokeWidth: true,
+}
+
+// 检查是否为 z-index 相关的 CSS 变量
+function isZIndexCSSVar(cssKey: string, styleName: string, prefixCls?: string): boolean {
+  // 如果没有 prefixCls，使用默认的 ant 前缀
+  const prefix = prefixCls || 'ant'
+  for (const unitlessKey in unitless) {
+    const _key = token2CSSVar(unitlessKey, prefix)
+    if (cssKey.startsWith(_key) || styleName.startsWith(_key)) {
+      return true
+    }
+  }
+  return false
 }
 
 // 检查是否为复合 CSS 属性
@@ -195,6 +210,8 @@ export function parseStyleInterpolation(
     hashPriority,
     transformers = [],
     linters = [],
+    prefixCls,
+    formatStyle = true, // 默认开启格式化
   } = config
 
   let styleStr = ''
@@ -309,7 +326,17 @@ export function parseStyleInterpolation(
             ...childEffectStyle,
           }
 
-          styleStr += `${mergedKey}${parsedStr}`
+          if (formatStyle && mergedKey) {
+            const innerContent = parsedStr.replace(/^\{|\}$/g, '').trim()
+            if (innerContent) {
+              const indentedContent = innerContent.replace(/^/gm, '  ')
+              styleStr += `${mergedKey} {\n${indentedContent}\n}\n`
+            } else {
+              styleStr += `${mergedKey} {}\n`
+            }
+          } else {
+            styleStr += `${mergedKey}${parsedStr}`
+          }
         } else {
           // 添加样式属性
           function appendStyle(cssKey: string, cssValue: any) {
@@ -334,6 +361,8 @@ export function parseStyleInterpolation(
             let formatValue = cssValue
             if (
               !unitless[cssKey]
+              && !unitless[styleName]
+              && !isZIndexCSSVar(cssKey, styleName, prefixCls)
               && typeof formatValue === 'number'
               && formatValue !== 0
             ) {
@@ -349,7 +378,7 @@ export function parseStyleInterpolation(
               formatValue = (cssValue as Keyframes).getName(hashId)
             }
 
-            styleStr += `${styleName}:${formatValue};`
+            styleStr += formatStyle ? `${styleName}: ${formatValue};\n` : `${styleName}:${formatValue};`
           }
 
           const actualValue = (value as any)?.value ?? value
@@ -370,11 +399,21 @@ export function parseStyleInterpolation(
   })
 
   if (!root) {
-    styleStr = `{${styleStr}}`
+    if (formatStyle) {
+      const trimmedStyle = styleStr.trim()
+      styleStr = trimmedStyle ? `{\n${trimmedStyle}}` : '{}'
+    } else {
+      styleStr = `{${styleStr}}`
+    }
   } else if (layer) {
     // fixme: https://github.com/thysultan/stylis/pull/339
     if (styleStr) {
-      styleStr = `@layer ${layer.name} {${styleStr}}`
+      if (formatStyle) {
+        const trimmedStyle = styleStr.trim()
+        styleStr = `@layer ${layer.name} {\n${trimmedStyle.replace(/^/gm, '  ')}\n}`
+      } else {
+        styleStr = `@layer ${layer.name} {${styleStr}}`
+      }
     }
 
     if (layer.dependencies) {
@@ -401,6 +440,9 @@ export function parseStyleToLess(
 }
 
 // 兼容原有接口
-export function parseStyle(styles: Record<string, any>, _token: AliasToken): string {
-  return parseStyleToLess(styles as CSSObject, {})
+export function parseStyle(
+  styles: Record<string, any>,
+  prefixCls: string = 'ant',
+): string {
+  return parseStyleToLess(styles as CSSObject, { prefixCls })
 }

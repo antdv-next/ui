@@ -1,6 +1,7 @@
 {
   "name": "ui",
   "type": "module",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "dev": "pnpm -F playground dev",
     "lint": "eslint . --fix"
@@ -13,6 +14,7 @@
     "@vitejs/plugin-vue": "catalog:",
     "@vue/tsconfig": "catalog:",
     "eslint": "catalog:",
+    "eslint-plugin-format": "^1.0.1",
     "jiti": "catalog:",
     "jsdom": "^26.1.0",
     "less": "catalog:",

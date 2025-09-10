@@ -1,6 +1,5 @@
 // import type { CSSInterpolation, DerivativeFunc } from '@ant-design/cssinjs'
 
-import type { CSSInterpolation } from '../cssvar/parseStyle.ts'
 // import type { AnyObject } from '../../_util/type'
 import type { AliasToken } from './alias'
 // import type { MapToken } from './maps'
@@ -44,5 +43,5 @@ export type AnyObject = Record<string, any>
 
 export type GenerateStyle<
   ComponentToken extends AnyObject = AliasToken,
-  ReturnType = CSSInterpolation,
+  ReturnType = any,
 > = (token: ComponentToken) => ReturnType

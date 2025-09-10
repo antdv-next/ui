@@ -14,7 +14,7 @@ import type { ComponentToken as AffixComponentToken } from '../../affix/style'
 // import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
 // import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
 // import type { ComponentToken as CollapseComponentToken } from '../../collapse/style';
-// import type { ComponentToken as ColorPickerComponentToken } from '../../color-picker/style';
+import type { ComponentToken as ColorPickerComponentToken } from '../../color-picker/style'
 // import type { ComponentToken as DatePickerComponentToken } from '../../date-picker/style';
 // import type { ComponentToken as DescriptionsComponentToken } from '../../descriptions/style';
 // import type { ComponentToken as DividerComponentToken } from '../../divider/style';
@@ -78,7 +78,7 @@ export interface ComponentTokenMap {
   // Carousel?: CarouselComponentToken;
   // Cascader?: CascaderComponentToken;
   // Checkbox?: CheckboxComponentToken;
-  // ColorPicker?: ColorPickerComponentToken;
+  ColorPicker?: ColorPickerComponentToken
   // Collapse?: CollapseComponentToken;
   // DatePicker?: DatePickerComponentToken;
   // Descriptions?: DescriptionsComponentToken;

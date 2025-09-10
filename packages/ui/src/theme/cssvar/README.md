@@ -50,15 +50,23 @@ console.log(lessCode)
 
 输出：
 ```less
-background-color:#1890ff;
-border:none;
-border-radius:6px;
-padding:4px 15px;
-font-size:14px;
-cursor:pointer;
-&:hover{background-color:#40a9ff;}
-&:active{background-color:#096dd9;}
-&.disabled{background-color:#f5f5f5;color:#00000040;cursor:not-allowed;}
+background-color: #1890ff;
+border: none;
+border-radius: 6px;
+padding: 4px 15px;
+font-size: 14px;
+cursor: pointer;
+&:hover {
+  background-color: #40a9ff;
+}
+&:active {
+  background-color: #096dd9;
+}
+&.disabled {
+  background-color: #f5f5f5;
+  color: #00000040;
+  cursor: not-allowed;
+}
 ```
 
 ### 2. 复杂嵌套结构
