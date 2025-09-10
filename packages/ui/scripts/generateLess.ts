@@ -10,9 +10,10 @@ import seedToken from '../src-old/theme/themes/seed'
 
 async function generateLess() {
   const components = [
-    'affix',
-    'button',
-    'color-picker',
+    // 'affix',
+    // 'button',
+    // 'color-picker',
+    'wave',
   ]
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
   const mapToken = genMapToken(seedToken, derivative)

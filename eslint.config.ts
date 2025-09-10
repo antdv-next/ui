@@ -7,5 +7,6 @@ export default antfu({
   rules: {
     'style/brace-style': 0,
     'jsdoc/empty-tags': 0,
+    'style/quote-props': 0,
   },
 })

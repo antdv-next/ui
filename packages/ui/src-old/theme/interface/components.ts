@@ -1,4 +1,3 @@
-// import type { ComponentToken as WaveToken } from '../../_util/wave/style';
 import type { ComponentToken as AffixComponentToken } from '../../affix/style'
 // import type { ComponentToken as AlertComponentToken } from '../../alert/style';
 // import type { ComponentToken as AnchorComponentToken } from '../../anchor/style';
@@ -15,6 +14,7 @@ import type { ComponentToken as ButtonComponentToken } from '../../button/style'
 // import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
 // import type { ComponentToken as CollapseComponentToken } from '../../collapse/style';
 import type { ComponentToken as ColorPickerComponentToken } from '../../color-picker/style'
+import type { ComponentToken as WaveToken } from '../../wave/style'
 // import type { ComponentToken as DatePickerComponentToken } from '../../date-picker/style';
 // import type { ComponentToken as DescriptionsComponentToken } from '../../descriptions/style';
 // import type { ComponentToken as DividerComponentToken } from '../../divider/style';
@@ -133,5 +133,5 @@ export interface ComponentTokenMap {
   // App?: AppComponentToken;
 
   /** @private Internal TS definition. Do not use. */
-  // Wave?: WaveToken;
+  Wave?: WaveToken
 }
