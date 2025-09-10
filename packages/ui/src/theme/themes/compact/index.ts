@@ -1,5 +1,4 @@
-import type { MapToken } from '../../interface/maps'
-import type { SeedToken } from '../../interface/seeds.ts'
+import type { MapToken, SeedToken } from '../../interface'
 import defaultAlgorithm from '../default'
 import genControlHeight from '../shared/genControlHeight'
 import genFontMapToken from '../shared/genFontMapToken'

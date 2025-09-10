@@ -8,7 +8,8 @@
     "package.json"
   ],
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "gen:less": "esno ./scripts/generateLess.ts"
   },
   "dependencies": {
     "es-toolkit": "^1.39.10"
