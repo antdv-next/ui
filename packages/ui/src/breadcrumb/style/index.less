@@ -1,0 +1,84 @@
+.ant-breadcrumb {
+  --ant-breadcrumb-item-color: var(--ant-color-text-description);
+  --ant-breadcrumb-last-item-color: var(--ant-color-text);
+  --ant-breadcrumb-icon-font-size: 14px;
+  --ant-breadcrumb-link-color: var(--ant-color-text-description);
+  --ant-breadcrumb-link-hover-color: var(--ant-color-text);
+  --ant-breadcrumb-separator-color: var(--ant-color-text-description);
+  --ant-breadcrumb-separator-margin: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-breadcrumb-item-color);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  .anticon {
+    font-size: var(--ant-breadcrumb-icon-font-size);
+  }
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    color: var(--ant-breadcrumb-link-color);
+    transition: color var(--ant-motion-duration-mid);
+    padding: 0 var(--ant-padding-xxs);
+    border-radius: var(--ant-border-radius-sm);
+    height: var(--ant-font-height);
+    display: inline-block;
+    margin-inline: calc(var(--ant-margin-xxs) * -1);
+    &:hover {
+      color: var(--ant-breadcrumb-link-hover-color);
+      background-color: var(--ant-color-bg-text-hover);
+    }
+    &:focus-visible {
+      outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+      outline-offset: 1px;
+      transition: outline-offset 0s, outline 0s;
+    }
+  }
+  li:last-child {
+    color: var(--ant-breadcrumb-last-item-color);
+  }
+  .ant-breadcrumb-separator {
+    margin-inline: var(--ant-breadcrumb-separator-margin);
+    color: var(--ant-breadcrumb-separator-color);
+  }
+  .ant-breadcrumb-link {
+    > .anticon + span,
+              > .anticon + a {
+      margin-inline-start: var(--ant-margin-xxs);
+    }
+  }
+  .ant-breadcrumb-overlay-link {
+    border-radius: var(--ant-border-radius-sm);
+    height: var(--ant-font-height);
+    display: inline-block;
+    padding: 0 var(--ant-padding-xxs);
+    margin-inline: calc(var(--ant-margin-xxs) * -1);
+    > .anticon {
+      margin-inline-start: var(--ant-margin-xxs);
+      font-size: var(--ant-font-size-icon);
+    }
+    &:hover {
+      color: var(--ant-breadcrumb-link-hover-color);
+      background-color: var(--ant-color-bg-text-hover);
+      a {
+        color: var(--ant-breadcrumb-link-hover-color);
+      }
+    }
+    a {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+  &.ant-breadcrumb-rtl {
+    direction: rtl;
+  }
+}

@@ -1,0 +1,81 @@
+.ant-layout-sider {
+  position: relative;
+  min-width: 0;
+  background: var(--ant-layout-sider-bg);
+  transition:
+    all var(--ant-motion-duration-mid),
+    background 0s;
+  &-has-trigger {
+    padding-bottom: var(--ant-layout-trigger-height);
+  }
+  &-right {
+    order: 1;
+  }
+  .ant-layout-sider-children {
+    height: 100%;
+    margin-top: -0.1px;
+    padding-top: 0.1px;
+    .ant-menu.ant-menu-inline-collapsed {
+      width: auto;
+    }
+  }
+  &-zero-width .ant-layout-sider-children {
+    overflow: hidden;
+  }
+  .ant-layout-sider-trigger {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    height: var(--ant-layout-trigger-height);
+    color: var(--ant-layout-trigger-color);
+    line-height: var(--ant-layout-trigger-height);
+    text-align: center;
+    background: var(--ant-layout-trigger-bg);
+    cursor: pointer;
+    transition: all var(--ant-motion-duration-mid);
+  }
+  .ant-layout-sider-zero-width-trigger {
+    position: absolute;
+    top: var(--ant-layout-header-height);
+    inset-inline-end: calc(var(--ant-layout-zero-trigger-width) * -1);
+    z-index: 1;
+    width: var(--ant-layout-zero-trigger-width);
+    height: var(--ant-layout-zero-trigger-height);
+    color: var(--ant-layout-trigger-color);
+    font-size: var(--ant-font-size-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ant-layout-sider-bg);
+    border-radius: 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0;
+    cursor: pointer;
+    transition: background var(--ant-motion-duration-slow) ease;
+    &::after {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      transition: all var(--ant-motion-duration-slow);
+      content: '';
+    }
+    &:hover::after {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    &-right {
+      inset-inline-start: calc(var(--ant-layout-zero-trigger-width) * -1);
+      border-radius: var(--ant-border-radius-lg) 0 0 var(--ant-border-radius-lg);
+    }
+  }
+  &-light {
+    background: var(--ant-layout-light-sider-bg);
+    .ant-layout-sider-trigger {
+      color: var(--ant-layout-light-trigger-color);
+      background: var(--ant-layout-light-trigger-bg);
+    }
+    .ant-layout-sider-zero-width-trigger {
+      color: var(--ant-layout-light-trigger-color);
+      background: var(--ant-layout-light-trigger-bg);
+      border: 1px solid var(--ant-layout-body-bg);
+      border-inline-start: 0;
+    }
+  }
+}

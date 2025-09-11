@@ -9,20 +9,55 @@ import derivative from '../src-old/theme/themes/default'
 import seedToken from '../src-old/theme/themes/seed'
 
 async function generateLess() {
-  const components = [
+  const components: (string | [string, string])[] = [
     // 'affix',
     // 'button',
     // 'color-picker',
-    'wave',
+    // 'wave',
+    // 'alert',
+    // 'anchor',
+    // 'app',
+    // 'avatar',
+    // 'badge',
+    // ['badge', 'ribbon'],
+    // 'breadcrumb',
+    // 'card',
+    // 'carousel',
+    // 'checkbox',
+    // 'cascader',
+    // ['cascader', 'panel'],
+    // 'collapse',
+    // 'descriptions',
+    // 'divider',
+    // 'drawer',
+    // 'dropdown',
+    // 'empty',
+    // 'flex',
+    // 'float-button',
+    // 'form',
+    // ['form', 'fallbackCmp'],
+    // ['grid', 'row'],
+    // ['grid', 'col'],
+    // ['input', 'shared'],
+    // ['input', 'otp'],
+    // ['input', 'textarea'],
+    // 'input',
+    // 'input-number',
+    // 'layout',
+    // ['layout', 'sider'],
+    // 'list',
+    // 'mentions',
   ]
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
-  const mapToken = genMapToken(seedToken, derivative)
+  let mapToken = genMapToken(seedToken, derivative)
   const mapTokenCssVar = genCSSVar<any>(mapToken, 'ant')
+  mapToken = mapTokenCssVar.mapToken as any
   for (const component of components) {
-    const styleFn = (await import(`../src-old/${component}/style/index.ts`)).default
+    const [dir, outFile = 'index'] = Array.isArray(component) ? component : [component]
+    const styleFn = (await import(`../src-old/${dir}/style/${outFile}.ts`)).default
     const { code } = styleFn(mapToken, mapTokenCssVar.cssToken)
     // 输出目录
-    const outputFile = path.resolve(baseUrl, `../src/${component}/style/index.less`)
+    const outputFile = path.resolve(baseUrl, `../src/${dir}/style/${outFile}.less`)
     // 文件已经存在的话就不生成了
     if (!fs.existsSync(outputFile)) {
       await fs.outputFile(outputFile, code, 'utf-8')

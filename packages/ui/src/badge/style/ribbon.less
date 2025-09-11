@@ -1,0 +1,116 @@
+.ant-ribbon-wrapper {
+  position: relative;
+}
+
+.ant-ribbon {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 var(--ant-padding-xs);
+  color: var(--ant-color-primary);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-font-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: absolute;
+  top: var(--ant-margin-xs);
+  white-space: nowrap;
+  background-color: var(--ant-color-primary);
+  border-radius: var(--ant-border-radius-sm);
+  .ant-ribbon-text {
+    color: var(--ant-color-text-light-solid);
+  }
+  .ant-ribbon-corner {
+    position: absolute;
+    top: 100%;
+    width: var(--ant-margin-xs);
+    height: var(--ant-margin-xs);
+    color: currentcolor;
+    border: calc(var(--ant-margin-xs) / 2) solid;
+    transform: scaleY(0.75);
+    transform-origin: top;
+    filter: brightness(75%);
+  }
+  &.ant-ribbon-color-blue {
+    background: var(--ant-blue-6);
+    color: var(--ant-blue-6);
+  }
+  &.ant-ribbon-color-purple {
+    background: var(--ant-purple-6);
+    color: var(--ant-purple-6);
+  }
+  &.ant-ribbon-color-cyan {
+    background: var(--ant-cyan-6);
+    color: var(--ant-cyan-6);
+  }
+  &.ant-ribbon-color-green {
+    background: var(--ant-green-6);
+    color: var(--ant-green-6);
+  }
+  &.ant-ribbon-color-magenta {
+    background: var(--ant-magenta-6);
+    color: var(--ant-magenta-6);
+  }
+  &.ant-ribbon-color-pink {
+    background: var(--ant-pink-6);
+    color: var(--ant-pink-6);
+  }
+  &.ant-ribbon-color-red {
+    background: var(--ant-red-6);
+    color: var(--ant-red-6);
+  }
+  &.ant-ribbon-color-orange {
+    background: var(--ant-orange-6);
+    color: var(--ant-orange-6);
+  }
+  &.ant-ribbon-color-yellow {
+    background: var(--ant-yellow-6);
+    color: var(--ant-yellow-6);
+  }
+  &.ant-ribbon-color-volcano {
+    background: var(--ant-volcano-6);
+    color: var(--ant-volcano-6);
+  }
+  &.ant-ribbon-color-geekblue {
+    background: var(--ant-geekblue-6);
+    color: var(--ant-geekblue-6);
+  }
+  &.ant-ribbon-color-lime {
+    background: var(--ant-lime-6);
+    color: var(--ant-lime-6);
+  }
+  &.ant-ribbon-color-gold {
+    background: var(--ant-gold-6);
+    color: var(--ant-gold-6);
+  }
+  &.ant-ribbon-placement-end {
+    inset-inline-end: calc(var(--ant-margin-xs) * -1);
+    border-end-end-radius: 0;
+    .ant-ribbon-corner {
+      inset-inline-end: 0;
+      border-inline-end-color: transparent;
+      border-block-end-color: transparent;
+    }
+  }
+  &.ant-ribbon-placement-start {
+    inset-inline-start: calc(var(--ant-margin-xs) * -1);
+    border-end-start-radius: 0;
+    .ant-ribbon-corner {
+      inset-inline-start: 0;
+      border-block-end-color: transparent;
+      border-inline-start-color: transparent;
+    }
+  }
+  &-rtl {
+    direction: rtl;
+  }
+}
+.ant-badge {
+  --ant-badge-indicator-z-index: auto;
+  --ant-badge-indicator-height: 20px;
+  --ant-badge-indicator-height-sm: 14px;
+  --ant-badge-dot-size: 6px;
+  --ant-badge-text-font-size: 12px;
+  --ant-badge-text-font-size-sm: 12px;
+  --ant-badge-text-font-weight: normal;
+  --ant-badge-status-size: 6px;
+}

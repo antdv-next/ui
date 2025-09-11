@@ -1,0 +1,294 @@
+.ant-card {
+  --ant-card-header-bg: transparent;
+  --ant-card-header-font-size: 16px;
+  --ant-card-header-font-size-sm: 14px;
+  --ant-card-header-height: 56px;
+  --ant-card-header-height-sm: 38px;
+  --ant-card-actions-bg: var(--ant-color-bg-container);
+  --ant-card-actions-li-margin: 12px 0;
+  --ant-card-tabs-margin-bottom: -17px;
+  --ant-card-extra-color: var(--ant-color-text);
+  --ant-card-body-padding-sm: 12px;
+  --ant-card-header-padding-sm: 12px;
+  --ant-card-body-padding: 24px;
+  --ant-card-header-padding: 24px;
+}
+.ant-card {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: relative;
+  background: var(--ant-color-bg-container);
+  border-radius: var(--ant-border-radius-lg);
+  &:not(.ant-card-bordered) {
+    box-shadow: var(--ant-box-shadow-tertiary);
+  }
+  .ant-card-head {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: var(--ant-card-header-height);
+    margin-bottom: -1px;
+    padding: 0 var(--ant-card-header-padding);
+    color: var(--ant-color-text-heading);
+    font-weight: var(--ant-font-weight-strong);
+    font-size: var(--ant-card-header-font-size);
+    background: var(--ant-card-header-bg);
+    border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border-secondary);
+    border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0;
+    &::before {
+      display: table;
+      content: "";
+    }
+    &::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+    &-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    &-title {
+      display: inline-block;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      > .ant-card-typography,
+                > .ant-card-typography-edit-content {
+        inset-inline-start: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    .ant-tabs-top {
+      clear: both;
+      margin-bottom: var(--ant-card-tabs-margin-bottom);
+      color: var(--ant-color-text);
+      font-weight: normal;
+      font-size: var(--ant-font-size);
+      &-bar {
+        border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border-secondary);
+      }
+    }
+  }
+  .ant-card-extra {
+    margin-inline-start: auto;
+    color: var(--ant-card-extra-color);
+    font-weight: normal;
+    font-size: var(--ant-font-size);
+  }
+  .ant-card-body {
+    padding: var(--ant-card-body-padding);
+    border-radius: 0 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg);
+    &::before {
+      display: table;
+      content: "";
+    }
+    &::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+  }
+  .ant-card-grid {
+    width: 33.33%;
+    padding: var(--ant-padding-lg);
+    border: 0;
+    border-radius: 0;
+    box-shadow: 
+          var(--ant-line-width) 0 0 0 var(--ant-color-border-secondary),
+          0 var(--ant-line-width) 0 0 var(--ant-color-border-secondary),
+          var(--ant-line-width) var(--ant-line-width) 0 0 var(--ant-color-border-secondary),
+          var(--ant-line-width) 0 0 0 var(--ant-color-border-secondary) inset,
+          0 var(--ant-line-width) 0 0 var(--ant-color-border-secondary) inset;
+        ;
+    transition: all var(--ant-motion-duration-mid);
+    &-hoverable:hover {
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--ant-box-shadow-card);
+    }
+  }
+  .ant-card-cover {
+    > * {
+      display: block;
+      width: 100%;
+      border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0;
+    }
+  }
+  .ant-card-actions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--ant-card-actions-bg);
+    border-top: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border-secondary);
+    display: flex;
+    border-radius: 0 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg);
+    &::before {
+      display: table;
+      content: "";
+    }
+    &::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+    & > li {
+      margin: var(--ant-card-actions-li-margin);
+      color: var(--ant-color-text-description);
+      text-align: center;
+      > span {
+        position: relative;
+        display: block;
+        min-width: calc(var(--ant-font-size) * 2);
+        font-size: var(--ant-font-size);
+        line-height: var(--ant-line-height);
+        cursor: pointer;
+        &:hover {
+          color: var(--ant-color-primary);
+          transition: color var(--ant-motion-duration-mid);
+        }
+        a:not(.ant-card-btn), > .anticon {
+          display: inline-block;
+          width: 100%;
+          color: var(--ant-color-icon);
+          line-height: var(--ant-font-height);
+          transition: color var(--ant-motion-duration-mid);
+          &:hover {
+            color: var(--ant-color-primary);
+          }
+        }
+        > .anticon {
+          font-size: var(--ant-font-size);
+          line-height: calc(var(--ant-font-size) * var(--ant-line-height));
+        }
+      }
+      &:not(:last-child) {
+        border-inline-end: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border-secondary);
+      }
+    }
+  }
+  .ant-card-meta {
+    margin: calc(var(--ant-margin-xxs) * -1) 0;
+    display: flex;
+    &::before {
+      display: table;
+      content: "";
+    }
+    &::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+    &-avatar {
+      padding-inline-end: var(--ant-padding);
+    }
+    &-detail {
+      overflow: hidden;
+      flex: 1;
+      > div:not(:last-child) {
+        margin-bottom: var(--ant-margin-xs);
+      }
+    }
+    &-title {
+      color: var(--ant-color-text-heading);
+      font-weight: var(--ant-font-weight-strong);
+      font-size: var(--ant-font-size-lg);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    &-description {
+      color: var(--ant-color-text-description);
+    }
+  }
+}
+.ant-card-bordered {
+  border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border-secondary);
+  .ant-card-cover {
+    margin-top: -1px;
+    margin-inline-start: -1px;
+    margin-inline-end: -1px;
+  }
+}
+.ant-card-hoverable {
+  cursor: pointer;
+  transition: box-shadow var(--ant-motion-duration-mid), border-color var(--ant-motion-duration-mid);
+  &:hover {
+    border-color: transparent;
+    box-shadow: var(--ant-box-shadow-card);
+  }
+}
+.ant-card-contain-grid {
+  border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0 ;
+  .ant-card-body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &:not(.ant-card-loading) .ant-card-body {
+    margin-block-start: calc(var(--ant-line-width) * -1);
+    margin-inline-start: calc(var(--ant-line-width) * -1);
+    padding: 0;
+  }
+}
+.ant-card-contain-tabs {
+  > div.ant-card-head {
+    min-height: 0;
+    .ant-card-head-title, .ant-card-extra {
+      padding-top: var(--ant-padding);
+    }
+  }
+}
+.ant-card-type-inner {
+  .ant-card-head {
+    padding: 0 var(--ant-card-header-padding);
+    background: var(--ant-color-fill-alter);
+    &-title {
+      font-size: var(--ant-font-size);
+    }
+  }
+  .ant-card-body {
+    padding: var(--ant-padding) var(--ant-card-body-padding);
+  }
+}
+.ant-card-loading {
+  overflow: hidden;
+  .ant-card-body {
+    user-select: none;
+  }
+}
+.ant-card-rtl {
+  direction: rtl;
+}
+.ant-card-small {
+  > .ant-card-head {
+    min-height: var(--ant-card-header-height-sm);
+    padding: 0 var(--ant-card-header-padding-sm);
+    font-size: var(--ant-card-header-font-size-sm);
+    > .ant-card-head-wrapper {
+      > .ant-card-extra {
+        font-size: var(--ant-font-size);
+      }
+    }
+  }
+  > .ant-card-body {
+    padding: var(--ant-card-body-padding-sm);
+  }
+}
+.ant-card-small.ant-card-contain-tabs {
+  > .ant-card-head {
+    .ant-card-head-title, .ant-card-extra {
+      padding-top: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

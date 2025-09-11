@@ -6,11 +6,11 @@ import { parseStyle } from './parseStyle.ts'
 export function genStyleHooks<K extends OverrideComponent>(
   component: string,
   styleFn: (...args: any) => any,
-  tokenFn: (...args: any) => any,
+  tokenFn?: (...args: any) => any,
   config?: any,
 ) {
   return (defaultToken: any, cssVarToken: any) => {
-    const componentToken = tokenFn(defaultToken)
+    const componentToken = tokenFn ? tokenFn(defaultToken) : defaultToken
     const componentBaseCls = kebabCase(component)
     const componentCls = `${defaultToken.prefixCls}-${componentBaseCls}`
     const keyToken = camelCase(component)
@@ -20,12 +20,13 @@ export function genStyleHooks<K extends OverrideComponent>(
       componentCls: `.${componentCls}`,
       componentBaseCls,
       antCls: `.${defaultToken.prefixCls}`,
+      rootPrefixCls: `${defaultToken.prefixCls}`,
       iconCls: `.anticon`,
       ...cssVarToken,
       ...componentCSSVar.cssToken,
     }
     // 处理token转换成cssVar
-    let styles = styleFn(token)
+    let styles = styleFn(token, token)
     if (Array.isArray(styles)) {
       styles = [
         {

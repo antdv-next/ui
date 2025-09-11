@@ -1,0 +1,41 @@
+.ant-input-otp {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  column-gap: var(--ant-padding-xs);
+  .ant-input-otp-input-wrapper {
+    position: relative;
+    .ant-input-otp-mask-icon {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      pointer-events: none;
+    }
+    .ant-input-otp-mask-input {
+      color: transparent;
+      caret-color: var(--ant-color-text);
+    }
+    .ant-input-otp-mask-input[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .ant-input-otp-mask-input[type='number'] {
+      -moz-appearance: textfield;
+    }
+  }
+  &-rtl {
+    direction: rtl;
+  }
+  .ant-input-otp-input {
+    text-align: center;
+    padding-inline: var(--ant-padding-xxs);
+  }
+  &.ant-input-otp-sm .ant-input-otp-input {
+    padding-inline: calc(var(--ant-padding-xxs) / 2);
+  }
+  &.ant-input-otp-lg .ant-input-otp-input {
+    padding-inline: var(--ant-padding-xs);
+  }
+}

@@ -1,0 +1,378 @@
+@keyframes antBadgeLoadingCircle {
+  0% {
+    transform-origin: 50%;
+  }
+  100% {
+    transform: translate(50%, -50%) rotate(360deg);
+    transform-origin: 50%;
+  }
+}
+
+@keyframes antStatusProcessing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+@keyframes antZoomBadgeIn {
+  0% {
+    transform: scale(0) translate(50%, -50%);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translate(50%, -50%);
+  }
+}
+@keyframes antZoomBadgeOut {
+  0% {
+    transform: scale(1) translate(50%, -50%);
+  }
+  100% {
+    transform: scale(0) translate(50%, -50%);
+    opacity: 0;
+  }
+}
+@keyframes antNoWrapperZoomBadgeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes antNoWrapperZoomBadgeOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.ant-badge {
+  --ant-badge-indicator-z-index: auto;
+  --ant-badge-indicator-height: 20px;
+  --ant-badge-indicator-height-sm: 14px;
+  --ant-badge-dot-size: 6px;
+  --ant-badge-text-font-size: 12px;
+  --ant-badge-text-font-size-sm: 12px;
+  --ant-badge-text-font-weight: normal;
+  --ant-badge-status-size: 6px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: 1;
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  .ant-badge-count {
+    display: inline-flex;
+    justify-content: center;
+    z-index: var(--ant-badge-indicator-z-index);
+    min-width: var(--ant-badge-indicator-height);
+    height: var(--ant-badge-indicator-height);
+    color: var(--ant-color-text-light-solid);
+    font-weight: var(--ant-badge-text-font-weight);
+    font-size: var(--ant-badge-text-font-size);
+    line-height: var(--ant-badge-indicator-height);
+    white-space: nowrap;
+    text-align: center;
+    background: var(--ant-color-error);
+    border-radius: calc(var(--ant-badge-indicator-height) / 2);
+    box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-border-bg);
+    transition: background var(--ant-motion-duration-mid);
+    a {
+      color: var(--ant-color-text-light-solid);
+    }
+    a:hover {
+      color: var(--ant-color-text-light-solid);
+    }
+    a:hover & {
+      background: var(--ant-color-error-hover);
+    }
+  }
+  .ant-badge-count-sm {
+    min-width: var(--ant-badge-indicator-height-sm);
+    height: var(--ant-badge-indicator-height-sm);
+    font-size: var(--ant-badge-text-font-size-sm);
+    line-height: var(--ant-badge-indicator-height-sm);
+    border-radius: calc(var(--ant-badge-indicator-height-sm) / 2);
+  }
+  .ant-badge-multiple-words {
+    padding: 0 var(--ant-padding-xs);
+    bdi {
+      unicode-bidi: plaintext;
+    }
+  }
+  .ant-badge-dot {
+    z-index: var(--ant-badge-indicator-z-index);
+    width: var(--ant-badge-dot-size);
+    min-width: var(--ant-badge-dot-size);
+    height: var(--ant-badge-dot-size);
+    background: var(--ant-color-error);
+    border-radius: 100%;
+    box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-border-bg);
+  }
+  .ant-badge-count,
+  .ant-badge-dot,
+  .ant-scroll-number-custom-component {
+    position: absolute;
+    top: 0;
+    inset-inline-end: 0;
+    transform: translate(50%, -50%);
+    transform-origin: 100% 0%;
+    &.anticon-spin {
+      animation-name: antBadgeLoadingCircle;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+  }
+  &.ant-badge-status {
+    line-height: inherit;
+    vertical-align: baseline;
+    .ant-badge-status-dot {
+      position: relative;
+      top: -1px;
+      display: inline-block;
+      width: var(--ant-badge-status-size);
+      height: var(--ant-badge-status-size);
+      vertical-align: middle;
+      border-radius: 50%;
+    }
+    .ant-badge-status-success {
+      background-color: var(--ant-color-success);
+    }
+    .ant-badge-status-processing {
+      overflow: visible;
+      color: var(--ant-color-info);
+      background-color: var(--ant-color-info);
+      border-color: currentcolor;
+      &::after {
+        position: absolute;
+        top: 0;
+        inset-inline-start: 0;
+        width: 100%;
+        height: 100%;
+        border-width: var(--ant-line-width);
+        border-style: solid;
+        border-color: inherit;
+        border-radius: 50%;
+        animation-name: antStatusProcessing;
+        animation-duration: 1.2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        content: '';
+      }
+    }
+    .ant-badge-status-default {
+      background-color: var(--ant-color-text-placeholder);
+    }
+    .ant-badge-status-error {
+      background-color: var(--ant-color-error);
+    }
+    .ant-badge-status-warning {
+      background-color: var(--ant-color-warning);
+    }
+    .ant-badge-status-text {
+      margin-inline-start: var(--ant-margin-xs);
+      color: var(--ant-color-text);
+      font-size: var(--ant-font-size);
+    }
+  }
+  &.ant-badge .ant-badge-color-blue {
+    background: var(--ant-blue-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-blue-6);
+    }
+    a:hover & {
+      background: var(--ant-blue-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-purple {
+    background: var(--ant-purple-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-purple-6);
+    }
+    a:hover & {
+      background: var(--ant-purple-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-cyan {
+    background: var(--ant-cyan-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-cyan-6);
+    }
+    a:hover & {
+      background: var(--ant-cyan-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-green {
+    background: var(--ant-green-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-green-6);
+    }
+    a:hover & {
+      background: var(--ant-green-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-magenta {
+    background: var(--ant-magenta-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-magenta-6);
+    }
+    a:hover & {
+      background: var(--ant-magenta-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-pink {
+    background: var(--ant-pink-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-pink-6);
+    }
+    a:hover & {
+      background: var(--ant-pink-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-red {
+    background: var(--ant-red-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-red-6);
+    }
+    a:hover & {
+      background: var(--ant-red-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-orange {
+    background: var(--ant-orange-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-orange-6);
+    }
+    a:hover & {
+      background: var(--ant-orange-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-yellow {
+    background: var(--ant-yellow-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-yellow-6);
+    }
+    a:hover & {
+      background: var(--ant-yellow-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-volcano {
+    background: var(--ant-volcano-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-volcano-6);
+    }
+    a:hover & {
+      background: var(--ant-volcano-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-geekblue {
+    background: var(--ant-geekblue-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-geekblue-6);
+    }
+    a:hover & {
+      background: var(--ant-geekblue-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-lime {
+    background: var(--ant-lime-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-lime-6);
+    }
+    a:hover & {
+      background: var(--ant-lime-6);
+    }
+  }
+  &.ant-badge .ant-badge-color-gold {
+    background: var(--ant-gold-6);
+    &:not(.ant-badge-count) {
+      color: var(--ant-gold-6);
+    }
+    a:hover & {
+      background: var(--ant-gold-6);
+    }
+  }
+  .ant-badge-zoom-appear,
+  .ant-badge-zoom-enter {
+    animation-name: antZoomBadgeIn;
+    animation-duration: var(--ant-motion-duration-slow);
+    animation-timing-function: var(--ant-motion-ease-out-back);
+    animation-fill-mode: both;
+  }
+  .ant-badge-zoom-leave {
+    animation-name: antZoomBadgeOut;
+    animation-duration: var(--ant-motion-duration-slow);
+    animation-timing-function: var(--ant-motion-ease-out-back);
+    animation-fill-mode: both;
+  }
+  &.ant-badge-not-a-wrapper {
+    .ant-badge-zoom-appear,
+    .ant-badge-zoom-enter {
+      animation-name: antNoWrapperZoomBadgeIn;
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-timing-function: var(--ant-motion-ease-out-back);
+    }
+    .ant-badge-zoom-leave {
+      animation-name: antNoWrapperZoomBadgeOut;
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-timing-function: var(--ant-motion-ease-out-back);
+    }
+    &:not(.ant-badge-status) {
+      vertical-align: middle;
+    }
+    .ant-scroll-number-custom-component,
+    .ant-badge-count {
+      transform: none;
+    }
+    .ant-scroll-number-custom-component,
+    .ant-scroll-number {
+      position: relative;
+      top: auto;
+      display: block;
+      transform-origin: 50% 50%;
+    }
+  }
+  .ant-scroll-number {
+    overflow: hidden;
+    transition: all var(--ant-motion-duration-mid) var(--ant-motion-ease-out-back);
+    .ant-scroll-number-only {
+      position: relative;
+      display: inline-block;
+      height: var(--ant-badge-indicator-height);
+      transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-out-back);
+      -webkit-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      > p.ant-scroll-number-only-unit {
+        height: var(--ant-badge-indicator-height);
+        margin: 0;
+        -webkit-transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+      }
+    }
+    .ant-scroll-number-symbol {
+      vertical-align: top;
+    }
+  }
+  &-rtl {
+    direction: rtl;
+    .ant-badge-count,
+    .ant-badge-dot,
+    .ant-scroll-number-custom-component {
+      transform: translate(-50%, -50%);
+    }
+  }
+}

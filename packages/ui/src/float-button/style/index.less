@@ -1,0 +1,568 @@
+@keyframes antFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes antFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes antFloatButtonMoveTopIn {
+  0% {
+    transform: translate3d(0, var(--ant-control-height-lg), 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes antFloatButtonMoveTopOut {
+  0% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, var(--ant-control-height-lg), 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+}
+@keyframes antFloatButtonMoveBottomIn {
+  0% {
+    transform: translate3d(0, calc(var(--ant-control-height-lg) * -1), 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes antFloatButtonMoveBottomOut {
+  0% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, calc(var(--ant-control-height-lg) * -1), 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+}
+@keyframes antFloatButtonMoveLeftIn {
+  0% {
+    transform: translate3d(var(--ant-control-height-lg), 0, 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes antFloatButtonMoveLeftOut {
+  0% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--ant-control-height-lg), 0, 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+}
+@keyframes antFloatButtonMoveRightIn {
+  0% {
+    transform: translate3d(calc(var(--ant-control-height-lg) * -1), 0, 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes antFloatButtonMoveRightOut {
+  0% {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(calc(var(--ant-control-height-lg) * -1), 0, 0);
+    transform-origin: 0 0;
+    opacity: 0;
+  }
+}
+
+.ant-float-button {
+  --ant-float-button-dot-offset-in-circle: 5.857864376269049px;
+  --ant-float-button-dot-offset-in-square: 2.3431457505076194px;
+}
+.ant-float-button-group {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  z-index: var(--ant-z-index-popup-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  position: fixed;
+  height: auto;
+  box-shadow: none;
+  min-width: var(--ant-control-height-lg);
+  min-height: var(--ant-control-height-lg);
+  inset-inline-end: var(--ant-margin-lg);
+  bottom: var(--ant-margin-xxl);
+  border-radius: var(--ant-border-radius-lg);
+  .ant-float-button-group-wrap {
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  }
+  &.ant-float-button-group-rtl {
+    direction: rtl;
+  }
+  .ant-float-button {
+    position: static;
+  }
+}
+.ant-float-button-group-top > .ant-float-button-group-wrap {
+  flex-direction: column;
+  top: auto;
+  bottom: calc(var(--ant-control-height-lg) + var(--ant-margin));
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: var(--ant-margin);
+    bottom: calc(var(--ant-margin) * -1);
+  }
+}
+.ant-float-button-group-bottom > .ant-float-button-group-wrap {
+  flex-direction: column;
+  top: calc(var(--ant-control-height-lg) + var(--ant-margin));
+  bottom: auto;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: var(--ant-margin);
+    top: calc(var(--ant-margin) * -1);
+  }
+}
+.ant-float-button-group-right > .ant-float-button-group-wrap {
+  flex-direction: row;
+  left: calc(var(--ant-control-height-lg) + var(--ant-margin));
+  right: auto;
+  &::after {
+    content: '';
+    position: absolute;
+    width: var(--ant-margin);
+    height: 100%;
+    left: calc(var(--ant-margin) * -1);
+  }
+}
+.ant-float-button-group-left > .ant-float-button-group-wrap {
+  flex-direction: row;
+  left: auto;
+  right: calc(var(--ant-control-height-lg) + var(--ant-margin));
+  &::after {
+    content: '';
+    position: absolute;
+    width: var(--ant-margin);
+    height: 100%;
+    right: calc(var(--ant-margin) * -1);
+  }
+}
+.ant-float-button-group-circle {
+  gap: var(--ant-margin);
+  .ant-float-button-group-wrap {
+    gap: var(--ant-margin);
+  }
+}
+.ant-float-button-group-square {
+  .ant-float-button-square {
+    padding: 0;
+    border-radius: 0;
+    &.ant-float-button-group-trigger {
+      border-radius: var(--ant-border-radius-lg);
+    }
+    &:first-child {
+      border-start-start-radius: var(--ant-border-radius-lg);
+      border-start-end-radius: var(--ant-border-radius-lg);
+    }
+    &:last-child {
+      border-end-start-radius: var(--ant-border-radius-lg);
+      border-end-end-radius: var(--ant-border-radius-lg);
+    }
+    &:not(:last-child) {
+      border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
+    }
+    .ant-badge {
+      .ant-badge-count {
+        top: calc((var(--ant-padding-xxs) + calc(var(--ant-padding-xxs) * 1.5)) * -1);
+        inset-inline-end: calc((var(--ant-padding-xxs) + calc(var(--ant-padding-xxs) * 1.5)) * -1);
+      }
+    }
+  }
+  .ant-float-button-group-wrap {
+    border-radius: var(--ant-border-radius-lg);
+    box-shadow: var(--ant-box-shadow-secondary);
+    .ant-float-button-square {
+      box-shadow: none;
+      border-radius: 0;
+      padding: var(--ant-padding-xxs);
+      .ant-float-button-body {
+        width: calc(var(--ant-control-height-lg) - var(--ant-padding-xxs) * 2);
+        height: calc(var(--ant-control-height-lg) - var(--ant-padding-xxs) * 2);
+        border-radius: var(--ant-border-radius-sm);
+      }
+    }
+  }
+}
+.ant-float-button-group-top > .ant-float-button-group-wrap,
+.ant-float-button-group-bottom > .ant-float-button-group-wrap {
+  > .ant-float-button-square {
+    &:first-child {
+      border-start-start-radius: var(--ant-border-radius-lg);
+      border-start-end-radius: var(--ant-border-radius-lg);
+    }
+    &:last-child {
+      border-end-start-radius: var(--ant-border-radius-lg);
+      border-end-end-radius: var(--ant-border-radius-lg);
+    }
+    &:not(:last-child) {
+      border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
+    }
+  }
+}
+.ant-float-button-group-left > .ant-float-button-group-wrap,
+.ant-float-button-group-right > .ant-float-button-group-wrap {
+  > .ant-float-button-square {
+    &:first-child {
+      border-start-start-radius: var(--ant-border-radius-lg);
+      border-end-start-radius: var(--ant-border-radius-lg);
+    }
+    &:last-child {
+      border-start-end-radius: var(--ant-border-radius-lg);
+      border-end-end-radius: var(--ant-border-radius-lg);
+    }
+    &:not(:last-child) {
+      border-bottom: none;
+      border-inline-end: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
+    }
+  }
+}
+.ant-float-button-group-circle-shadow {
+  box-shadow: none;
+}
+.ant-float-button-group-square-shadow {
+  box-shadow: var(--ant-box-shadow-secondary);
+  .ant-float-button-square {
+    box-shadow: none;
+    padding: var(--ant-padding-xxs);
+    .ant-float-button-body {
+      width: calc(var(--ant-control-height-lg) - var(--ant-padding-xxs) * 2);
+      height: calc(var(--ant-control-height-lg) - var(--ant-padding-xxs) * 2);
+      border-radius: var(--ant-border-radius-sm);
+    }
+  }
+}
+.ant-float-button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  border: none;
+  position: fixed;
+  cursor: pointer;
+  z-index: var(--ant-z-index-popup-base);
+  display: block;
+  width: var(--ant-control-height-lg);
+  height: var(--ant-control-height-lg);
+  inset-inline-end: var(--ant-margin-lg);
+  bottom: var(--ant-margin-xxl);
+  box-shadow: var(--ant-box-shadow-secondary);
+  &-pure {
+    position: relative;
+    inset: auto;
+  }
+  &:empty {
+    display: none;
+  }
+  .ant-badge {
+    width: 100%;
+    height: 100%;
+    .ant-badge-count {
+      transform: translate(0, 0);
+      transform-origin: center;
+      top: calc(calc(var(--ant-padding-xxs) * 1.5) * -1);
+      inset-inline-end: calc(calc(var(--ant-padding-xxs) * 1.5) * -1);
+    }
+  }
+  .ant-float-button-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--ant-motion-duration-mid);
+    .ant-float-button-content {
+      overflow: hidden;
+      text-align: center;
+      min-height: var(--ant-control-height-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: calc(var(--ant-padding-xxs) / 2) var(--ant-padding-xxs);
+      .ant-float-button-icon {
+        text-align: center;
+        margin: auto;
+        width: calc(var(--ant-font-size-icon) * 1.5);
+        font-size: calc(var(--ant-font-size-icon) * 1.5);
+        line-height: 1;
+      }
+    }
+  }
+}
+.ant-float-button-rtl {
+  direction: rtl;
+}
+.ant-float-button-circle {
+  height: var(--ant-control-height-lg);
+  border-radius: 50%;
+  .ant-badge {
+    .ant-badge-dot {
+      top: var(--ant-float-button-dot-offset-in-circle);
+      inset-inline-end: var(--ant-float-button-dot-offset-in-circle);
+    }
+  }
+  .ant-float-button-body {
+    border-radius: 50%;
+  }
+}
+.ant-float-button-square {
+  height: auto;
+  min-height: var(--ant-control-height-lg);
+  border-radius: var(--ant-border-radius-lg);
+  .ant-badge {
+    .ant-badge-dot {
+      top: var(--ant-float-button-dot-offset-in-square);
+      inset-inline-end: var(--ant-float-button-dot-offset-in-square);
+    }
+  }
+  .ant-float-button-body {
+    height: auto;
+    border-radius: var(--ant-border-radius-lg);
+  }
+}
+.ant-float-button-default {
+  background-color: var(--ant-color-bg-elevated);
+  transition: background-color var(--ant-motion-duration-mid);
+  .ant-float-button-body {
+    background-color: var(--ant-color-bg-elevated);
+    transition: background-color var(--ant-motion-duration-mid);
+    &:hover {
+      background-color: var(--ant-color-fill-content);
+    }
+    .ant-float-button-content {
+      .ant-float-button-icon {
+        color: var(--ant-color-text);
+      }
+      .ant-float-button-description {
+        display: flex;
+        align-items: center;
+        line-height: var(--ant-font-size-lg);
+        color: var(--ant-color-text);
+        font-size: var(--ant-font-size-sm);
+      }
+    }
+  }
+}
+.ant-float-button-primary {
+  background-color: var(--ant-color-primary);
+  .ant-float-button-body {
+    background-color: var(--ant-color-primary);
+    transition: background-color var(--ant-motion-duration-mid);
+    &:hover {
+      background-color: var(--ant-color-primary-hover);
+    }
+    .ant-float-button-content {
+      .ant-float-button-icon {
+        color: var(--ant-color-text-light-solid);
+      }
+      .ant-float-button-description {
+        display: flex;
+        align-items: center;
+        line-height: var(--ant-font-size-lg);
+        color: var(--ant-color-text-light-solid);
+        font-size: var(--ant-font-size-sm);
+      }
+    }
+  }
+}
+.ant-fade-enter,
+.ant-fade-appear {
+  animation-duration: var(--ant-motion-duration-mid);
+  animation-fill-mode: both;
+  animation-play-state: paused;
+}
+.ant-fade-leave {
+  animation-duration: var(--ant-motion-duration-mid);
+  animation-fill-mode: both;
+  animation-play-state: paused;
+}
+.ant-fade-enter.ant-fade-enter-active,
+.ant-fade-appear.ant-fade-appear-active {
+  animation-name: antFadeIn;
+  animation-play-state: running;
+}
+.ant-fade-leave.ant-fade-leave-active {
+  animation-name: antFadeOut;
+  animation-play-state: running;
+  pointer-events: none;
+}
+.ant-fade-enter,
+.ant-fade-appear {
+  opacity: 0;
+  animation-timing-function: linear;
+}
+.ant-fade-leave {
+  animation-timing-function: linear;
+}
+.ant-float-button-group {
+  &.ant-float-button-group-top .ant-float-button-group-wrap {
+    &.ant-float-button-group-wrap-enter,
+    &.ant-float-button-group-wrap-appear {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-leave {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-enter.ant-float-button-group-wrap-enter-active,
+    &.ant-float-button-group-wrap-appear.ant-float-button-group-wrap-appear-active {
+      animation-name: antFloatButtonMoveTopIn;
+      animation-play-state: running;
+    }
+    &.ant-float-button-group-wrap-leave.ant-float-button-group-wrap-leave-active {
+      animation-name: antFloatButtonMoveTopOut;
+      animation-play-state: running;
+      pointer-events: none;
+    }
+  }
+  &.ant-float-button-group-bottom .ant-float-button-group-wrap {
+    &.ant-float-button-group-wrap-enter,
+    &.ant-float-button-group-wrap-appear {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-leave {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-enter.ant-float-button-group-wrap-enter-active,
+    &.ant-float-button-group-wrap-appear.ant-float-button-group-wrap-appear-active {
+      animation-name: antFloatButtonMoveBottomIn;
+      animation-play-state: running;
+    }
+    &.ant-float-button-group-wrap-leave.ant-float-button-group-wrap-leave-active {
+      animation-name: antFloatButtonMoveBottomOut;
+      animation-play-state: running;
+      pointer-events: none;
+    }
+  }
+  &.ant-float-button-group-left .ant-float-button-group-wrap {
+    &.ant-float-button-group-wrap-enter,
+    &.ant-float-button-group-wrap-appear {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-leave {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-enter.ant-float-button-group-wrap-enter-active,
+    &.ant-float-button-group-wrap-appear.ant-float-button-group-wrap-appear-active {
+      animation-name: antFloatButtonMoveLeftIn;
+      animation-play-state: running;
+    }
+    &.ant-float-button-group-wrap-leave.ant-float-button-group-wrap-leave-active {
+      animation-name: antFloatButtonMoveLeftOut;
+      animation-play-state: running;
+      pointer-events: none;
+    }
+  }
+  &.ant-float-button-group-right .ant-float-button-group-wrap {
+    &.ant-float-button-group-wrap-enter,
+    &.ant-float-button-group-wrap-appear {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-leave {
+      animation-duration: var(--ant-motion-duration-slow);
+      animation-fill-mode: both;
+      animation-play-state: paused;
+    }
+    &.ant-float-button-group-wrap-enter.ant-float-button-group-wrap-enter-active,
+    &.ant-float-button-group-wrap-appear.ant-float-button-group-wrap-appear-active {
+      animation-name: antFloatButtonMoveRightIn;
+      animation-play-state: running;
+    }
+    &.ant-float-button-group-wrap-leave.ant-float-button-group-wrap-leave-active {
+      animation-name: antFloatButtonMoveRightOut;
+      animation-play-state: running;
+      pointer-events: none;
+    }
+  }
+}
+.ant-float-button-group-wrap {
+  &.ant-float-button-group-wrap-enter,
+  &.ant-float-button-group-wrap-appear {
+    opacity: 0;
+    animation-timing-function: var(--ant-motion-ease-in-out-circ);
+  }
+  &.ant-float-button-group-wrap-leave {
+    opacity: 1;
+    animation-timing-function: var(--ant-motion-ease-in-out-circ);
+  }
+}

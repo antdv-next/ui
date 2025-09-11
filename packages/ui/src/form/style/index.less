@@ -1,0 +1,501 @@
+@keyframes antZoomIn {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.ant-form {
+  --ant-form-label-required-mark-color: var(--ant-color-error);
+  --ant-form-label-color: var(--ant-color-text-heading);
+  --ant-form-label-font-size: 14px;
+  --ant-form-label-height: 32px;
+  --ant-form-label-colon-margin-inline-start: 2px;
+  --ant-form-label-colon-margin-inline-end: 8px;
+  --ant-form-item-margin-bottom: 24px;
+  --ant-form-vertical-label-padding: 0 0 8px;
+  --ant-form-vertical-label-margin: 0;
+  --ant-form-inline-item-margin-bottom: 0;
+}
+.ant-form {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  legend {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--ant-margin-lg);
+    padding: 0;
+    color: var(--ant-color-text-description);
+    font-size: var(--ant-font-size-lg);
+    line-height: inherit;
+    border: 0;
+    border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border);
+  }
+  input[type='search'] {
+    box-sizing: border-box;
+  }
+  input[type='radio'],
+  input[type='checkbox'] {
+    line-height: normal;
+  }
+  input[type='file'] {
+    display: block;
+  }
+  input[type='range'] {
+    display: block;
+    width: 100%;
+  }
+  select[multiple],
+  select[size] {
+    height: auto;
+  }
+  input[type='file']:focus,
+  input[type='radio']:focus,
+  input[type='checkbox']:focus {
+    outline: 0;
+    box-shadow: 0 0 0 var(--ant-control-outline-width) var(--ant-control-outline);
+  }
+  output {
+    display: block;
+    padding-top: 15px;
+    color: var(--ant-color-text);
+    font-size: var(--ant-font-size);
+    line-height: var(--ant-line-height);
+  }
+  .ant-form-text {
+    display: inline-block;
+    padding-inline-end: var(--ant-padding-sm);
+  }
+  &-small {
+    .ant-form-item {
+      .ant-form-item-label > label {
+        height: var(--ant-control-height-sm);
+      }
+      .ant-form-item-control-input {
+        min-height: var(--ant-control-height-sm);
+      }
+    }
+  }
+  &-large {
+    .ant-form-item {
+      .ant-form-item-label > label {
+        height: var(--ant-control-height-lg);
+      }
+      .ant-form-item-control-input {
+        min-height: var(--ant-control-height-lg);
+      }
+    }
+  }
+}
+.ant-form-item {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  margin-bottom: var(--ant-form-item-margin-bottom);
+  vertical-align: top;
+  &-with-help {
+    transition: none;
+  }
+  &-hidden,
+  &-hidden.ant-row {
+    display: none;
+  }
+  &-has-warning {
+    .ant-form-item-split {
+      color: var(--ant-color-error);
+    }
+  }
+  &-has-error {
+    .ant-form-item-split {
+      color: var(--ant-color-warning);
+    }
+  }
+  .ant-form-item-label {
+    flex-grow: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: end;
+    vertical-align: middle;
+    &-left {
+      text-align: start;
+    }
+    &-wrap {
+      overflow: unset;
+      line-height: var(--ant-line-height);
+      white-space: unset;
+      > label {
+        vertical-align: middle;
+        text-wrap: balance;
+      }
+    }
+    > label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      max-width: 100%;
+      height: var(--ant-form-label-height);
+      color: var(--ant-form-label-color);
+      font-size: var(--ant-form-label-font-size);
+      > .anticon {
+        font-size: var(--ant-font-size);
+        vertical-align: top;
+      }
+      &.ant-form-item-required {
+        &::before {
+          display: inline-block;
+          margin-inline-end: var(--ant-margin-xxs);
+          color: var(--ant-form-label-required-mark-color);
+          font-size: var(--ant-font-size);
+          font-family: SimSun, sans-serif;
+          line-height: 1;
+          content: '*';
+        }
+        &.ant-form-item-required-mark-hidden,
+        &.ant-form-item-required-mark-optional {
+          &::before {
+            display: none;
+          }
+        }
+      }
+      .ant-form-item-optional {
+        display: inline-block;
+        margin-inline-start: var(--ant-margin-xxs);
+        color: var(--ant-color-text-description);
+        &.ant-form-item-required-mark-hidden {
+          display: none;
+        }
+      }
+      .ant-form-item-tooltip {
+        color: var(--ant-color-text-description);
+        cursor: help;
+        writing-mode: horizontal-tb;
+        margin-inline-start: var(--ant-margin-xxs);
+      }
+      &::after {
+        content: ':';
+        position: relative;
+        margin-block: 0;
+        margin-inline-start: var(--ant-form-label-colon-margin-inline-start);
+        margin-inline-end: var(--ant-form-label-colon-margin-inline-end);
+      }
+      &.ant-form-item-no-colon::after {
+        content: '\a0';
+      }
+    }
+  }
+  .ant-form-item-control {
+    --ant-display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    &:first-child:not([class^="'ant-col-'"]):not([class*="' ant-col-'"]) {
+      width: 100%;
+    }
+    &-input {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: var(--ant-control-height);
+      &-content {
+        flex: auto;
+        max-width: 100%;
+        &:has(> .ant-switch:only-child, > .ant-rate:only-child) {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+  .ant-form-item {
+    &-additional {
+      display: flex;
+      flex-direction: column;
+    }
+    &-explain,
+    &-extra {
+      clear: both;
+      color: var(--ant-color-text-description);
+      font-size: var(--ant-font-size);
+      line-height: var(--ant-line-height);
+    }
+    &-explain-connected {
+      width: 100%;
+    }
+    &-extra {
+      min-height: var(--ant-control-height-sm);
+      transition: color var(--ant-motion-duration-mid) var(--ant-motion-ease-out);
+    }
+    &-explain {
+      &-error {
+        color: var(--ant-color-error);
+      }
+      &-warning {
+        color: var(--ant-color-warning);
+      }
+    }
+  }
+  &-with-help .ant-form-item-explain {
+    height: auto;
+    opacity: 1;
+  }
+  .ant-form-item-feedback-icon {
+    font-size: var(--ant-font-size);
+    text-align: center;
+    visibility: visible;
+    animation-name: antZoomIn;
+    animation-duration: var(--ant-motion-duration-mid);
+    animation-timing-function: var(--ant-motion-ease-out-back);
+    pointer-events: none;
+    &-success {
+      color: var(--ant-color-success);
+    }
+    &-error {
+      color: var(--ant-color-error);
+    }
+    &-warning {
+      color: var(--ant-color-warning);
+    }
+    &-validating {
+      color: var(--ant-color-primary);
+    }
+  }
+}
+.ant-form-show-help {
+  transition: opacity var(--ant-motion-duration-fast) var(--ant-motion-ease-in-out);
+  &-appear,
+  &-enter {
+    opacity: 0;
+    &-active {
+      opacity: 1;
+    }
+  }
+  &-leave {
+    opacity: 1;
+    &-active {
+      opacity: 0;
+    }
+  }
+  .ant-form-show-help-item {
+    overflow: hidden;
+    transition:
+      height var(--ant-motion-duration-fast) var(--ant-motion-ease-in-out),
+      opacity var(--ant-motion-duration-fast) var(--ant-motion-ease-in-out),
+      transform var(--ant-motion-duration-fast) var(--ant-motion-ease-in-out) !important;
+    &.ant-form-show-help-item-appear,
+    &.ant-form-show-help-item-enter {
+      transform: translateY(-5px);
+      opacity: 0;
+      &-active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    &.ant-form-show-help-item-leave-active {
+      transform: translateY(-5px);
+    }
+  }
+}
+.ant-form-item-horizontal {
+  .ant-form-item-label {
+    flex-grow: 0;
+  }
+  .ant-form-item-control {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .ant-form-item-label[class$='-24'],
+  .ant-form-item-label[class*='-24 '] {
+    & + .ant-form-item-control {
+      min-width: unset;
+    }
+  }
+  .ant-col-24.ant-form-item-label,
+  .ant-col-xl-24.ant-form-item-label {
+    padding: var(--ant-form-vertical-label-padding);
+    margin: var(--ant-form-vertical-label-margin);
+    white-space: initial;
+    text-align: start;
+    > label {
+      margin: 0;
+      &::after {
+        visibility: hidden;
+      }
+    }
+  }
+}
+.ant-form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  .ant-form-item-inline {
+    flex: none;
+    margin-inline-end: var(--ant-margin);
+    margin-bottom: var(--ant-form-inline-item-margin-bottom);
+    &-row {
+      flex-wrap: nowrap;
+    }
+    > .ant-form-item-label,
+    > .ant-form-item-control {
+      display: inline-block;
+      vertical-align: top;
+    }
+    > .ant-form-item-label {
+      flex: none;
+    }
+    .ant-form-text {
+      display: inline-block;
+    }
+    .ant-form-item-has-feedback {
+      display: inline-block;
+    }
+  }
+}
+.ant-form-item-vertical {
+  .ant-form-item-row {
+    flex-direction: column;
+  }
+  .ant-form-item-label > label {
+    height: auto;
+  }
+  .ant-form-item-control {
+    width: 100%;
+  }
+  .ant-form-item-label,
+  .ant-col-24.ant-form-item-label,
+  .ant-col-xl-24.ant-form-item-label {
+    padding: var(--ant-form-vertical-label-padding);
+    margin: var(--ant-form-vertical-label-margin);
+    white-space: initial;
+    text-align: start;
+    > label {
+      margin: 0;
+      &::after {
+        visibility: hidden;
+      }
+    }
+  }
+}
+@media (max-width: var(--ant-screen-xs-max)) {
+  .ant-form-item .ant-form-item-label {
+    padding: var(--ant-form-vertical-label-padding);
+    margin: var(--ant-form-vertical-label-margin);
+    white-space: initial;
+    text-align: start;
+    > label {
+      margin: 0;
+      &::after {
+        visibility: hidden;
+      }
+    }
+  }
+  .ant-form:not(.ant-form-inline) {
+    .ant-form-item {
+      flex-wrap: wrap;
+      .ant-form-item-label,
+      .ant-form-item-control {
+        &:not([class*=' ant-col-xs']) {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  .ant-form {
+    .ant-form-item:not(.ant-form-item-horizontal) {
+      .ant-col-xs-24.ant-form-item-label {
+        padding: var(--ant-form-vertical-label-padding);
+        margin: var(--ant-form-vertical-label-margin);
+        white-space: initial;
+        text-align: start;
+        > label {
+          margin: 0;
+          &::after {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: var(--ant-screen-sm-max)) {
+  .ant-form {
+    .ant-form-item:not(.ant-form-item-horizontal) {
+      .ant-col-sm-24.ant-form-item-label {
+        padding: var(--ant-form-vertical-label-padding);
+        margin: var(--ant-form-vertical-label-margin);
+        white-space: initial;
+        text-align: start;
+        > label {
+          margin: 0;
+          &::after {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: var(--ant-screen-md-max)) {
+  .ant-form {
+    .ant-form-item:not(.ant-form-item-horizontal) {
+      .ant-col-md-24.ant-form-item-label {
+        padding: var(--ant-form-vertical-label-padding);
+        margin: var(--ant-form-vertical-label-margin);
+        white-space: initial;
+        text-align: start;
+        > label {
+          margin: 0;
+          &::after {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: var(--ant-screen-lg-max)) {
+  .ant-form {
+    .ant-form-item:not(.ant-form-item-horizontal) {
+      .ant-col-lg-24.ant-form-item-label {
+        padding: var(--ant-form-vertical-label-padding);
+        margin: var(--ant-form-vertical-label-margin);
+        white-space: initial;
+        text-align: start;
+        > label {
+          margin: 0;
+          &::after {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+.ant-form {
+  .ant-motion-collapse-legacy {
+    overflow: hidden;
+    &-active {
+      transition:
+        height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+        opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+    }
+  }
+  .ant-motion-collapse {
+    overflow: hidden;
+    transition:
+      height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+      opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+  }
+}

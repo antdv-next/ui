@@ -1,0 +1,85 @@
+textarea.ant-input-textarea {
+  max-width: 100%;
+  height: auto;
+  min-height: var(--ant-control-height);
+  line-height: var(--ant-line-height);
+  vertical-align: bottom;
+  transition: all var(--ant-motion-duration-slow);
+  resize: vertical;
+  &.ant-input-textarea-mouse-active {
+    transition:
+      all var(--ant-motion-duration-slow),
+      height 0s,
+      width 0s;
+  }
+}
+.ant-input-textarea-textarea-affix-wrapper-resize-dirty {
+  width: auto;
+}
+.ant-input-textarea-textarea {
+  position: relative;
+  &-show-count {
+    .ant-input-textarea-data-count {
+      position: absolute;
+      bottom: calc(var(--ant-font-size) * var(--ant-line-height) * -1);
+      inset-inline-end: 0;
+      color: var(--ant-color-text-description);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+  }
+  &-allow-clear > .ant-input-textarea,
+  &-affix-wrapper.ant-input-textarea-textarea-has-feedback .ant-input-textarea {
+    padding-inline-end: var(--ant-padding-lg);
+  }
+  &-affix-wrapper.ant-input-textarea-affix-wrapper {
+    padding: 0;
+    > textarea.ant-input-textarea {
+      font-size: inherit;
+      border: none;
+      outline: none;
+      background: transparent;
+      min-height: calc(var(--ant-control-height) - var(--ant-line-width) * 2);
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+    .ant-input-textarea-suffix {
+      margin: 0;
+      > *:not(:last-child) {
+        margin-inline: 0;
+      }
+      .ant-input-textarea-clear-icon {
+        position: absolute;
+        inset-inline-end: var(--ant-input-padding-inline);
+        inset-block-start: var(--ant-padding-xs);
+      }
+      .ant-input-textarea-textarea-suffix {
+        position: absolute;
+        top: 0;
+        inset-inline-end: var(--ant-input-padding-inline);
+        bottom: 0;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        margin: auto;
+        pointer-events: none;
+      }
+    }
+  }
+  &-affix-wrapper.ant-input-textarea-affix-wrapper-rtl {
+    .ant-input-textarea-suffix {
+      .ant-input-textarea-data-count {
+        direction: ltr;
+        inset-inline-start: 0;
+      }
+    }
+  }
+  &-affix-wrapper.ant-input-textarea-affix-wrapper-sm {
+    .ant-input-textarea-suffix {
+      .ant-input-textarea-clear-icon {
+        inset-inline-end: var(--ant-input-padding-inline-sm);
+      }
+    }
+  }
+}

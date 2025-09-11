@@ -25,14 +25,16 @@ export function genMapToken(seedToken: SeedToken, ...derivatives: GenerateThemeD
 }
 
 export function genCSSVar<T extends OverrideComponent>(token: FullToken<T>, prefixCls?: string, component?: string) {
-  const skipKeys = ['wireframe', 'motion', 'prefixCls', 'componentCls', 'antCls', 'calc', 'unit']
+  const skipKeys = ['wireframe', 'motion', 'prefixCls', 'componentCls', 'antCls', 'calc', 'unit', 'checkboxCls']
   const _cssVars: Record<string, any> = {}
   const cssToken: Record<string, any> = {}
+  const mapToken: Record<string, string> = {}
   for (const cssVarsKey in token) {
     const value = (token as any)[cssVarsKey as keyof typeof token]
 
-    if (skipKeys.includes(cssVarsKey)) {
+    if (skipKeys.includes(cssVarsKey) || cssVarsKey.endsWith('Cls')) {
       cssToken[cssVarsKey] = value
+      mapToken[cssVarsKey] = value
       continue
     }
     let _cssVarsKey = cssVarsKey
@@ -46,6 +48,11 @@ export function genCSSVar<T extends OverrideComponent>(token: FullToken<T>, pref
       _cssVars[_key] = value
     }
     cssToken[cssVarsKey] = `var(${_key})`
+    if (typeof value === 'string') {
+      mapToken[cssVarsKey] = `var(${_key})`
+    } else {
+      mapToken[cssVarsKey] = value
+    }
   }
-  return { cssToken, cssVars: _cssVars }
+  return { cssToken, cssVars: _cssVars, mapToken }
 }

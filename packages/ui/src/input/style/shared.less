@@ -1,0 +1,471 @@
+.ant-input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--ant-input-padding-block) var(--ant-input-padding-inline);
+  color: var(--ant-color-text);
+  font-size: var(--ant-input-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  border-radius: var(--ant-border-radius);
+  transition: all var(--ant-motion-duration-mid);
+  &::-moz-placeholder {
+    opacity: 1;
+  }
+  &::placeholder {
+    color: var(--ant-color-text-placeholder);
+    user-select: none;
+  }
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+  &-lg {
+    padding: var(--ant-input-padding-block-lg) var(--ant-input-padding-inline-lg);
+    font-size: var(--ant-input-font-size-lg);
+    line-height: var(--ant-line-height-lg);
+    border-radius: var(--ant-border-radius-lg);
+  }
+  &-sm {
+    padding: var(--ant-input-padding-block-sm) var(--ant-input-padding-inline-sm);
+    font-size: var(--ant-input-font-size-sm);
+    border-radius: var(--ant-border-radius-sm);
+  }
+  &-rtl,
+  &-textarea-rtl {
+    direction: rtl;
+  }
+  &-outlined {
+    background: var(--ant-color-bg-container);
+    border-width: var(--ant-line-width);
+    border-style: var(--ant-line-type);
+    border-color: var(--ant-color-border);
+    &:hover {
+      border-color: var(--ant-input-hover-border-color);
+      background-color: var(--ant-input-hover-bg);
+    }
+    &:focus,
+    &:focus-within {
+      border-color: var(--ant-input-active-border-color);
+      box-shadow: var(--ant-input-active-shadow);
+      outline: 0;
+      background-color: var(--ant-input-active-bg);
+    }
+    &.ant-input-disabled,
+    &[disabled] {
+      color: var(--ant-color-text-disabled);
+      background-color: var(--ant-color-bg-container-disabled);
+      border-color: var(--ant-color-border);
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 1;
+      input[disabled],
+      textarea[disabled] {
+        cursor: not-allowed;
+      }
+      &:hover:not([disabled]) {
+        border-color: var(--ant-color-border);
+        background-color: var(--ant-color-bg-container-disabled);
+      }
+    }
+    &.ant-input-status-error:not(.ant-input-disabled) {
+      background: var(--ant-color-bg-container);
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      border-color: var(--ant-color-error);
+      &:hover {
+        border-color: var(--ant-color-error-border-hover);
+        background-color: var(--ant-input-hover-bg);
+      }
+      &:focus,
+      &:focus-within {
+        border-color: var(--ant-color-error);
+        box-shadow: var(--ant-input-error-active-shadow);
+        outline: 0;
+        background-color: var(--ant-input-active-bg);
+      }
+      .ant-input-prefix,
+      .ant-input-suffix {
+        color: var(--ant-color-error);
+      }
+    }
+    &.ant-input-status-error.ant-input-disabled {
+      border-color: var(--ant-color-error);
+    }
+    &.ant-input-status-warning:not(.ant-input-disabled) {
+      background: var(--ant-color-bg-container);
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      border-color: var(--ant-color-warning);
+      &:hover {
+        border-color: var(--ant-color-warning-border-hover);
+        background-color: var(--ant-input-hover-bg);
+      }
+      &:focus,
+      &:focus-within {
+        border-color: var(--ant-color-warning);
+        box-shadow: var(--ant-input-warning-active-shadow);
+        outline: 0;
+        background-color: var(--ant-input-active-bg);
+      }
+      .ant-input-prefix,
+      .ant-input-suffix {
+        color: var(--ant-color-warning);
+      }
+    }
+    &.ant-input-status-warning.ant-input-disabled {
+      border-color: var(--ant-color-warning);
+    }
+  }
+  &-filled {
+    background: var(--ant-color-fill-tertiary);
+    border-width: var(--ant-line-width);
+    border-style: var(--ant-line-type);
+    border-color: transparent;
+    input&,
+    & input,
+    textarea&,
+    & textarea {
+      color: unset;
+    }
+    &:hover {
+      background: var(--ant-color-fill-secondary);
+    }
+    &:focus,
+    &:focus-within {
+      outline: 0;
+      border-color: var(--ant-input-active-border-color);
+      background-color: var(--ant-input-active-bg);
+    }
+    &.ant-input-disabled,
+    &[disabled] {
+      color: var(--ant-color-text-disabled);
+      background-color: var(--ant-color-bg-container-disabled);
+      border-color: var(--ant-color-border);
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 1;
+      input[disabled],
+      textarea[disabled] {
+        cursor: not-allowed;
+      }
+      &:hover:not([disabled]) {
+        border-color: var(--ant-color-border);
+        background-color: var(--ant-color-bg-container-disabled);
+      }
+    }
+    &.ant-input-status-error:not(.ant-input-disabled) {
+      background: var(--ant-color-error-bg);
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      border-color: transparent;
+      input&,
+      & input,
+      textarea&,
+      & textarea {
+        color: var(--ant-color-error-text);
+      }
+      &:hover {
+        background: var(--ant-color-error-bg-hover);
+      }
+      &:focus,
+      &:focus-within {
+        outline: 0;
+        border-color: var(--ant-color-error);
+        background-color: var(--ant-input-active-bg);
+      }
+      .ant-input-prefix,
+      .ant-input-suffix {
+        color: var(--ant-color-error);
+      }
+    }
+    &.ant-input-status-warning:not(.ant-input-disabled) {
+      background: var(--ant-color-warning-bg);
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      border-color: transparent;
+      input&,
+      & input,
+      textarea&,
+      & textarea {
+        color: var(--ant-color-warning-text);
+      }
+      &:hover {
+        background: var(--ant-color-warning-bg-hover);
+      }
+      &:focus,
+      &:focus-within {
+        outline: 0;
+        border-color: var(--ant-color-warning);
+        background-color: var(--ant-input-active-bg);
+      }
+      .ant-input-prefix,
+      .ant-input-suffix {
+        color: var(--ant-color-warning);
+      }
+    }
+  }
+  &-borderless {
+    background: transparent;
+    border: none;
+    &:focus,
+    &:focus-within {
+      outline: none;
+    }
+    &.ant-input-disabled,
+    &[disabled] {
+      color: var(--ant-color-text-disabled);
+      cursor: not-allowed;
+    }
+    &.ant-input-status-error {
+      &,
+      & input,
+      & textarea {
+        color: var(--ant-color-error);
+      }
+    }
+    &.ant-input-status-warning {
+      &,
+      & input,
+      & textarea {
+        color: var(--ant-color-warning);
+      }
+    }
+  }
+  &-underlined {
+    background: var(--ant-color-bg-container);
+    border-width: var(--ant-line-width) 0;
+    border-style: var(--ant-line-type) none;
+    border-color: transparent transparent var(--ant-color-border) transparent;
+    border-radius: 0;
+    &:hover {
+      border-color: transparent transparent var(--ant-color-border) transparent;
+      background-color: var(--ant-input-hover-bg);
+    }
+    &:focus,
+    &:focus-within {
+      border-color: transparent transparent var(--ant-input-active-border-color) transparent;
+      outline: 0;
+      background-color: var(--ant-input-active-bg);
+    }
+    &.ant-input-disabled,
+    &[disabled] {
+      color: var(--ant-color-text-disabled);
+      box-shadow: none;
+      cursor: not-allowed;
+      &:hover {
+        border-color: transparent transparent var(--ant-color-border) transparent;
+      }
+    }
+    input[disabled],
+    textarea[disabled] {
+      cursor: not-allowed;
+    }
+    &.ant-input-status-error:not(.ant-input-disabled) {
+      background: var(--ant-color-bg-container);
+      border-width: var(--ant-line-width) 0;
+      border-style: var(--ant-line-type) none;
+      border-color: transparent transparent var(--ant-color-error) transparent;
+      border-radius: 0;
+      &:hover {
+        border-color: transparent transparent var(--ant-color-error) transparent;
+        background-color: var(--ant-input-hover-bg);
+      }
+      &:focus,
+      &:focus-within {
+        border-color: transparent transparent var(--ant-color-error) transparent;
+        outline: 0;
+        background-color: var(--ant-input-active-bg);
+      }
+      .ant-input-prefix,
+      .ant-input-suffix {
+        color: var(--ant-color-error);
+      }
+    }
+    &.ant-input-status-error.ant-input-disabled {
+      border-color: transparent transparent var(--ant-color-error) transparent;
+    }
+    &.ant-input-status-warning:not(.ant-input-disabled) {
+      background: var(--ant-color-bg-container);
+      border-width: var(--ant-line-width) 0;
+      border-style: var(--ant-line-type) none;
+      border-color: transparent transparent var(--ant-color-warning) transparent;
+      border-radius: 0;
+      &:hover {
+        border-color: transparent transparent var(--ant-color-warning) transparent;
+        background-color: var(--ant-input-hover-bg);
+      }
+      &:focus,
+      &:focus-within {
+        border-color: transparent transparent var(--ant-color-warning) transparent;
+        outline: 0;
+        background-color: var(--ant-input-active-bg);
+      }
+      .ant-input-prefix,
+      .ant-input-suffix {
+        color: var(--ant-color-warning);
+      }
+    }
+    &.ant-input-status-warning.ant-input-disabled {
+      border-color: transparent transparent var(--ant-color-warning) transparent;
+    }
+  }
+  &[type='color'] {
+    height: var(--ant-control-height);
+    &.ant-input-lg {
+      height: var(--ant-control-height-lg);
+    }
+    &.ant-input-sm {
+      height: var(--ant-control-height-sm);
+      padding-top: calc((var(--ant-control-height-sm) - var(--ant-line-width) * 2 - 16px) / 2);
+      padding-bottom: calc((var(--ant-control-height-sm) - var(--ant-line-width) * 2 - 16px) / 2);
+    }
+  }
+  &[type='search']::-webkit-search-cancel-button,
+  &[type='search']::-webkit-search-decoration {
+    appearance: none;
+  }
+}
+.ant-input-affix-wrapper {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  min-width: 0;
+  padding: var(--ant-input-padding-block) var(--ant-input-padding-inline);
+  color: var(--ant-color-text);
+  font-size: var(--ant-input-font-size);
+  line-height: var(--ant-line-height);
+  border-radius: var(--ant-border-radius);
+  transition: all var(--ant-motion-duration-mid);
+  &::-moz-placeholder {
+    opacity: 1;
+  }
+  &::placeholder {
+    color: var(--ant-color-text-placeholder);
+    user-select: none;
+  }
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+  &-lg {
+    padding: var(--ant-input-padding-block-lg) var(--ant-input-padding-inline-lg);
+    font-size: var(--ant-input-font-size-lg);
+    line-height: var(--ant-line-height-lg);
+    border-radius: var(--ant-border-radius-lg);
+  }
+  &-sm {
+    padding: var(--ant-input-padding-block-sm) var(--ant-input-padding-inline-sm);
+    font-size: var(--ant-input-font-size-sm);
+    border-radius: var(--ant-border-radius-sm);
+  }
+  &-rtl,
+  &-textarea-rtl {
+    direction: rtl;
+  }
+  &:not(.ant-input-disabled):hover {
+    z-index: 1;
+    .ant-input-search-with-button & {
+      z-index: 0;
+    }
+  }
+  &-focused,
+  &:focus {
+    z-index: 1;
+  }
+  > input.ant-input {
+    padding: 0;
+  }
+  > input.ant-input,
+  > textarea.ant-input {
+    font-size: inherit;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    &::-ms-reveal {
+      display: none;
+    }
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+  &::before {
+    display: inline-block;
+    width: 0;
+    visibility: hidden;
+    content: '\a0';
+  }
+  .ant-input {
+    &-prefix,
+    &-suffix {
+      display: flex;
+      flex: none;
+      align-items: center;
+      > *:not(:last-child) {
+        margin-inline-end: var(--ant-padding-xs);
+      }
+    }
+    &-show-count-suffix {
+      color: var(--ant-color-text-description);
+      direction: ltr;
+    }
+    &-show-count-has-suffix {
+      margin-inline-end: var(--ant-padding-xxs);
+    }
+    &-prefix {
+      margin-inline-end: var(--ant-padding-xxs);
+    }
+    &-suffix {
+      margin-inline-start: var(--ant-padding-xxs);
+    }
+  }
+  .ant-input-clear-icon {
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    color: var(--ant-color-text-quaternary);
+    font-size: var(--ant-font-size-icon);
+    vertical-align: -1px;
+    cursor: pointer;
+    transition: color var(--ant-motion-duration-slow);
+    border: none;
+    outline: none;
+    background-color: transparent;
+    &:hover {
+      color: var(--ant-color-icon);
+    }
+    &:active {
+      color: var(--ant-color-text);
+    }
+    &-hidden {
+      visibility: hidden;
+    }
+    &-has-suffix {
+      margin: 0 var(--ant-padding-xxs);
+    }
+  }
+  .anticon.ant-input-password-icon {
+    color: var(--ant-color-icon);
+    cursor: pointer;
+    transition: all var(--ant-motion-duration-slow);
+    &:hover {
+      color: var(--ant-color-icon-hover);
+    }
+  }
+}
+.ant-input-underlined {
+  border-radius: 0;
+}
+.ant-input-affix-wrapper-disabled {
+  .anticon.ant-input-password-icon {
+    color: var(--ant-color-icon);
+    cursor: not-allowed;
+    &:hover {
+      color: var(--ant-color-icon);
+    }
+  }
+}
