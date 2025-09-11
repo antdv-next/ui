@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`button > renders correctly 1`] = `
+"<button class="ant-btn ant-btn-color-default ant-btn-variant-outlined">
+  <!-- If existIcon is true, render without animation -->
+  <!-- Otherwise render with animation -->
+  <transition-stub name="ant-btn-loading-icon-motion" appear="false" persisted="false" css="true">
+    <!--v-if-->
+  </transition-stub><span>Follow</span>
+</button>"
+`;
