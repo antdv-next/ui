@@ -1,0 +1,53 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parseStyle > should handle complex nested structures 1`] = `
+"position: relative;
+.header {
+  padding: 16px;
+  &.active {
+    font-weight: bold;
+  }
+}
+"
+`;
+
+exports[`parseStyle > should handle deep nesting correctly 1`] = `
+".container {
+  .header {
+    .title {
+      font-size: 18px;
+      &.large {
+        font-size: 24px;
+      }
+    }
+  }
+}
+"
+`;
+
+exports[`parseStyle > should handle media queries 1`] = `
+"font-size: 16px;
+@media (max-width: 768px) {
+  font-size: 14px;
+}
+"
+`;
+
+exports[`parseStyle > should handle nested selectors 1`] = `
+"color: blue;
+&:hover {
+  color: red;
+}
+.child {
+  margin-top: 8px;
+}
+"
+`;
+
+exports[`parseStyle > should inject hash ID correctly 1`] = `
+"color: red;
+.test-123:hover {
+  color: blue;
+}
+"
+`;

@@ -11,9 +11,9 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('color:red;')
-    expect(result).toContain('font-size:16px;')
-    expect(result).toContain('padding:10px;')
+    expect(result).toContain('color: red;')
+    expect(result).toContain('font-size: 16px;')
+    expect(result).toContain('padding: 10px;')
   })
 
   it('should handle nested selectors', () => {
@@ -28,9 +28,8 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('color:blue;')
-    expect(result).toContain('&:hover{color:red;}')
-    expect(result).toContain('.child{margin-top:8px;}')
+    expect(result).toContain('color: blue;')
+    expect(result).toMatchSnapshot()
   })
 
   it('should handle media queries', () => {
@@ -42,8 +41,7 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('font-size:16px;')
-    expect(result).toContain('@media (max-width: 768px){font-size:14px;}')
+    expect(result).toMatchSnapshot()
   })
 
   it('should inject hash ID correctly', () => {
@@ -59,8 +57,8 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles, config)
-    expect(result).toContain('color:red;')
-    expect(result).toContain('.test-123:hover{color:blue;}')
+    expect(result).toContain('color: red;')
+    expect(result).toMatchSnapshot()
   })
 
   it('should handle complex nested structures', () => {
@@ -75,8 +73,8 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('position:relative;')
-    expect(result).toContain('.header{padding:16px;&.active{font-weight:bold;}}')
+    expect(result).toContain('position: relative;')
+    expect(result).toMatchSnapshot()
   })
 
   it('should add px units to numeric values when needed', () => {
@@ -88,10 +86,10 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('width:100px;')
-    expect(result).toContain('height:200px;')
-    expect(result).toContain('z-index:1000;')
-    expect(result).toContain('line-height:1.5;')
+    expect(result).toContain('width: 100px;')
+    expect(result).toContain('height: 200px;')
+    expect(result).toContain('z-index: 1000;')
+    expect(result).toContain('line-height: 1.5;')
   })
 
   it('should handle camelCase to kebab-case conversion', () => {
@@ -102,9 +100,9 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('background-color:white;')
-    expect(result).toContain('border-radius:4px;')
-    expect(result).toContain('margin-top:8px;')
+    expect(result).toContain('background-color: white;')
+    expect(result).toContain('border-radius: 4px;')
+    expect(result).toContain('margin-top: 8px;')
   })
 
   it('should work with original interface', () => {
@@ -115,8 +113,8 @@ describe('parseStyle', () => {
 
     const mockToken = {} as any
     const result = parseStyle(styles, mockToken)
-    expect(result).toContain('color:red;')
-    expect(result).toContain('font-size:16px;')
+    expect(result).toContain('color: red;')
+    expect(result).toContain('font-size: 16px;')
   })
 
   it('should handle empty styles', () => {
@@ -154,7 +152,7 @@ describe('parseStyle', () => {
 
     const [result] = parseStyleInterpolation(styles)
     expect(result).toContain('color: red;')
-    expect(result).toContain('font-size:16px;')
+    expect(result).toContain('font-size: 16px;')
     expect(result).toContain('margin: 0;')
   })
 
@@ -173,7 +171,7 @@ describe('parseStyle', () => {
     }
 
     const result = parseStyleToLess(styles)
-    expect(result).toContain('.container{.header{.title{font-size:18px;&.large{font-size:24px;}}}}')
+    expect(result).toMatchSnapshot()
   })
 
   it('should handle hash priority', () => {
@@ -218,13 +216,13 @@ describe('parseStyle', () => {
     const result = parseStyleToLess(styles)
 
     // z-index 相关属性不应该有 px
-    expect(result).toContain('z-index:1000;')
-    expect(result).toContain('--ant-z-index:1001;')
+    expect(result).toContain('z-index: 1000;')
+    expect(result).toContain('--ant-z-index: 1001;')
 
     // 其他数值属性应该有 px
-    expect(result).toContain('width:100px;')
-    expect(result).toContain('height:200px;')
-    expect(result).toContain('--ant-color-primary:16px;')
+    expect(result).toContain('width: 100px;')
+    expect(result).toContain('height: 200px;')
+    expect(result).toContain('--ant-color-primary: 16px;')
   })
 
   it('should handle custom prefix for z-index CSS variables', () => {
@@ -240,9 +238,9 @@ describe('parseStyle', () => {
 
     const result = parseStyleToLess(styles, config)
 
-    expect(result).toContain('--ant-custom-z-index:1002;')
-    expect(result).toContain('--ant-custom-z-index-mask:1003;')
-    expect(result).toContain('--ant-custom-z-index-overlay:1004;')
+    expect(result).toContain('--ant-custom-z-index: 1002;')
+    expect(result).toContain('--ant-custom-z-index-mask: 1003;')
+    expect(result).toContain('--ant-custom-z-index-overlay: 1004;')
   })
 
   it('should format CSS with proper indentation and line breaks', () => {
@@ -264,8 +262,8 @@ describe('parseStyle', () => {
     const unformattedResult = parseStyleToLess(styles, { formatStyle: false })
 
     // 格式化的结果应该包含换行和缩进
-    expect(formattedResult).toContain('  color: red;\n')
-    expect(formattedResult).toContain('  font-size: 16px;\n')
+    expect(formattedResult).toContain('color: red;\n')
+    expect(formattedResult).toContain('font-size: 16px;\n')
     expect(formattedResult).toContain('&:hover {\n')
     expect(formattedResult).toContain('  color: blue;\n')
     expect(formattedResult).toContain('}\n')

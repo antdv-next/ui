@@ -1,0 +1,82 @@
+import type { DOMWindow } from 'jsdom'
+import util from 'node:util'
+import { vi } from 'vitest'
+import { version } from 'vue'
+
+console.log('Current Vue Version:', version)
+type Writeable<T> = { -readonly [P in keyof T]: T[P] }
+
+// This function can not move to external file since jest setup not support
+export function fillWindowEnv(window: Window | DOMWindow) {
+  const win = window as Writeable<Window> & typeof globalThis
+
+  win.resizeTo = (width, height) => {
+    win.innerWidth = width || win.innerWidth
+    win.innerHeight = height || win.innerHeight
+    win.dispatchEvent(new Event('resize'))
+  }
+  win.scrollTo = () => {}
+  // ref: https://github.com/ant-design/ant-design/issues/18774
+  if (!win.matchMedia) {
+    Object.defineProperty(win, 'matchMedia', {
+      writable: true,
+      configurable: true,
+      value: vi.fn(query => ({
+        matches: query.includes('max-width'),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    })
+  }
+
+  // Fix css-animation or rc-motion deps on these
+  // https://github.com/react-component/motion/blob/9c04ef1a210a4f3246c9becba6e33ea945e00669/src/util/motion.ts#L27-L35
+  // https://github.com/yiminghe/css-animation/blob/a5986d73fd7dfce75665337f39b91483d63a4c8c/src/Event.js#L44
+  win.AnimationEvent = win.AnimationEvent || win.Event
+  win.TransitionEvent = win.TransitionEvent || win.Event
+
+  // ref: https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
+  // ref: https://github.com/jsdom/jsdom/issues/2524
+  Object.defineProperty(win, 'TextEncoder', { writable: true, value: util.TextEncoder })
+  Object.defineProperty(win, 'TextDecoder', { writable: true, value: util.TextDecoder })
+
+  // Mock getComputedStyle to handle pseudoElt parameter
+  const originalGetComputedStyle = win.getComputedStyle
+  win.getComputedStyle = (elt: Element, pseudoElt?: string | null | undefined) => {
+    if (pseudoElt) {
+      // Return a mock style object for pseudo-elements
+      return {
+        getPropertyValue: (prop: string) => {
+          // Return default values for common properties
+          const defaults: Record<string, string> = {
+            width: '0px',
+            height: '0px',
+            padding: '0px',
+            margin: '0px',
+            border: '0px',
+            'background-color': 'transparent',
+            color: 'rgb(0, 0, 0)',
+            'font-size': '16px',
+            'line-height': 'normal',
+            display: 'block',
+            position: 'static',
+            overflow: 'visible',
+            'overflow-x': 'visible',
+            'overflow-y': 'visible',
+          }
+          return defaults[prop] || ''
+        },
+      } as CSSStyleDeclaration
+    }
+    return originalGetComputedStyle.call(win, elt, pseudoElt)
+  }
+}
+
+if (typeof window !== 'undefined') {
+  fillWindowEnv(window)
+}
+
+// eslint-disable-next-line no-restricted-globals
+global.requestAnimationFrame = global.requestAnimationFrame || global.setTimeout
+// eslint-disable-next-line no-restricted-globals
+global.cancelAnimationFrame = global.cancelAnimationFrame || global.clearTimeout
