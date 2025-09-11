@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import type { ButtonEvents, ButtonProps, ButtonSlots, ColorVariantPairType } from './define.ts'
 import { filterEmpty } from '@v-c/util/dist/props-util'
-import { computed, onMounted, shallowRef, useSlots } from 'vue'
+import { computed, defineComponent, h, onBeforeMount, onMounted, shallowRef, useSlots, watch } from 'vue'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
 import { useSize } from '../config-provider/size-context.ts'
 import Wave from '../wave/wave.vue'
+import ButtonIcon from './button-icon.vue'
 import { isTwoCNChar, isUnBorderedButtonVariant } from './buttonHelpers.ts'
 import { ButtonTypeMap } from './define'
-import IconWrapper from './icon-wrapper.vue'
+import {
+
+  getLoadingConfig,
+} from './define.ts'
 
 defineOptions({
   name: 'AButton',
@@ -21,16 +25,17 @@ const {
   shape: customizeShape,
   disabled = false,
   size: customizeSize,
-  icon,
+  icon = undefined,
   ghost,
   autoInsertSpace = undefined,
   iconPosition = 'start',
   block,
   classNames: customClassNames,
   styles,
+  loading = false,
   ...rest
 } = defineProps<ButtonProps>()
-defineEmits<ButtonEvents>()
+const emit = defineEmits<ButtonEvents>()
 defineSlots<ButtonSlots>()
 const mergedType = computed(() => type || 'default')
 const shape = computed(() => customizeShape || 'default')
@@ -38,6 +43,41 @@ const buttonRef = shallowRef<HTMLElement>()
 const innerLoading = shallowRef()
 const hasTwoCNChar = shallowRef(false)
 const slots = useSlots()
+const isMountRef = shallowRef(true)
+const loadingOrDelay = computed(() => getLoadingConfig(loading))
+
+// ========================= Mount ==========================
+// Record for mount status.
+// This will help to no to show the animation of loading on the first mount.
+onMounted(() => {
+  isMountRef.value = false
+})
+
+onBeforeMount(() => {
+  isMountRef.value = true
+})
+
+watch(loadingOrDelay, (loadingOrDelay, _, onCleanup) => {
+  let delayTimer: ReturnType<typeof setTimeout> | null = null
+  if (loadingOrDelay.delay > 0) {
+    delayTimer = setTimeout(() => {
+      innerLoading.value = loadingOrDelay.loading
+      delayTimer = null
+    }, loadingOrDelay.delay)
+  } else {
+    innerLoading.value = loadingOrDelay.loading
+  }
+
+  function cleanupTimer() {
+    if (delayTimer) {
+      clearTimeout(delayTimer)
+      delayTimer = null
+    }
+  }
+  onCleanup(cleanupTimer)
+}, {
+  immediate: true,
+})
 
 const context = useConfigContext()
 const buttonCtx = useComponentConfig('button')
@@ -95,13 +135,19 @@ const sizeCls = computed(() => {
 })
 
 const iconType = computed(() => {
-  return innerLoading.value ? 'loading' : icon
+  return innerLoading.value ? 'loading' : (icon ?? slots.icon)
+})
+
+const hasDefaultSlot = computed(() => {
+  return !!slots.default
+})
+
+const hasIconSlot = computed(() => {
+  return !!slots.icon
 })
 
 const needInserted = computed(() => {
-  const children = filterEmpty(slots.default?.() ?? [])
-  const iconChildren = filterEmpty(slots.icon?.() ?? [])
-  return children.length !== 0 && !icon && iconChildren.length < 1 && !isUnBorderedButtonVariant(mergeTypes.value[1])
+  return hasDefaultSlot.value && !(icon || hasIconSlot.value) && !isUnBorderedButtonVariant(mergeTypes.value[1])
 })
 
 // Two chinese characters check
@@ -110,7 +156,7 @@ onMounted(() => {
     return
   }
 
-  const buttonText = buttonRef.value.textContent || ''
+  const buttonText = (buttonRef.value.textContent || '').trim()
   if (needInserted.value && isTwoCNChar(buttonText)) {
     if (!hasTwoCNChar.value) {
       hasTwoCNChar.value = true
@@ -123,8 +169,7 @@ onMounted(() => {
 const prefixCls = `ant-btn`
 const cls = computed(() => {
   const [_, variant] = mergeTypes.value
-  const children = filterEmpty(slots.default?.() ?? [])
-  const iconChildren = filterEmpty(slots.icon?.() ?? [])
+
   return {
     [prefixCls]: true,
     [`${prefixCls}-${shape.value}`]: shape.value !== 'default',
@@ -135,7 +180,7 @@ const cls = computed(() => {
     [`${prefixCls}-color-${mergedColorText.value}`]: !!mergedColorText.value,
     [`${prefixCls}-variant-${variant}`]: !!variant,
     [`${prefixCls}-${sizeCls.value}`]: sizeCls.value,
-    [`${prefixCls}-icon-only`]: children.length !== 0 && !!iconType.value && iconChildren.length > 0,
+    [`${prefixCls}-icon-only`]: !!iconType.value && !hasDefaultSlot.value,
     [`${prefixCls}-background-ghost`]: ghost && !isUnBorderedButtonVariant(variant),
     [`${prefixCls}-loading`]: innerLoading.value,
     [`${prefixCls}-two-chinese-chars`]: !innerLoading.value && hasTwoCNChar.value && mergedInsertSpace.value,
@@ -145,73 +190,100 @@ const cls = computed(() => {
   }
 })
 
-// const iconClasses = computed(() => {
-//   return [customClassNames?.icon, buttonCtx.value?.classNames?.icon]
-// })
-// const iconStyle = computed(() => {
-//   return {
-//     ...buttonCtx.value?.styles?.icon,
-//     ...styles?.icon,
-//   }
-// })
+const RenderText = defineComponent({
+  setup(_, { slots }) {
+    return () => {
+      const children = filterEmpty(slots.default?.() ?? [])
+      if (!children.length) {
+        return null
+      }
+      return h('span', {}, children)
+    }
+  },
+})
+
+function handleClick(e: Event) {
+  if (mergedDisabled.value) {
+    e.preventDefault()
+    return
+  }
+  emit('click', e)
+}
 </script>
 
 <template>
   <template v-if="linkButtonRestProps.href !== undefined">
     <a
       ref="buttonRef"
+      v-bind="$attrs"
+      :href="mergedDisabled ? undefined : linkButtonRestProps.href"
       :class="[
         cls,
         {
           [`${prefixCls}-disabled`]: mergedDisabled,
         },
+        $attrs.class,
       ]"
-      :style="[]"
-      v-bind="$attrs"
+      :style="[buttonCtx.style, $attrs.style as any]"
+      :tabIndex="mergedDisabled ? -1 : 0"
+      :aria-disabled="mergedDisabled"
+      @click="handleClick"
     >
-      <span>
+      <ButtonIcon
+        :prefix-cls="prefixCls"
+        :icon="icon"
+        :loading="loading"
+        :inner-loading="innerLoading"
+        :is-mount-ref="isMountRef"
+        :custom-class-names="customClassNames"
+        :button-ctx="buttonCtx"
+        :styles="styles"
+      >
+        <template v-if="$slots.icon" #icon>
+          <slot name="icon" />
+        </template>
+        <template v-if="$slots.loadingIcon" #loadingIcon>
+          <slot name="loadingIcon" />
+        </template>
+      </ButtonIcon>
+      <RenderText>
         <slot />
-      </span>
+      </RenderText>
     </a>
   </template>
   <button
     v-else
     ref="buttonRef"
-    :class="[cls]"
-    :style="[]"
+    :type="htmlType"
+    :class="[cls, $attrs.class]"
+    :style="[buttonCtx.style, $attrs.style as any]"
     :disabled="mergedDisabled"
+    @click="handleClick"
   >
     <Wave
       v-if="!isUnBorderedButtonVariant(mergeTypes[1])"
       component="Button"
       :node="buttonRef"
     />
-    <IconWrapper
-      v-if="(icon || $slots?.icon) && !innerLoading"
+    <ButtonIcon
       :prefix-cls="prefixCls"
-      :class="[
-        customClassNames?.icon,
-        buttonCtx?.classNames?.icon,
-      ]"
-      :style="[
-        buttonCtx?.styles?.icon,
-        styles?.icon,
-      ]"
+      :icon="icon"
+      :loading="loading"
+      :inner-loading="innerLoading"
+      :is-mount-ref="isMountRef"
+      :custom-class-names="customClassNames"
+      :button-ctx="buttonCtx"
+      :styles="styles"
     >
-      <slot name="icon">
-        <component :is="icon" />
-      </slot>
-    </IconWrapper>
-    <IconWrapper v-else-if="loading && typeof loading === 'object' && (loading.icon || $slots.loadingIcon)">
-      <slot name="loadingIcon">
-        <component :is="loading.icon" />
-      </slot>
-    </IconWrapper>
-    <template v-else>
-      <!--      -->
-    </template>
-    <span>
+      <template v-if="$slots.icon" #icon>
+        <slot name="icon" />
+      </template>
+      <template v-if="$slots.loadingIcon" #loadingIcon>
+        <slot name="loadingIcon" />
+      </template>
+    </ButtonIcon>
+    <RenderText>
       <slot />
-    </span>
+    </RenderText>
   </button>
 </template>

@@ -1,3 +1,5 @@
+import type { VueNode } from '@v-c/util/dist/type'
+import { Fragment, h, isVNode } from 'vue'
 import { PresetColors } from '../themes/interface/base'
 
 const rxTwoCNChar = /^[\u4E00-\u9FA5]{2}$/
@@ -38,3 +40,58 @@ export const _ButtonColorTypes = [
 ] as const
 
 export type ButtonColorType = (typeof _ButtonColorTypes)[number]
+
+// 检查是否为Fragment的简单实现
+function isFragment(vnode: any): boolean {
+  return vnode && vnode.type && vnode.type === 'Fragment'
+}
+
+export function splitCNCharsBySpace(child: VueNode, needInserted: boolean): VueNode {
+  if (child === null || child === undefined) {
+    return child
+  }
+
+  const SPACE = needInserted ? ' ' : ''
+
+  if (
+    typeof child !== 'string'
+    && typeof child !== 'number'
+    && isVNode(child)
+    && isString(child.type)
+    && typeof child.children === 'string'
+    && isTwoCNChar(child.children)
+  ) {
+    // 对于有两个中文字符的VNode，克隆并修改其子内容
+    return h(child.type as string, child.props, child.children.split('').join(SPACE))
+  }
+
+  if (isString(child)) {
+    return isTwoCNChar(child) ? h('span', child.split('').join(SPACE)) : h('span', child)
+  }
+
+  if (isVNode(child) && isFragment(child)) {
+    return h('span', child)
+  }
+
+  return child
+}
+
+export function spaceChildren(children: VueNode[], needInserted: boolean): VueNode {
+  let isPrevChildPure = false
+  const childList: VueNode[] = []
+
+  children.forEach((child) => {
+    const type = typeof child
+    const isCurrentChildPure = type === 'string' || type === 'number'
+    if (isPrevChildPure && isCurrentChildPure) {
+      const lastIndex = childList.length - 1
+      const lastChild = childList[lastIndex]
+      childList[lastIndex] = `${lastChild}${child}`
+    } else {
+      childList.push(child)
+    }
+    isPrevChildPure = isCurrentChildPure
+  })
+
+  return h(Fragment, childList.map(child => splitCNCharsBySpace(child, needInserted)))
+}

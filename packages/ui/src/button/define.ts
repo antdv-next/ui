@@ -44,7 +44,7 @@ export interface ButtonSlots {
 }
 
 export interface ButtonEvents {
-  click?: [MouseEvent]
+  click: [Event]
 }
 
 export type ColorVariantPairType = [color?: ButtonColorType, variant?: ButtonVariantType]
@@ -56,4 +56,31 @@ export const ButtonTypeMap: Partial<Record<ButtonType, ColorVariantPairType>> = 
   // `link` is not a real color but we should compatible with it
   link: ['link' as any, 'link'],
   text: ['default', 'text'],
+}
+
+export interface DefaultLoadingIconProps {
+  prefixCls: string
+  existIcon: boolean
+  loading?: boolean | object
+  mount: boolean
+}
+export interface LoadingConfigType {
+  loading: boolean
+  delay: number
+}
+
+export function getLoadingConfig(loading: BaseButtonProps['loading']): LoadingConfigType {
+  if (typeof loading === 'object' && loading) {
+    let delay = loading?.delay
+    delay = !Number.isNaN(delay) && typeof delay === 'number' ? delay : 0
+    return {
+      loading: delay <= 0,
+      delay,
+    }
+  }
+
+  return {
+    loading: !!loading,
+    delay: 0,
+  }
 }

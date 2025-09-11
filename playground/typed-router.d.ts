@@ -20,8 +20,10 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/affix/basic': RouteRecordInfo<'/affix/basic', '/affix/basic', Record<never, never>, Record<never, never>>,
+    '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/icon': RouteRecordInfo<'/button/icon', '/button/icon', Record<never, never>, Record<never, never>>,
+    '/button/icon-position': RouteRecordInfo<'/button/icon-position', '/button/icon-position', Record<never, never>, Record<never, never>>,
     '/button/variant': RouteRecordInfo<'/button/variant', '/button/variant', Record<never, never>, Record<never, never>>,
   }
 
@@ -44,12 +46,20 @@ declare module 'vue-router/auto-routes' {
       routes: '/affix/basic'
       views: never
     }
+    'src/pages/button/auto-insert-space.vue': {
+      routes: '/button/auto-insert-space'
+      views: never
+    }
     'src/pages/button/basic.vue': {
       routes: '/button/basic'
       views: never
     }
     'src/pages/button/icon.vue': {
       routes: '/button/icon'
+      views: never
+    }
+    'src/pages/button/icon-position.vue': {
+      routes: '/button/icon-position'
       views: never
     }
     'src/pages/button/variant.vue': {

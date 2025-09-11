@@ -5,6 +5,8 @@ Button.install = (app: App) => {
   app.component('AButton', Button)
 }
 
+Button.__ANT_BUTTON = true
+
 export {
   Button,
 }
