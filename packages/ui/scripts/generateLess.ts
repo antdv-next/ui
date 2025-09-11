@@ -24,6 +24,7 @@ async function generateLess() {
     // 'card',
     // 'carousel',
     // 'checkbox',
+    // 'calendar',
     // 'cascader',
     // ['cascader', 'panel'],
     // 'collapse',

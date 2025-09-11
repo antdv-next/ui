@@ -43,12 +43,12 @@
     border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0;
     &::before {
       display: table;
-      content: "";
+      content: ' ';
     }
     &::after {
       display: table;
       clear: both;
-      content: "";
+      content: '';
     }
     &-wrapper {
       width: 100%;
@@ -62,7 +62,7 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       > .ant-card-typography,
-                > .ant-card-typography-edit-content {
+      > .ant-card-typography-edit-content {
         inset-inline-start: 0;
         margin-top: 0;
         margin-bottom: 0;
@@ -90,12 +90,12 @@
     border-radius: 0 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg);
     &::before {
       display: table;
-      content: "";
+      content: '';
     }
     &::after {
       display: table;
       clear: both;
-      content: "";
+      content: '';
     }
   }
   .ant-card-grid {
@@ -103,13 +103,12 @@
     padding: var(--ant-padding-lg);
     border: 0;
     border-radius: 0;
-    box-shadow: 
-          var(--ant-line-width) 0 0 0 var(--ant-color-border-secondary),
-          0 var(--ant-line-width) 0 0 var(--ant-color-border-secondary),
-          var(--ant-line-width) var(--ant-line-width) 0 0 var(--ant-color-border-secondary),
-          var(--ant-line-width) 0 0 0 var(--ant-color-border-secondary) inset,
-          0 var(--ant-line-width) 0 0 var(--ant-color-border-secondary) inset;
-        ;
+    box-shadow:
+      var(--ant-line-width) 0 0 0 var(--ant-color-border-secondary),
+      0 var(--ant-line-width) 0 0 var(--ant-color-border-secondary),
+      var(--ant-line-width) var(--ant-line-width) 0 0 var(--ant-color-border-secondary),
+      var(--ant-line-width) 0 0 0 var(--ant-color-border-secondary) inset,
+      0 var(--ant-line-width) 0 0 var(--ant-color-border-secondary) inset;
     transition: all var(--ant-motion-duration-mid);
     &-hoverable:hover {
       position: relative;
@@ -134,12 +133,12 @@
     border-radius: 0 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg);
     &::before {
       display: table;
-      content: "";
+      content: '';
     }
     &::after {
       display: table;
       clear: both;
-      content: "";
+      content: '';
     }
     & > li {
       margin: var(--ant-card-actions-li-margin);
@@ -156,7 +155,8 @@
           color: var(--ant-color-primary);
           transition: color var(--ant-motion-duration-mid);
         }
-        a:not(.ant-card-btn), > .anticon {
+        a:not(.ant-card-btn),
+        > .anticon {
           display: inline-block;
           width: 100%;
           color: var(--ant-color-icon);
@@ -181,12 +181,12 @@
     display: flex;
     &::before {
       display: table;
-      content: "";
+      content: '';
     }
     &::after {
       display: table;
       clear: both;
-      content: "";
+      content: '';
     }
     &-avatar {
       padding-inline-end: var(--ant-padding);
@@ -221,14 +221,16 @@
 }
 .ant-card-hoverable {
   cursor: pointer;
-  transition: box-shadow var(--ant-motion-duration-mid), border-color var(--ant-motion-duration-mid);
+  transition:
+    box-shadow var(--ant-motion-duration-mid),
+    border-color var(--ant-motion-duration-mid);
   &:hover {
     border-color: transparent;
     box-shadow: var(--ant-box-shadow-card);
   }
 }
 .ant-card-contain-grid {
-  border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0 ;
+  border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0;
   .ant-card-body {
     display: flex;
     flex-wrap: wrap;
@@ -242,7 +244,8 @@
 .ant-card-contain-tabs {
   > div.ant-card-head {
     min-height: 0;
-    .ant-card-head-title, .ant-card-extra {
+    .ant-card-head-title,
+    .ant-card-extra {
       padding-top: var(--ant-padding);
     }
   }
@@ -285,7 +288,8 @@
 }
 .ant-card-small.ant-card-contain-tabs {
   > .ant-card-head {
-    .ant-card-head-title, .ant-card-extra {
+    .ant-card-head-title,
+    .ant-card-extra {
       padding-top: 0;
       display: flex;
       align-items: center;

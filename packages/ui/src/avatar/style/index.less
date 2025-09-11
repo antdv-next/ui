@@ -1,0 +1,103 @@
+.ant-avatar {
+  --ant-avatar-container-size: 32px;
+  --ant-avatar-container-size-lg: 40px;
+  --ant-avatar-container-size-sm: 24px;
+  --ant-avatar-text-font-size: 14px;
+  --ant-avatar-text-font-size-lg: 14px;
+  --ant-avatar-text-font-size-sm: 14px;
+  --ant-avatar-icon-font-size: 18px;
+  --ant-avatar-icon-font-size-lg: 24px;
+  --ant-avatar-icon-font-size-sm: 14px;
+  --ant-avatar-group-space: 4px;
+  --ant-avatar-group-overlapping: -8px;
+  --ant-avatar-group-border-color: var(--ant-color-border-bg);
+}
+
+.ant-avatar {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text-light-solid);
+  font-size: var(--ant-avatar-text-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background: var(--ant-color-text-placeholder);
+  border: var(--ant-line-width) var(--ant-line-type) transparent;
+  &-image {
+    background: transparent;
+  }
+  .ant-image-img {
+    display: block;
+  }
+  width: var(--ant-avatar-container-size);
+  height: var(--ant-avatar-container-size);
+  border-radius: 50%;
+  &.ant-avatar-square {
+    border-radius: var(--ant-border-radius);
+  }
+  &.ant-avatar-icon {
+    font-size: var(--ant-avatar-icon-font-size);
+    > .anticon {
+      margin: 0;
+    }
+  }
+  &-lg {
+    width: var(--ant-avatar-container-size-lg);
+    height: var(--ant-avatar-container-size-lg);
+    border-radius: 50%;
+    font-size: var(--ant-avatar-text-font-size-lg);
+    &.ant-avatar-square {
+      border-radius: var(--ant-border-radius-lg);
+    }
+    &.ant-avatar-icon {
+      font-size: var(--ant-avatar-icon-font-size-lg);
+      > .anticon {
+        margin: 0;
+      }
+    }
+  }
+  &-sm {
+    width: var(--ant-avatar-container-size-sm);
+    height: var(--ant-avatar-container-size-sm);
+    border-radius: 50%;
+    font-size: var(--ant-avatar-text-font-size-sm);
+    &.ant-avatar-square {
+      border-radius: var(--ant-border-radius-sm);
+    }
+    &.ant-avatar-icon {
+      font-size: var(--ant-avatar-icon-font-size-sm);
+      > .anticon {
+        margin: 0;
+      }
+    }
+  }
+  > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.ant-avatar-group {
+  display: inline-flex;
+  .ant-avatar {
+    border-color: var(--ant-avatar-group-border-color);
+  }
+  > *:not(:first-child) {
+    margin-inline-start: var(--ant-avatar-group-overlapping);
+  }
+}
+.ant-avatar-group-popover {
+  .ant-avatar + .ant-avatar {
+    margin-inline-start: var(--ant-avatar-group-space);
+  }
+}
