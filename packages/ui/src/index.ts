@@ -3,6 +3,7 @@ import * as components from './components'
 
 export * from './components'
 
+export type * from './types'
 export default {
   install(app: App) {
     Object.keys(components).forEach((key) => {

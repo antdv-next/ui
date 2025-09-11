@@ -22,8 +22,14 @@ declare module 'vue-router/auto-routes' {
     '/affix/basic': RouteRecordInfo<'/affix/basic', '/affix/basic', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
+    '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
+    '/button/danger': RouteRecordInfo<'/button/danger', '/button/danger', Record<never, never>, Record<never, never>>,
+    '/button/disabled': RouteRecordInfo<'/button/disabled', '/button/disabled', Record<never, never>, Record<never, never>>,
+    '/button/ghost': RouteRecordInfo<'/button/ghost', '/button/ghost', Record<never, never>, Record<never, never>>,
     '/button/icon': RouteRecordInfo<'/button/icon', '/button/icon', Record<never, never>, Record<never, never>>,
     '/button/icon-position': RouteRecordInfo<'/button/icon-position', '/button/icon-position', Record<never, never>, Record<never, never>>,
+    '/button/loading': RouteRecordInfo<'/button/loading', '/button/loading', Record<never, never>, Record<never, never>>,
+    '/button/size': RouteRecordInfo<'/button/size', '/button/size', Record<never, never>, Record<never, never>>,
     '/button/variant': RouteRecordInfo<'/button/variant', '/button/variant', Record<never, never>, Record<never, never>>,
   }
 
@@ -54,12 +60,36 @@ declare module 'vue-router/auto-routes' {
       routes: '/button/basic'
       views: never
     }
+    'src/pages/button/block.vue': {
+      routes: '/button/block'
+      views: never
+    }
+    'src/pages/button/danger.vue': {
+      routes: '/button/danger'
+      views: never
+    }
+    'src/pages/button/disabled.vue': {
+      routes: '/button/disabled'
+      views: never
+    }
+    'src/pages/button/ghost.vue': {
+      routes: '/button/ghost'
+      views: never
+    }
     'src/pages/button/icon.vue': {
       routes: '/button/icon'
       views: never
     }
     'src/pages/button/icon-position.vue': {
       routes: '/button/icon-position'
+      views: never
+    }
+    'src/pages/button/loading.vue': {
+      routes: '/button/loading'
+      views: never
+    }
+    'src/pages/button/size.vue': {
+      routes: '/button/size'
       views: never
     }
     'src/pages/button/variant.vue': {
