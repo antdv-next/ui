@@ -31,6 +31,15 @@ declare module 'vue-router/auto-routes' {
     '/button/loading': RouteRecordInfo<'/button/loading', '/button/loading', Record<never, never>, Record<never, never>>,
     '/button/size': RouteRecordInfo<'/button/size', '/button/size', Record<never, never>, Record<never, never>>,
     '/button/variant': RouteRecordInfo<'/button/variant', '/button/variant', Record<never, never>, Record<never, never>>,
+    '/color-picker/basic': RouteRecordInfo<'/color-picker/basic', '/color-picker/basic', Record<never, never>, Record<never, never>>,
+    '/divider/basic': RouteRecordInfo<'/divider/basic', '/divider/basic', Record<never, never>, Record<never, never>>,
+    '/divider/customize-style': RouteRecordInfo<'/divider/customize-style', '/divider/customize-style', Record<never, never>, Record<never, never>>,
+    '/divider/horizontal': RouteRecordInfo<'/divider/horizontal', '/divider/horizontal', Record<never, never>, Record<never, never>>,
+    '/divider/plain': RouteRecordInfo<'/divider/plain', '/divider/plain', Record<never, never>, Record<never, never>>,
+    '/divider/size': RouteRecordInfo<'/divider/size', '/divider/size', Record<never, never>, Record<never, never>>,
+    '/divider/variant': RouteRecordInfo<'/divider/variant', '/divider/variant', Record<never, never>, Record<never, never>>,
+    '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
+    '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -94,6 +103,42 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/button/variant.vue': {
       routes: '/button/variant'
+      views: never
+    }
+    'src/pages/color-picker/basic.vue': {
+      routes: '/color-picker/basic'
+      views: never
+    }
+    'src/pages/divider/basic.vue': {
+      routes: '/divider/basic'
+      views: never
+    }
+    'src/pages/divider/customize-style.vue': {
+      routes: '/divider/customize-style'
+      views: never
+    }
+    'src/pages/divider/horizontal.vue': {
+      routes: '/divider/horizontal'
+      views: never
+    }
+    'src/pages/divider/plain.vue': {
+      routes: '/divider/plain'
+      views: never
+    }
+    'src/pages/divider/size.vue': {
+      routes: '/divider/size'
+      views: never
+    }
+    'src/pages/divider/variant.vue': {
+      routes: '/divider/variant'
+      views: never
+    }
+    'src/pages/divider/vertical.vue': {
+      routes: '/divider/vertical'
+      views: never
+    }
+    'src/pages/divider/with-text.vue': {
+      routes: '/divider/with-text'
       views: never
     }
   }
