@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'vue'
+import type throttleByAnimationFrame from '../_utils/throttleByAnimationFrame'
 
 export const TRIGGER_EVENTS: (keyof WindowEventMap)[] = [
   'resize',
@@ -28,4 +29,21 @@ export interface AffixProps {
   prefixCls?: string
   // className?: string
   rootClassName?: string
+}
+
+export const AFFIX_STATUS_NONE = 0
+export const AFFIX_STATUS_PREPARE = 1
+
+export type AffixStatus = typeof AFFIX_STATUS_NONE | typeof AFFIX_STATUS_PREPARE
+
+export interface AffixState {
+  affixStyle?: CSSProperties
+  placeholderStyle?: CSSProperties
+  status: AffixStatus
+  lastAffix: boolean
+  prevTarget: Window | HTMLElement | null
+}
+
+export interface AffixExpose {
+  updatePosition: ReturnType<typeof throttleByAnimationFrame>
 }
