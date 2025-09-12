@@ -20,6 +20,7 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/affix/basic': RouteRecordInfo<'/affix/basic', '/affix/basic', Record<never, never>, Record<never, never>>,
+    '/affix/change': RouteRecordInfo<'/affix/change', '/affix/change', Record<never, never>, Record<never, never>>,
     '/affix/target': RouteRecordInfo<'/affix/target', '/affix/target', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
@@ -59,6 +60,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/affix/basic.vue': {
       routes: '/affix/basic'
+      views: never
+    }
+    'src/pages/affix/change.vue': {
+      routes: '/affix/change'
       views: never
     }
     'src/pages/affix/target.vue': {

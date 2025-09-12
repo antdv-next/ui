@@ -23,12 +23,16 @@ export interface AffixProps {
   offsetBottom?: number
   style?: CSSProperties
   /** Callback function triggered when fixed state changes */
-  onChange?: (affixed?: boolean) => void
+  // onChange?: (affixed?: boolean) => void
   /** Set the element that Affix needs to listen to its scroll event, the value is a function that returns the corresponding DOM element */
   target?: () => Window | HTMLElement | null
   prefixCls?: string
   // className?: string
   rootClassName?: string
+}
+
+export interface AffixEmits {
+  change: [boolean]
 }
 
 export const AFFIX_STATUS_NONE = 0

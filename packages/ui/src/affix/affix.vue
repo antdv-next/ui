@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import type { AffixExpose, AffixProps } from './define'
+import type { AffixEmits, AffixExpose, AffixProps } from './define'
 import { unrefElement, useResizeObserver } from '@vueuse/core'
 import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 import throttleByAnimationFrame from '../_utils/throttleByAnimationFrame'
@@ -14,9 +14,10 @@ const props = withDefaults(defineProps<InternalAffixProps>(), {
   offsetBottom: undefined,
   target: undefined,
   prefixCls: undefined,
-  onChange: undefined,
   onTestUpdatePosition: undefined,
 })
+
+const emit = defineEmits<AffixEmits>()
 
 const context = useConfigContext()
 const affixPrefixCls = context.getPrefixCls('affix', props.prefixCls)
@@ -104,7 +105,7 @@ function measure() {
     newState.lastAffix = !!newState.affixStyle
 
     if (lastAffix.value !== newState.lastAffix) {
-      props.onChange?.(newState.lastAffix)
+      emit('change', newState.lastAffix)
     }
 
     status.value = newState.status
