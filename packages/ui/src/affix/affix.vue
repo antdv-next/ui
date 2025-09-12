@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import type { AffixProps } from './define.ts'
 
+const props = defineProps<AffixProps>()
 </script>
 
 <template>

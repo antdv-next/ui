@@ -31,7 +31,6 @@ declare module 'vue-router/auto-routes' {
     '/button/loading': RouteRecordInfo<'/button/loading', '/button/loading', Record<never, never>, Record<never, never>>,
     '/button/size': RouteRecordInfo<'/button/size', '/button/size', Record<never, never>, Record<never, never>>,
     '/button/variant': RouteRecordInfo<'/button/variant', '/button/variant', Record<never, never>, Record<never, never>>,
-    '/color-picker/basic': RouteRecordInfo<'/color-picker/basic', '/color-picker/basic', Record<never, never>, Record<never, never>>,
     '/divider/basic': RouteRecordInfo<'/divider/basic', '/divider/basic', Record<never, never>, Record<never, never>>,
     '/divider/customize-style': RouteRecordInfo<'/divider/customize-style', '/divider/customize-style', Record<never, never>, Record<never, never>>,
     '/divider/horizontal': RouteRecordInfo<'/divider/horizontal', '/divider/horizontal', Record<never, never>, Record<never, never>>,
@@ -103,10 +102,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/button/variant.vue': {
       routes: '/button/variant'
-      views: never
-    }
-    'src/pages/color-picker/basic.vue': {
-      routes: '/color-picker/basic'
       views: never
     }
     'src/pages/divider/basic.vue': {
