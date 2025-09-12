@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ComputedRef, CSSProperties } from 'vue'
-import { computed, shallowRef, withDefaults } from 'vue'
+import { computed, shallowRef } from 'vue'
 
 type SizeType = 'small' | 'middle' | 'large' | undefined
 interface DividerProps {
