@@ -10,13 +10,7 @@ import { getFixedBottom, getFixedTop, getTargetRect } from './utils'
 
 type InternalAffixProps = AffixProps & { onTestUpdatePosition?: any }
 const props = withDefaults(defineProps<InternalAffixProps>(), {
-  offsetTop: undefined,
-  offsetBottom: undefined,
-  target: undefined,
-  prefixCls: undefined,
-  onTestUpdatePosition: undefined,
 })
-
 const emit = defineEmits<AffixEmits>()
 
 const context = useConfigContext()
