@@ -1,0 +1,32 @@
+.ant-space {
+    display: inline-flex;
+    &-rtl {
+    direction: rtl;
+}
+
+  &-vertical {
+    flex-direction: column;
+}
+
+  &-align {
+    flex-direction: column;
+    &-center {
+          align-items: center;
+};
+        &-start {
+    align-items: flex-start;
+};
+        &-end {
+    align-items: flex-end;
+};
+        &-baseline {
+    align-items: baseline;
+};
+  }
+
+  &-item {
+    &:empty {
+      display: 'none';
+    }
+  }
+}

@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import type { CSSProperties, VNode } from 'vue'
+import type { CSSProperties, VNodeNormalizedChildren } from 'vue'
+import type { VNodeChildAtom } from '../_utils/checker'
 import type { SizeType } from '../config-provider/size-context'
 import { computed, ref, toRefs, useSlots, watch } from 'vue'
+import { flattenChildren } from '../_utils/checker'
 import useFlexGapSupport from '../_utils/hooks/useFlexGapSupport'
+import { renderVNode } from '../_utils/node'
 import { useConfigContext } from '../config-provider/context'
 
 type SpaceSize = SizeType | number
 
 interface SpaceProps {
-  prefixCls: string
+  prefixCls?: string
   size: SpaceSize | [SpaceSize, SpaceSize]
   direction?: 'horizontal' | 'vertical'
   align: 'start' | 'end' | 'center' | 'baseline'
@@ -30,11 +33,13 @@ const spaceSize = {
   large: 24,
 }
 
-const { align, size: _size, wrap, prefixCls, direction } = toRefs(props)
+const { align, size: _size, wrap, direction } = toRefs(props)
+
+const ctx = useConfigContext()
+const prefixCls = computed(() => ctx.getPrefixCls('space', props.prefixCls))
 const horizontalSize = ref<number>()
 const verticalSize = ref<number>()
 
-const ctx = useConfigContext()
 const supportFlexGap = useFlexGapSupport()
 
 const size = computed(() => _size.value ?? ctx?.space ?? 'small')
@@ -70,8 +75,10 @@ const style = computed(() => {
 })
 
 const slots = useSlots()
-const renderChildren = computed(() => slots.default?.() || [])
-const splitChildren = computed(() => slots.split?.())
+const renderChildren = computed(() => flattenChildren(slots.default?.() || []))
+const splitChildren = computed(() => {
+  return renderVNode(flattenChildren(slots.split?.()))
+})
 
 watch(
   size,
@@ -86,14 +93,14 @@ watch(
   { immediate: true },
 )
 
-function getOriginIndex(child: VNode, defaultIndex: number) {
+function getOriginIndex(child: VNodeChildAtom | VNodeNormalizedChildren, defaultIndex: number) {
   const index = renderChildren.value.indexOf(child)
   if (index === -1) {
     return `$$space-${defaultIndex}`
   }
 }
 
-const itemClassName = computed(() => `${prefixCls.value}-item)`)
+const itemClassName = computed(() => `${prefixCls.value}-item`)
 const latestIndex = computed(() => renderChildren.value.length - 1)
 function calcItemStyle(index: number) {
   let itemStyle: CSSProperties = {}
