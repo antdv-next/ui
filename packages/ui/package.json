@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@v-c/util": "^0.0.2",
-    "@vueuse/core": "^13.9.0",
     "@v-c/color-picker": "^1.0.0",
+    "@v-c/util": "^0.0.3",
+    "@vueuse/core": "^13.9.0",
     "es-toolkit": "^1.39.10"
   },
   "devDependencies": {

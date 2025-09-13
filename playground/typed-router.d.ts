@@ -22,6 +22,14 @@ declare module 'vue-router/auto-routes' {
     '/affix/basic': RouteRecordInfo<'/affix/basic', '/affix/basic', Record<never, never>, Record<never, never>>,
     '/affix/change': RouteRecordInfo<'/affix/change', '/affix/change', Record<never, never>, Record<never, never>>,
     '/affix/target': RouteRecordInfo<'/affix/target', '/affix/target', Record<never, never>, Record<never, never>>,
+    '/alert/action': RouteRecordInfo<'/alert/action', '/alert/action', Record<never, never>, Record<never, never>>,
+    '/alert/banner': RouteRecordInfo<'/alert/banner', '/alert/banner', Record<never, never>, Record<never, never>>,
+    '/alert/basic': RouteRecordInfo<'/alert/basic', '/alert/basic', Record<never, never>, Record<never, never>>,
+    '/alert/close': RouteRecordInfo<'/alert/close', '/alert/close', Record<never, never>, Record<never, never>>,
+    '/alert/description': RouteRecordInfo<'/alert/description', '/alert/description', Record<never, never>, Record<never, never>>,
+    '/alert/error': RouteRecordInfo<'/alert/error', '/alert/error', Record<never, never>, Record<never, never>>,
+    '/alert/icon': RouteRecordInfo<'/alert/icon', '/alert/icon', Record<never, never>, Record<never, never>>,
+    '/alert/styles': RouteRecordInfo<'/alert/styles', '/alert/styles', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -68,6 +76,38 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/affix/target.vue': {
       routes: '/affix/target'
+      views: never
+    }
+    'src/pages/alert/action.vue': {
+      routes: '/alert/action'
+      views: never
+    }
+    'src/pages/alert/banner.vue': {
+      routes: '/alert/banner'
+      views: never
+    }
+    'src/pages/alert/basic.vue': {
+      routes: '/alert/basic'
+      views: never
+    }
+    'src/pages/alert/close.vue': {
+      routes: '/alert/close'
+      views: never
+    }
+    'src/pages/alert/description.vue': {
+      routes: '/alert/description'
+      views: never
+    }
+    'src/pages/alert/error.vue': {
+      routes: '/alert/error'
+      views: never
+    }
+    'src/pages/alert/icon.vue': {
+      routes: '/alert/icon'
+      views: never
+    }
+    'src/pages/alert/styles.vue': {
+      routes: '/alert/styles'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {

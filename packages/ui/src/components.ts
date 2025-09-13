@@ -1,3 +1,4 @@
 export { Affix } from './affix'
+export { Alert } from './alert'
 export { Button } from './button'
 export { Divider } from './divider'
