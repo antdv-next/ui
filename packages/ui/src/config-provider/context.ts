@@ -95,6 +95,7 @@ export interface ConfigConsumerProps extends ConfigComponentProps {
   // popupOverflow?: PopupOverflow;
   // theme?: ThemeConfig;
   // warning?: WarningContextProps;
+  space?: 'small' | 'middle' | 'large' | number
 }
 
 export const ConfigProviderKey: InjectionKey<ConfigConsumerProps> = generateKey('ConfigProviderKey')
