@@ -17,7 +17,7 @@
     "@v-c/color-picker": "catalog:",
     "@v-c/util": "catalog:",
     "@vueuse/core": "catalog:",
-    "es-toolkit": "catalog:"
-  },
-  "devDependencies": {}
+    "es-toolkit": "catalog:",
+    "scroll-into-view-if-needed": "^3.1.0"
+  }
 }
