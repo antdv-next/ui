@@ -4,6 +4,7 @@ import { filterEmpty } from '@v-c/util/dist/props-util'
 import { computed, defineComponent, h, onBeforeMount, onMounted, shallowRef, useSlots, watch } from 'vue'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
 import { useSize } from '../config-provider/size-context.ts'
+import { useCompactItemContext } from '../space/define.ts'
 import Wave from '../wave/wave.vue'
 import ButtonIcon from './button-icon.vue'
 import { isTwoCNChar, isUnBorderedButtonVariant } from './buttonHelpers.ts'
@@ -81,7 +82,9 @@ watch(loadingOrDelay, (loadingOrDelay, _, onCleanup) => {
 
 const context = useConfigContext()
 const buttonCtx = useComponentConfig('button')
-
+const prefixCls = computed(() => `ant-btn`)
+const direction = computed(() => buttonCtx.value?.direction)
+const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction)
 const mergedInsertSpace = computed(() => {
   return autoInsertSpace ?? buttonCtx.value?.autoInsertSpace ?? true
 })
@@ -127,7 +130,7 @@ const { size: ctxSize } = useSize()
 
 const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined }
 const sizeFullName = computed(() => {
-  return customizeSize || ctxSize?.value
+  return customizeSize || compactSize.value || ctxSize?.value
 })
 
 const sizeCls = computed(() => {
@@ -166,28 +169,30 @@ onMounted(() => {
   }
 })
 
-const prefixCls = `ant-btn`
 const cls = computed(() => {
   const [_, variant] = mergeTypes.value
+  const _prefixCls = prefixCls.value
+  return [
+    {
+      [_prefixCls]: true,
+      [`${_prefixCls}-${shape.value}`]: shape.value !== 'default',
 
-  return {
-    [prefixCls]: true,
-    [`${prefixCls}-${shape.value}`]: shape.value !== 'default',
+      [`${_prefixCls}-${type}`]: !!type,
+      [`${_prefixCls}-dangerous`]: isDanger.value,
 
-    [`${prefixCls}-${type}`]: !!type,
-    [`${prefixCls}-dangerous`]: isDanger.value,
-
-    [`${prefixCls}-color-${mergedColorText.value}`]: !!mergedColorText.value,
-    [`${prefixCls}-variant-${variant}`]: !!variant,
-    [`${prefixCls}-${sizeCls.value}`]: sizeCls.value,
-    [`${prefixCls}-icon-only`]: !!iconType.value && !hasDefaultSlot.value,
-    [`${prefixCls}-background-ghost`]: ghost && !isUnBorderedButtonVariant(variant),
-    [`${prefixCls}-loading`]: innerLoading.value,
-    [`${prefixCls}-two-chinese-chars`]: !innerLoading.value && hasTwoCNChar.value && mergedInsertSpace.value,
-    [`${prefixCls}-block`]: block,
-    [`${prefixCls}-rtl`]: buttonCtx.value?.direction === 'rtl',
-    [`${prefixCls}-icon-end`]: iconPosition === 'end',
-  }
+      [`${_prefixCls}-color-${mergedColorText.value}`]: !!mergedColorText.value,
+      [`${_prefixCls}-variant-${variant}`]: !!variant,
+      [`${_prefixCls}-${sizeCls.value}`]: sizeCls.value,
+      [`${_prefixCls}-icon-only`]: !!iconType.value && !hasDefaultSlot.value,
+      [`${_prefixCls}-background-ghost`]: ghost && !isUnBorderedButtonVariant(variant),
+      [`${_prefixCls}-loading`]: innerLoading.value,
+      [`${_prefixCls}-two-chinese-chars`]: !innerLoading.value && hasTwoCNChar.value && mergedInsertSpace.value,
+      [`${_prefixCls}-block`]: block,
+      [`${_prefixCls}-rtl`]: direction.value === 'rtl',
+      [`${_prefixCls}-icon-end`]: iconPosition === 'end',
+    },
+    compactItemClassnames.value,
+  ]
 })
 
 const RenderText = defineComponent({
