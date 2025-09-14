@@ -2,6 +2,8 @@ import type { App } from 'vue'
 import Compact from './compact.vue'
 import Space from './space.vue'
 
+export type { SpaceCompactItemProps, SpaceCompactProps, SpaceProps, SpaceSize } from './define'
+
 Space.Compact = Compact
 
 Space.install = function (app: App) {

@@ -8,11 +8,7 @@ import { useCompactItemContext } from '../space/define.ts'
 import Wave from '../wave/wave.vue'
 import ButtonIcon from './button-icon.vue'
 import { isTwoCNChar, isUnBorderedButtonVariant } from './buttonHelpers.ts'
-import { ButtonTypeMap } from './define'
-import {
-
-  getLoadingConfig,
-} from './define.ts'
+import { ButtonTypeMap, getLoadingConfig } from './define'
 
 defineOptions({
   name: 'AButton',
