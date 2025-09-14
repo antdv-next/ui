@@ -13,12 +13,11 @@
   },
   "dependencies": {
     "@ant-design/colors": "catalog:",
-    "@ant-design/icons-vue": "^7.0.1",
-    "@v-c/color-picker": "^1.0.0",
-    "@v-c/util": "^0.0.3",
-    "@vueuse/core": "^13.9.0",
-    "es-toolkit": "^1.39.10"
+    "@ant-design/icons-vue": "catalog:",
+    "@v-c/color-picker": "catalog:",
+    "@v-c/util": "catalog:",
+    "@vueuse/core": "catalog:",
+    "es-toolkit": "catalog:"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/icons-vue": "^7.0.1",
+    "@ant-design/icons-vue": "catalog:",
     "vue": "catalog:"
   },
   "devDependencies": {
@@ -16,7 +16,7 @@
     "@vue/tsconfig": "catalog:",
     "h3": "catalog:",
     "mock-h3": "catalog:",
-    "unocss": "^66.5.1",
+    "unocss": "catalog:",
     "unplugin-vue-router": "catalog:",
     "vite": "catalog:",
     "vue-router": "catalog:",
