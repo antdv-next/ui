@@ -20,7 +20,5 @@
     "es-toolkit": "^1.39.10"
   },
   "devDependencies": {
-    "@ant-design/cssinjs": "^1.24.0",
-    "@ant-design/cssinjs-utils": "^1.1.3"
   }
 }
