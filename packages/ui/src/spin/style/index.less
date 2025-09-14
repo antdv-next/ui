@@ -1,0 +1,251 @@
+@keyframes antSpinMove{
+to {
+  opacity: 1;
+}}
+@keyframes antRotate{
+to {
+  transform: rotate(405deg);
+}}
+
+.ant-spin {
+  --ant-spin-content-height: 400px;
+  --ant-spin-dot-size: 20px;
+  --ant-spin-dot-size-sm: 14px;
+  --ant-spin-dot-size-lg: 32px;
+
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-primary);
+  font-size: 0;
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: absolute;
+  display: none;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0;
+  transition: transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out-circ);
+  &-spinning {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+  }
+  .ant-spin-text {
+    font-size: var(--ant-font-size);
+    padding-top: calc((var(--ant-spin-dot-size) - var(--ant-font-size)) / 2 + 2px);
+  }
+  &-fullscreen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--ant-color-bg-mask);
+    z-index: var(--ant-z-index-popup-base);
+    inset: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--ant-motion-duration-mid);
+    &-show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .ant-spin {
+      .ant-spin-dot-holder {
+        color: var(--ant-color-white);
+      }
+      .ant-spin-text {
+        color: var(--ant-color-text-light-solid);
+      }
+    }
+  }
+  &-nested-loading {
+    position: relative;
+    > div > .ant-spin {
+      position: absolute;
+      top: 0;
+      inset-inline-start: 0;
+      z-index: 4;
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: var(--ant-spin-content-height);
+      .ant-spin-dot {
+        position: absolute;
+        top: 50%;
+        inset-inline-start: 50%;
+        margin: calc(var(--ant-spin-dot-size) * -1 / 2);
+      }
+      .ant-spin-text {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-shadow: 0 1px 2px var(--ant-color-bg-container);
+      }
+      &.ant-spin-show-text .ant-spin-dot {
+        margin-top: calc(var(--ant-spin-dot-size) / 2 * -1 - 10px);
+      }
+      &-sm {
+        .ant-spin-dot {
+          margin: calc(var(--ant-spin-dot-size-sm) * -1 / 2);
+        }
+        .ant-spin-text {
+          padding-top: calc((var(--ant-spin-dot-size-sm) - var(--ant-font-size)) / 2 + 2px);
+        }
+        &.ant-spin-show-text .ant-spin-dot {
+          margin-top: calc(var(--ant-spin-dot-size-sm) / 2 * -1 - 10px);
+        }
+      }
+      &-lg {
+        .ant-spin-dot {
+          margin: calc(var(--ant-spin-dot-size-lg) * -1 / 2);
+        }
+        .ant-spin-text {
+          padding-top: calc((var(--ant-spin-dot-size-lg) - var(--ant-font-size)) / 2 + 2px);
+        }
+        &.ant-spin-show-text .ant-spin-dot {
+          margin-top: calc(var(--ant-spin-dot-size-lg) / 2 * -1 - 10px);
+        }
+      }
+    }
+    .ant-spin-container {
+      position: relative;
+      transition: opacity var(--ant-motion-duration-slow);
+      &::after {
+        position: absolute;
+        top: 0;
+        inset-inline-end: 0;
+        bottom: 0;
+        inset-inline-start: 0;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        background: var(--ant-color-bg-container);
+        opacity: 0;
+        transition: all var(--ant-motion-duration-slow);
+        content: "";
+        pointer-events: none;
+      }
+    }
+    .ant-spin-blur {
+      clear: both;
+      opacity: 0.5;
+      user-select: none;
+      pointer-events: none;
+      &::after {
+        opacity: 0.4;
+        pointer-events: auto;
+      }
+    }
+  }
+  &-tip {
+    color: var(--ant-color-text-description);
+  }
+  .ant-spin-dot-holder {
+    width: 1em;
+    height: 1em;
+    font-size: var(--ant-spin-dot-size);
+    display: inline-block;
+    transition: transform var(--ant-motion-duration-slow) ease, opacity var(--ant-motion-duration-slow) ease;
+    transform-origin: 50% 50%;
+    line-height: 1;
+    color: var(--ant-color-primary);
+    &-hidden {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+  }
+  .ant-spin-dot-progress {
+    position: absolute;
+    inset: 0;
+  }
+  .ant-spin-dot {
+    position: relative;
+    display: inline-block;
+    font-size: var(--ant-spin-dot-size);
+    width: 1em;
+    height: 1em;
+    &-item {
+      position: absolute;
+      display: block;
+      width: calc((var(--ant-spin-dot-size) - var(--ant-margin-xxs) / 2) / 2);
+      height: calc((var(--ant-spin-dot-size) - var(--ant-margin-xxs) / 2) / 2);
+      background: currentColor;
+      border-radius: 100%;
+      transform: scale(0.75);
+      transform-origin: 50% 50%;
+      opacity: 0.3;
+      animation-name: antSpinMove;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-direction: alternate;
+      &:nth-child(1) {
+        top: 0;
+        inset-inline-start: 0;
+        animation-delay: 0s;
+      }
+      &:nth-child(2) {
+        top: 0;
+        inset-inline-end: 0;
+        animation-delay: 0.4s;
+      }
+      &:nth-child(3) {
+        inset-inline-end: 0;
+        bottom: 0;
+        animation-delay: 0.8s;
+      }
+      &:nth-child(4) {
+        bottom: 0;
+        inset-inline-start: 0;
+        animation-delay: 1.2s;
+      }
+    }
+    &-spin {
+      transform: rotate(45deg);
+      animation-name: antRotate;
+      animation-duration: 1.2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    &-circle {
+      stroke-linecap: round;
+      transition: stroke-dashoffset var(--ant-motion-duration-slow) ease,stroke-dasharray var(--ant-motion-duration-slow) ease,stroke var(--ant-motion-duration-slow) ease,stroke-width var(--ant-motion-duration-slow) ease,opacity var(--ant-motion-duration-slow) ease;
+      fill-opacity: 0;
+      stroke: currentcolor;
+    }
+    &-circle-bg {
+      stroke: var(--ant-color-fill-secondary);
+    }
+  }
+  &-sm .ant-spin-dot {
+    &, &-holder {
+      font-size: var(--ant-spin-dot-size-sm);
+    }
+  }
+  &-sm .ant-spin-dot-holder {
+    i {
+      width: calc((var(--ant-spin-dot-size-sm) - var(--ant-margin-xxs) / 2) / 2);
+      height: calc((var(--ant-spin-dot-size-sm) - var(--ant-margin-xxs) / 2) / 2);
+    }
+  }
+  &-lg .ant-spin-dot {
+    &, &-holder {
+      font-size: var(--ant-spin-dot-size-lg);
+    }
+  }
+  &-lg .ant-spin-dot-holder {
+    i {
+      width: calc((var(--ant-spin-dot-size-lg) - var(--ant-margin-xxs)) / 2);
+      height: calc((var(--ant-spin-dot-size-lg) - var(--ant-margin-xxs)) / 2);
+    }
+  }
+  &.ant-spin-show-text .ant-spin-text {
+    display: block;
+  }
+}

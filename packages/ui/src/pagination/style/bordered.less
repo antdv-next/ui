@@ -1,0 +1,74 @@
+.ant-pagination.ant-pagination-bordered.ant-pagination-disabled:not(.ant-pagination-mini) {
+  &, &:hover {
+    .ant-pagination-item-link {
+      border-color: var(--ant-color-border);
+    }
+  }
+  &:focus-visible {
+    .ant-pagination-item-link {
+      border-color: var(--ant-color-border);
+    }
+  }
+  .ant-pagination-item, .ant-pagination-item-link {
+    background-color: var(--ant-color-bg-container-disabled);
+    border-color: var(--ant-color-border);
+    &:hover:not(.ant-pagination-item-active) {
+      background-color: var(--ant-color-bg-container-disabled);
+      border-color: var(--ant-color-border);
+      a {
+        color: var(--ant-color-text-disabled);
+      }
+    }
+    &.ant-pagination-item-active {
+      background-color: var(--ant-pagination-item-active-bg-disabled);
+    }
+  }
+  .ant-pagination-prev, .ant-pagination-next {
+    &:hover button {
+      background-color: var(--ant-color-bg-container-disabled);
+      border-color: var(--ant-color-border);
+      color: var(--ant-color-text-disabled);
+    }
+    .ant-pagination-item-link {
+      background-color: var(--ant-color-bg-container-disabled);
+      border-color: var(--ant-color-border);
+    }
+  }
+}
+.ant-pagination.ant-pagination-bordered:not(.ant-pagination-mini) {
+  .ant-pagination-prev, .ant-pagination-next {
+    &:hover button {
+      border-color: var(--ant-color-primary-hover);
+      background-color: var(--ant-pagination-item-bg);
+    }
+    .ant-pagination-item-link {
+      background-color: var(--ant-pagination-item-link-bg);
+      border-color: var(--ant-color-border);
+    }
+    &:hover .ant-pagination-item-link {
+      border-color: var(--ant-color-primary);
+      background-color: var(--ant-pagination-item-bg);
+      color: var(--ant-color-primary);
+    }
+    &.ant-pagination-disabled {
+      .ant-pagination-item-link {
+        border-color: var(--ant-color-border);
+        color: var(--ant-color-text-disabled);
+      }
+    }
+  }
+  .ant-pagination-item {
+    background-color: var(--ant-pagination-item-bg);
+    border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border);
+    &:hover:not(.ant-pagination-item-active) {
+      border-color: var(--ant-color-primary);
+      background-color: var(--ant-pagination-item-bg);
+      a {
+        color: var(--ant-color-primary);
+      }
+    }
+    &-active {
+      border-color: var(--ant-color-primary);
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.ant-popconfirm {
+  --ant-popconfirm-z-index-popup: 1060;
+  z-index: var(--ant-popconfirm-z-index-popup);
+
+  &.ant-popover {
+    font-size: var(--ant-font-size);
+  }
+
+  .ant-popconfirm-message {
+    margin-bottom: var(--ant-margin-xs);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: start;
+    > .ant-popconfirm-message-icon .anticon {
+      color: var(--ant-color-warning);
+      font-size: var(--ant-font-size);
+      line-height: 1;
+      margin-inline-end: var(--ant-margin-xs);
+    }
+    .ant-popconfirm-title {
+      font-weight: var(--ant-font-weight-strong);
+      color: var(--ant-color-text-heading);
+      &:only-child {
+        font-weight: normal;
+      }
+    }
+    .ant-popconfirm-description {
+      margin-top: var(--ant-margin-xxs);
+      color: var(--ant-color-text);
+    }
+  }
+  .ant-popconfirm-buttons {
+    text-align: end;
+    white-space: nowrap;
+    button {
+      margin-inline-start: var(--ant-margin-xs);
+    }
+  }
+}

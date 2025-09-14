@@ -1,0 +1,177 @@
+.ant-segmented {
+  --ant-segmented-track-padding: 2px;
+  --ant-segmented-track-bg: var(--ant-color-bg-layout);
+  --ant-segmented-item-color: var(--ant-color-text-label);
+  --ant-segmented-item-hover-color: var(--ant-color-text);
+  --ant-segmented-item-hover-bg: var(--ant-color-fill-secondary);
+  --ant-segmented-item-selected-bg: var(--ant-color-bg-elevated);
+  --ant-segmented-item-active-bg: var(--ant-color-fill);
+  --ant-segmented-item-selected-color: var(--ant-color-text);
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--ant-segmented-track-padding);
+  color: var(--ant-segmented-item-color);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  display: inline-block;
+  background: var(--ant-segmented-track-bg);
+  border-radius: var(--ant-border-radius);
+  transition: all var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out);
+  &:focus-visible {
+    outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+    outline-offset: 1px;
+    transition: outline-offset 0s, outline 0s;
+  }
+  .ant-segmented-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+  }
+  &.ant-segmented-rtl {
+    direction: rtl;
+  }
+  &.ant-segmented-vertical {
+    .ant-segmented-group {
+      flex-direction: column;
+    }
+    .ant-segmented-thumb {
+      width: 100%;
+      height: 0;
+      padding: 0 var(--ant-padding-xxs);
+    }
+  }
+  &.ant-segmented-block {
+    display: flex;
+  }
+  &.ant-segmented-block .ant-segmented-item {
+    flex: 1;
+    min-width: 0;
+  }
+  .ant-segmented-item {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    transition: color var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out);
+    border-radius: var(--ant-border-radius-sm);
+    transform: translateZ(0);
+    &-selected {
+      background-color: var(--ant-segmented-item-selected-bg);
+      box-shadow: var(--ant-box-shadow-tertiary);
+      color: var(--ant-segmented-item-selected-color);
+    }
+    &-focused {
+      outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+      outline-offset: 1px;
+      transition: outline-offset 0s, outline 0s;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      inset-inline-start: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity var(--ant-motion-duration-mid);
+      pointer-events: none;
+    }
+    &:hover:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled) {
+      color: var(--ant-segmented-item-hover-color);
+      &::after {
+        opacity: 1;
+        background-color: var(--ant-segmented-item-hover-bg);
+      }
+    }
+    &:active:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled) {
+      color: var(--ant-segmented-item-hover-color);
+      &::after {
+        opacity: 1;
+        background-color: var(--ant-segmented-item-active-bg);
+      }
+    }
+    &-label {
+      min-height: calc(var(--ant-control-height) - var(--ant-segmented-track-padding) * 2);
+      line-height: calc(var(--ant-control-height) - var(--ant-segmented-track-padding) * 2);
+      padding: 0 calc(var(--ant-control-padding-horizontal) - var(--ant-line-width));
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    &-icon + * {
+      margin-inline-start: calc(var(--ant-margin-sm) / 2);
+    }
+    &-input {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  .ant-segmented-thumb {
+    background-color: var(--ant-segmented-item-selected-bg);
+    box-shadow: var(--ant-box-shadow-tertiary);
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    width: 0;
+    height: 100%;
+    padding: var(--ant-padding-xxs) 0;
+    border-radius: var(--ant-border-radius-sm);
+    transition: transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out), height var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
+    & ~ .ant-segmented-item:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled)::after {
+      background-color: transparent;
+    }
+  }
+  &.ant-segmented-lg {
+    border-radius: var(--ant-border-radius-lg);
+    .ant-segmented-item-label {
+      min-height: calc(var(--ant-control-height-lg) - var(--ant-segmented-track-padding) * 2);
+      line-height: calc(var(--ant-control-height-lg) - var(--ant-segmented-track-padding) * 2);
+      padding: 0 calc(var(--ant-control-padding-horizontal) - var(--ant-line-width));
+      font-size: var(--ant-font-size-lg);
+    }
+    .ant-segmented-item, .ant-segmented-thumb {
+      border-radius: var(--ant-border-radius);
+    }
+  }
+  &.ant-segmented-sm {
+    border-radius: var(--ant-border-radius-sm);
+    .ant-segmented-item-label {
+      min-height: calc(var(--ant-control-height-sm) - var(--ant-segmented-track-padding) * 2);
+      line-height: calc(var(--ant-control-height-sm) - var(--ant-segmented-track-padding) * 2);
+      padding: 0 calc(var(--ant-control-padding-horizontal-sm) - var(--ant-line-width));
+    }
+    .ant-segmented-item, .ant-segmented-thumb {
+      border-radius: var(--ant-border-radius-xs);
+    }
+  }
+  &-disabled .ant-segmented-item, &-disabled .ant-segmented-item:hover, &-disabled .ant-segmented-item:focus {
+    color: var(--ant-color-text-disabled);
+    cursor: not-allowed;
+  }
+  .ant-segmented-item-disabled, .ant-segmented-item-disabled:hover, .ant-segmented-item-disabled:focus {
+    color: var(--ant-color-text-disabled);
+    cursor: not-allowed;
+  }
+  .ant-segmented-thumb-motion-appear-active {
+    transition: transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out), width var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
+    will-change: transform, width;
+  }
+  &.ant-segmented-shape-round {
+    border-radius: 9999px;
+    .ant-segmented-item, .ant-segmented-thumb {
+      border-radius: 9999px;
+    }
+  }
+}

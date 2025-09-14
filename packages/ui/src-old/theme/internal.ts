@@ -50,3 +50,4 @@ export type {
   SeedToken,
   // UseComponentStyleResult,
 }
+export const genSubStyleComponent = genStyleHooks

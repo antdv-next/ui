@@ -30,40 +30,40 @@ import type { ComponentToken as InputComponentToken } from '../../input/style'
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style'
 import type { ComponentToken as ListComponentToken } from '../../list/style'
 import type { ComponentToken as MentionsComponentToken } from '../../mentions/style'
-// import type { ComponentToken as MenuComponentToken } from '../../menu/style';
-// import type { ComponentToken as MessageComponentToken } from '../../message/style';
-// import type { ComponentToken as ModalComponentToken } from '../../modal/style';
-// import type { ComponentToken as NotificationComponentToken } from '../../notification/style';
-// import type { ComponentToken as PaginationComponentToken } from '../../pagination/style';
-// import type { ComponentToken as PopconfirmComponentToken } from '../../popconfirm/style';
-// import type { ComponentToken as PopoverComponentToken } from '../../popover/style';
-// import type { ComponentToken as ProgressComponentToken } from '../../progress/style';
-// import type { ComponentToken as QRCodeComponentToken } from '../../qr-code/style';
-// import type { ComponentToken as RadioComponentToken } from '../../radio/style';
-// import type { ComponentToken as RateComponentToken } from '../../rate/style';
-// import type { ComponentToken as ResultComponentToken } from '../../result/style';
-// import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
-// import type { ComponentToken as SelectComponentToken } from '../../select/style';
-// import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
-// import type { ComponentToken as SliderComponentToken } from '../../slider/style';
+import type { ComponentToken as MenuComponentToken } from '../../menu/style'
+import type { ComponentToken as MessageComponentToken } from '../../message/style'
+import type { ComponentToken as ModalComponentToken } from '../../modal/style'
+import type { ComponentToken as NotificationComponentToken } from '../../notification/style'
+import type { ComponentToken as PaginationComponentToken } from '../../pagination/style'
+import type { ComponentToken as PopconfirmComponentToken } from '../../popconfirm/style'
+import type { ComponentToken as PopoverComponentToken } from '../../popover/style'
+import type { ComponentToken as ProgressComponentToken } from '../../progress/style'
+import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style'
+import type { ComponentToken as RadioComponentToken } from '../../radio/style'
+import type { ComponentToken as RateComponentToken } from '../../rate/style'
+import type { ComponentToken as ResultComponentToken } from '../../result/style'
+import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style'
+import type { ComponentToken as SelectComponentToken } from '../../select/style'
+import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style'
+import type { ComponentToken as SliderComponentToken } from '../../slider/style'
 import type { ComponentToken as SpaceComponentToken } from '../../space/style'
+import type { ComponentToken as SpinComponentToken } from '../../spin/style'
+import type { ComponentToken as SplitterComponentToken } from '../../splitter/style'
+import type { ComponentToken as StatisticComponentToken } from '../../statistic/style'
+import type { ComponentToken as StepsComponentToken } from '../../steps/style'
+import type { ComponentToken as SwitchComponentToken } from '../../switch/style'
+import type { ComponentToken as TableComponentToken } from '../../table/style'
+import type { ComponentToken as TabsComponentToken } from '../../tabs/style'
+import type { ComponentToken as TagComponentToken } from '../../tag/style'
+import type { ComponentToken as TimelineComponentToken } from '../../timeline/style'
+import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style'
+import type { ComponentToken as TourComponentToken } from '../../tour/style'
+import type { ComponentToken as TransferComponentToken } from '../../transfer/style'
+import type { ComponentToken as TreeSelectComponentToken } from '../../tree-select/style'
+import type { ComponentToken as TreeComponentToken } from '../../tree/style'
+import type { ComponentToken as TypographyComponentToken } from '../../typography/style'
+import type { ComponentToken as UploadComponentToken } from '../../upload/style'
 import type { ComponentToken as WaveToken } from '../../wave/style'
-// import type { ComponentToken as SpinComponentToken } from '../../spin/style';
-// import type { ComponentToken as StatisticComponentToken } from '../../statistic/style';
-// import type { ComponentToken as StepsComponentToken } from '../../steps/style';
-// import type { ComponentToken as SwitchComponentToken } from '../../switch/style';
-// import type { ComponentToken as TableComponentToken } from '../../table/style';
-// import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
-// import type { ComponentToken as TagComponentToken } from '../../tag/style';
-// import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
-// import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
-// import type { ComponentToken as TourComponentToken } from '../../tour/style';
-// import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
-// import type { ComponentToken as TreeSelectComponentToken } from '../../tree-select/style';
-// import type { ComponentToken as TreeComponentToken } from '../../tree/style';
-// import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
-// import type { ComponentToken as UploadComponentToken } from '../../upload/style';
-// import type { ComponentToken as SplitterComponentToken } from '../../splitter/style';
 
 export interface ComponentTokenMap {
   Affix?: AffixComponentToken
@@ -96,40 +96,40 @@ export interface ComponentTokenMap {
   Layout?: LayoutComponentToken
   List?: ListComponentToken
   Mentions?: MentionsComponentToken
-  // Notification?: NotificationComponentToken;
-  // Pagination?: PaginationComponentToken;
-  // Popover?: PopoverComponentToken;
-  // Popconfirm?: PopconfirmComponentToken;
-  // Rate?: RateComponentToken;
-  // Radio?: RadioComponentToken;
-  // Result?: ResultComponentToken;
-  // Segmented?: SegmentedComponentToken;
-  // Select?: SelectComponentToken;
-  // Skeleton?: SkeletonComponentToken;
-  // Slider?: SliderComponentToken;
-  // Spin?: SpinComponentToken;
-  // Statistic?: StatisticComponentToken;
-  // Switch?: SwitchComponentToken;
-  // Splitter?: SplitterComponentToken;
-  // Tag?: TagComponentToken;
-  // Tree?: TreeComponentToken;
-  // TreeSelect?: TreeSelectComponentToken;
-  // Typography?: TypographyComponentToken;
-  // Timeline?: TimelineComponentToken;
-  // Transfer?: TransferComponentToken;
-  // Tabs?: TabsComponentToken;
+  Notification?: NotificationComponentToken
+  Pagination?: PaginationComponentToken
+  Popover?: PopoverComponentToken
+  Popconfirm?: PopconfirmComponentToken
+  Rate?: RateComponentToken
+  Radio?: RadioComponentToken
+  Result?: ResultComponentToken
+  Segmented?: SegmentedComponentToken
+  Select?: SelectComponentToken
+  Skeleton?: SkeletonComponentToken
+  Slider?: SliderComponentToken
+  Spin?: SpinComponentToken
+  Statistic?: StatisticComponentToken
+  Switch?: SwitchComponentToken
+  Splitter?: SplitterComponentToken
+  Tag?: TagComponentToken
+  Tree?: TreeComponentToken
+  TreeSelect?: TreeSelectComponentToken
+  Typography?: TypographyComponentToken
+  Timeline?: TimelineComponentToken
+  Transfer?: TransferComponentToken
+  Tabs?: TabsComponentToken
   Calendar?: CalendarComponentToken
-  // Steps?: StepsComponentToken;
-  // Menu?: MenuComponentToken;
-  // Modal?: ModalComponentToken;
-  // Message?: MessageComponentToken;
-  // Upload?: UploadComponentToken;
-  // Tooltip?: TooltipComponentToken;
-  // Table?: TableComponentToken;
+  Steps?: StepsComponentToken
+  Menu?: MenuComponentToken
+  Modal?: ModalComponentToken
+  Message?: MessageComponentToken
+  Upload?: UploadComponentToken
+  Tooltip?: TooltipComponentToken
+  Table?: TableComponentToken
   Space?: SpaceComponentToken
-  // Progress?: ProgressComponentToken;
-  // Tour?: TourComponentToken;
-  // QRCode?: QRCodeComponentToken;
+  Progress?: ProgressComponentToken
+  Tour?: TourComponentToken
+  QRCode?: QRCodeComponentToken
   App?: AppComponentToken
 
   /** @private Internal TS definition. Do not use. */

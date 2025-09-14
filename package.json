@@ -18,6 +18,7 @@
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "catalog:",
+    "antd-style": "^3.7.1",
     "eslint": "catalog:",
     "eslint-plugin-format": "^1.0.1",
     "esno": "^4.8.0",

@@ -1,0 +1,54 @@
+.ant-qr-code {
+  --ant-qr-code-qr-code-mask-background-color: rgba(0,0,0,0.96);
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--ant-padding-sm);
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ant-color-white);
+  border-radius: var(--ant-border-radius-lg);
+  border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
+  position: relative;
+  overflow: hidden;
+  & > .ant-qr-code-mask {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--ant-color-text);
+    line-height: var(--ant-line-height);
+    background: var(--ant-qr-code-qr-code-mask-background-color);
+    text-align: center;
+    & > .ant-qr-code-expired, & > .ant-qr-code-scanned {
+      color: var(--ant-color-text);
+    }
+  }
+  > canvas {
+    align-self: stretch;
+    flex: auto;
+    min-width: 0;
+  }
+  &-icon {
+    margin-block-end: var(--ant-margin-xs);
+    font-size: var(--ant-control-height);
+  }
+}
+.ant-qr-code-borderless {
+  border-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+

@@ -1,0 +1,473 @@
+@keyframes uploadAnimateInlineIn{
+from {
+  width: 0;
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  margin: calc(var(--ant-margin-xs) / -2);
+}}
+@keyframes uploadAnimateInlineOut{
+to {
+  width: 0;
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  margin: calc(var(--ant-margin-xs) / -2);
+}}
+@keyframes antFadeIn{
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 1;
+}}
+@keyframes antFadeOut{
+0% {
+  opacity: 1;
+}
+100% {
+  opacity: 0;
+}}
+.ant-upload {
+  --ant-upload-actions-color: var(--ant-color-icon);
+}
+.ant-upload-wrapper {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  .ant-upload {
+    outline: 0;
+    input[type='file'] {
+      cursor: pointer;
+    }
+  }
+  .ant-upload-select {
+    display: inline-block;
+  }
+  .ant-upload-hidden {
+    display: none;
+  }
+  .ant-upload-disabled {
+    color: var(--ant-color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+.ant-upload-wrapper {
+  .ant-upload-drag {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: var(--ant-color-fill-alter);
+    border: var(--ant-line-width) dashed var(--ant-color-border);
+    border-radius: var(--ant-border-radius-lg);
+    cursor: pointer;
+    transition: border-color var(--ant-motion-duration-slow);
+    .ant-upload {
+      padding: var(--ant-padding);
+    }
+    .ant-upload-btn {
+      display: table;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border-radius: var(--ant-border-radius-lg);
+      &:focus-visible {
+        outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+      }
+    }
+    .ant-upload-drag-container {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    &:not(.ant-upload-disabled):hover,
+              &-hover:not(.ant-upload-disabled) {
+      border-color: var(--ant-color-primary-hover);
+    }
+    p.ant-upload-drag-icon {
+      margin-bottom: var(--ant-margin);
+      .anticon {
+        color: var(--ant-color-primary);
+        font-size: calc(var(--ant-font-size-heading-3) * 2);
+      }
+    }
+    p.ant-upload-text {
+      margin: 0 0 var(--ant-margin-xxs);
+      color: var(--ant-color-text-heading);
+      font-size: var(--ant-font-size-lg);
+    }
+    p.ant-upload-hint {
+      color: var(--ant-color-text-description);
+      font-size: var(--ant-font-size);
+    }
+    &.ant-upload-disabled {
+      p.ant-upload-drag-icon .anticon,
+                  p.ant-upload-text,
+                  p.ant-upload-hint {
+        color: var(--ant-color-text-disabled);
+      }
+    }
+  }
+}
+.ant-upload-wrapper {
+  .ant-upload-list.ant-upload-list-picture,
+          .ant-upload-list.ant-upload-list-picture-card,
+          .ant-upload-list.ant-upload-list-picture-circle {
+    .ant-upload-list-item {
+      position: relative;
+      height: calc(calc(var(--ant-font-size-heading-3) * 2) + var(--ant-line-width) * 2 + var(--ant-padding-xs) * 2);
+      padding: var(--ant-padding-xs);
+      border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border);
+      border-radius: var(--ant-border-radius-lg);
+      &:hover {
+        background: transparent;
+      }
+      .ant-upload-list-item-thumbnail {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: calc(var(--ant-font-size-heading-3) * 2);
+        height: calc(var(--ant-font-size-heading-3) * 2);
+        line-height: calc(calc(var(--ant-font-size-heading-3) * 2) + var(--ant-padding-sm));
+        text-align: center;
+        flex: none;
+        .anticon {
+          font-size: var(--ant-font-size-heading-2);
+          color: var(--ant-color-primary);
+        }
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+      }
+      .ant-upload-list-item-progress {
+        bottom: calc((var(--ant-font-height) / 2) + var(--ant-line-width));
+        width: calc(100% - calc(var(--ant-padding-sm) * 2));
+        margin-top: 0;
+        padding-inline-start: calc(calc(var(--ant-font-size-heading-3) * 2) + var(--ant-padding-xs));
+      }
+    }
+    .ant-upload-list-item-error {
+      border-color: var(--ant-color-error);
+      .ant-upload-list-item-thumbnail .anticon {
+        svg path[fill='#e6f4ff'] {
+          fill: var(--ant-color-error-bg);
+        }
+        svg path[fill='#1677ff'] {
+          fill: var(--ant-color-error);
+        }
+      }
+    }
+    .ant-upload-list-item-uploading {
+      border-style: dashed;
+      .ant-upload-list-item-name {
+        margin-bottom: calc((var(--ant-font-height) / 2) + var(--ant-line-width));
+      }
+    }
+  }
+  .ant-upload-list.ant-upload-list-picture-circle .ant-upload-list-item {
+    &, &::before, .ant-upload-list-item-thumbnail {
+      border-radius: 50%;
+    }
+  }
+}
+.ant-upload-wrapper.ant-upload-picture-card-wrapper,
+      .ant-upload-wrapper.ant-upload-picture-circle-wrapper {
+  &::before {
+    display: table;
+    content: "";
+  }
+  &::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+  display: block;
+  .ant-upload.ant-upload-select {
+    width: calc(var(--ant-control-height-lg) * 2.55);
+    height: calc(var(--ant-control-height-lg) * 2.55);
+    text-align: center;
+    vertical-align: top;
+    background-color: var(--ant-color-fill-alter);
+    border: var(--ant-line-width) dashed var(--ant-color-border);
+    border-radius: var(--ant-border-radius-lg);
+    cursor: pointer;
+    transition: border-color var(--ant-motion-duration-slow);
+    > .ant-upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+    }
+    &:not(.ant-upload-disabled):hover {
+      border-color: var(--ant-color-primary);
+    }
+  }
+  .ant-upload-list.ant-upload-list-picture-card, .ant-upload-list.ant-upload-list-picture-circle {
+    display: flex;
+    flex-wrap: wrap;
+    @supports not (gap: 1px) {
+      & > * {
+        margin-block-end: var(--ant-margin-xs);
+        margin-inline-end: var(--ant-margin-xs);
+      }
+    }
+    @supports (gap: 1px) {
+      gap: var(--ant-margin-xs);
+    }
+    .ant-upload-list-item-container {
+      display: inline-block;
+      width: calc(var(--ant-control-height-lg) * 2.55);
+      height: calc(var(--ant-control-height-lg) * 2.55);
+      vertical-align: top;
+    }
+    &::after {
+      display: none;
+    }
+    &::before {
+      display: none;
+    }
+    .ant-upload-list-item {
+      height: 100%;
+      margin: 0;
+      &::before {
+        position: absolute;
+        z-index: 1;
+        width: calc(100% - calc(var(--ant-padding-xs) * 2));
+        height: calc(100% - calc(var(--ant-padding-xs) * 2));
+        background-color: var(--ant-color-bg-mask);
+        opacity: 0;
+        transition: all var(--ant-motion-duration-slow);
+        content: " ";
+      }
+    }
+    .ant-upload-list-item:hover {
+      &::before, .ant-upload-list-item-actions {
+        opacity: 1;
+      }
+    }
+    .ant-upload-list-item-actions {
+      position: absolute;
+      inset-inline-start: 0;
+      z-index: 10;
+      width: 100%;
+      white-space: nowrap;
+      text-align: center;
+      opacity: 0;
+      transition: all var(--ant-motion-duration-slow);
+      .anticon-eye,
+                  .anticon-download,
+                  .anticon-delete {
+        z-index: 10;
+        width: var(--ant-font-size-lg);
+        margin: 0 var(--ant-margin-xxs);
+        font-size: var(--ant-font-size-lg);
+        cursor: pointer;
+        transition: all var(--ant-motion-duration-slow);
+        color: var(--ant-color-text-light-solid);
+        &:hover {
+          color: var(--ant-color-text-light-solid);
+        }
+        svg {
+          vertical-align: baseline;
+        }
+      }
+    }
+    .ant-upload-list-item-thumbnail, .ant-upload-list-item-thumbnail img {
+      position: static;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .ant-upload-list-item-name {
+      display: none;
+      text-align: center;
+    }
+    .ant-upload-list-item-file + .ant-upload-list-item-name {
+      position: absolute;
+      bottom: var(--ant-margin);
+      display: block;
+      width: calc(100% - calc(var(--ant-padding-xs) * 2));
+    }
+    .ant-upload-list-item-uploading {
+      &.ant-upload-list-item {
+        background-color: var(--ant-color-fill-alter);
+      }
+      &::before, .anticon-eye, .anticon-download, .anticon-delete {
+        display: none;
+      }
+    }
+    .ant-upload-list-item-progress {
+      bottom: var(--ant-margin-xl);
+      width: calc(100% - calc(var(--ant-padding-xs) * 2));
+      padding-inline-start: 0;
+    }
+  }
+}
+.ant-upload-wrapper.ant-upload-picture-circle-wrapper {
+  .ant-upload.ant-upload-select {
+    border-radius: 50%;
+  }
+}
+.ant-upload-wrapper {
+  .ant-upload-list {
+    &::before {
+      display: table;
+      content: "";
+    }
+    &::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+    line-height: var(--ant-line-height);
+    .ant-upload-list-item {
+      position: relative;
+      height: calc(var(--ant-line-height) * var(--ant-font-size));
+      margin-top: var(--ant-margin-xs);
+      font-size: var(--ant-font-size);
+      display: flex;
+      align-items: center;
+      transition: background-color var(--ant-motion-duration-slow);
+      border-radius: var(--ant-border-radius-sm);
+      &:hover {
+        background-color: var(--ant-control-item-bg-hover);
+      }
+      .ant-upload-list-item-name {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 0 var(--ant-padding-xs);
+        line-height: var(--ant-line-height);
+        flex: auto;
+        transition: all var(--ant-motion-duration-slow);
+      }
+      .ant-upload-list-item-actions {
+        white-space: nowrap;
+        .ant-upload-list-item-action {
+          opacity: 0;
+        }
+        .anticon {
+          color: var(--ant-upload-actions-color);
+          transition: all var(--ant-motion-duration-slow);
+        }
+        .ant-upload-list-item-action:focus-visible,
+                      &.picture .ant-upload-list-item-action {
+          opacity: 1;
+        }
+      }
+      .ant-upload-icon .anticon {
+        color: var(--ant-color-icon);
+        font-size: var(--ant-font-size);
+      }
+      .ant-upload-list-item-progress {
+        position: absolute;
+        bottom: calc(calc((var(--ant-font-height) / 2) + var(--ant-line-width)) * -1);
+        width: 100%;
+        padding-inline-start: calc(var(--ant-font-size) + var(--ant-padding-xs));
+        font-size: var(--ant-font-size);
+        line-height: 0;
+        pointer-events: none;
+        > div {
+          margin: 0;
+        }
+      }
+    }
+    .ant-upload-list-item:hover .ant-upload-list-item-action {
+      opacity: 1;
+    }
+    .ant-upload-list-item-error {
+      color: var(--ant-color-error);
+      .ant-upload-list-item-name, .ant-upload-icon .anticon {
+        color: var(--ant-color-error);
+      }
+      .ant-upload-list-item-actions {
+        .anticon, .anticon:hover {
+          color: var(--ant-color-error);
+        }
+        .ant-upload-list-item-action {
+          opacity: 1;
+        }
+      }
+    }
+    .ant-upload-list-item-container {
+      transition: opacity var(--ant-motion-duration-slow), height var(--ant-motion-duration-slow);
+      &::before {
+        display: table;
+        width: 0;
+        height: 0;
+        content: "";
+      }
+    }
+  }
+}
+.ant-upload-wrapper {
+  .ant-upload-animate-inline-appear, .ant-upload-animate-inline-enter, .ant-upload-animate-inline-leave {
+    animation-duration: var(--ant-motion-duration-slow);
+    animation-timing-function: var(--ant-motion-ease-in-out-circ);
+    animation-fill-mode: forwards;
+  }
+  .ant-upload-animate-inline-appear, .ant-upload-animate-inline-enter {
+    animation-name: uploadAnimateInlineIn;
+  }
+  .ant-upload-animate-inline-leave {
+    animation-name: uploadAnimateInlineOut;
+  }
+}
+.ant-upload-wrapper {
+  .ant-fade-enter,
+        .ant-fade-appear {
+    animation-duration: var(--ant-motion-duration-mid);
+    animation-fill-mode: both;
+    animation-play-state: paused;
+  }
+  .ant-fade-leave {
+    animation-duration: var(--ant-motion-duration-mid);
+    animation-fill-mode: both;
+    animation-play-state: paused;
+  }
+  .ant-fade-enter.ant-fade-enter-active,
+        .ant-fade-appear.ant-fade-appear-active {
+    animation-name: antFadeIn;
+    animation-play-state: running;
+  }
+  .ant-fade-leave.ant-fade-leave-active {
+    animation-name: antFadeOut;
+    animation-play-state: running;
+    pointer-events: none;
+  }
+  .ant-fade-enter,
+          .ant-fade-appear {
+    opacity: 0;
+    animation-timing-function: linear;
+  }
+  .ant-fade-leave {
+    animation-timing-function: linear;
+  }
+}
+.ant-upload-rtl {
+  direction: rtl;
+}
+.ant-upload {
+  .ant-motion-collapse-legacy {
+    overflow: hidden;
+    &-active {
+      transition: height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+              opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+    }
+  }
+  .ant-motion-collapse {
+    overflow: hidden;
+    transition: height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+            opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+  }
+}

@@ -1,0 +1,224 @@
+.ant-switch {
+  --ant-switch-track-height: 22px;
+  --ant-switch-track-height-sm: 16px;
+  --ant-switch-track-min-width: 44px;
+  --ant-switch-track-min-width-sm: 28px;
+  --ant-switch-track-padding: 2px;
+  --ant-switch-handle-bg: var(--ant-color-white);
+  --ant-switch-handle-size: 18px;
+  --ant-switch-handle-size-sm: 12px;
+  --ant-switch-handle-shadow: 0 2px 4px 0 rgba(0,35,11,0.2);
+  --ant-switch-inner-min-margin: 9px;
+  --ant-switch-inner-max-margin: 24px;
+  --ant-switch-inner-min-margin-sm: 6px;
+  --ant-switch-inner-max-margin-sm: 18px;
+}
+
+.ant-switch {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-switch-track-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: relative;
+  display: inline-block;
+  min-width: var(--ant-switch-track-min-width);
+  height: var(--ant-switch-track-height);
+  vertical-align: middle;
+  background: var(--ant-color-text-quaternary);
+  border: 0;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all var(--ant-motion-duration-mid);
+  user-select: none;
+  &:hover:not(.ant-switch-disabled) {
+    background: var(--ant-color-text-tertiary);
+  }
+  &:focus-visible {
+    outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+    outline-offset: 1px;
+    transition: outline-offset 0s, outline 0s;
+  }
+  &.ant-switch-checked {
+    background: var(--ant-color-primary);
+    &:hover:not(.ant-switch-disabled) {
+      background: var(--ant-color-primary-hover);
+    }
+  }
+  &.ant-switch-loading, &.ant-switch-disabled {
+    cursor: not-allowed;
+    opacity: var(--ant-opacity-loading);
+    * {
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+  }
+  &.ant-switch-rtl {
+    direction: rtl;
+  }
+}
+.ant-switch {
+  .ant-switch-inner {
+    display: block;
+    overflow: hidden;
+    border-radius: 100px;
+    height: 100%;
+    padding-inline-start: var(--ant-switch-inner-max-margin);
+    padding-inline-end: var(--ant-switch-inner-min-margin);
+    transition: padding-inline-start var(--ant-motion-duration-mid) ease-in-out, padding-inline-end var(--ant-motion-duration-mid) ease-in-out;
+    .ant-switch-inner-checked, .ant-switch-inner-unchecked {
+      display: block;
+      color: var(--ant-color-text-light-solid);
+      font-size: var(--ant-font-size-sm);
+      transition: margin-inline-start var(--ant-motion-duration-mid) ease-in-out, margin-inline-end var(--ant-motion-duration-mid) ease-in-out;
+      pointer-events: none;
+      min-height: var(--ant-switch-track-height);
+    }
+    .ant-switch-inner-checked {
+      margin-inline-start: calc(-100% + calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin) * 2));
+      margin-inline-end: calc(100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin) * 2));
+    }
+    .ant-switch-inner-unchecked {
+      margin-top: calc(var(--ant-switch-track-height) * -1);
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+    }
+  }
+  &.ant-switch-checked .ant-switch-inner {
+    padding-inline-start: var(--ant-switch-inner-min-margin);
+    padding-inline-end: var(--ant-switch-inner-max-margin);
+    .ant-switch-inner-checked {
+      margin-inline-start: 0;
+      margin-inline-end: 0;
+    }
+    .ant-switch-inner-unchecked {
+      margin-inline-start: calc(100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin) * 2));
+      margin-inline-end: calc(-100% + calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin) * 2));
+    }
+  }
+  &:not(.ant-switch-disabled):active {
+    &:not(.ant-switch-checked) .ant-switch-inner {
+      .ant-switch-inner-unchecked {
+        margin-inline-start: calc(var(--ant-switch-track-padding) * 2);
+        margin-inline-end: calc(var(--ant-switch-track-padding) * -1 * 2);
+      }
+    }
+    &.ant-switch-checked .ant-switch-inner {
+      .ant-switch-inner-checked {
+        margin-inline-start: calc(var(--ant-switch-track-padding) * -1 * 2);
+        margin-inline-end: calc(var(--ant-switch-track-padding) * 2);
+      }
+    }
+  }
+}
+.ant-switch {
+  .ant-switch-handle {
+    position: absolute;
+    top: var(--ant-switch-track-padding);
+    inset-inline-start: var(--ant-switch-track-padding);
+    width: var(--ant-switch-handle-size);
+    height: var(--ant-switch-handle-size);
+    transition: all var(--ant-motion-duration-mid) ease-in-out;
+    &::before {
+      position: absolute;
+      top: 0;
+      inset-inline-end: 0;
+      bottom: 0;
+      inset-inline-start: 0;
+      background-color: var(--ant-switch-handle-bg);
+      border-radius: calc(var(--ant-switch-handle-size) / 2);
+      box-shadow: var(--ant-switch-handle-shadow);
+      transition: all var(--ant-motion-duration-mid) ease-in-out;
+      content: "";
+    }
+  }
+  &.ant-switch-checked .ant-switch-handle {
+    inset-inline-start: calc(100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding)));
+  }
+  &:not(.ant-switch-disabled):active {
+    .ant-switch-handle::before {
+      inset-inline-end: -30%;
+      inset-inline-start: 0;
+    }
+    &.ant-switch-checked .ant-switch-handle::before {
+      inset-inline-end: 0;
+      inset-inline-start: -30%;
+    }
+  }
+}
+.ant-switch {
+  .ant-switch-loading-icon.anticon {
+    position: relative;
+    top: calc((var(--ant-switch-handle-size) - var(--ant-font-size)) / 2);
+    color: rgba(0, 0, 0, var(--ant-opacity-loading));
+    vertical-align: top;
+  }
+  &.ant-switch-checked .ant-switch-loading-icon {
+    color: var(--ant-color-primary);
+  }
+}
+.ant-switch {
+  &.ant-switch-small {
+    min-width: var(--ant-switch-track-min-width-sm);
+    height: var(--ant-switch-track-height-sm);
+    line-height: var(--ant-switch-track-height-sm);
+    .ant-switch-inner {
+      padding-inline-start: var(--ant-switch-inner-max-margin-sm);
+      padding-inline-end: var(--ant-switch-inner-min-margin-sm);
+      .ant-switch-inner-checked, .ant-switch-inner-unchecked {
+        min-height: var(--ant-switch-track-height-sm);
+      }
+      .ant-switch-inner-checked {
+        margin-inline-start: calc(-100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin-sm) * 2));
+        margin-inline-end: calc(100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin-sm) * 2));
+      }
+      .ant-switch-inner-unchecked {
+        margin-top: calc(var(--ant-switch-track-height-sm) * -1);
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+      }
+    }
+    .ant-switch-handle {
+      width: var(--ant-switch-handle-size-sm);
+      height: var(--ant-switch-handle-size-sm);
+    }
+    .ant-switch-loading-icon {
+      top: calc((var(--ant-switch-handle-size-sm) - calc(var(--ant-font-size-icon) * 0.75)) / 2);
+      font-size: calc(var(--ant-font-size-icon) * 0.75);
+    }
+    &.ant-switch-checked {
+      .ant-switch-inner {
+        padding-inline-start: var(--ant-switch-inner-min-margin-sm);
+        padding-inline-end: var(--ant-switch-inner-max-margin-sm);
+        .ant-switch-inner-checked {
+          margin-inline-start: 0;
+          margin-inline-end: 0;
+        }
+        .ant-switch-inner-unchecked {
+          margin-inline-start: calc(100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin-sm) * 2));
+          margin-inline-end: calc(-100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin-sm) * 2));
+        }
+      }
+      .ant-switch-handle {
+        inset-inline-start: calc(100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding)));
+      }
+    }
+    &:not(.ant-switch-disabled):active {
+      &:not(.ant-switch-checked) .ant-switch-inner {
+        .ant-switch-inner-unchecked {
+          margin-inline-start: calc(var(--ant-margin-xxs) / 2);
+          margin-inline-end: calc(var(--ant-margin-xxs) * -1 / 2);
+        }
+      }
+      &.ant-switch-checked .ant-switch-inner {
+        .ant-switch-inner-checked {
+          margin-inline-start: calc(var(--ant-margin-xxs) * -1 / 2);
+          margin-inline-end: calc(var(--ant-margin-xxs) / 2);
+        }
+      }
+    }
+  }
+}

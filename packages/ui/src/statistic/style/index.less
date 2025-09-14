@@ -1,0 +1,38 @@
+.ant-statistic {
+  --ant-statistic-title-font-size: 14px;
+  --ant-statistic-content-font-size: 24px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  .ant-statistic-title {
+    margin-bottom: var(--ant-margin-xxs);
+    color: var(--ant-color-text-description);
+    font-size: var(--ant-statistic-title-font-size);
+  }
+  .ant-statistic-skeleton {
+    padding-top: var(--ant-padding);
+  }
+  .ant-statistic-content {
+    color: var(--ant-color-text-heading);
+    font-size: var(--ant-statistic-content-font-size);
+    font-family: var(--ant-font-family);
+    .ant-statistic-content-value {
+      display: inline-block;
+      direction: ltr;
+    }
+    .ant-statistic-content-prefix, .ant-statistic-content-suffix {
+      display: inline-block;
+    }
+    .ant-statistic-content-prefix {
+      margin-inline-end: var(--ant-margin-xxs);
+    }
+    .ant-statistic-content-suffix {
+      margin-inline-start: var(--ant-margin-xxs);
+    }
+  }
+}

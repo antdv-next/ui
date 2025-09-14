@@ -1,0 +1,77 @@
+.ant-tag {
+  --ant-tag-default-bg: #000000;
+  --ant-tag-default-color: var(--ant-color-text);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size-sm);
+  line-height: calc(var(--ant-line-height-sm) * var(--ant-font-size-sm));
+  list-style: none;
+  font-family: var(--ant-font-family);
+  display: inline-block;
+  height: auto;
+  margin-inline-end: var(--ant-margin-xs);
+  padding-inline: calc(8px - var(--ant-line-width));
+  white-space: nowrap;
+  background: var(--ant-tag-default-bg);
+  border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border);
+  border-radius: var(--ant-border-radius-sm);
+  opacity: 1;
+  transition: all var(--ant-motion-duration-mid);
+  text-align: start;
+  position: relative;
+  &.ant-tag-rtl {
+    direction: rtl;
+  }
+  &, a, a:hover {
+    color: var(--ant-tag-default-color);
+  }
+  .ant-tag-close-icon {
+    margin-inline-start: calc(var(--ant-padding-xxs) - var(--ant-line-width));
+    font-size: calc(var(--ant-font-size-icon) - var(--ant-line-width) * 2);
+    color: var(--ant-color-icon);
+    cursor: pointer;
+    transition: all var(--ant-motion-duration-mid);
+    &:hover {
+      color: var(--ant-color-text-heading);
+    }
+  }
+  &.ant-tag-has-color {
+    border-color: transparent;
+    &, a, a:hover, .anticon-close, .anticon-close:hover {
+      color: var(--ant-color-text-light-solid);
+    }
+  }
+  &-checkable {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    &:not(.ant-tag-checkable-checked):hover {
+      color: var(--ant-color-primary);
+      background-color: var(--ant-color-fill-secondary);
+    }
+    &:active, &-checked {
+      color: var(--ant-color-text-light-solid);
+    }
+    &-checked {
+      background-color: var(--ant-color-primary);
+      &:hover {
+        background-color: var(--ant-color-primary-hover);
+      }
+    }
+    &:active {
+      background-color: var(--ant-color-primary-active);
+    }
+  }
+  &-hidden {
+    display: none;
+  }
+  > .anticon + span, > span + .anticon {
+    margin-inline-start: calc(8px - var(--ant-line-width));
+  }
+}
+.ant-tag-borderless {
+  border-color: transparent;
+  background: var(--ant-tag-default-bg);
+}

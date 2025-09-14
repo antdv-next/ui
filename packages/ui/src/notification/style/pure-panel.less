@@ -1,0 +1,115 @@
+.ant-notification-pure-panel-notice-pure-panel {
+  position: relative;
+  margin-bottom: var(--ant-margin);
+  margin-inline-start: auto;
+  background: var(--ant-color-bg-elevated);
+  border-radius: var(--ant-border-radius-lg);
+  box-shadow: var(--ant-box-shadow);
+  .ant-notification-pure-panel-notice {
+    padding: var(--ant-padding-md) var(--ant-padding-content-horizontal-lg);
+    width: var(--ant-notification-pure-panel-width);
+    max-width: calc(100vw - calc(var(--ant-margin-lg) * 2));
+    overflow: hidden;
+    line-height: var(--ant-line-height);
+    word-wrap: break-word;
+  }
+  .ant-notification-pure-panel-notice-message {
+    color: var(--ant-color-text-heading);
+    font-size: var(--ant-font-size-lg);
+    line-height: var(--ant-line-height-lg);
+  }
+  .ant-notification-pure-panel-notice-description {
+    font-size: var(--ant-font-size);
+    color: var(--ant-color-text);
+    margin-top: var(--ant-margin-xs);
+  }
+  .ant-notification-pure-panel-notice-closable .ant-notification-pure-panel-notice-message {
+    padding-inline-end: var(--ant-padding-lg);
+  }
+  .ant-notification-pure-panel-notice-with-icon .ant-notification-pure-panel-notice-message {
+    margin-inline-start: calc(var(--ant-margin-sm) + calc(var(--ant-font-size-lg) * var(--ant-line-height-lg)));
+    font-size: var(--ant-font-size-lg);
+  }
+  .ant-notification-pure-panel-notice-with-icon .ant-notification-pure-panel-notice-description {
+    margin-inline-start: calc(var(--ant-margin-sm) + calc(var(--ant-font-size-lg) * var(--ant-line-height-lg)));
+    font-size: var(--ant-font-size);
+  }
+  .ant-notification-pure-panel-notice-icon {
+    position: absolute;
+    font-size: calc(var(--ant-font-size-lg) * var(--ant-line-height-lg));
+    line-height: 1;
+    &-success.anticon {
+      color: var(--ant-color-success);
+    }
+    &-info.anticon {
+      color: var(--ant-color-info);
+    }
+    &-warning.anticon {
+      color: var(--ant-color-warning);
+    }
+    &-error.anticon {
+      color: var(--ant-color-error);
+    }
+  }
+  .ant-notification-pure-panel-notice-close {
+    position: absolute;
+    top: var(--ant-padding-md);
+    inset-inline-end: var(--ant-padding-lg);
+    color: var(--ant-color-icon);
+    outline: none;
+    width: calc(var(--ant-control-height-lg) * 0.55);
+    height: calc(var(--ant-control-height-lg) * 0.55);
+    border-radius: var(--ant-border-radius-sm);
+    transition: background-color var(--ant-motion-duration-mid), color var(--ant-motion-duration-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    &:hover {
+      color: var(--ant-color-icon-hover);
+      background-color: var(--ant-color-bg-text-hover);
+    }
+    &:active {
+      background-color: var(--ant-color-bg-text-active);
+    }
+    &:focus-visible {
+      outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+      outline-offset: 1px;
+      transition: outline-offset 0s, outline 0s;
+    }
+  }
+  .ant-notification-pure-panel-notice-progress {
+    position: absolute;
+    display: block;
+    appearance: none;
+    inline-size: calc(100% - var(--ant-border-radius-lg) * 2);
+    left: var(--ant-border-radius-lg);
+    right: var(--ant-border-radius-lg);
+    bottom: 0;
+    block-size: 2px;
+    border: 0;
+    &, &::-webkit-progress-bar {
+      border-radius: var(--ant-border-radius-lg);
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+    &::-moz-progress-bar {
+      background: linear-gradient(90deg, var(--ant-color-primary-border-hover), var(--ant-color-primary));
+    }
+    &::-webkit-progress-value {
+      border-radius: var(--ant-border-radius-lg);
+      background: linear-gradient(90deg, var(--ant-color-primary-border-hover), var(--ant-color-primary));
+    }
+  }
+  .ant-notification-pure-panel-notice-actions {
+    float: right;
+    margin-top: var(--ant-margin-sm);
+  }
+  width: var(--ant-notification-pure-panel-width);
+  max-width: calc(100vw - calc(var(--ant-margin-lg) * 2));
+  margin: 0;
+}
+.ant-notification-pure-panel {
+  --ant-notification-pure-panel-z-index-popup: 2050;
+  --ant-notification-pure-panel-width: 384px;
+}

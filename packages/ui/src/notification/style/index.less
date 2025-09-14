@@ -1,0 +1,341 @@
+@keyframes antNotificationFadeOut{
+0% {
+  max-height: 150px;
+  margin-bottom: var(--ant-margin);
+}
+100% {
+  max-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+}}
+@keyframes antNotificationTopFadeIn{
+0% {
+  top: -150px;
+  opacity: 0;
+}
+100% {
+  top: 0;
+  opacity: 1;
+}}
+@keyframes antNotificationBottomFadeIn{
+0% {
+  bottom: calc(150px * -1);
+  opacity: 0;
+}
+100% {
+  bottom: 0;
+  opacity: 1;
+}}
+@keyframes antNotificationFadeIn{
+0% {
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+}
+100% {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}}
+@keyframes antNotificationLeftFadeIn{
+0% {
+  transform: translate3d(-100%, 0, 0);
+  opacity: 0;
+}
+100% {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}}
+.ant-notification {
+  --ant-notification-z-index-popup: 2050;
+  --ant-notification-width: 384px;
+}
+.ant-notification {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--ant-color-text);
+  font-size: var(--ant-font-size);
+  line-height: var(--ant-line-height);
+  list-style: none;
+  font-family: var(--ant-font-family);
+  position: fixed;
+  z-index: var(--ant-notification-z-index-popup);
+  margin-right: var(--ant-margin-lg);
+  .ant-notification-hook-holder {
+    position: relative;
+  }
+  .ant-notification-fade-appear-prepare {
+    opacity: 0 !important;
+  }
+  .ant-notification-fade-enter, .ant-notification-fade-appear {
+    animation-duration: var(--ant-motion-duration-mid);
+    animation-timing-function: var(--ant-motion-ease-in-out);
+    animation-fill-mode: both;
+    opacity: 0;
+    animation-play-state: paused;
+  }
+  .ant-notification-fade-leave {
+    animation-timing-function: var(--ant-motion-ease-in-out);
+    animation-fill-mode: both;
+    animation-duration: var(--ant-motion-duration-mid);
+    animation-play-state: paused;
+  }
+  .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+    animation-play-state: running;
+  }
+  .ant-notification-fade-leave.ant-notification-fade-leave-active {
+    animation-name: antNotificationFadeOut;
+    animation-play-state: running;
+  }
+  &-rtl {
+    direction: rtl;
+    .ant-notification-notice-actions {
+      float: left;
+    }
+  }
+}
+.ant-notification {
+  .ant-notification-notice-wrapper {
+    position: relative;
+    margin-bottom: var(--ant-margin);
+    margin-inline-start: auto;
+    background: var(--ant-color-bg-elevated);
+    border-radius: var(--ant-border-radius-lg);
+    box-shadow: var(--ant-box-shadow);
+    .ant-notification-notice {
+      padding: var(--ant-padding-md) var(--ant-padding-content-horizontal-lg);
+      width: var(--ant-notification-width);
+      max-width: calc(100vw - calc(var(--ant-margin-lg) * 2));
+      overflow: hidden;
+      line-height: var(--ant-line-height);
+      word-wrap: break-word;
+    }
+    .ant-notification-notice-message {
+      color: var(--ant-color-text-heading);
+      font-size: var(--ant-font-size-lg);
+      line-height: var(--ant-line-height-lg);
+    }
+    .ant-notification-notice-description {
+      font-size: var(--ant-font-size);
+      color: var(--ant-color-text);
+      margin-top: var(--ant-margin-xs);
+    }
+    .ant-notification-notice-closable .ant-notification-notice-message {
+      padding-inline-end: var(--ant-padding-lg);
+    }
+    .ant-notification-notice-with-icon .ant-notification-notice-message {
+      margin-inline-start: calc(var(--ant-margin-sm) + calc(var(--ant-font-size-lg) * var(--ant-line-height-lg)));
+      font-size: var(--ant-font-size-lg);
+    }
+    .ant-notification-notice-with-icon .ant-notification-notice-description {
+      margin-inline-start: calc(var(--ant-margin-sm) + calc(var(--ant-font-size-lg) * var(--ant-line-height-lg)));
+      font-size: var(--ant-font-size);
+    }
+    .ant-notification-notice-icon {
+      position: absolute;
+      font-size: calc(var(--ant-font-size-lg) * var(--ant-line-height-lg));
+      line-height: 1;
+      &-success.anticon {
+        color: var(--ant-color-success);
+      }
+      &-info.anticon {
+        color: var(--ant-color-info);
+      }
+      &-warning.anticon {
+        color: var(--ant-color-warning);
+      }
+      &-error.anticon {
+        color: var(--ant-color-error);
+      }
+    }
+    .ant-notification-notice-close {
+      position: absolute;
+      top: var(--ant-padding-md);
+      inset-inline-end: var(--ant-padding-lg);
+      color: var(--ant-color-icon);
+      outline: none;
+      width: calc(var(--ant-control-height-lg) * 0.55);
+      height: calc(var(--ant-control-height-lg) * 0.55);
+      border-radius: var(--ant-border-radius-sm);
+      transition: background-color var(--ant-motion-duration-mid), color var(--ant-motion-duration-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      &:hover {
+        color: var(--ant-color-icon-hover);
+        background-color: var(--ant-color-bg-text-hover);
+      }
+      &:active {
+        background-color: var(--ant-color-bg-text-active);
+      }
+      &:focus-visible {
+        outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
+        outline-offset: 1px;
+        transition: outline-offset 0s, outline 0s;
+      }
+    }
+    .ant-notification-notice-progress {
+      position: absolute;
+      display: block;
+      appearance: none;
+      inline-size: calc(100% - var(--ant-border-radius-lg) * 2);
+      left: var(--ant-border-radius-lg);
+      right: var(--ant-border-radius-lg);
+      bottom: 0;
+      block-size: 2px;
+      border: 0;
+      &, &::-webkit-progress-bar {
+        border-radius: var(--ant-border-radius-lg);
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+      &::-moz-progress-bar {
+        background: linear-gradient(90deg, var(--ant-color-primary-border-hover), var(--ant-color-primary));
+      }
+      &::-webkit-progress-value {
+        border-radius: var(--ant-border-radius-lg);
+        background: linear-gradient(90deg, var(--ant-color-primary-border-hover), var(--ant-color-primary));
+      }
+    }
+    .ant-notification-notice-actions {
+      float: right;
+      margin-top: var(--ant-margin-sm);
+    }
+  }
+}
+.ant-notification {
+  &.ant-notification-top, &.ant-notification-bottom {
+    margin-inline: 0;
+    .ant-notification-notice {
+      margin-inline: auto auto;
+    }
+  }
+  &.ant-notification-top {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+      animation-name: antNotificationTopFadeIn;
+    }
+  }
+  &.ant-notification-bottom {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+      animation-name: antNotificationBottomFadeIn;
+    }
+  }
+  &.ant-notification-topRight, &.ant-notification-bottomRight {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+      animation-name: antNotificationFadeIn;
+    }
+  }
+  &.ant-notification-topLeft, &.ant-notification-bottomLeft {
+    margin-right: 0;
+    margin-left: var(--ant-margin-lg);
+    .ant-notification-notice {
+      margin-inline-end: auto;
+      margin-inline-start: 0;
+    }
+    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+      animation-name: antNotificationLeftFadeIn;
+    }
+  }
+}
+.ant-notification-stack {
+  & > .ant-notification-notice-wrapper {
+    transition: transform var(--ant-motion-duration-slow), backdrop-filter 0s;
+    will-change: transform, opacity;
+    position: absolute;
+    &:not(:nth-last-child(-n+3)) {
+      opacity: 0;
+      overflow: hidden;
+      color: transparent;
+      pointer-events: none;
+    }
+    &:nth-last-child(2) {
+      overflow: hidden;
+      & > .ant-notification-notice {
+        opacity: 0;
+        transition: opacity var(--ant-motion-duration-mid);
+      }
+    }
+    &:nth-last-child(3) {
+      overflow: hidden;
+      & > .ant-notification-notice {
+        opacity: 0;
+        transition: opacity var(--ant-motion-duration-mid);
+      }
+    }
+  }
+}
+.ant-notification-stack:not(.ant-notification-stack-expanded) {
+  & > .ant-notification-notice-wrapper {
+    &:nth-last-child(2) {
+      background: var(--ant-color-bg-blur);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    &:nth-last-child(3) {
+      background: var(--ant-color-bg-blur);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
+}
+.ant-notification-stack.ant-notification-stack-expanded {
+  & > .ant-notification-notice-wrapper {
+    &:not(:nth-last-child(-n + 1)) {
+      opacity: 1;
+      overflow: unset;
+      color: inherit;
+      pointer-events: auto;
+      & > .ant-notification-notice {
+        opacity: 1;
+      }
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      height: var(--ant-margin);
+      width: 100%;
+      inset-inline: 0;
+      bottom: calc(var(--ant-margin) * -1);
+      background: transparent;
+      pointer-events: auto;
+    }
+  }
+}
+.ant-notification-top {
+  &.ant-notification-stack > .ant-notification-notice-wrapper {
+    top: 0;
+    left: 0;
+  }
+}
+.ant-notification-topLeft {
+  &.ant-notification-stack > .ant-notification-notice-wrapper {
+    top: 0;
+    left: 0;
+  }
+}
+.ant-notification-topRight {
+  &.ant-notification-stack > .ant-notification-notice-wrapper {
+    top: 0;
+    right: 0;
+  }
+}
+.ant-notification-bottom {
+  &.ant-notification-stack > .ant-notification-notice-wrapper {
+    bottom: 0;
+    left: 0;
+  }
+}
+.ant-notification-bottomLeft {
+  &.ant-notification-stack > .ant-notification-notice-wrapper {
+    bottom: 0;
+    left: 0;
+  }
+}
+.ant-notification-bottomRight {
+  &.ant-notification-stack > .ant-notification-notice-wrapper {
+    bottom: 0;
+    right: 0;
+  }
+}

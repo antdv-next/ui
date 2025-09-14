@@ -1,16 +1,19 @@
 import type { OverrideComponent } from '../interface'
 import { camelCase, kebabCase } from 'es-toolkit/compat'
-import { genCSSVar } from './genCssvar.ts'
+import { addFunc, genCSSVar } from './genCssvar.ts'
 import { parseStyle } from './parseStyle.ts'
 
 export function genStyleHooks<K extends OverrideComponent>(
-  component: string,
+  component: string | string[],
   styleFn: (...args: any) => any,
   tokenFn?: (...args: any) => any,
   config?: any,
 ) {
+  if (Array.isArray(component)) {
+    component = component.reduce((prev, cur) => `${prev ? `${prev}${cur}` : cur}`)
+  }
   return (defaultToken: any, cssVarToken: any) => {
-    const componentToken = tokenFn ? tokenFn(defaultToken) : defaultToken
+    const componentToken = addFunc(tokenFn ? tokenFn(defaultToken) : defaultToken)
     const componentBaseCls = kebabCase(component)
     const componentCls = `${defaultToken.prefixCls}-${componentBaseCls}`
     const keyToken = camelCase(component)

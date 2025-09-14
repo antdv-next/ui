@@ -21,11 +21,23 @@ export function genMapToken(seedToken: SeedToken, ...derivatives: GenerateThemeD
     prefixCls: 'ant',
     calc: (number: string) => genCalc('css', new Set())(number),
     unit,
+    max: (...args: (string | number)[]) => `max(${args.join(',')})`,
+    min: (...args: (string | number)[]) => `min(${args.join(',')})`,
+  }
+}
+
+export function addFunc(token: any) {
+  return {
+    ...token,
+    calc: (number: string) => genCalc('css', new Set())(number),
+    unit,
+    max: (...args: (string | number)[]) => `max(${args.join(',')})`,
+    min: (...args: (string | number)[]) => `min(${args.join(',')})`,
   }
 }
 
 export function genCSSVar<T extends OverrideComponent>(token: FullToken<T>, prefixCls?: string, component?: string) {
-  const skipKeys = ['wireframe', 'motion', 'prefixCls', 'componentCls', 'antCls', 'calc', 'unit', 'checkboxCls']
+  const skipKeys = ['wireframe', 'motion', 'prefixCls', 'componentCls', 'antCls', 'calc', 'unit', 'checkboxCls', 'INTERNAL_FIXED_ITEM_MARGIN', 'max', 'min']
   const _cssVars: Record<string, any> = {}
   const cssToken: Record<string, any> = {}
   const mapToken: Record<string, string> = {}
