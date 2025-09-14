@@ -12,6 +12,7 @@
     "gen:less": "esno ./scripts/generateLess.ts"
   },
   "dependencies": {
+    "@ant-design/colors": "catalog:",
     "@ant-design/icons-vue": "^7.0.1",
     "@v-c/color-picker": "^1.0.0",
     "@v-c/util": "^0.0.3",
@@ -19,9 +20,7 @@
     "es-toolkit": "^1.39.10"
   },
   "devDependencies": {
-    "@ant-design/colors": "catalog:",
     "@ant-design/cssinjs": "^1.24.0",
-    "@ant-design/cssinjs-utils": "^1.1.3",
-    "@ant-design/fast-color": "catalog:"
+    "@ant-design/cssinjs-utils": "^1.1.3"
   }
 }

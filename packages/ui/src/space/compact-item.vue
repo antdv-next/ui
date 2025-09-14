@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { SpaceCompactItemProps } from './define'
-import { SpaceCompactItemContext } from './define';
+import { SpaceCompactItemContext } from './define'
 
 defineOptions({
-  name: 'CompactItem'
+  name: 'CompactItem',
 })
 
 const props = withDefaults(defineProps<SpaceCompactItemProps>(), {
-  compactDirection: 'horizontal'
+  compactDirection: 'horizontal',
 })
 
-SpaceCompactItemContext.useProvide(props);
+SpaceCompactItemContext.useProvide(props)
 </script>
 
 <template>

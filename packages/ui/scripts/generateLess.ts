@@ -48,6 +48,7 @@ async function generateLess() {
     // ['layout', 'sider'],
     // 'list',
     // 'mentions',
+    'space',
   ]
   const baseUrl = fileURLToPath(new URL('.', import.meta.url))
   let mapToken = genMapToken(seedToken, derivative)

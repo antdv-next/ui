@@ -2,22 +2,31 @@ import type { Ref } from 'vue'
 import type { DirectionType } from '../config-provider/context'
 
 import type { SizeType } from '../types'
-import classNames from 'classnames'
 import { isEmpty } from 'es-toolkit/compat'
 import { computed } from 'vue'
+import { classNames } from '../_utils/classNames'
 import createContext from '../_utils/createContext'
 
-export interface SpaceCompactProps {
-  prefixCls: string
-  size: SizeType
-  direction?: 'horizontal' | 'vertical'
-  align: 'start' | 'center' | 'end' | 'baseline'
-  block: boolean
+export type SpaceSize = SizeType | number
 
+export interface SpaceProps {
+  prefixCls?: string
+  size?: SpaceSize | [SpaceSize, SpaceSize]
+  direction?: 'horizontal' | 'vertical'
+  align?: 'start' | 'end' | 'center' | 'baseline'
+  wrap?: boolean
+}
+
+export interface SpaceCompactProps {
+  prefixCls?: string
+  size?: SizeType
+  direction?: 'horizontal' | 'vertical'
+  align?: 'start' | 'center' | 'end' | 'baseline'
+  block?: boolean
 }
 
 export interface SpaceCompactItemProps {
-  compactSize: SizeType
+  compactSize?: SizeType
   compactDirection?: 'horizontal' | 'vertical'
   isFirstItem?: boolean
   isLastItem?: boolean

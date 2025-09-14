@@ -1,22 +1,12 @@
 <script setup lang="ts">
 import type { CSSProperties, VNodeNormalizedChildren } from 'vue'
 import type { VNodeChildAtom } from '../_utils/checker'
-import type { SizeType } from '../config-provider/size-context'
+import type { SpaceProps, SpaceSize } from './define.ts'
 import { computed, ref, toRefs, useSlots, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker'
 import useFlexGapSupport from '../_utils/hooks/useFlexGapSupport'
 import { renderVNode } from '../_utils/node'
 import { useConfigContext } from '../config-provider/context'
-
-type SpaceSize = SizeType | number
-
-interface SpaceProps {
-  prefixCls?: string
-  size: SpaceSize | [SpaceSize, SpaceSize]
-  direction?: 'horizontal' | 'vertical'
-  align: 'start' | 'end' | 'center' | 'baseline'
-  wrap?: boolean
-}
 
 defineOptions({
   name: 'ASpace',

@@ -30,7 +30,6 @@ import type { ComponentToken as InputComponentToken } from '../../input/style'
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style'
 import type { ComponentToken as ListComponentToken } from '../../list/style'
 import type { ComponentToken as MentionsComponentToken } from '../../mentions/style'
-import type { ComponentToken as WaveToken } from '../../wave/style'
 // import type { ComponentToken as MenuComponentToken } from '../../menu/style';
 // import type { ComponentToken as MessageComponentToken } from '../../message/style';
 // import type { ComponentToken as ModalComponentToken } from '../../modal/style';
@@ -47,7 +46,8 @@ import type { ComponentToken as WaveToken } from '../../wave/style'
 // import type { ComponentToken as SelectComponentToken } from '../../select/style';
 // import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
 // import type { ComponentToken as SliderComponentToken } from '../../slider/style';
-// import type { ComponentToken as SpaceComponentToken } from '../../space/style';
+import type { ComponentToken as SpaceComponentToken } from '../../space/style'
+import type { ComponentToken as WaveToken } from '../../wave/style'
 // import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 // import type { ComponentToken as StatisticComponentToken } from '../../statistic/style';
 // import type { ComponentToken as StepsComponentToken } from '../../steps/style';
@@ -126,7 +126,7 @@ export interface ComponentTokenMap {
   // Upload?: UploadComponentToken;
   // Tooltip?: TooltipComponentToken;
   // Table?: TableComponentToken;
-  // Space?: SpaceComponentToken;
+  Space?: SpaceComponentToken
   // Progress?: ProgressComponentToken;
   // Tour?: TourComponentToken;
   // QRCode?: QRCodeComponentToken;
