@@ -72,7 +72,10 @@ const middleware = computed(() => {
   ]
 
   if (showArrow.value && arrowRef.value) {
-    mw.push(arrow({ element: arrowRef.value }))
+    mw.push(arrow({
+      element: arrowRef.value,
+      padding: 8,
+    }))
   }
 
   return mw
@@ -90,34 +93,33 @@ const arrowStyles = computed(() => {
   if (!arrowData || !showArrow.value)
     return {}
 
-  let { x, y } = arrowData
-  // const staticSide = {
-  //   top: 'bottom',
-  //   right: 'left',
-  //   bottom: 'top',
-  //   left: 'right',
-  // }[placement.value.split('-')[0]] as string
-  // 如果是left的话 +4px
-  // 如果是right的话 -4px
-  if (x != null) {
-    if (placement.value === 'top-end') {
-      x += 4
-    }
-    if (placement.value === 'top-start') {
-      x -= 4
-    }
-  }
-  if (y != null) {
-    if (placement.value === 'left' || placement.value === 'right') {
-      y += 4
-    }
+  const currentPlacement = placement.value
+  const side = currentPlacement.split('-')[0]
+  const alignment = currentPlacement.split('-')[1]
+
+  const styles: Record<string, string> = {}
+
+  // 新策略：
+  // 1. 基础位置（top, bottom, left, right）：完全不使用 floating-ui 的箭头位置
+  // 2. 边缘位置：使用 floating-ui 的精确位置
+  // 3. 这样可以确保基础位置始终居中
+
+  if (!alignment) {
+    // 基础位置：不应用任何 floating-ui 计算的位置，让 CSS 完全控制
+    return {}
   }
 
-  const styles: Record<string, string> = {
-    left: x != null ? `${x}px` : '',
-    top: y != null ? `${y}px` : '',
-    right: '',
-    bottom: '',
+  // 边缘位置：使用 floating-ui 的计算
+  const { x, y } = arrowData
+
+  if (side === 'top' || side === 'bottom') {
+    if (x != null) {
+      styles.left = `${x}px`
+    }
+  } else if (side === 'left' || side === 'right') {
+    if (y != null) {
+      styles.top = `${y}px`
+    }
   }
 
   return styles
@@ -352,7 +354,9 @@ function getReference(el: any) {
           ...arrowStyles,
           ...colorInfo.arrowStyle,
         }"
-      />
+      >
+        <span class="ant-tooltip-arrow-content" />
+      </div>
 
       <!-- Content -->
       <div :class="innerClasses" :style="innerStyles">
