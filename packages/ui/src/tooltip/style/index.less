@@ -41,6 +41,11 @@
   visibility: visible;
   --valid-offset-x: var(--arrow-offset-horizontal, var(--arrow-x));
   transform-origin: var(--valid-offset-x, 50%) var(--arrow-y, 50%);
+
+  &-wrapper {
+    display: inline-block;
+  }
+
   &-hidden {
     display: none;
   }

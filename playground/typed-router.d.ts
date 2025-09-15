@@ -68,6 +68,7 @@ declare module 'vue-router/auto-routes' {
     '/space/split': RouteRecordInfo<'/space/split', '/space/split', Record<never, never>, Record<never, never>>,
     '/space/vertical': RouteRecordInfo<'/space/vertical', '/space/vertical', Record<never, never>, Record<never, never>>,
     '/space/wrap': RouteRecordInfo<'/space/wrap', '/space/wrap', Record<never, never>, Record<never, never>>,
+    '/tooltip/': RouteRecordInfo<'/tooltip/', '/tooltip', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -279,6 +280,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/space/wrap.vue': {
       routes: '/space/wrap'
+      views: never
+    }
+    'src/pages/tooltip/index.vue': {
+      routes: '/tooltip/'
       views: never
     }
   }
