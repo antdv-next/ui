@@ -5,6 +5,8 @@ import { generateKey } from '../_utils/env.ts'
 
 export type DirectionType = 'ltr' | 'rtl' | undefined
 
+export type SizeType = 'small' | 'middle' | 'large' | undefined
+
 export interface ConfigComponentProps {
   // input?: InputConfig;
   // textArea?: TextAreaConfig;
@@ -96,6 +98,7 @@ export interface ConfigConsumerProps extends ConfigComponentProps {
   // theme?: ThemeConfig;
   // warning?: WarningContextProps;
   space?: 'small' | 'middle' | 'large' | number
+  size: SizeType
 }
 
 export const ConfigProviderKey: InjectionKey<ConfigConsumerProps> = generateKey('ConfigProviderKey')
