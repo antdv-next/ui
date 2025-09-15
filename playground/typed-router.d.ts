@@ -70,6 +70,12 @@ declare module 'vue-router/auto-routes' {
     '/space/wrap': RouteRecordInfo<'/space/wrap', '/space/wrap', Record<never, never>, Record<never, never>>,
     '/spin/': RouteRecordInfo<'/spin/', '/spin', Record<never, never>, Record<never, never>>,
     '/spin/basic': RouteRecordInfo<'/spin/basic', '/spin/basic', Record<never, never>, Record<never, never>>,
+    '/spin/custom-indicator': RouteRecordInfo<'/spin/custom-indicator', '/spin/custom-indicator', Record<never, never>, Record<never, never>>,
+    '/spin/delay': RouteRecordInfo<'/spin/delay', '/spin/delay', Record<never, never>, Record<never, never>>,
+    '/spin/inside': RouteRecordInfo<'/spin/inside', '/spin/inside', Record<never, never>, Record<never, never>>,
+    '/spin/nested': RouteRecordInfo<'/spin/nested', '/spin/nested', Record<never, never>, Record<never, never>>,
+    '/spin/size': RouteRecordInfo<'/spin/size', '/spin/size', Record<never, never>, Record<never, never>>,
+    '/spin/tip': RouteRecordInfo<'/spin/tip', '/spin/tip', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -289,6 +295,30 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/spin/basic.vue': {
       routes: '/spin/basic'
+      views: never
+    }
+    'src/pages/spin/custom-indicator.vue': {
+      routes: '/spin/custom-indicator'
+      views: never
+    }
+    'src/pages/spin/delay.vue': {
+      routes: '/spin/delay'
+      views: never
+    }
+    'src/pages/spin/inside.vue': {
+      routes: '/spin/inside'
+      views: never
+    }
+    'src/pages/spin/nested.vue': {
+      routes: '/spin/nested'
+      views: never
+    }
+    'src/pages/spin/size.vue': {
+      routes: '/spin/size'
+      views: never
+    }
+    'src/pages/spin/tip.vue': {
+      routes: '/spin/tip'
       views: never
     }
   }
