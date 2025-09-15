@@ -35,7 +35,9 @@ declare module 'vue-router/auto-routes' {
     '/anchor/horizontal': RouteRecordInfo<'/anchor/horizontal', '/anchor/horizontal', Record<never, never>, Record<never, never>>,
     '/anchor/onChange': RouteRecordInfo<'/anchor/onChange', '/anchor/onChange', Record<never, never>, Record<never, never>>,
     '/anchor/onClick': RouteRecordInfo<'/anchor/onClick', '/anchor/onClick', Record<never, never>, Record<never, never>>,
+    '/anchor/replace': RouteRecordInfo<'/anchor/replace', '/anchor/replace', Record<never, never>, Record<never, never>>,
     '/anchor/static': RouteRecordInfo<'/anchor/static', '/anchor/static', Record<never, never>, Record<never, never>>,
+    '/anchor/target-offset': RouteRecordInfo<'/anchor/target-offset', '/anchor/target-offset', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -147,8 +149,16 @@ declare module 'vue-router/auto-routes' {
       routes: '/anchor/onClick'
       views: never
     }
+    'src/pages/anchor/replace.vue': {
+      routes: '/anchor/replace'
+      views: never
+    }
     'src/pages/anchor/static.vue': {
       routes: '/anchor/static'
+      views: never
+    }
+    'src/pages/anchor/target-offset.vue': {
+      routes: '/anchor/target-offset'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {
