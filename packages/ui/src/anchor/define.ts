@@ -27,14 +27,14 @@ export interface AnchorProps {
   getContainer?: () => AnchorContainer
   /** Return customize highlight anchor */
   getCurrentAnchor?: (activeLink: string) => string
-  onClick?: (
-    e: MouseEvent,
-    link: { title: VueNode | (() => VueNode), href: string },
-  ) => void
+  // onClick?: (
+  //   e: MouseEvent,
+  //   link: { title: VueNode | (() => VueNode), href: string },
+  // ) => void
   /** Scroll to target offset value, if none, it's offsetTop prop value or 0. */
   targetOffset?: number
   /** Listening event when scrolling change active link */
-  onChange?: (currentActiveLink: string) => void
+  // onChange?: (currentActiveLink: string) => void
   items?: AnchorLinkItemProps[]
   direction?: AnchorDirection
   replace?: boolean
@@ -50,4 +50,9 @@ export interface AntAnchor {
     link: { title: VueNode | (() => VueNode), href: string },
   ) => void
   direction: Ref<AnchorDirection>
+}
+
+export interface AnchorEmits {
+  click: [MouseEvent, { title: VueNode | (() => VueNode), href: string }]
+  change: [string]
 }

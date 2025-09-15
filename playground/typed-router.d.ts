@@ -30,6 +30,12 @@ declare module 'vue-router/auto-routes' {
     '/alert/error': RouteRecordInfo<'/alert/error', '/alert/error', Record<never, never>, Record<never, never>>,
     '/alert/icon': RouteRecordInfo<'/alert/icon', '/alert/icon', Record<never, never>, Record<never, never>>,
     '/alert/styles': RouteRecordInfo<'/alert/styles', '/alert/styles', Record<never, never>, Record<never, never>>,
+    '/anchor/basic': RouteRecordInfo<'/anchor/basic', '/anchor/basic', Record<never, never>, Record<never, never>>,
+    '/anchor/customize-highlight': RouteRecordInfo<'/anchor/customize-highlight', '/anchor/customize-highlight', Record<never, never>, Record<never, never>>,
+    '/anchor/horizontal': RouteRecordInfo<'/anchor/horizontal', '/anchor/horizontal', Record<never, never>, Record<never, never>>,
+    '/anchor/onChange': RouteRecordInfo<'/anchor/onChange', '/anchor/onChange', Record<never, never>, Record<never, never>>,
+    '/anchor/onClick': RouteRecordInfo<'/anchor/onClick', '/anchor/onClick', Record<never, never>, Record<never, never>>,
+    '/anchor/static': RouteRecordInfo<'/anchor/static', '/anchor/static', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -119,6 +125,30 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/alert/styles.vue': {
       routes: '/alert/styles'
+      views: never
+    }
+    'src/pages/anchor/basic.vue': {
+      routes: '/anchor/basic'
+      views: never
+    }
+    'src/pages/anchor/customize-highlight.vue': {
+      routes: '/anchor/customize-highlight'
+      views: never
+    }
+    'src/pages/anchor/horizontal.vue': {
+      routes: '/anchor/horizontal'
+      views: never
+    }
+    'src/pages/anchor/onChange.vue': {
+      routes: '/anchor/onChange'
+      views: never
+    }
+    'src/pages/anchor/onClick.vue': {
+      routes: '/anchor/onClick'
+      views: never
+    }
+    'src/pages/anchor/static.vue': {
+      routes: '/anchor/static'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { AnchorContainer, AnchorProps, AntAnchor } from './define.ts'
+import type { AnchorContainer, AnchorEmits, AnchorProps, AntAnchor } from './define.ts'
 import { useEventListener } from '@vueuse/core'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { computed, nextTick, shallowRef, watch } from 'vue'
+import { computed, nextTick, onMounted, shallowRef, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import getScroll from '../_utils/getScroll.ts'
 import scrollTo from '../_utils/scrollTo.ts'
@@ -18,10 +18,7 @@ const props = withDefaults(defineProps<AnchorProps>(), {
   bounds: 5,
 })
 
-const emit = defineEmits<{
-  click: [e: MouseEvent, link: { title: any, href: string }]
-  change: [currentActiveLink: string]
-}>()
+const emit = defineEmits<AnchorEmits>()
 
 const anchorDirection = computed(() => props.direction === 'horizontal' ? 'horizontal' : 'vertical')
 
@@ -218,38 +215,31 @@ useAnchorProvider(memoizedContextValue)
 
 const currentContainer = computed(() => getCurrentContainer.value())
 useEventListener(currentContainer, 'scroll', handleScroll)
-// Watch for changes
-// watch(dependencyListItem, (_n, _o, onCleanup) => {
-//   const scrollContainer = getCurrentContainer.value()
-//   handleScroll()
-//   scrollContainer?.addEventListener('scroll', handleScroll)
-//   onCleanup(() => {
-//     scrollContainer?.removeEventListener('scroll', handleScroll)
-//   })
-// }, { immediate: true })
-
-watch(() => props.getCurrentAnchor, () => {
-  if (typeof props.getCurrentAnchor === 'function') {
-    setCurrentActiveLink(props.getCurrentAnchor(activeLinkRef.value || ''))
-  }
+onMounted(() => {
+  handleScroll()
 })
+watch(
+  () => props.getCurrentAnchor,
+  () => {
+    if (typeof props.getCurrentAnchor === 'function') {
+      setCurrentActiveLink(props.getCurrentAnchor(activeLinkRef.value || ''))
+    }
+  },
+)
 
-watch([anchorDirection, () => props.getCurrentAnchor, dependencyListItem, activeLink], () => {
-  nextTick(() => {
-    updateInk()
-  })
-})
-
-// onMounted(() => {
-//   const scrollContainer = getCurrentContainer.value()
-//   handleScroll()
-//   scrollContainer?.addEventListener('scroll', handleScroll)
-// })
-//
-// onUnmounted(() => {
-//   const scrollContainer = getCurrentContainer.value()
-//   scrollContainer?.removeEventListener('scroll', handleScroll)
-// })
+watch(
+  [
+    anchorDirection,
+    () => props.getCurrentAnchor,
+    dependencyListItem,
+    activeLink,
+  ],
+  () => {
+    nextTick(() => {
+      updateInk()
+    })
+  },
+)
 </script>
 
 <template>
