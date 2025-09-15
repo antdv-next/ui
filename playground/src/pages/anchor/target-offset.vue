@@ -8,7 +8,7 @@ const style = {
   position: 'fixed' as const,
   top: 0,
   insetInlineStart: 0,
-  width: '75%',
+  width: '70vw',
   color: '#fff',
 }
 
