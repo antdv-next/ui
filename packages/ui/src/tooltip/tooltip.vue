@@ -2,6 +2,7 @@
 import type { TooltipEmits, TooltipProps, TooltipRef } from './define'
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom'
 import { useFloating } from '@floating-ui/vue'
+import { unrefElement } from '@vueuse/core'
 import { computed, nextTick, ref, watch } from 'vue'
 import { classNames } from '../_utils/classNames'
 import { convertPlacement, parseColor } from './util'
@@ -15,6 +16,8 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   destroyOnHidden: false,
   autoAdjustOverflow: true,
   defaultOpen: false,
+  open: undefined,
+  visible: undefined,
 })
 
 const emit = defineEmits<TooltipEmits>()
@@ -87,13 +90,28 @@ const arrowStyles = computed(() => {
   if (!arrowData || !showArrow.value)
     return {}
 
-  const { x, y } = arrowData
-  const staticSide = {
-    top: 'bottom',
-    right: 'left',
-    bottom: 'top',
-    left: 'right',
-  }[placement.value.split('-')[0]] as string
+  let { x, y } = arrowData
+  // const staticSide = {
+  //   top: 'bottom',
+  //   right: 'left',
+  //   bottom: 'top',
+  //   left: 'right',
+  // }[placement.value.split('-')[0]] as string
+  // 如果是left的话 +4px
+  // 如果是right的话 -4px
+  if (x != null) {
+    if (placement.value === 'top-end') {
+      x += 4
+    }
+    if (placement.value === 'top-start') {
+      x -= 4
+    }
+  }
+  if (y != null) {
+    if (placement.value === 'left' || placement.value === 'right') {
+      y += 4
+    }
+  }
 
   const styles: Record<string, string> = {
     left: x != null ? `${x}px` : '',
@@ -101,8 +119,6 @@ const arrowStyles = computed(() => {
     right: '',
     bottom: '',
   }
-
-  styles[staticSide] = '-4px'
 
   return styles
 })
@@ -193,8 +209,8 @@ function setOpenImmediately(open: boolean) {
   emit('update:visible', finalOpen)
   emit('visibleChange', finalOpen)
 
-  props.onOpenChange?.(finalOpen)
-  props.onVisibleChange?.(finalOpen)
+  // props.onOpenChange?.(finalOpen)
+  // props.onVisibleChange?.(finalOpen)
 
   nextTick(() => {
     props.afterOpenChange?.(finalOpen)
@@ -279,27 +295,48 @@ function renderContent() {
   }
   return content
 }
+
+function addEventListener(target: HTMLElement) {
+  target.addEventListener('mouseenter', onMouseEnter)
+  target.addEventListener('mouseleave', onMouseLeave)
+  target.addEventListener('focus', onFocus)
+  target.addEventListener('blur', onBlur)
+  target.addEventListener('click', onClick)
+  target.addEventListener('contextmenu', onContextMenu)
+}
+
+function removeEventListener(target: HTMLElement) {
+  target.removeEventListener('mouseenter', onMouseEnter)
+  target.removeEventListener('mouseleave', onMouseLeave)
+  target.removeEventListener('focus', onFocus)
+  target.removeEventListener('blur', onBlur)
+  target.removeEventListener('click', onClick)
+  target.removeEventListener('contextmenu', onContextMenu)
+}
+
+function getReference(el: any) {
+  if (reference.value) {
+    removeEventListener(reference.value)
+  }
+  const _el = unrefElement(el)
+  if (_el?.nextElementSibling) {
+    reference.value = _el?.nextElementSibling as HTMLElement
+    addEventListener(reference.value)
+  }
+}
 </script>
 
 <template>
-  <!-- Trigger element -->
-  <div
-    ref="reference"
+  <component
+    :is="$slots.default"
+    :ref="getReference"
     :class="mergedOpen && props.openClassName"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
-    @focus="onFocus"
-    @blur="onBlur"
-    @click="onClick"
-    @contextmenu="onContextMenu"
-  >
-    <slot />
-  </div>
+  />
 
   <!-- Teleport for popup -->
-  <Teleport :to="props.getPopupContainer?.(reference!) || 'body'" :disabled="!mergedOpen || !reference">
+  <Teleport v-if="reference" :to="props.getPopupContainer?.(reference!) || 'body'" :disabled="!mergedOpen || !reference">
     <div
-      v-if="mergedOpen || !props.destroyOnHidden"
+      v-if="mergedOpen && !props.destroyOnHidden"
       ref="floating"
       :class="tooltipClasses"
       :style="tooltipStyles"

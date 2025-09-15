@@ -18,7 +18,7 @@
     <section>
       <h2>Placement</h2>
       <div class="demo-grid">
-        <a-tooltip placement="top" title="Top">
+        <a-tooltip placement="top" title="Top" trigger="click">
           <a-button>Top</a-button>
         </a-tooltip>
         <a-tooltip placement="topLeft" title="Top Left">
@@ -36,10 +36,10 @@
         <a-tooltip placement="bottomRight" title="Bottom Right">
           <a-button>Bottom Right</a-button>
         </a-tooltip>
-        <a-tooltip placement="left" title="Left">
+        <a-tooltip placement="left" title="Left" trigger="click">
           <a-button>Left</a-button>
         </a-tooltip>
-        <a-tooltip placement="right" title="Right">
+        <a-tooltip placement="right" title="Right" trigger="click">
           <a-button>Right</a-button>
         </a-tooltip>
       </div>
