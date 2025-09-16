@@ -75,6 +75,14 @@ declare module 'vue-router/auto-routes' {
     '/tooltip/detailed-test': RouteRecordInfo<'/tooltip/detailed-test', '/tooltip/detailed-test', Record<never, never>, Record<never, never>>,
     '/tooltip/final-test': RouteRecordInfo<'/tooltip/final-test', '/tooltip/final-test', Record<never, never>, Record<never, never>>,
     '/tooltip/simple-test': RouteRecordInfo<'/tooltip/simple-test', '/tooltip/simple-test', Record<never, never>, Record<never, never>>,
+    '/spin/': RouteRecordInfo<'/spin/', '/spin', Record<never, never>, Record<never, never>>,
+    '/spin/basic': RouteRecordInfo<'/spin/basic', '/spin/basic', Record<never, never>, Record<never, never>>,
+    '/spin/custom-indicator': RouteRecordInfo<'/spin/custom-indicator', '/spin/custom-indicator', Record<never, never>, Record<never, never>>,
+    '/spin/delay': RouteRecordInfo<'/spin/delay', '/spin/delay', Record<never, never>, Record<never, never>>,
+    '/spin/inside': RouteRecordInfo<'/spin/inside', '/spin/inside', Record<never, never>, Record<never, never>>,
+    '/spin/nested': RouteRecordInfo<'/spin/nested', '/spin/nested', Record<never, never>, Record<never, never>>,
+    '/spin/size': RouteRecordInfo<'/spin/size', '/spin/size', Record<never, never>, Record<never, never>>,
+    '/spin/tip': RouteRecordInfo<'/spin/tip', '/spin/tip', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -314,6 +322,36 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/tooltip/simple-test.vue': {
       routes: '/tooltip/simple-test'
+    'src/pages/spin/index.vue': {
+      routes: '/spin/'
+      views: never
+    }
+    'src/pages/spin/basic.vue': {
+      routes: '/spin/basic'
+      views: never
+    }
+    'src/pages/spin/custom-indicator.vue': {
+      routes: '/spin/custom-indicator'
+      views: never
+    }
+    'src/pages/spin/delay.vue': {
+      routes: '/spin/delay'
+      views: never
+    }
+    'src/pages/spin/inside.vue': {
+      routes: '/spin/inside'
+      views: never
+    }
+    'src/pages/spin/nested.vue': {
+      routes: '/spin/nested'
+      views: never
+    }
+    'src/pages/spin/size.vue': {
+      routes: '/spin/size'
+      views: never
+    }
+    'src/pages/spin/tip.vue': {
+      routes: '/spin/tip'
       views: never
     }
   }
