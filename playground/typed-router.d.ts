@@ -68,13 +68,6 @@ declare module 'vue-router/auto-routes' {
     '/space/split': RouteRecordInfo<'/space/split', '/space/split', Record<never, never>, Record<never, never>>,
     '/space/vertical': RouteRecordInfo<'/space/vertical', '/space/vertical', Record<never, never>, Record<never, never>>,
     '/space/wrap': RouteRecordInfo<'/space/wrap', '/space/wrap', Record<never, never>, Record<never, never>>,
-    '/tooltip/': RouteRecordInfo<'/tooltip/', '/tooltip', Record<never, never>, Record<never, never>>,
-    '/tooltip/arrow-test': RouteRecordInfo<'/tooltip/arrow-test', '/tooltip/arrow-test', Record<never, never>, Record<never, never>>,
-    '/tooltip/comprehensive-test': RouteRecordInfo<'/tooltip/comprehensive-test', '/tooltip/comprehensive-test', Record<never, never>, Record<never, never>>,
-    '/tooltip/debug-arrow': RouteRecordInfo<'/tooltip/debug-arrow', '/tooltip/debug-arrow', Record<never, never>, Record<never, never>>,
-    '/tooltip/detailed-test': RouteRecordInfo<'/tooltip/detailed-test', '/tooltip/detailed-test', Record<never, never>, Record<never, never>>,
-    '/tooltip/final-test': RouteRecordInfo<'/tooltip/final-test', '/tooltip/final-test', Record<never, never>, Record<never, never>>,
-    '/tooltip/simple-test': RouteRecordInfo<'/tooltip/simple-test', '/tooltip/simple-test', Record<never, never>, Record<never, never>>,
     '/spin/': RouteRecordInfo<'/spin/', '/spin', Record<never, never>, Record<never, never>>,
     '/spin/basic': RouteRecordInfo<'/spin/basic', '/spin/basic', Record<never, never>, Record<never, never>>,
     '/spin/custom-indicator': RouteRecordInfo<'/spin/custom-indicator', '/spin/custom-indicator', Record<never, never>, Record<never, never>>,
@@ -83,6 +76,10 @@ declare module 'vue-router/auto-routes' {
     '/spin/nested': RouteRecordInfo<'/spin/nested', '/spin/nested', Record<never, never>, Record<never, never>>,
     '/spin/size': RouteRecordInfo<'/spin/size', '/spin/size', Record<never, never>, Record<never, never>>,
     '/spin/tip': RouteRecordInfo<'/spin/tip', '/spin/tip', Record<never, never>, Record<never, never>>,
+    '/tooltip/basic': RouteRecordInfo<'/tooltip/basic', '/tooltip/basic', Record<never, never>, Record<never, never>>,
+    '/tooltip/colorful': RouteRecordInfo<'/tooltip/colorful', '/tooltip/colorful', Record<never, never>, Record<never, never>>,
+    '/tooltip/placement': RouteRecordInfo<'/tooltip/placement', '/tooltip/placement', Record<never, never>, Record<never, never>>,
+    '/tooltip/shift': RouteRecordInfo<'/tooltip/shift', '/tooltip/shift', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -296,32 +293,6 @@ declare module 'vue-router/auto-routes' {
       routes: '/space/wrap'
       views: never
     }
-    'src/pages/tooltip/index.vue': {
-      routes: '/tooltip/'
-      views: never
-    }
-    'src/pages/tooltip/arrow-test.vue': {
-      routes: '/tooltip/arrow-test'
-      views: never
-    }
-    'src/pages/tooltip/comprehensive-test.vue': {
-      routes: '/tooltip/comprehensive-test'
-      views: never
-    }
-    'src/pages/tooltip/debug-arrow.vue': {
-      routes: '/tooltip/debug-arrow'
-      views: never
-    }
-    'src/pages/tooltip/detailed-test.vue': {
-      routes: '/tooltip/detailed-test'
-      views: never
-    }
-    'src/pages/tooltip/final-test.vue': {
-      routes: '/tooltip/final-test'
-      views: never
-    }
-    'src/pages/tooltip/simple-test.vue': {
-      routes: '/tooltip/simple-test'
     'src/pages/spin/index.vue': {
       routes: '/spin/'
       views: never
@@ -352,6 +323,22 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/spin/tip.vue': {
       routes: '/spin/tip'
+      views: never
+    }
+    'src/pages/tooltip/basic.vue': {
+      routes: '/tooltip/basic'
+      views: never
+    }
+    'src/pages/tooltip/colorful.vue': {
+      routes: '/tooltip/colorful'
+      views: never
+    }
+    'src/pages/tooltip/placement.vue': {
+      routes: '/tooltip/placement'
+      views: never
+    }
+    'src/pages/tooltip/shift.vue': {
+      routes: '/tooltip/shift'
       views: never
     }
   }
