@@ -1,5 +1,4 @@
 import type { VueNode } from '@v-c/util/dist/type'
-import type { CSSMotionProps } from '@v-c/util/dist/utils/transition'
 import type { CSSProperties } from 'vue'
 import type { PresetColorType } from '../_utils/colors.ts'
 import type { LiteralUnion } from '../_utils/type.ts'
@@ -37,7 +36,6 @@ export interface TooltipProps {
   trigger?: ActionType | ActionType[]
   open?: boolean
   defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void
   afterOpenChange?: (open: boolean) => void
 
   // Layout & positioning
@@ -47,8 +45,6 @@ export interface TooltipProps {
   // Style & appearance
   styles?: Partial<Record<SemanticName, CSSProperties>>
   classNames?: Partial<Record<SemanticName, string>>
-  style?: CSSProperties
-  className?: string
   rootClassName?: string
   color?: LiteralUnion<PresetColorType>
   overlayStyle?: CSSProperties
@@ -71,7 +67,6 @@ export interface TooltipProps {
   overlay?: VueNode | (() => VueNode)
 
   // Animation & timing
-  motion?: CSSMotionProps
   transitionName?: string
   mouseEnterDelay?: number
   mouseLeaveDelay?: number
@@ -81,13 +76,11 @@ export interface TooltipProps {
   fresh?: boolean
   openClassName?: string
 
-  // Legacy support
+  // Legacy support (deprecated but compatible)
   /** @deprecated Please use `open` instead. */
   visible?: boolean
   /** @deprecated Please use `defaultOpen` instead. */
   defaultVisible?: boolean
-  /** @deprecated Please use `onOpenChange` instead. */
-  onVisibleChange?: (visible: boolean) => void
   /** @deprecated Please use `afterOpenChange` instead. */
   afterVisibleChange?: (visible: boolean) => void
 }
@@ -95,12 +88,13 @@ export interface TooltipProps {
 export interface TooltipRef {
   /** Force popup to align */
   forceAlign: () => void
-  /** @deprecated Please use `forceAlign` instead */
-  forcePopupAlign: () => void
   /** Wrapped dom element */
   nativeElement: HTMLElement | null
   /** Popup dom element */
   popupElement: HTMLDivElement | null
+
+  /** @deprecated Please use `forceAlign` instead */
+  forcePopupAlign?: () => void
 }
 
 export interface TooltipExpose extends TooltipRef {}

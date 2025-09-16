@@ -60,7 +60,7 @@
         <a-tooltip color="red" title="Red tooltip">
           <a-button>Red</a-button>
         </a-tooltip>
-        <a-tooltip color="#ff6b35" title="Custom color">
+        <a-tooltip color="#ff6b35" title="Custom color" trigger="click">
           <a-button>Custom</a-button>
         </a-tooltip>
       </div>
@@ -102,6 +102,36 @@
         </a-tooltip>
       </div>
     </section>
+
+    <section>
+      <h2>Custom Motion</h2>
+      <div class="demo-row">
+        <a-tooltip title="Default motion (zoom-big-fast)">
+          <a-button>Default Motion</a-button>
+        </a-tooltip>
+        <a-tooltip
+          :motion="{
+            name: 'custom-fade',
+            appear: true,
+            enterActiveClass: 'custom-fade-enter-active',
+            enterFromClass: 'custom-fade-enter-from',
+            enterToClass: 'custom-fade-enter-to',
+            leaveActiveClass: 'custom-fade-leave-active',
+            leaveFromClass: 'custom-fade-leave-from',
+            leaveToClass: 'custom-fade-leave-to',
+          } as any"
+          title="Custom fade motion"
+        >
+          <a-button>Custom Motion</a-button>
+        </a-tooltip>
+        <a-tooltip
+          transition-name="ant-zoom-big"
+          title="Custom transition name"
+        >
+          <a-button>Custom Transition Name</a-button>
+        </a-tooltip>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -135,5 +165,21 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 16px;
   max-width: 600px;
+}
+
+/* Custom fade animation for motion demo */
+:global(.custom-fade-enter-active),
+:global(.custom-fade-leave-active) {
+  transition: opacity 0.5s ease;
+}
+
+:global(.custom-fade-enter-from),
+:global(.custom-fade-leave-to) {
+  opacity: 0;
+}
+
+:global(.custom-fade-enter-to),
+:global(.custom-fade-leave-from) {
+  opacity: 1;
 }
 </style>

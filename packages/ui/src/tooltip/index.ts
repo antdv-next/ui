@@ -8,5 +8,6 @@ export { Tooltip }
 
 Tooltip.install = (app: App) => {
   app.component('ATooltip', Tooltip)
+  app.component('Tooltip', Tooltip)
 }
 export default Tooltip

@@ -1,5 +1,6 @@
 import type { CSSProperties, InjectionKey } from 'vue'
 import type { ButtonProps } from '../button/define.ts'
+import type { TooltipProps } from '../tooltip'
 import { computed, inject, provide } from 'vue'
 import { generateKey } from '../_utils/env.ts'
 
@@ -59,7 +60,7 @@ export interface ConfigComponentProps {
   timeline?: ComponentStyleConfig
   // timePicker?: TimePickerConfig;
   // tour?: TourConfig;
-  // tooltip?: TooltipConfig;
+  tooltip?: TooltipConfig
   // popover?: PopoverConfig;
   // popconfirm?: PopconfirmConfig;
   // upload?: UploadConfig;
@@ -193,3 +194,5 @@ export interface ComponentStyleConfig {
 }
 export type ButtonConfig = ComponentStyleConfig
   & Pick<ButtonProps, 'classNames' | 'styles' | 'autoInsertSpace' | 'variant' | 'color' | 'shape'>
+
+export type TooltipConfig = ComponentStyleConfig & Pick<TooltipProps, 'classNames' | 'styles'>

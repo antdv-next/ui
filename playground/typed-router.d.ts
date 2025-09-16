@@ -70,6 +70,8 @@ declare module 'vue-router/auto-routes' {
     '/space/wrap': RouteRecordInfo<'/space/wrap', '/space/wrap', Record<never, never>, Record<never, never>>,
     '/tooltip/': RouteRecordInfo<'/tooltip/', '/tooltip', Record<never, never>, Record<never, never>>,
     '/tooltip/arrow-test': RouteRecordInfo<'/tooltip/arrow-test', '/tooltip/arrow-test', Record<never, never>, Record<never, never>>,
+    '/tooltip/comprehensive-test': RouteRecordInfo<'/tooltip/comprehensive-test', '/tooltip/comprehensive-test', Record<never, never>, Record<never, never>>,
+    '/tooltip/debug-arrow': RouteRecordInfo<'/tooltip/debug-arrow', '/tooltip/debug-arrow', Record<never, never>, Record<never, never>>,
     '/tooltip/detailed-test': RouteRecordInfo<'/tooltip/detailed-test', '/tooltip/detailed-test', Record<never, never>, Record<never, never>>,
     '/tooltip/final-test': RouteRecordInfo<'/tooltip/final-test', '/tooltip/final-test', Record<never, never>, Record<never, never>>,
     '/tooltip/simple-test': RouteRecordInfo<'/tooltip/simple-test', '/tooltip/simple-test', Record<never, never>, Record<never, never>>,
@@ -292,6 +294,14 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/tooltip/arrow-test.vue': {
       routes: '/tooltip/arrow-test'
+      views: never
+    }
+    'src/pages/tooltip/comprehensive-test.vue': {
+      routes: '/tooltip/comprehensive-test'
+      views: never
+    }
+    'src/pages/tooltip/debug-arrow.vue': {
+      routes: '/tooltip/debug-arrow'
       views: never
     }
     'src/pages/tooltip/detailed-test.vue': {
