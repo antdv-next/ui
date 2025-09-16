@@ -76,6 +76,10 @@ declare module 'vue-router/auto-routes' {
     '/spin/nested': RouteRecordInfo<'/spin/nested', '/spin/nested', Record<never, never>, Record<never, never>>,
     '/spin/size': RouteRecordInfo<'/spin/size', '/spin/size', Record<never, never>, Record<never, never>>,
     '/spin/tip': RouteRecordInfo<'/spin/tip', '/spin/tip', Record<never, never>, Record<never, never>>,
+    '/tooltip/basic': RouteRecordInfo<'/tooltip/basic', '/tooltip/basic', Record<never, never>, Record<never, never>>,
+    '/tooltip/colorful': RouteRecordInfo<'/tooltip/colorful', '/tooltip/colorful', Record<never, never>, Record<never, never>>,
+    '/tooltip/placement': RouteRecordInfo<'/tooltip/placement', '/tooltip/placement', Record<never, never>, Record<never, never>>,
+    '/tooltip/shift': RouteRecordInfo<'/tooltip/shift', '/tooltip/shift', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -319,6 +323,22 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/spin/tip.vue': {
       routes: '/spin/tip'
+      views: never
+    }
+    'src/pages/tooltip/basic.vue': {
+      routes: '/tooltip/basic'
+      views: never
+    }
+    'src/pages/tooltip/colorful.vue': {
+      routes: '/tooltip/colorful'
+      views: never
+    }
+    'src/pages/tooltip/placement.vue': {
+      routes: '/tooltip/placement'
+      views: never
+    }
+    'src/pages/tooltip/shift.vue': {
+      routes: '/tooltip/shift'
       views: never
     }
   }

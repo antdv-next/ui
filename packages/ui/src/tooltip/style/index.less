@@ -1,28 +1,37 @@
-@keyframes antZoomBigIn{
-0% {
-  transform: scale(0.8);
-  opacity: 0;
+@keyframes antZoomBigIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
-100% {
-  transform: scale(1);
-  opacity: 1;
-}}
-@keyframes antZoomBigOut{
-0% {
-  transform: scale(1);
+@keyframes antZoomBigOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
 }
-100% {
-  transform: scale(0.8);
-  opacity: 0;
-}
-}
+
 .ant-tooltip {
   --ant-tooltip-z-index-popup: 1070;
   --ant-tooltip-arrow-offset-horizontal: 12px;
   --ant-tooltip-arrow-offset-vertical: 8px;
   --ant-tooltip-arrow-shadow-width: 8.970562748477143px;
-  --ant-tooltip-arrow-path: path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z');
-  --ant-tooltip-arrow-polygon: polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%);
+  --ant-tooltip-arrow-path: path(
+    'M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z'
+  );
+  --ant-tooltip-arrow-polygon: polygon(
+    1.6568542494923806px 100%,
+    50% 1.6568542494923806px,
+    14.34314575050762px 100%,
+    1.6568542494923806px 100%
+  );
 }
 .ant-tooltip {
   box-sizing: border-box;
@@ -41,10 +50,16 @@
   visibility: visible;
   --valid-offset-x: var(--arrow-offset-horizontal, var(--arrow-x));
   transform-origin: var(--valid-offset-x, 50%) var(--arrow-y, 50%);
+
+  &-wrapper {
+    display: inline-block;
+  }
+
   &-hidden {
     display: none;
   }
   --antd-arrow-background-color: var(--ant-color-bg-spotlight);
+
   .ant-tooltip-inner {
     min-width: calc(var(--ant-border-radius) * 2 + var(--ant-size-popup-arrow));
     min-height: var(--ant-control-height);
@@ -58,12 +73,22 @@
     box-shadow: var(--ant-box-shadow-secondary);
     box-sizing: border-box;
   }
-  &-placement-topLeft,&-placement-topRight,&-placement-bottomLeft,&-placement-bottomRight {
-    min-width: calc(var(--ant-border-radius) + var(--ant-size-popup-arrow) + var(--ant-tooltip-arrow-offset-horizontal));
+  &-placement-topLeft,
+  &-placement-topRight,
+  &-placement-bottomLeft,
+  &-placement-bottomRight {
+    min-width: calc(
+      var(--ant-border-radius) + var(--ant-size-popup-arrow) + var(--ant-tooltip-arrow-offset-horizontal)
+    );
   }
-  &-placement-left,&-placement-leftTop,&-placement-leftBottom,&-placement-right,&-placement-rightTop,&-placement-rightBottom {
+  &-placement-left,
+  &-placement-leftTop,
+  &-placement-leftBottom,
+  &-placement-right,
+  &-placement-rightTop,
+  &-placement-rightBottom {
     .ant-tooltip-inner {
-      border-radius: min(var(--ant-border-radius),8);
+      border-radius: min(var(--ant-border-radius), 8px);
     }
   }
   .ant-tooltip-content {
@@ -195,10 +220,10 @@
       background: var(--antd-arrow-background-color);
       clip-path: var(--ant-tooltip-arrow-polygon);
       clip-path: var(--ant-tooltip-arrow-path);
-      content: "";
+      content: '';
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       width: var(--ant-tooltip-arrow-shadow-width);
       height: var(--ant-tooltip-arrow-shadow-width);
@@ -215,7 +240,9 @@
       background: var(--antd-arrow-background-color);
     }
   }
-  &-placement-top > .ant-tooltip-arrow,&-placement-topLeft > .ant-tooltip-arrow,&-placement-topRight > .ant-tooltip-arrow {
+  &-placement-top > .ant-tooltip-arrow,
+  &-placement-topLeft > .ant-tooltip-arrow,
+  &-placement-topRight > .ant-tooltip-arrow {
     bottom: 0;
     transform: translateY(100%) rotate(180deg);
   }
@@ -235,7 +262,9 @@
       right: var(--ant-tooltip-arrow-offset-horizontal);
     }
   }
-  &-placement-bottom > .ant-tooltip-arrow,&-placement-bottomLeft > .ant-tooltip-arrow,&-placement-bottomRight > .ant-tooltip-arrow {
+  &-placement-bottom > .ant-tooltip-arrow,
+  &-placement-bottomLeft > .ant-tooltip-arrow,
+  &-placement-bottomRight > .ant-tooltip-arrow {
     top: 0;
     transform: translateY(-100%);
   }
@@ -255,7 +284,9 @@
       right: var(--ant-tooltip-arrow-offset-horizontal);
     }
   }
-  &-placement-left > .ant-tooltip-arrow,&-placement-leftTop > .ant-tooltip-arrow,&-placement-leftBottom > .ant-tooltip-arrow {
+  &-placement-left > .ant-tooltip-arrow,
+  &-placement-leftTop > .ant-tooltip-arrow,
+  &-placement-leftBottom > .ant-tooltip-arrow {
     right: 0;
     transform: translateX(100%) rotate(90deg);
   }
@@ -269,7 +300,9 @@
   &-placement-leftBottom > .ant-tooltip-arrow {
     bottom: var(--ant-tooltip-arrow-offset-vertical);
   }
-  &-placement-right > .ant-tooltip-arrow,&-placement-rightTop > .ant-tooltip-arrow,&-placement-rightBottom > .ant-tooltip-arrow {
+  &-placement-right > .ant-tooltip-arrow,
+  &-placement-rightTop > .ant-tooltip-arrow,
+  &-placement-rightBottom > .ant-tooltip-arrow {
     left: 0;
     transform: translateX(-100%) rotate(-90deg);
   }
@@ -290,18 +323,19 @@
   margin: var(--ant-size-popup-arrow);
 }
 .ant-zoom-big-fast-enter,
-      .ant-zoom-big-fast-appear {
+.ant-zoom-big-fast-appear {
   animation-duration: var(--ant-motion-duration-fast);
   animation-fill-mode: both;
   animation-play-state: paused;
 }
+
 .ant-zoom-big-fast-leave {
   animation-duration: var(--ant-motion-duration-fast);
   animation-fill-mode: both;
   animation-play-state: paused;
 }
 .ant-zoom-big-fast-enter.ant-zoom-big-fast-enter-active,
-      .ant-zoom-big-fast-appear.ant-zoom-big-fast-appear-active {
+.ant-zoom-big-fast-appear.ant-zoom-big-fast-appear-active {
   animation-name: antZoomBigIn;
   animation-play-state: running;
 }
@@ -310,8 +344,9 @@
   animation-play-state: running;
   pointer-events: none;
 }
+
 .ant-zoom-big-fast-enter,
-        .ant-zoom-big-fast-appear {
+.ant-zoom-big-fast-appear {
   transform: scale(0);
   opacity: 0;
   animation-timing-function: var(--ant-motion-ease-out-circ);
