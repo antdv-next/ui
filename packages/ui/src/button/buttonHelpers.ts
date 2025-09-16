@@ -1,6 +1,6 @@
 import type { VueNode } from '@v-c/util/dist/type'
 import { Fragment, h, isVNode } from 'vue'
-import { PresetColors } from '../themes/interface/base'
+import { PresetColors } from '../theme/interface/presetColors'
 
 const rxTwoCNChar = /^[\u4E00-\u9FA5]{2}$/
 export const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar)
@@ -93,5 +93,8 @@ export function spaceChildren(children: VueNode[], needInserted: boolean): VueNo
     isPrevChildPure = isCurrentChildPure
   })
 
-  return h(Fragment, childList.map(child => splitCNCharsBySpace(child, needInserted)))
+  return h(
+    Fragment as any,
+    childList.map(child => splitCNCharsBySpace(child, needInserted)) as any,
+  )
 }
