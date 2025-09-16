@@ -2,7 +2,7 @@
 import type { Placement } from '@floating-ui/vue'
 import type { TooltipEmits, TooltipProps } from './define'
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue'
-import { computed, nextTick, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, shallowRef, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig } from '../config-provider/context'
 import { convertPlacement, parseColor } from './util.ts'
@@ -23,6 +23,7 @@ const props = withDefaults(
   },
 )
 const emit = defineEmits<TooltipEmits>()
+const slots = useSlots()
 
 // 内部状态
 const isOpen = ref(props.open ?? props.defaultOpen)
@@ -117,7 +118,7 @@ function setOpen(open: boolean, delay?: number) {
 
 function setOpenImmediately(open: boolean) {
   // Don't show tooltip if no content
-  const hasContent = !!(tooltipContent.value || tooltipContent.value === 0)
+  const hasContent = !!(tooltipContent.value || tooltipContent.value === 0 || slots?.title)
   const finalOpen = hasContent && open
 
   if (finalOpen === isOpen.value)
@@ -313,7 +314,7 @@ defineExpose(tooltipRef)
 
 <template>
   <component :is="$slots.default" :ref="getReferenceDom" />
-  <Teleport :to="props.getPopupContainer?.(reference!) || 'body'" :disabled="!mergedOpen">
+  <Teleport :disabled="!reference" :to="props.getPopupContainer?.(reference!) || 'body'">
     <Transition name="ant-zoom-big-fast" appear>
       <div
         v-show="mergedOpen"
