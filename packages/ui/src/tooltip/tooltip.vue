@@ -26,7 +26,8 @@ const props = withDefaults(
 const emit = defineEmits<TooltipEmits>()
 const slots = useSlots()
 
-const ARROW_EDGE_BUFFER = 10
+const ARROW_SAFE_INSET = 10
+const ARROW_ALIGNED_INSET = 4
 
 // 内部状态
 const isOpen = ref(props.open ?? props.defaultOpen)
@@ -75,7 +76,7 @@ const middleware = computed(() => {
       shiftOptions.limiter = limitShift({
         crossAxis: true,
         offset: ({ placement, rects }) => {
-          const basePlacement = placement.split('-')[0]
+          const [basePlacement, alignment] = placement.split('-') as [string, string | undefined]
           const arrowEl = arrowRef.value
           const arrowSize = (arrowEl?.offsetWidth ?? 16) / 2
           const limit = basePlacement === 'top' || basePlacement === 'bottom'
@@ -83,7 +84,8 @@ const middleware = computed(() => {
             : rects.floating.height / 2 - arrowSize
 
           const constrainedLimit = Math.max(limit, 0)
-          const releaseBuffer = Math.min(ARROW_EDGE_BUFFER, constrainedLimit)
+          const buffer = alignment ? ARROW_ALIGNED_INSET : ARROW_SAFE_INSET
+          const releaseBuffer = Math.min(buffer, constrainedLimit)
 
           return {
             crossAxis: Math.max(constrainedLimit - releaseBuffer, 0),
@@ -98,7 +100,12 @@ const middleware = computed(() => {
   if (props.arrow) {
     middlewares.push(arrow({
       element: arrowRef,
-      padding: 4,
+      padding: {
+        left: ARROW_SAFE_INSET,
+        right: ARROW_SAFE_INSET,
+        top: ARROW_ALIGNED_INSET,
+        bottom: ARROW_ALIGNED_INSET,
+      },
     }))
   }
 
@@ -117,6 +124,12 @@ const basePlacement = computed(() => {
   return (placement || 'top').split('-')[0]
 })
 
+const alignment = computed(() => {
+  const placement = actualPlacement.value || floatingPlacement.value
+  const [, align] = (placement || 'top').split('-') as [string, string | undefined]
+  return align
+})
+
 const isVerticalPlacement = computed(() => basePlacement.value === 'top' || basePlacement.value === 'bottom')
 const isHorizontalPlacement = computed(() => basePlacement.value === 'left' || basePlacement.value === 'right')
 
@@ -125,7 +138,18 @@ const colorInfo = computed(() => {
 })
 
 const arrowX = computed(() => {
-  const value = middlewareData.value?.arrow?.x
+  let value = middlewareData.value?.arrow?.x
+  if (basePlacement.value === 'top' || basePlacement.value === 'bottom') {
+    const arrowEl = arrowRef.value
+    const arrowWidth = arrowEl?.offsetWidth ?? 0
+    if (alignment.value === 'start') {
+      value = ARROW_SAFE_INSET
+    } else if (alignment.value === 'end') {
+      const floatingWidth = floating.value?.offsetWidth ?? 0
+      value = floatingWidth - arrowWidth - ARROW_SAFE_INSET
+    }
+  }
+
   return typeof value === 'number' ? value : null
 })
 
@@ -134,78 +158,22 @@ const arrowY = computed(() => {
   return typeof value === 'number' ? value : null
 })
 
-function clampValue(value: number, min: number, max: number) {
-  if (Number.isNaN(value))
-    return value
-
-  if (min > max)
-    return value
-
-  return Math.min(Math.max(value, min), max)
-}
-
-const resolvedArrowX = computed(() => {
-  if (arrowX.value == null)
-    return null
-
-  const floatingEl = floating.value
+const arrowPosition = computed(() => {
   const arrowEl = arrowRef.value
-  if (!floatingEl || !arrowEl)
-    return arrowX.value
+  const arrowWidth = arrowEl?.offsetWidth ?? 0
+  const arrowHeight = arrowEl?.offsetHeight ?? 0
+  const correctedX = arrowX.value != null && isVerticalPlacement.value && !alignment.value && arrowWidth
+    ? arrowX.value + arrowWidth / 2
+    : arrowX.value
 
-  if (!isVerticalPlacement.value)
-    return arrowX.value
+  const correctedY = arrowY.value != null && isHorizontalPlacement.value && !alignment.value && arrowHeight
+    ? arrowY.value + arrowHeight / 2
+    : arrowY.value
 
-  const floatingWidth = floatingEl.offsetWidth
-  const arrowWidth = arrowEl.offsetWidth || 0
-  if (!floatingWidth || !arrowWidth)
-    return arrowX.value
-
-  if (floatingWidth <= arrowWidth)
-    return floatingWidth / 2
-
-  const halfArrow = arrowWidth / 2
-  const available = Math.max((floatingWidth - arrowWidth) / 2, 0)
-  const inset = Math.min(ARROW_EDGE_BUFFER, available)
-  const min = halfArrow + inset
-  const max = floatingWidth - halfArrow - inset
-
-  if (min > max)
-    return floatingWidth / 2
-
-  return clampValue(arrowX.value, min, max)
-})
-
-const resolvedArrowY = computed(() => {
-  if (arrowY.value == null)
-    return null
-
-  const floatingEl = floating.value
-  const arrowEl = arrowRef.value
-  if (!floatingEl || !arrowEl)
-    return arrowY.value
-
-  if (!isHorizontalPlacement.value)
-    return arrowY.value
-
-  const floatingHeight = floatingEl.offsetHeight
-  const arrowHeight = arrowEl.offsetHeight || 0
-  if (!floatingHeight || !arrowHeight)
-    return arrowY.value
-
-  if (floatingHeight <= arrowHeight)
-    return floatingHeight / 2
-
-  const halfArrow = arrowHeight / 2
-  const available = Math.max((floatingHeight - arrowHeight) / 2, 0)
-  const inset = Math.min(ARROW_EDGE_BUFFER, available)
-  const min = halfArrow + inset
-  const max = floatingHeight - halfArrow - inset
-
-  if (min > max)
-    return floatingHeight / 2
-
-  return clampValue(arrowY.value, min, max)
+  return {
+    x: correctedX,
+    y: correctedY,
+  }
 })
 
 // 监听 props.open 的变化
@@ -395,10 +363,10 @@ const tooltipStyles = computed(() => {
     ...props.styles?.root,
   }
 
-  if (resolvedArrowX.value != null) {
-    style['--arrow-x'] = `${resolvedArrowX.value}px`
+  if (arrowPosition.value.x != null) {
+    style['--arrow-x'] = `${arrowPosition.value.x}px`
     if (isVerticalPlacement.value)
-      style['--arrow-offset-horizontal'] = `${resolvedArrowX.value}px`
+      style['--arrow-offset-horizontal'] = `${arrowPosition.value.x}px`
     else
       delete style['--arrow-offset-horizontal']
   } else {
@@ -406,8 +374,8 @@ const tooltipStyles = computed(() => {
     delete style['--arrow-offset-horizontal']
   }
 
-  if (resolvedArrowY.value != null) {
-    style['--arrow-y'] = `${resolvedArrowY.value}px`
+  if (arrowPosition.value.y != null) {
+    style['--arrow-y'] = `${arrowPosition.value.y}px`
   } else {
     delete style['--arrow-y']
   }
@@ -440,16 +408,16 @@ const arrowStyles = computed(() => {
     ...colorInfo.value.arrowStyle,
   }
 
-  if (resolvedArrowX.value != null) {
-    style.left = `${resolvedArrowX.value}px`
+  if (arrowPosition.value.x != null) {
+    style.left = `${arrowPosition.value.x}px`
     style.right = 'auto'
   } else {
     delete style.left
     delete style.right
   }
 
-  if (resolvedArrowY.value != null) {
-    style.top = `${resolvedArrowY.value}px`
+  if (arrowPosition.value.y != null) {
+    style.top = `${arrowPosition.value.y}px`
     style.bottom = 'auto'
   } else {
     delete style.top
