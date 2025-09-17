@@ -57,6 +57,11 @@ declare module 'vue-router/auto-routes' {
     '/divider/variant': RouteRecordInfo<'/divider/variant', '/divider/variant', Record<never, never>, Record<never, never>>,
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
+    '/popover/basic': RouteRecordInfo<'/popover/basic', '/popover/basic', Record<never, never>, Record<never, never>>,
+    '/popover/control': RouteRecordInfo<'/popover/control', '/popover/control', Record<never, never>, Record<never, never>>,
+    '/popover/placement': RouteRecordInfo<'/popover/placement', '/popover/placement', Record<never, never>, Record<never, never>>,
+    '/popover/shift': RouteRecordInfo<'/popover/shift', '/popover/shift', Record<never, never>, Record<never, never>>,
+    '/popover/triggerType': RouteRecordInfo<'/popover/triggerType', '/popover/triggerType', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
     '/qrcode/base': RouteRecordInfo<'/qrcode/base', '/qrcode/base', Record<never, never>, Record<never, never>>,
     '/qrcode/basic': RouteRecordInfo<'/qrcode/basic', '/qrcode/basic', Record<never, never>, Record<never, never>>,
@@ -260,6 +265,24 @@ declare module 'vue-router/auto-routes' {
       routes: '/divider/with-text'
       views: never
     }
+    'src/pages/popover/basic.vue': {
+      routes: '/popover/basic'
+      views: never
+    }
+    'src/pages/popover/control.vue': {
+      routes: '/popover/control'
+      views: never
+    }
+    'src/pages/popover/placement.vue': {
+      routes: '/popover/placement'
+      views: never
+    }
+    'src/pages/popover/shift.vue': {
+      routes: '/popover/shift'
+      views: never
+    }
+    'src/pages/popover/triggerType.vue': {
+      routes: '/popover/triggerType'
     'src/pages/flex/basic.vue': {
       routes: '/flex/basic'
       views: never

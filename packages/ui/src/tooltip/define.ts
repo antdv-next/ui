@@ -32,6 +32,7 @@ export interface TooltipAlignConfig {
 }
 
 export interface TooltipProps {
+  prefixCls?: string
   // Basic props
   trigger?: ActionType | ActionType[]
   open?: boolean
