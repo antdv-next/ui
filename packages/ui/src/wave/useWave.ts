@@ -10,7 +10,7 @@ export function useWave(
   cls: string,
   component?: MaybeRef<WaveComponent | undefined>,
 ) {
-  const showWave = (e: MouseEvent) => {
+  const showWave = (_e: MouseEvent) => {
     const node = unref(nodeRef)
     if (!node) {
       return
