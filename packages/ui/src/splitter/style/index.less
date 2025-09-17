@@ -4,7 +4,6 @@
   --ant-splitter-split-bar-draggable-size: 20px;
   --ant-splitter-resize-spinner-size: 20px;
 
-
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,7 +27,7 @@
       transform: translate(-50%, -50%);
       z-index: 1;
       &::before {
-        content: "";
+        content: '';
         background: var(--ant-control-item-bg-hover);
         position: absolute;
         top: 50%;
@@ -36,7 +35,7 @@
         transform: translate(-50%, -50%);
       }
       &::after {
-        content: "";
+        content: '';
         background: var(--ant-color-fill);
         position: absolute;
         top: 50%;
@@ -56,7 +55,9 @@
       }
       &-disabled.ant-splitter-bar-dragger {
         z-index: 0;
-        &, &:hover, &-active {
+        &,
+        &:hover,
+        &-active {
           cursor: default;
           &::before {
             background: var(--ant-control-item-bg-hover);
@@ -89,13 +90,14 @@
         background: var(--ant-control-item-bg-active-hover);
       }
     }
-    &:hover, &:active {
+    &:hover,
+    &:active {
       .ant-splitter-bar-collapse-bar-hover-only {
         opacity: 1;
       }
     }
     .ant-splitter-bar-collapse-bar-hover-only {
-      @media(hover:none) {
+      @media (hover: none) {
         opacity: 1;
       }
     }

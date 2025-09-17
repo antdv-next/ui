@@ -3,19 +3,19 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "antdv-next": ["../packages/ui/src"],
+      "antdv-next/*": ["../packages/ui/src/*"]
+    },
     /* Linting */
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noUncheckedSideEffectImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "antdv-next": ["../packages/ui/src"],
-      "antdv-next/*": ["../packages/ui/src/*"]
-    }
+    "noUncheckedSideEffectImports": true
   },
   "files": [
     "types/vite-env.d.ts",

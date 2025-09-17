@@ -58,6 +58,11 @@ declare module 'vue-router/auto-routes' {
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
+    '/popconfirm/basic': RouteRecordInfo<'/popconfirm/basic', '/popconfirm/basic', Record<never, never>, Record<never, never>>,
+    '/popconfirm/dynamic-trigger': RouteRecordInfo<'/popconfirm/dynamic-trigger', '/popconfirm/dynamic-trigger', Record<never, never>, Record<never, never>>,
+    '/popconfirm/icon': RouteRecordInfo<'/popconfirm/icon', '/popconfirm/icon', Record<never, never>, Record<never, never>>,
+    '/popconfirm/placement': RouteRecordInfo<'/popconfirm/placement', '/popconfirm/placement', Record<never, never>, Record<never, never>>,
+    '/popconfirm/promise': RouteRecordInfo<'/popconfirm/promise', '/popconfirm/promise', Record<never, never>, Record<never, never>>,
     '/popover/basic': RouteRecordInfo<'/popover/basic', '/popover/basic', Record<never, never>, Record<never, never>>,
     '/popover/control': RouteRecordInfo<'/popover/control', '/popover/control', Record<never, never>, Record<never, never>>,
     '/popover/placement': RouteRecordInfo<'/popover/placement', '/popover/placement', Record<never, never>, Record<never, never>>,
@@ -267,6 +272,26 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/flex/basic.vue': {
       routes: '/flex/basic'
+      views: never
+    }
+    'src/pages/popconfirm/basic.vue': {
+      routes: '/popconfirm/basic'
+      views: never
+    }
+    'src/pages/popconfirm/dynamic-trigger.vue': {
+      routes: '/popconfirm/dynamic-trigger'
+      views: never
+    }
+    'src/pages/popconfirm/icon.vue': {
+      routes: '/popconfirm/icon'
+      views: never
+    }
+    'src/pages/popconfirm/placement.vue': {
+      routes: '/popconfirm/placement'
+      views: never
+    }
+    'src/pages/popconfirm/promise.vue': {
+      routes: '/popconfirm/promise'
       views: never
     }
     'src/pages/popover/basic.vue': {

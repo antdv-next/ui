@@ -60,7 +60,9 @@
     width: calc(var(--ant-control-height-lg) * 0.55);
     height: calc(var(--ant-control-height-lg) * 0.55);
     border-radius: var(--ant-border-radius-sm);
-    transition: background-color var(--ant-motion-duration-mid), color var(--ant-motion-duration-mid);
+    transition:
+      background-color var(--ant-motion-duration-mid),
+      color var(--ant-motion-duration-mid);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +78,9 @@
     &:focus-visible {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
   }
   .ant-notification-pure-panel-notice-progress {
@@ -89,7 +93,8 @@
     bottom: 0;
     block-size: 2px;
     border: 0;
-    &, &::-webkit-progress-bar {
+    &,
+    &::-webkit-progress-bar {
       border-radius: var(--ant-border-radius-lg);
       background-color: rgba(0, 0, 0, 0.04);
     }

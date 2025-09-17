@@ -1,26 +1,28 @@
-@keyframes MessageMoveIn{
-0% {
-  padding: 0;
-  transform: translateY(-100%);
-  opacity: 0;
-}
+@keyframes MessageMoveIn {
+  0% {
+    padding: 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 
-100% {
-  padding: var(--ant-padding-xs);
-  transform: translateY(0);
-  opacity: 1;
-}}
-@keyframes MessageMoveOut{
-0% {
-  max-height: 150px;
-  padding: var(--ant-padding-xs);
-  opacity: 1;
+  100% {
+    padding: var(--ant-padding-xs);
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
-100% {
-  max-height: 0;
-  padding: 0;
-  opacity: 0;
-}}
+@keyframes MessageMoveOut {
+  0% {
+    max-height: 150px;
+    padding: var(--ant-padding-xs);
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
 .ant-message {
   --ant-message-z-index-popup: 2010;
   --ant-message-content-bg: var(--ant-color-bg-elevated);
@@ -44,14 +46,14 @@
     animation-fill-mode: forwards;
   }
   .ant-message-move-up-appear,
-          .ant-message-move-up-enter {
+  .ant-message-move-up-enter {
     animation-name: MessageMoveIn;
     animation-duration: var(--ant-motion-duration-slow);
     animation-play-state: paused;
     animation-timing-function: var(--ant-motion-ease-in-out-circ);
   }
   .ant-message-move-up-appear.ant-message-move-up-appear-active,
-          .ant-message-move-up-enter.ant-message-move-up-enter-active {
+  .ant-message-move-up-enter.ant-message-move-up-enter-active {
     animation-play-state: running;
   }
   .ant-message-move-up-leave {
@@ -100,7 +102,7 @@
       color: var(--ant-color-warning);
     }
     .ant-message-info > .anticon,
-          .ant-message-loading > .anticon {
+    .ant-message-loading > .anticon {
       color: var(--ant-color-info);
     }
   }
@@ -134,7 +136,7 @@
     color: var(--ant-color-warning);
   }
   .ant-message-info > .anticon,
-        .ant-message-loading > .anticon {
+  .ant-message-loading > .anticon {
     color: var(--ant-color-info);
   }
 }

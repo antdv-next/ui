@@ -25,8 +25,6 @@ Utility Libraries
 
 import { classNames } from "relative_path/_utils/classNames"
 
-
-
 Git Commit Conventions
 
 We follow the Conventional Commits specification for commit messages. The format is as follows:
@@ -52,5 +50,3 @@ docs: update README file
 Acknowledgements
 
 Many thanks to all developers and users who have contributed to this project. Your support is our driving force! If you have any questions or suggestions, feel free to reach out at any time.
-
-

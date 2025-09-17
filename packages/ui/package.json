@@ -17,8 +17,8 @@
     "@floating-ui/dom": "^1.7.4",
     "@floating-ui/vue": "^1.1.9",
     "@v-c/color-picker": "catalog:",
-    "@v-c/util": "catalog:",
     "@v-c/qrcode": "^0.0.2",
+    "@v-c/util": "catalog:",
     "@vueuse/core": "catalog:",
     "es-toolkit": "catalog:",
     "scroll-into-view-if-needed": "^3.1.0"

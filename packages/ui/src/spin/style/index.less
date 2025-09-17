@@ -1,18 +1,19 @@
-@keyframes antSpinMove{
-to {
-  opacity: 1;
-}}
-@keyframes antRotate{
-to {
-  transform: rotate(405deg);
-}}
+@keyframes antSpinMove {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes antRotate {
+  to {
+    transform: rotate(405deg);
+  }
+}
 
 .ant-spin {
   --ant-spin-content-height: 400px;
   --ant-spin-dot-size: 20px;
   --ant-spin-dot-size-sm: 14px;
   --ant-spin-dot-size-lg: 32px;
-
 
   box-sizing: border-box;
   margin: 0;
@@ -128,7 +129,7 @@ to {
         background: var(--ant-color-bg-container);
         opacity: 0;
         transition: all var(--ant-motion-duration-slow);
-        content: "";
+        content: '';
         pointer-events: none;
       }
     }
@@ -151,7 +152,9 @@ to {
     height: 1em;
     font-size: var(--ant-spin-dot-size);
     display: inline-block;
-    transition: transform var(--ant-motion-duration-slow) ease, opacity var(--ant-motion-duration-slow) ease;
+    transition:
+      transform var(--ant-motion-duration-slow) ease,
+      opacity var(--ant-motion-duration-slow) ease;
     transform-origin: 50% 50%;
     line-height: 1;
     color: var(--ant-color-primary);
@@ -215,7 +218,12 @@ to {
     }
     &-circle {
       stroke-linecap: round;
-      transition: stroke-dashoffset var(--ant-motion-duration-slow) ease,stroke-dasharray var(--ant-motion-duration-slow) ease,stroke var(--ant-motion-duration-slow) ease,stroke-width var(--ant-motion-duration-slow) ease,opacity var(--ant-motion-duration-slow) ease;
+      transition:
+        stroke-dashoffset var(--ant-motion-duration-slow) ease,
+        stroke-dasharray var(--ant-motion-duration-slow) ease,
+        stroke var(--ant-motion-duration-slow) ease,
+        stroke-width var(--ant-motion-duration-slow) ease,
+        opacity var(--ant-motion-duration-slow) ease;
       fill-opacity: 0;
       stroke: currentcolor;
     }
@@ -224,7 +232,8 @@ to {
     }
   }
   &-sm .ant-spin-dot {
-    &, &-holder {
+    &,
+    &-holder {
       font-size: var(--ant-spin-dot-size-sm);
     }
   }
@@ -235,7 +244,8 @@ to {
     }
   }
   &-lg .ant-spin-dot {
-    &, &-holder {
+    &,
+    &-holder {
       font-size: var(--ant-spin-dot-size-lg);
     }
   }

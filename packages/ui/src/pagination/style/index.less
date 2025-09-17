@@ -46,7 +46,8 @@
   &-end {
     justify-content: end;
   }
-  ul, ol {
+  ul,
+  ol {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -57,7 +58,7 @@
     height: 0;
     overflow: hidden;
     visibility: hidden;
-    content: "";
+    content: '';
   }
   .ant-pagination-total-text {
     display: inline-block;
@@ -114,7 +115,8 @@
       }
     }
   }
-  .ant-pagination-jump-prev, .ant-pagination-jump-next {
+  .ant-pagination-jump-prev,
+  .ant-pagination-jump-next {
     outline: 0;
     .ant-pagination-item-container {
       position: relative;
@@ -157,14 +159,14 @@
     }
   }
   .ant-pagination-prev,
-      .ant-pagination-jump-prev,
-      .ant-pagination-jump-next {
+  .ant-pagination-jump-prev,
+  .ant-pagination-jump-next {
     margin-inline-end: var(--ant-margin-xs);
   }
   .ant-pagination-prev,
-      .ant-pagination-next,
-      .ant-pagination-jump-prev,
-      .ant-pagination-jump-next {
+  .ant-pagination-next,
+  .ant-pagination-jump-prev,
+  .ant-pagination-jump-next {
     display: inline-block;
     min-width: var(--ant-pagination-item-size);
     height: var(--ant-pagination-item-size);
@@ -178,7 +180,8 @@
     cursor: pointer;
     transition: all var(--ant-motion-duration-mid);
   }
-  .ant-pagination-prev, .ant-pagination-next {
+  .ant-pagination-prev,
+  .ant-pagination-next {
     outline: 0;
     button {
       color: var(--ant-color-text);
@@ -260,7 +263,8 @@
           font-size: var(--ant-pagination-input-font-size-sm);
           border-radius: var(--ant-border-radius-sm);
         }
-        &-rtl, &-textarea-rtl {
+        &-rtl,
+        &-textarea-rtl {
           direction: rtl;
         }
         background: var(--ant-color-bg-container);
@@ -271,7 +275,8 @@
           border-color: var(--ant-color-primary-hover);
           background-color: var(--ant-pagination-hover-bg);
         }
-        &:focus, &:focus-within {
+        &:focus,
+        &:focus-within {
           border-color: var(--ant-color-primary);
           box-shadow: var(--ant-pagination-active-shadow);
           outline: 0;
@@ -284,7 +289,8 @@
           box-shadow: none;
           cursor: not-allowed;
           opacity: 1;
-          input[disabled], textarea[disabled] {
+          input[disabled],
+          textarea[disabled] {
             cursor: not-allowed;
           }
           &:hover:not([disabled]) {
@@ -301,7 +307,8 @@
     }
   }
   &.ant-pagination-simple {
-    .ant-pagination-prev, .ant-pagination-next {
+    .ant-pagination-prev,
+    .ant-pagination-next {
       height: var(--ant-pagination-item-size);
       line-height: var(--ant-pagination-item-size);
       vertical-align: top;
@@ -354,16 +361,19 @@
       }
     }
     &.ant-pagination-disabled {
-      .ant-pagination-prev, .ant-pagination-next {
+      .ant-pagination-prev,
+      .ant-pagination-next {
         .ant-pagination-item-link {
-          &:hover, &:active {
+          &:hover,
+          &:active {
             background-color: transparent;
           }
         }
       }
     }
     &.ant-pagination-mini {
-      .ant-pagination-prev, .ant-pagination-next {
+      .ant-pagination-prev,
+      .ant-pagination-next {
         height: var(--ant-pagination-item-size-sm);
         line-height: var(--ant-pagination-item-size-sm);
         .ant-pagination-item-link {
@@ -382,7 +392,8 @@
       }
     }
   }
-  &.ant-pagination-mini .ant-pagination-total-text, &.ant-pagination-mini .ant-pagination-simple-pager {
+  &.ant-pagination-mini .ant-pagination-total-text,
+  &.ant-pagination-mini .ant-pagination-simple-pager {
     height: var(--ant-pagination-item-size-sm);
     line-height: var(--ant-pagination-item-size-sm);
   }
@@ -392,14 +403,16 @@
     margin: 0;
     line-height: calc(var(--ant-pagination-item-size-sm) - 2px);
   }
-  &.ant-pagination-mini .ant-pagination-prev, &.ant-pagination-mini .ant-pagination-next {
+  &.ant-pagination-mini .ant-pagination-prev,
+  &.ant-pagination-mini .ant-pagination-next {
     min-width: var(--ant-pagination-item-size-sm);
     height: var(--ant-pagination-item-size-sm);
     margin: 0;
     line-height: var(--ant-pagination-item-size-sm);
   }
   &.ant-pagination-mini:not(.ant-pagination-disabled) {
-    .ant-pagination-prev, .ant-pagination-next {
+    .ant-pagination-prev,
+    .ant-pagination-next {
       &:hover .ant-pagination-item-link {
         background-color: var(--ant-color-bg-text-hover);
       }
@@ -412,7 +425,7 @@
     }
   }
   &.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link,
-      &.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link {
+  &.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link {
     background-color: transparent;
     border-color: transparent;
     &::after {
@@ -420,7 +433,8 @@
       line-height: var(--ant-pagination-item-size-sm);
     }
   }
-  &.ant-pagination-mini .ant-pagination-jump-prev, &.ant-pagination-mini .ant-pagination-jump-next {
+  &.ant-pagination-mini .ant-pagination-jump-prev,
+  &.ant-pagination-mini .ant-pagination-jump-next {
     height: var(--ant-pagination-item-size-sm);
     margin-inline-end: 0;
     line-height: var(--ant-pagination-item-size-sm);
@@ -443,7 +457,8 @@
     }
   }
   .ant-pagination-disabled {
-    &, &:hover {
+    &,
+    &:hover {
       cursor: not-allowed;
       .ant-pagination-item-link {
         color: var(--ant-color-text-disabled);
@@ -463,7 +478,8 @@
     .ant-pagination-item {
       cursor: not-allowed;
       background-color: transparent;
-      &:hover, &:active {
+      &:hover,
+      &:active {
         background-color: transparent;
       }
       a {
@@ -475,7 +491,8 @@
       &-active {
         border-color: var(--ant-color-border);
         background-color: var(--ant-pagination-item-active-bg-disabled);
-        &:hover, &:active {
+        &:hover,
+        &:active {
           background-color: var(--ant-pagination-item-active-bg-disabled);
         }
         a {
@@ -486,12 +503,14 @@
     .ant-pagination-item-link {
       color: var(--ant-color-text-disabled);
       cursor: not-allowed;
-      &:hover, &:active {
+      &:hover,
+      &:active {
         background-color: transparent;
       }
       .ant-pagination-simple& {
         background-color: transparent;
-        &:hover, &:active {
+        &:hover,
+        &:active {
           background-color: transparent;
         }
       }
@@ -499,7 +518,8 @@
     .ant-pagination-simple-pager {
       color: var(--ant-color-text-disabled);
     }
-    .ant-pagination-jump-prev, .ant-pagination-jump-next {
+    .ant-pagination-jump-prev,
+    .ant-pagination-jump-next {
       .ant-pagination-item-link-icon {
         opacity: 0;
       }
@@ -510,7 +530,8 @@
   }
   @media only screen and (max-width: var(--ant-screen-lg)px) {
     .ant-pagination-item {
-      &-after-jump-prev, &-before-jump-next {
+      &-after-jump-prev,
+      &-before-jump-next {
         display: none;
       }
     }
@@ -529,10 +550,13 @@
     &:focus-visible {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
   }
-  .ant-pagination-jump-prev, .ant-pagination-jump-next {
+  .ant-pagination-jump-prev,
+  .ant-pagination-jump-next {
     &:focus-visible {
       .ant-pagination-item-link-icon {
         opacity: 1;
@@ -542,14 +566,19 @@
       }
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
   }
-  .ant-pagination-prev, .ant-pagination-next {
+  .ant-pagination-prev,
+  .ant-pagination-next {
     &:focus-visible .ant-pagination-item-link {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
   }
 }

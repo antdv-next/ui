@@ -16,6 +16,8 @@ export function isUnBorderedButtonVariant(type?: ButtonVariantType) {
 const _ButtonTypes = ['default', 'primary', 'dashed', 'link', 'text'] as const
 export type ButtonType = (typeof _ButtonTypes)[number]
 
+export type LegacyButtonType = ButtonType | 'danger'
+
 const _ButtonShapes = ['default', 'circle', 'round'] as const
 export type ButtonShape = (typeof _ButtonShapes)[number]
 
@@ -74,6 +76,18 @@ export function splitCNCharsBySpace(child: VueNode, needInserted: boolean): VueN
   }
 
   return child
+}
+
+export function convertLegacyProps(type?: LegacyButtonType) {
+  if (!type) {
+    return {}
+  }
+
+  if (type === 'danger') {
+    return { danger: true }
+  }
+
+  return { type }
 }
 
 export function spaceChildren(children: VueNode[], needInserted: boolean): VueNode {

@@ -17,7 +17,6 @@
   --ant-radio-bg-color: var(--ant-color-primary);
 }
 
-
 .ant-radio-group {
   box-sizing: border-box;
   margin: 0;
@@ -69,7 +68,7 @@
     display: inline-block;
     width: 0;
     overflow: hidden;
-    content: "\a0";
+    content: '\a0';
   }
   &-block {
     flex: 1;
@@ -85,7 +84,7 @@
     border-radius: 50%;
     visibility: hidden;
     opacity: 0;
-    content: "";
+    content: '';
   }
   .ant-radio {
     box-sizing: border-box;
@@ -104,15 +103,18 @@
     border-radius: 50%;
   }
   .ant-radio-wrapper:hover &,
-          &:hover .ant-radio-inner {
+  &:hover .ant-radio-inner {
     border-color: var(--ant-color-primary);
   }
   .ant-radio-input:focus-visible + .ant-radio-inner {
     outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
     outline-offset: 1px;
-    transition: outline-offset 0s, outline 0s;
+    transition:
+      outline-offset 0s,
+      outline 0s;
   }
-  .ant-radio:hover::after, .ant-radio-wrapper:hover &::after {
+  .ant-radio:hover::after,
+  .ant-radio-wrapper:hover &::after {
     visibility: visible;
   }
   .ant-radio-inner {
@@ -133,7 +135,7 @@
       transform: scale(0);
       opacity: 0;
       transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out-circ);
-      content: "";
+      content: '';
     }
     box-sizing: border-box;
     position: relative;
@@ -212,7 +214,10 @@
   border-block-start-width: calc(var(--ant-line-width) + 0.02px);
   border-inline-end-width: var(--ant-line-width);
   cursor: pointer;
-  transition: color var(--ant-motion-duration-mid),background var(--ant-motion-duration-mid),box-shadow var(--ant-motion-duration-mid);
+  transition:
+    color var(--ant-motion-duration-mid),
+    background var(--ant-motion-duration-mid),
+    box-shadow var(--ant-motion-duration-mid);
   a {
     color: var(--ant-radio-button-color);
   }
@@ -273,9 +278,13 @@
   &:has(:focus-visible) {
     outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
     outline-offset: 1px;
-    transition: outline-offset 0s, outline 0s;
+    transition:
+      outline-offset 0s,
+      outline 0s;
   }
-  .ant-radio-inner, input[type='checkbox'], input[type='radio'] {
+  .ant-radio-inner,
+  input[type='checkbox'],
+  input[type='radio'] {
     width: 0;
     height: 0;
     opacity: 0;
@@ -327,7 +336,8 @@
     background-color: var(--ant-color-bg-container-disabled);
     border-color: var(--ant-color-border);
     cursor: not-allowed;
-    &:first-child, &:hover {
+    &:first-child,
+    &:hover {
       color: var(--ant-color-text-disabled);
       background-color: var(--ant-color-bg-container-disabled);
       border-color: var(--ant-color-border);

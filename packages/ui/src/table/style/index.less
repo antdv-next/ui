@@ -31,8 +31,8 @@
   --ant-table-sticky-scroll-bar-bg: var(--ant-color-text-placeholder);
   --ant-table-sticky-scroll-bar-border-radius: 100px;
   --ant-table-expand-icon-margin-top: 2.5px;
-  --ant-table-header-icon-color: rgba(0,0,0,0.65);
-  --ant-table-header-icon-hover-color: rgba(0,0,0,0.65);
+  --ant-table-header-icon-color: rgba(0, 0, 0, 0.65);
+  --ant-table-header-icon-hover-color: rgba(0, 0, 0, 0.65);
   --ant-table-expand-icon-half-inner: 7px;
   --ant-table-expand-icon-size: 17px;
   --ant-table-expand-icon-scale: 0.9411764705882353px;
@@ -44,12 +44,12 @@
   --rc-virtual-list-scrollbar-bg: var(--ant-color-split);
   &::before {
     display: table;
-    content: "";
+    content: '';
   }
   &::after {
     display: table;
     clear: both;
-    content: "";
+    content: '';
   }
   .ant-table {
     box-sizing: border-box;
@@ -72,11 +72,11 @@
     border-spacing: 0;
   }
   .ant-table-cell,
-            .ant-table-thead > tr > th,
-            .ant-table-tbody > tr > th,
-            .ant-table-tbody > tr > td,
-            tfoot > tr > th,
-            tfoot > tr > td {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > th,
+  .ant-table-tbody > tr > td,
+  tfoot > tr > th,
+  tfoot > tr > td {
     position: relative;
     padding: var(--ant-table-cell-padding-block) var(--ant-table-cell-padding-inline);
     overflow-wrap: break-word;
@@ -86,7 +86,7 @@
   }
   .ant-table-thead {
     > tr > th,
-              > tr > td {
+    > tr > td {
       position: relative;
       color: var(--ant-table-header-color);
       font-weight: var(--ant-font-weight-strong);
@@ -106,7 +106,7 @@
         background-color: var(--ant-table-header-split-color);
         transform: translateY(-50%);
         transition: background-color var(--ant-motion-duration-mid);
-        content: "";
+        content: '';
       }
     }
     > tr:not(:last-child) > th[colspan] {
@@ -115,18 +115,25 @@
   }
   .ant-table-tbody {
     > tr {
-      > th, > td {
-        transition: background var(--ant-motion-duration-mid), border-color var(--ant-motion-duration-mid);
+      > th,
+      > td {
+        transition:
+          background var(--ant-motion-duration-mid),
+          border-color var(--ant-motion-duration-mid);
         border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
         > .ant-table-wrapper:only-child,
-                      > .ant-table-expanded-row-fixed > .ant-table-wrapper:only-child {
+        > .ant-table-expanded-row-fixed > .ant-table-wrapper:only-child {
           .ant-table {
             margin-block: calc(var(--ant-table-cell-padding-block) * -1);
-            margin-inline: calc(calc(var(--ant-control-interactive-size) + var(--ant-padding) * 2) - var(--ant-table-cell-padding-inline))
-                            calc(var(--ant-table-cell-padding-inline) * -1);
+            margin-inline: calc(
+                calc(var(--ant-control-interactive-size) + var(--ant-padding) * 2) -
+                  var(--ant-table-cell-padding-inline)
+              )
+              calc(var(--ant-table-cell-padding-inline) * -1);
             .ant-table-tbody > tr:last-child > td {
               border-bottom-width: 0;
-              &:first-child, &:last-child {
+              &:first-child,
+              &:last-child {
                 border-radius: 0;
               }
             }
@@ -178,7 +185,8 @@
     z-index: 2;
     background: var(--ant-color-bg-container);
     > tr {
-      > th, > td {
+      > th,
+      > td {
         border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
       }
     }
@@ -191,7 +199,9 @@
   .ant-table-thead th.ant-table-column-has-sorters {
     outline: none;
     cursor: pointer;
-    transition: all var(--ant-motion-duration-slow), left 0s;
+    transition:
+      all var(--ant-motion-duration-slow),
+      left 0s;
     &:hover {
       background: var(--ant-table-header-sort-hover-bg);
       &::before {
@@ -202,7 +212,7 @@
       color: var(--ant-color-primary);
     }
     &.ant-table-cell-fix-left:hover,
-              &.ant-table-cell-fix-right:hover {
+    &.ant-table-cell-fix-right:hover {
       background: var(--ant-table-fixed-header-sort-active-bg);
     }
   }
@@ -231,7 +241,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      content: "";
+      content: '';
     }
   }
   .ant-table-column-sorters-tooltip-target-sorter {
@@ -249,7 +259,8 @@
       flex-direction: column;
       align-items: center;
     }
-    &-up, &-down {
+    &-up,
+    &-down {
       font-size: var(--ant-font-size-icon);
       &.active {
         color: var(--ant-color-primary);
@@ -317,7 +328,7 @@
         color: var(--ant-color-text-disabled);
         font-size: var(--ant-font-size-sm);
         text-align: center;
-        content: "Not Found";
+        content: 'Not Found';
       }
     }
     .ant-table-filter-dropdown-tree {
@@ -330,7 +341,8 @@
         background-color: var(--ant-control-item-bg-hover);
       }
       .ant-tree-treenode-checkbox-checked .ant-tree-node-content-wrapper {
-        &, &:hover {
+        &,
+        &:hover {
           background-color: var(--ant-control-item-bg-active);
         }
       }
@@ -361,7 +373,8 @@
     }
   }
 }
-.ant-dropdown .ant-table-filter-dropdown, .ant-table-filter-dropdown-submenu {
+.ant-dropdown .ant-table-filter-dropdown,
+.ant-table-filter-dropdown-submenu {
   .ant-checkbox-wrapper + span {
     padding-inline-start: var(--ant-padding-xs);
     color: var(--ant-color-text);
@@ -382,16 +395,16 @@
       border-inline-start: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
       border-top: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
       > .ant-table-content,
-                  > .ant-table-header,
-                  > .ant-table-body,
-                  > .ant-table-summary {
+      > .ant-table-header,
+      > .ant-table-body,
+      > .ant-table-summary {
         > table {
           > thead > tr > th,
-                          > thead > tr > td,
-                          > tbody > tr > th,
-                          > tbody > tr > td,
-                          > tfoot > tr > th,
-                          > tfoot > tr > td {
+          > thead > tr > td,
+          > tbody > tr > th,
+          > tbody > tr > td,
+          > tfoot > tr > th,
+          > tfoot > tr > td {
             border-inline-end: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
           }
           > thead {
@@ -403,23 +416,24 @@
             }
           }
           > thead > tr,
-                          > tbody > tr,
-                          > tfoot > tr {
+          > tbody > tr,
+          > tfoot > tr {
             > .ant-table-cell-fix-right-first::after {
               border-inline-end: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
             }
           }
           > tbody > tr > th,
-                          > tbody > tr > td {
+          > tbody > tr > td {
             > .ant-table-expanded-row-fixed {
-              margin: calc(var(--ant-table-cell-padding-block) * -1) calc((var(--ant-table-cell-padding-inline) + var(--ant-line-width)) * -1);
+              margin: calc(var(--ant-table-cell-padding-block) * -1)
+                calc((var(--ant-table-cell-padding-inline) + var(--ant-line-width)) * -1);
               &::after {
                 position: absolute;
                 top: 0;
                 inset-inline-end: var(--ant-line-width);
                 bottom: 0;
                 border-inline-end: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
-                content: "";
+                content: '';
               }
             }
           }
@@ -430,8 +444,9 @@
       > .ant-table-container > .ant-table-body {
         > table > tbody {
           > tr.ant-table-expanded-row,
-                          > tr.ant-table-placeholder {
-            > th, > td {
+          > tr.ant-table-placeholder {
+            > th,
+            > td {
               border-inline-end: 0;
             }
           }
@@ -440,12 +455,13 @@
     }
     &.ant-table-middle {
       > .ant-table-container {
-        > .ant-table-content, > .ant-table-body {
+        > .ant-table-content,
+        > .ant-table-body {
           > table > tbody > tr > th,
-                      > table > tbody > tr > td {
+          > table > tbody > tr > td {
             > .ant-table-expanded-row-fixed {
               margin: calc(var(--ant-table-cell-padding-block-md) * -1)
-                            calc((var(--ant-table-cell-padding-inline-md) + var(--ant-line-width)) * -1);
+                calc((var(--ant-table-cell-padding-inline-md) + var(--ant-line-width)) * -1);
             }
           }
         }
@@ -453,12 +469,13 @@
     }
     &.ant-table-small {
       > .ant-table-container {
-        > .ant-table-content, > .ant-table-body {
+        > .ant-table-content,
+        > .ant-table-body {
           > table > tbody > tr > th,
-                      > table > tbody > tr > td {
+          > table > tbody > tr > td {
             > .ant-table-expanded-row-fixed {
               margin: calc(var(--ant-table-cell-padding-block-sm) * -1)
-                            calc((var(--ant-table-cell-padding-inline-sm) + var(--ant-line-width)) * -1);
+                calc((var(--ant-table-cell-padding-inline-sm) + var(--ant-line-width)) * -1);
             }
           }
         }
@@ -483,17 +500,22 @@
 }
 .ant-table-wrapper {
   .ant-table {
-    .ant-table-title, .ant-table-header {
+    .ant-table-title,
+    .ant-table-header {
       border-radius: var(--ant-table-header-border-radius) var(--ant-table-header-border-radius) 0 0;
     }
     .ant-table-title + .ant-table-container {
       border-start-start-radius: 0;
       border-start-end-radius: 0;
-      .ant-table-header, table {
+      .ant-table-header,
+      table {
         border-radius: 0;
       }
       table > thead > tr:first-child {
-        th:first-child, th:last-child, td:first-child, td:last-child {
+        th:first-child,
+        th:last-child,
+        td:first-child,
+        td:last-child {
           border-radius: 0;
         }
       }
@@ -544,7 +566,9 @@
     &:focus-visible {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
     &:hover {
       color: var(--ant-color-link-hover);
@@ -565,14 +589,17 @@
     line-height: var(--ant-table-expand-icon-size);
     border-radius: var(--ant-border-radius);
     transform: scale(var(--ant-table-expand-icon-scale));
-    &:focus, &:hover, &:active {
+    &:focus,
+    &:hover,
+    &:active {
       border-color: currentcolor;
     }
-    &::before, &::after {
+    &::before,
+    &::after {
       position: absolute;
       background: currentcolor;
       transition: transform var(--ant-motion-duration-slow) ease-out;
-      content: "";
+      content: '';
     }
     &::before {
       top: var(--ant-table-expand-icon-half-inner);
@@ -594,7 +621,8 @@
       transform: rotate(0deg);
     }
     &-spaced {
-      &::before, &::after {
+      &::before,
+      &::after {
         display: none;
         content: none;
       }
@@ -608,8 +636,10 @@
     margin-inline-end: var(--ant-padding-xs);
   }
   tr.ant-table-expanded-row {
-    &, &:hover {
-      > th, > td {
+    &,
+    &:hover {
+      > th,
+      > td {
         background: var(--ant-table-row-expanded-bg);
       }
     }
@@ -633,7 +663,8 @@
     z-index: 2;
     background: var(--ant-color-bg-container);
     > tr {
-      > th, > td {
+      > th,
+      > td {
         border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
       }
     }
@@ -647,7 +678,7 @@
     text-align: center;
     color: var(--ant-color-text-disabled);
     &:hover > th,
-              &:hover > td {
+    &:hover > td {
       background: var(--ant-color-bg-container);
     }
   }
@@ -662,12 +693,15 @@
   .ant-table-bordered .ant-table-selection-col {
     width: calc(var(--ant-table-selection-column-width) + var(--ant-padding-xs) * 2);
     &.ant-table-selection-col-with-dropdown {
-      width: calc(var(--ant-table-selection-column-width) + var(--ant-font-size-icon) + var(--ant-padding) / 4 + var(--ant-padding-xs) * 2);
+      width: calc(
+        var(--ant-table-selection-column-width) + var(--ant-font-size-icon) + var(--ant-padding) / 4 +
+          var(--ant-padding-xs) * 2
+      );
     }
   }
   table tr th.ant-table-selection-column,
-          table tr td.ant-table-selection-column,
-          .ant-table-selection-column {
+  table tr td.ant-table-selection-column,
+  .ant-table-selection-column {
     padding-inline-end: var(--ant-padding-xs);
     padding-inline-start: var(--ant-padding-xs);
     text-align: center;
@@ -721,13 +755,13 @@
 }
 .ant-table-wrapper {
   .ant-table-cell-fix-left,
-          .ant-table-cell-fix-right {
+  .ant-table-cell-fix-right {
     position: sticky !important;
     z-index: 2;
     background: var(--ant-color-bg-container);
   }
   .ant-table-cell-fix-left-first::after,
-          .ant-table-cell-fix-left-last::after {
+  .ant-table-cell-fix-left-last::after {
     position: absolute;
     top: 0;
     right: 0;
@@ -735,7 +769,7 @@
     width: 30px;
     transform: translateX(100%);
     transition: box-shadow var(--ant-motion-duration-slow);
-    content: "";
+    content: '';
     pointer-events: none;
     will-change: transform;
   }
@@ -743,7 +777,7 @@
     display: none;
   }
   .ant-table-cell-fix-right-first::after,
-          .ant-table-cell-fix-right-last::after {
+  .ant-table-cell-fix-right-last::after {
     position: absolute;
     top: 0;
     bottom: calc(var(--ant-line-width) * -1);
@@ -751,19 +785,20 @@
     width: 30px;
     transform: translateX(-100%);
     transition: box-shadow var(--ant-motion-duration-slow);
-    content: "";
+    content: '';
     pointer-events: none;
   }
   .ant-table-container {
     position: relative;
-    &::before, &::after {
+    &::before,
+    &::after {
       position: absolute;
       top: 0;
       bottom: 0;
       z-index: calc(calc(2 + 1) + 1);
       width: 30px;
       transition: box-shadow var(--ant-motion-duration-slow);
-      content: "";
+      content: '';
       pointer-events: none;
     }
     &::before {
@@ -778,7 +813,7 @@
       box-shadow: inset 10px 0 8px -8px var(--ant-color-split);
     }
     .ant-table-cell-fix-left-first::after,
-              .ant-table-cell-fix-left-last::after {
+    .ant-table-cell-fix-left-last::after {
       box-shadow: inset 10px 0 8px -8px var(--ant-color-split);
     }
     .ant-table-cell-fix-left-last::before {
@@ -790,15 +825,15 @@
       box-shadow: inset -10px 0 8px -8px var(--ant-color-split);
     }
     .ant-table-cell-fix-right-first::after,
-              .ant-table-cell-fix-right-last::after {
+    .ant-table-cell-fix-right-last::after {
       box-shadow: inset -10px 0 8px -8px var(--ant-color-split);
     }
   }
   .ant-table-fixed-column-gapped {
     .ant-table-cell-fix-left-first::after,
-            .ant-table-cell-fix-left-last::after,
-            .ant-table-cell-fix-right-first::after,
-            .ant-table-cell-fix-right-last::after {
+    .ant-table-cell-fix-left-last::after,
+    .ant-table-cell-fix-right-first::after,
+    .ant-table-cell-fix-right-last::after {
       box-shadow: none;
     }
   }
@@ -827,10 +862,13 @@
         height: 8px;
         background-color: var(--ant-table-sticky-scroll-bar-bg);
         border-radius: var(--ant-table-sticky-scroll-bar-border-radius);
-        transition: all var(--ant-motion-duration-slow), transform 0s;
+        transition:
+          all var(--ant-motion-duration-slow),
+          transform 0s;
         position: absolute;
         bottom: 0;
-        &:hover, &-active {
+        &:hover,
+        &-active {
           background-color: var(--ant-color-text-heading);
         }
       }
@@ -844,7 +882,7 @@
     text-overflow: ellipsis;
     word-break: keep-all;
     &.ant-table-cell-fix-left-last,
-              &.ant-table-cell-fix-right-first {
+    &.ant-table-cell-fix-right-first {
       overflow: visible;
       .ant-table-cell-content {
         display: block;
@@ -863,13 +901,13 @@
   .ant-table.ant-table-middle {
     font-size: var(--ant-table-cell-font-size-md);
     .ant-table-title,
-            .ant-table-footer,
-            .ant-table-cell,
-            .ant-table-thead > tr > th,
-            .ant-table-tbody > tr > th,
-            .ant-table-tbody > tr > td,
-            tfoot > tr > th,
-            tfoot > tr > td {
+    .ant-table-footer,
+    .ant-table-cell,
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > th,
+    .ant-table-tbody > tr > td,
+    tfoot > tr > th,
+    tfoot > tr > td {
       padding: var(--ant-table-cell-padding-block-md) var(--ant-table-cell-padding-inline-md);
     }
     .ant-table-filter-trigger {
@@ -881,7 +919,10 @@
     .ant-table-tbody {
       .ant-table-wrapper:only-child .ant-table {
         margin-block: calc(var(--ant-table-cell-padding-block-md) * -1);
-        margin-inline: calc(calc(var(--ant-control-interactive-size) + var(--ant-padding) * 2) - var(--ant-table-cell-padding-inline-md)) calc(var(--ant-table-cell-padding-inline-md) * -1);
+        margin-inline: calc(
+            calc(var(--ant-control-interactive-size) + var(--ant-padding) * 2) - var(--ant-table-cell-padding-inline-md)
+          )
+          calc(var(--ant-table-cell-padding-inline-md) * -1);
       }
     }
     .ant-table-selection-extra {
@@ -891,13 +932,13 @@
   .ant-table.ant-table-small {
     font-size: var(--ant-table-cell-font-size-sm);
     .ant-table-title,
-            .ant-table-footer,
-            .ant-table-cell,
-            .ant-table-thead > tr > th,
-            .ant-table-tbody > tr > th,
-            .ant-table-tbody > tr > td,
-            tfoot > tr > th,
-            tfoot > tr > td {
+    .ant-table-footer,
+    .ant-table-cell,
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > th,
+    .ant-table-tbody > tr > td,
+    tfoot > tr > th,
+    tfoot > tr > td {
       padding: var(--ant-table-cell-padding-block-sm) var(--ant-table-cell-padding-inline-sm);
     }
     .ant-table-filter-trigger {
@@ -909,7 +950,10 @@
     .ant-table-tbody {
       .ant-table-wrapper:only-child .ant-table {
         margin-block: calc(var(--ant-table-cell-padding-block-sm) * -1);
-        margin-inline: calc(calc(var(--ant-control-interactive-size) + var(--ant-padding) * 2) - var(--ant-table-cell-padding-inline-sm)) calc(var(--ant-table-cell-padding-inline-sm) * -1);
+        margin-inline: calc(
+            calc(var(--ant-control-interactive-size) + var(--ant-padding) * 2) - var(--ant-table-cell-padding-inline-sm)
+          )
+          calc(var(--ant-table-cell-padding-inline-sm) * -1);
       }
     }
     .ant-table-selection-extra {
@@ -957,8 +1001,8 @@
 .ant-table-wrapper {
   .ant-table-tbody-virtual {
     .ant-table-tbody-virtual-holder-inner {
-      & > .ant-table-row, 
-                  & > div:not(.ant-table-row) > .ant-table-row {
+      & > .ant-table-row,
+      & > div:not(.ant-table-row) > .ant-table-row {
         display: flex;
         box-sizing: border-box;
         width: 100%;
@@ -981,7 +1025,7 @@
   .ant-table-bordered {
     .ant-table-tbody-virtual {
       &:after {
-        content: "";
+        content: '';
         inset-inline: 0;
         bottom: 0;
         border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
@@ -990,7 +1034,7 @@
       .ant-table-cell {
         border-inline-end: var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);
         &.ant-table-cell-fix-right-first:before {
-          content: "";
+          content: '';
           position: absolute;
           inset-block: 0;
           inset-inline-start: calc(var(--ant-line-width) * -1);
