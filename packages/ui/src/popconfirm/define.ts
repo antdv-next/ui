@@ -8,8 +8,6 @@ export interface PopconfirmProps extends Omit<PopoverProps, 'title' | 'content'>
   title?: VueNode | (() => VueNode)
   description?: VueNode | (() => VueNode)
   disabled?: boolean
-  onConfirm?: (e: MouseEvent) => void
-  onCancel?: (e: MouseEvent) => void
   okText?: VueNode | (() => VueNode)
   okType?: LegacyButtonType
   cancelText?: VueNode | (() => VueNode)
@@ -17,7 +15,6 @@ export interface PopconfirmProps extends Omit<PopoverProps, 'title' | 'content'>
   cancelButtonProps?: Partial<ButtonProps>
   showCancel?: boolean
   icon?: VueNode | (() => VueNode)
-  onVisibleChange?: (visible: boolean) => void
   onPopupClick?: (event: MouseEvent) => void
 }
 

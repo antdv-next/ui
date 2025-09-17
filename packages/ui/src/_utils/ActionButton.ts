@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
+import type { ButtonProps } from '../button'
 import type { LegacyButtonType } from '../button/buttonHelpers'
-import type { ButtonProps } from '../button/define'
 import { defineComponent, h, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 import { Button } from '../button'
 import { convertLegacyProps } from '../button/buttonHelpers'
@@ -148,7 +148,9 @@ export default defineComponent({
         ref: (instance: any) => {
           buttonRef.value = instance
         },
-      }, slotChildren)
+      }, {
+        default: () => slotChildren,
+      })
     }
   },
 })

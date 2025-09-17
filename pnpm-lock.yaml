@@ -28,8 +28,8 @@ catalogs:
       specifier: ^1.0.0
       version: 1.0.0
     '@v-c/util':
-      specifier: ^0.0.3
-      version: 0.0.3
+      specifier: ^0.0.4
+      version: 0.0.4
     '@vitejs/plugin-vue':
       specifier: ^6.0.1
       version: 6.0.1
@@ -200,7 +200,7 @@ importers:
         version: 0.0.2(vue@3.5.21(typescript@5.8.3))
       '@v-c/util':
         specifier: 'catalog:'
-        version: 0.0.3(vue@3.5.21(typescript@5.8.3))
+        version: 0.0.4(vue@3.5.21(typescript@5.8.3))
       '@vueuse/core':
         specifier: 'catalog:'
         version: 13.9.0(vue@3.5.21(typescript@5.8.3))
@@ -1156,6 +1156,11 @@ packages:
 
   '@v-c/util@0.0.3':
     resolution: {integrity: sha512-kYxy4SZZEWKZlJu7WdU8EUFaX8lgX7O3FrZUEa37GIVH2eeuNWoieJ/0Q+i8kzzpEtIXiTspYxL7GW9XoBUe/g==}
+    peerDependencies:
+      vue: ^3.0.0
+
+  '@v-c/util@0.0.4':
+    resolution: {integrity: sha512-mu5aD0fNoP5JO6GXbLPB4qm8pQGmx5/b69bKzBdXGUgcPQD+89mkABblfbkohEBmAIbmxzUj6L4//zKTS2jxsA==}
     peerDependencies:
       vue: ^3.0.0
 
@@ -4100,6 +4105,10 @@ snapshots:
       vue: 3.5.21(typescript@5.8.3)
 
   '@v-c/util@0.0.3(vue@3.5.21(typescript@5.8.3))':
+    dependencies:
+      vue: 3.5.21(typescript@5.8.3)
+
+  '@v-c/util@0.0.4(vue@3.5.21(typescript@5.8.3))':
     dependencies:
       vue: 3.5.21(typescript@5.8.3)
 

@@ -11,7 +11,7 @@ catalog:
   '@types/jsdom': ^21.1.7
   '@types/node': ^24.3.3
   '@v-c/color-picker': ^1.0.0
-  '@v-c/util': ^0.0.3
+  '@v-c/util': ^0.0.4
   '@vitejs/plugin-vue': ^6.0.1
   '@vue/test-utils': ^2.4.6
   '@vue/tsconfig': ^0.7.0

@@ -2,7 +2,7 @@
 import type { PopoverProps } from '../popover'
 import type { PopconfirmEmits, PopconfirmProps, PopconfirmSlots } from './define'
 import { omit } from 'es-toolkit'
-import { computed, defineOptions, h, ref, useSlots, watch } from 'vue'
+import { computed, h, ref, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig } from '../config-provider/context.ts'
 import { Popover } from '../popover'
@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   open: undefined,
   visible: undefined,
   autoAdjustOverflow: true,
+  arrow: true,
 })
 
 const emit = defineEmits<PopconfirmEmits>()
@@ -71,8 +72,6 @@ function syncOpen(open: boolean) {
 function notifyOpenChange(open: boolean, _event?: MouseEvent | KeyboardEvent) {
   emit('openChange', open)
   emit('visibleChange', open)
-  props.onOpenChange?.(open)
-  props.onVisibleChange?.(open)
 }
 
 function close(event?: MouseEvent) {
@@ -81,13 +80,11 @@ function close(event?: MouseEvent) {
 }
 
 function handleConfirm(event: MouseEvent) {
-  props.onConfirm?.(event)
   emit('confirm', event)
 }
 
 function handleCancel(event: MouseEvent) {
   close(event)
-  props.onCancel?.(event)
   emit('cancel', event)
 }
 
