@@ -9,4 +9,20 @@ export default antfu({
     'jsdoc/empty-tags': 0,
     'style/quote-props': 0,
   },
+}, {
+  files: [
+    './packages/ui/src/locale/**/*.ts',
+    './packages/ui/src/locale/**/*.js',
+  ],
+  rules: {
+    'no-template-curly-in-string': 0,
+  },
+}, {
+  files: [
+    './playground/**/*',
+
+  ],
+  rules: {
+    'no-console': 0,
+  },
 })
