@@ -17,5 +17,6 @@ declare module 'vue' {
         AAnchor: typeof import('antdv-next')['Anchor'];
         ATooltip: typeof import('antdv-next')['Tooltip'];
         ASpin: typeof import('antdv-next')['Spin'];
+        APopover: typeof import('antdv-next')['Popover'];
     }
 }

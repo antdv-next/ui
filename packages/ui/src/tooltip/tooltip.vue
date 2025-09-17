@@ -220,7 +220,6 @@ watch(() => props.open, (newOpen) => {
 const tooltipContent = computed(() => {
   const title = props.title
   const overlay = props.overlay
-
   if (title === 0)
     return title
   if (overlay)
@@ -252,7 +251,9 @@ function setOpen(open: boolean, delay?: number) {
 
 function setOpenImmediately(open: boolean) {
   // Don't show tooltip if no content
-  const hasContent = !!(tooltipContent.value || tooltipContent.value === 0 || slots?.title)
+  const slotHasTitle = !!slots?.title
+  const slotHasOverlay = !!slots?.overlay
+  const hasContent = !!(tooltipContent.value || tooltipContent.value === 0 || slotHasTitle || slotHasOverlay)
   const finalOpen = hasContent && open
 
   if (finalOpen === isOpen.value)

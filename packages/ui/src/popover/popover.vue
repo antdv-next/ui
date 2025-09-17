@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   arrow: true,
   destroyOnHidden: false,
   autoAdjustOverflow: true,
+  open: undefined,
 })
 
 const emit = defineEmits<PopoverEmits>()
@@ -46,7 +47,7 @@ function hasContent(node: any): boolean {
 const titleNode = computed(() => resolveNode(props.title, slots.title))
 const contentNode = computed(() => resolveNode(props.content, slots.content))
 
-const overlayContent = computed(() => {
+const overlayNode = computed(() => {
   const title = titleNode.value
   const content = contentNode.value
   const hasTitle = hasContent(title)
@@ -55,7 +56,7 @@ const overlayContent = computed(() => {
   if (!hasTitle && !hasBody)
     return null
 
-  return () => h('div', { class: `${prefixCls.value}-content` }, [
+  return h('div', { class: `${prefixCls.value}-content` }, [
     hasTitle ? h('div', { class: `${prefixCls.value}-title` }, title) : null,
     hasBody ? h('div', { class: `${prefixCls.value}-inner-content` }, content) : null,
   ])
@@ -101,7 +102,7 @@ const tooltipBindings = computed(() => {
     prefixCls: prefixCls.value,
     classNames: mergedClassNames.value,
     styles: mergedStyles.value,
-    overlay: overlayContent.value ?? undefined,
+    overlay: overlayNode.value ?? undefined,
   }
   delete base.content
   delete base.onOpenChange

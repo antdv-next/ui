@@ -1,3 +1,3 @@
 export function classNames(...classes: any[]) {
-  return classes
+  return classes.filter(Boolean)
 }
