@@ -6,6 +6,7 @@ import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from 
 import { onClickOutside } from '@vueuse/core'
 import { computed, defineComponent, defineOptions, nextTick, onBeforeUnmount, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
+import { useZIndex, useZIndexProvider } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig } from '../config-provider/context'
 import { convertPlacement, parseColor } from './util.ts'
 
@@ -36,6 +37,9 @@ const attrs = useAttrs()
 
 const ARROW_SAFE_INSET = 10
 const ARROW_ALIGNED_INSET = 4
+// ============================ zIndex ============================
+const [zIndex, contextZIndex] = useZIndex('Tooltip', props.zIndex)
+useZIndexProvider(contextZIndex)
 
 // 内部状态
 const isOpen = ref(props.open ?? props.defaultOpen)
@@ -392,7 +396,7 @@ type CssVars = CSSProperties & Record<string, string | number | undefined>
 const tooltipStyles = computed(() => {
   const style: CssVars = {
     ...floatingStyles.value,
-    zIndex: props.zIndex || 1070,
+    zIndex: zIndex.value || 1070,
     ...colorInfo.value.overlayStyle,
     ...props.overlayStyle,
     ...props.styles?.root,
