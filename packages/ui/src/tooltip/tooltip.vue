@@ -3,6 +3,7 @@ import type { Placement } from '@floating-ui/vue'
 import type { CSSProperties, PropType } from 'vue'
 import type { TooltipEmits, TooltipProps } from './define'
 import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from '@floating-ui/vue'
+import { onClickOutside } from '@vueuse/core'
 import { computed, defineComponent, defineOptions, nextTick, onBeforeUnmount, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig } from '../config-provider/context'
@@ -492,6 +493,18 @@ const tooltipRef = {
 }
 
 defineExpose(tooltipRef)
+
+onClickOutside(
+  floating,
+  () => {
+    if (mergedOpen.value) {
+      setOpen(false)
+    }
+  },
+  {
+    ignore: [reference, arrowRef],
+  },
+)
 </script>
 
 <template>

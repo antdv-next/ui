@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
 })
 
 const emit = defineEmits<PopoverEmits>()
+defineSlots<PopoverSlots>()
 const slots = useSlots() as PopoverSlots
 
 const componentConfig = useComponentConfig('popover')
@@ -38,7 +39,7 @@ function resolveNode(propValue?: PopoverProps['title'], slot?: () => any) {
 }
 
 function hasContent(node: any): boolean {
-  if (node === null || node === undefined)
+  if (node === null || node === undefined || node === false)
     return false
   const children = flattenChildren(node as any, true)
   return children.length > 0
@@ -102,7 +103,7 @@ const tooltipBindings = computed(() => {
     prefixCls: prefixCls.value,
     classNames: mergedClassNames.value,
     styles: mergedStyles.value,
-    overlay: overlayNode.value ?? undefined,
+    overlay: overlayNode.value || undefined,
   }
   delete base.content
   delete base.onOpenChange

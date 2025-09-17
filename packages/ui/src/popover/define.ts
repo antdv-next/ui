@@ -9,9 +9,9 @@ export interface PopoverProps extends Omit<TooltipProps, 'title' | 'overlay'> {
 }
 
 export interface PopoverSlots {
-  default?: () => VueNode
-  title?: () => VueNode
-  content?: () => VueNode
+  default?: () => any
+  title?: () => any
+  content?: () => any
 }
 
 export type PopoverRef = TooltipRef

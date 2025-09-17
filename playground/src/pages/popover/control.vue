@@ -1,18 +1,24 @@
 <script setup lang="ts">
+import { shallowRef } from 'vue'
 
+const open = shallowRef(false)
+function hide() {
+  open.value = false
+}
 </script>
 
 <template>
   <div class="popover-demo">
-    <a-popover title="Title1">
+    <a-popover
+      v-model:open="open"
+      title="Title"
+      trigger="click"
+    >
       <a-button type="primary">
-        Hover me
+        Click me
       </a-button>
       <template #content>
-        <div>
-          <p>Content1</p>
-          <p>Content2</p>
-        </div>
+        <a @click="hide">Close</a>
       </template>
     </a-popover>
   </div>
