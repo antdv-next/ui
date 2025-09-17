@@ -3,6 +3,11 @@ import type { PaginationLocale } from './pagination/interface'
 
 import { computed } from 'vue'
 import { useConfigContext } from '../config-provider/context'
+import defaultLocaleData from './en_US'
+
+export type LocaleContextProps = Locale & { exist?: boolean }
+
+export type LocaleComponentName = Exclude<keyof Locale, 'locale'>
 
 export interface Locale {
   locale: string
@@ -58,17 +63,23 @@ export interface Locale {
   }
 }
 
-export function useLocale<T extends Record<string, any>>(componentName: string, defaultLocale: T) {
-  const configContext = useConfigContext() as Record<string, any>
-
-  return [
-    computed<T>(() => {
-      const locale = configContext?.locale
-      const componentLocale = locale?.[componentName] ?? {}
-      return {
-        ...defaultLocale,
-        ...componentLocale,
-      }
-    }),
-  ] as const
+export function useLocale<C extends LocaleComponentName = LocaleComponentName>(componentName: C, defaultLocale?: Locale[C] | (() => Locale[C])) {
+  const configContext = useConfigContext()
+  const fullLocale = computed(() => configContext.locale)
+  const getLocale = computed(() => {
+    const locale = defaultLocale || defaultLocaleData[componentName]
+    const localeFromContext = fullLocale.value?.[componentName] ?? {}
+    return {
+      ...(typeof locale === 'function' ? locale() : locale),
+      ...localeFromContext,
+    }
+  })
+  const getLocaleCode = computed(() => {
+    const localeCode = fullLocale?.value?.locale
+    if ((fullLocale.value as LocaleContextProps)?.exist && !localeCode) {
+      return defaultLocaleData.locale
+    }
+    return localeCode!
+  })
+  return [getLocale, getLocaleCode]
 }

@@ -1,5 +1,6 @@
 import type { CSSProperties, InjectionKey } from 'vue'
 import type { ButtonProps } from '../button/define.ts'
+import type { Locale } from '../locale'
 import type { PopoverProps } from '../popover'
 import type { TooltipProps } from '../tooltip'
 import { computed, inject, provide } from 'vue'
@@ -93,7 +94,7 @@ export interface ConfigConsumerProps extends ConfigComponentProps {
   autoInsertSpaceInButton?: boolean
   // variant?: Variant;
   virtual?: boolean
-  // locale?: Locale;
+  locale?: Locale
   direction?: DirectionType
   popupMatchSelectWidth?: boolean
   // popupOverflow?: PopupOverflow;

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PropType } from 'vue'
 import type { LegacyButtonType } from '../button/buttonHelpers'
-import type { OverlayProps, PopconfirmLocale } from './define'
+import type { OverlayProps } from './define'
 import { ExclamationCircleFilled } from '@ant-design/icons-vue'
 import { computed, defineComponent, h } from 'vue'
 import ActionButton from '../_utils/ActionButton'
@@ -60,7 +60,7 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const configContext = useConfigContext()
-    const [contextLocale] = useLocale<PopconfirmLocale>('Popconfirm', defaultLocale.Popconfirm)
+    const [contextLocale] = useLocale('Popconfirm', defaultLocale.Popconfirm)
 
     const iconNode = computed(() => {
       if (slots.icon) {
