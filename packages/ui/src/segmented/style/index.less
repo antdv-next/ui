@@ -23,7 +23,9 @@
   &:focus-visible {
     outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
     outline-offset: 1px;
-    transition: outline-offset 0s, outline 0s;
+    transition:
+      outline-offset 0s,
+      outline 0s;
   }
   .ant-segmented-group {
     position: relative;
@@ -68,10 +70,12 @@
     &-focused {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       z-index: -1;
       width: 100%;
@@ -128,7 +132,9 @@
     height: 100%;
     padding: var(--ant-padding-xxs) 0;
     border-radius: var(--ant-border-radius-sm);
-    transition: transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out), height var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
+    transition:
+      transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out),
+      height var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
     & ~ .ant-segmented-item:not(.ant-segmented-item-selected):not(.ant-segmented-item-disabled)::after {
       background-color: transparent;
     }
@@ -141,7 +147,8 @@
       padding: 0 calc(var(--ant-control-padding-horizontal) - var(--ant-line-width));
       font-size: var(--ant-font-size-lg);
     }
-    .ant-segmented-item, .ant-segmented-thumb {
+    .ant-segmented-item,
+    .ant-segmented-thumb {
       border-radius: var(--ant-border-radius);
     }
   }
@@ -152,25 +159,33 @@
       line-height: calc(var(--ant-control-height-sm) - var(--ant-segmented-track-padding) * 2);
       padding: 0 calc(var(--ant-control-padding-horizontal-sm) - var(--ant-line-width));
     }
-    .ant-segmented-item, .ant-segmented-thumb {
+    .ant-segmented-item,
+    .ant-segmented-thumb {
       border-radius: var(--ant-border-radius-xs);
     }
   }
-  &-disabled .ant-segmented-item, &-disabled .ant-segmented-item:hover, &-disabled .ant-segmented-item:focus {
+  &-disabled .ant-segmented-item,
+  &-disabled .ant-segmented-item:hover,
+  &-disabled .ant-segmented-item:focus {
     color: var(--ant-color-text-disabled);
     cursor: not-allowed;
   }
-  .ant-segmented-item-disabled, .ant-segmented-item-disabled:hover, .ant-segmented-item-disabled:focus {
+  .ant-segmented-item-disabled,
+  .ant-segmented-item-disabled:hover,
+  .ant-segmented-item-disabled:focus {
     color: var(--ant-color-text-disabled);
     cursor: not-allowed;
   }
   .ant-segmented-thumb-motion-appear-active {
-    transition: transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out), width var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
+    transition:
+      transform var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out),
+      width var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
     will-change: transform, width;
   }
   &.ant-segmented-shape-round {
     border-radius: 9999px;
-    .ant-segmented-item, .ant-segmented-thumb {
+    .ant-segmented-item,
+    .ant-segmented-thumb {
       border-radius: 9999px;
     }
   }

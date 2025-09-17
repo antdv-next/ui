@@ -53,7 +53,7 @@
       margin-inline-start: 0;
     }
     &.ant-checkbox-wrapper-in-form-item {
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         width: 14px;
         height: 14px;
       }
@@ -83,7 +83,9 @@
       &:focus-visible + .ant-checkbox-inner {
         outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
         outline-offset: 1px;
-        transition: outline-offset 0s, outline 0s;
+        transition:
+          outline-offset 0s,
+          outline 0s;
       }
     }
     .ant-checkbox-inner {
@@ -108,10 +110,12 @@
         border: var(--ant-line-width-bold) solid var(--ant-color-white);
         border-top: 0;
         border-inline-start: 0;
-        transform: rotate(45deg) scale(0) translate(-50%,-50%);
+        transform: rotate(45deg) scale(0) translate(-50%, -50%);
         opacity: 0;
-        content: "";
-        transition: all var(--ant-motion-duration-fast) var(--ant-motion-ease-in-back), opacity var(--ant-motion-duration-fast);
+        content: '';
+        transition:
+          all var(--ant-motion-duration-fast) var(--ant-motion-ease-in-back),
+          opacity var(--ant-motion-duration-fast);
       }
     }
     & + span {
@@ -120,7 +124,7 @@
     }
   }
   .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled),
-          .ant-checkbox:not(.ant-checkbox-disabled) {
+  .ant-checkbox:not(.ant-checkbox-disabled) {
     &:hover .ant-checkbox-inner {
       border-color: var(--ant-color-primary);
     }
@@ -140,13 +144,13 @@
       border-color: var(--ant-color-primary);
       &:after {
         opacity: 1;
-        transform: rotate(45deg) scale(1) translate(-50%,-50%);
+        transform: rotate(45deg) scale(1) translate(-50%, -50%);
         transition: all var(--ant-motion-duration-mid) var(--ant-motion-ease-out-back) var(--ant-motion-duration-fast);
       }
     }
   }
   .ant-checkbox-wrapper-checked:not(.ant-checkbox-wrapper-disabled),
-          .ant-checkbox-checked:not(.ant-checkbox-disabled) {
+  .ant-checkbox-checked:not(.ant-checkbox-disabled) {
     &:hover .ant-checkbox-inner {
       background-color: var(--ant-color-primary-hover);
       border-color: transparent;
@@ -167,7 +171,7 @@
             border: 0;
             transform: translate(-50%, -50%) scale(1);
             opacity: 1;
-            content: "";
+            content: '';
           }
         }
         &:hover .ant-checkbox-inner {
@@ -181,7 +185,8 @@
     cursor: not-allowed;
   }
   .ant-checkbox-disabled {
-    &, .ant-checkbox-input {
+    &,
+    .ant-checkbox-input {
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -258,12 +263,13 @@
             background: transparent;
           }
           &.ant-cascader-menu-item-expand .ant-cascader-menu-item-expand-icon,
-            .ant-cascader-menu-item-loading-icon {
+          .ant-cascader-menu-item-loading-icon {
             color: var(--ant-color-text-disabled);
           }
         }
         &-active:not(.ant-cascader-menu-item-disabled) {
-          &, &:hover {
+          &,
+          &:hover {
             color: var(--ant-cascader-option-selected-color);
             font-weight: var(--ant-cascader-option-selected-font-weight);
             background-color: var(--ant-cascader-option-selected-bg);
@@ -273,7 +279,7 @@
           flex: auto;
         }
         &.ant-cascader-menu-item-expand .ant-cascader-menu-item-expand-icon,
-          .ant-cascader-menu-item-loading-icon {
+        .ant-cascader-menu-item-loading-icon {
           margin-inline-start: var(--ant-padding-xxs);
           color: var(--ant-color-icon);
           font-size: var(--ant-font-size-icon);
@@ -296,7 +302,9 @@
     z-index: 2;
   }
   &-item {
-    &:hover ,&:focus ,&:active {
+    &:hover,
+    &:focus,
+    &:active {
       z-index: 3;
     }
     &[disabled] {
@@ -307,13 +315,17 @@
     border-radius: 0;
   }
   &-item:not(.ant-cascader-compact-last-item).ant-cascader-compact-first-item {
-    & , &.ant-cascader-sm , &.ant-cascader-lg {
+    &,
+    &.ant-cascader-sm,
+    &.ant-cascader-lg {
       border-start-end-radius: 0;
       border-end-end-radius: 0;
     }
   }
   &-item:not(.ant-cascader-compact-first-item).ant-cascader-compact-last-item {
-    & , &.ant-cascader-sm , &.ant-cascader-lg {
+    &,
+    &.ant-cascader-sm,
+    &.ant-cascader-lg {
       border-start-start-radius: 0;
       border-end-start-radius: 0;
     }

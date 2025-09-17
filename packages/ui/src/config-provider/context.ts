@@ -65,7 +65,7 @@ export interface ConfigComponentProps {
   // tour?: TourConfig;
   tooltip?: TooltipConfig
   popover?: PopoverConfig
-  // popconfirm?: PopconfirmConfig;
+  popconfirm?: PopconfirmConfig
   // upload?: UploadConfig;
   // notification?: NotificationConfig;
   tree?: ComponentStyleConfig
@@ -201,3 +201,4 @@ export type ButtonConfig = ComponentStyleConfig
 
 export type TooltipConfig = ComponentStyleConfig & Pick<TooltipProps, 'classNames' | 'styles'>
 export type PopoverConfig = ComponentStyleConfig & Pick<PopoverProps, 'classNames' | 'styles'>
+export type PopconfirmConfig = ComponentStyleConfig & Pick<PopoverProps, 'classNames' | 'styles'>

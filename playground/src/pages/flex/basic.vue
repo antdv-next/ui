@@ -85,7 +85,7 @@ const customGapSize = ref(0)
         </select>
       </label>
       <template v-if="gapSize === 'customize'">
-        <input v-model="customGapSize" type="range" />
+        <input v-model="customGapSize" type="range">
       </template>
       <a-flex :gap="gapSize !== 'customize' ? gapSize : customGapSize">
         <a-button variant="solid">

@@ -138,16 +138,20 @@ const treeData = ref([
         </a-select-option>
       </a-select>
       <a-input :style="{ width: 100, textAlig: 'center' }" placeholder="Minimum" />
-      <a-input class="site-input-split" :style="{
-        width: 30,
-        borderLef: 0,
-        borderRight: 0,
-        pointerEvents: 'none',
-      }" placeholder="~" disabled />
-      <a-input class="site-input-right" :style="{
-        width: 100,
-        textAlig: 'center',
-      }" placeholder="Maximum" />
+      <a-input
+        class="site-input-split" :style="{
+          width: 30,
+          borderLef: 0,
+          borderRight: 0,
+          pointerEvents: 'none',
+        }" placeholder="~" disabled
+      />
+      <a-input
+        class="site-input-right" :style="{
+          width: 100,
+          textAlig: 'center',
+        }" placeholder="Maximum"
+      />
     </a-space-compact>
     <a-space-compact block>
       <a-select default-value="Sign Up" :style="{ width: '30%' }">
@@ -158,51 +162,57 @@ const treeData = ref([
           Sign In
         </a-select-option>
       </a-select>
-      <a-auto-complete :style="{ width: '70%' }" placeholder="Email"
-        :options="[{ value: 'text 1' }, { value: 'text 2' }]" />
+      <a-auto-complete
+        :style="{ width: '70%' }" placeholder="Email"
+        :options="[{ value: 'text 1' }, { value: 'text 2' }]"
+      />
     </a-space-compact>
     <a-space-compact block>
       <a-time-picker :style="{ width: '70%' }" />
-      <a-cascader :style="{ width: '70%' }" :options="[
-        {
-          value: 'zhejiang',
-          label: 'Zhejiang',
-          children: [
-            {
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [
-                {
-                  value: 'xihu',
-                  label: 'West Lake',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          value: 'jiangsu',
-          label: 'Jiangsu',
-          children: [
-            {
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [
-                {
-                  value: 'zhonghuamen',
-                  label: 'Zhong Hua Men',
-                },
-              ],
-            },
-          ],
-        },
-      ]" placeholder="Select Address" />
+      <a-cascader
+        :style="{ width: '70%' }" :options="[
+          {
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [
+              {
+                value: 'hangzhou',
+                label: 'Hangzhou',
+                children: [
+                  {
+                    value: 'xihu',
+                    label: 'West Lake',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [
+              {
+                value: 'nanjing',
+                label: 'Nanjing',
+                children: [
+                  {
+                    value: 'zhonghuamen',
+                    label: 'Zhong Hua Men',
+                  },
+                ],
+              },
+            ],
+          },
+        ]" placeholder="Select Address"
+      />
     </a-space-compact>
     <a-space-compact block>
       <a-time-range-picker />
-      <a-tree-select show-search :style="{ width: '60%' }" value="leaf1"
+      <a-tree-select
+        show-search :style="{ width: '60%' }" value="leaf1"
         :dropdown-style="{ maxHeight: 400, overflow: 'auto' }" placeholder="Please select" allow-clear
-        tree-default-expand-all :tree-data="treeData" />
+        tree-default-expand-all :tree-data="treeData"
+      />
       <a-button type="primary">
         Submit
       </a-button>

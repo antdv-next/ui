@@ -25,13 +25,13 @@
     border-bottom: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border);
     &:first-child {
       &,
-                  & > .ant-collapse-header {
+      & > .ant-collapse-header {
         border-radius: var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0;
       }
     }
     &:last-child {
       &,
-                  & > .ant-collapse-header {
+      & > .ant-collapse-header {
         border-radius: 0 0 var(--ant-border-radius-lg) var(--ant-border-radius-lg);
       }
     }
@@ -44,11 +44,15 @@
       color: var(--ant-color-text-heading);
       line-height: var(--ant-line-height);
       cursor: pointer;
-      transition: all var(--ant-motion-duration-slow), visibility 0s;
+      transition:
+        all var(--ant-motion-duration-slow),
+        visibility 0s;
       &:focus-visible {
         outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
         outline-offset: 1px;
-        transition: outline-offset 0s, outline 0s;
+        transition:
+          outline-offset 0s,
+          outline 0s;
       }
       > .ant-collapse-header-text {
         flex: auto;
@@ -151,7 +155,7 @@
   }
   & .ant-collapse-item-disabled > .ant-collapse-header {
     &,
-              & > .arrow {
+    & > .arrow {
       color: var(--ant-color-text-disabled);
       cursor: not-allowed;
     }
@@ -175,7 +179,7 @@
     border-bottom: 1px solid var(--ant-color-border);
   }
   > .ant-collapse-item:last-child,
-          > .ant-collapse-item:last-child .ant-collapse-header {
+  > .ant-collapse-item:last-child .ant-collapse-header {
     border-radius: 0;
   }
   > .ant-collapse-item:last-child {
@@ -212,13 +216,15 @@
   .ant-motion-collapse-legacy {
     overflow: hidden;
     &-active {
-      transition: height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
-              opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+      transition:
+        height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+        opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
     }
   }
   .ant-motion-collapse {
     overflow: hidden;
-    transition: height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
-            opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+    transition:
+      height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+      opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
   }
 }

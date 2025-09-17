@@ -7,7 +7,7 @@
   --ant-switch-handle-bg: var(--ant-color-white);
   --ant-switch-handle-size: 18px;
   --ant-switch-handle-size-sm: 12px;
-  --ant-switch-handle-shadow: 0 2px 4px 0 rgba(0,35,11,0.2);
+  --ant-switch-handle-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
   --ant-switch-inner-min-margin: 9px;
   --ant-switch-inner-max-margin: 24px;
   --ant-switch-inner-min-margin-sm: 6px;
@@ -40,7 +40,9 @@
   &:focus-visible {
     outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
     outline-offset: 1px;
-    transition: outline-offset 0s, outline 0s;
+    transition:
+      outline-offset 0s,
+      outline 0s;
   }
   &.ant-switch-checked {
     background: var(--ant-color-primary);
@@ -48,7 +50,8 @@
       background: var(--ant-color-primary-hover);
     }
   }
-  &.ant-switch-loading, &.ant-switch-disabled {
+  &.ant-switch-loading,
+  &.ant-switch-disabled {
     cursor: not-allowed;
     opacity: var(--ant-opacity-loading);
     * {
@@ -68,18 +71,29 @@
     height: 100%;
     padding-inline-start: var(--ant-switch-inner-max-margin);
     padding-inline-end: var(--ant-switch-inner-min-margin);
-    transition: padding-inline-start var(--ant-motion-duration-mid) ease-in-out, padding-inline-end var(--ant-motion-duration-mid) ease-in-out;
-    .ant-switch-inner-checked, .ant-switch-inner-unchecked {
+    transition:
+      padding-inline-start var(--ant-motion-duration-mid) ease-in-out,
+      padding-inline-end var(--ant-motion-duration-mid) ease-in-out;
+    .ant-switch-inner-checked,
+    .ant-switch-inner-unchecked {
       display: block;
       color: var(--ant-color-text-light-solid);
       font-size: var(--ant-font-size-sm);
-      transition: margin-inline-start var(--ant-motion-duration-mid) ease-in-out, margin-inline-end var(--ant-motion-duration-mid) ease-in-out;
+      transition:
+        margin-inline-start var(--ant-motion-duration-mid) ease-in-out,
+        margin-inline-end var(--ant-motion-duration-mid) ease-in-out;
       pointer-events: none;
       min-height: var(--ant-switch-track-height);
     }
     .ant-switch-inner-checked {
-      margin-inline-start: calc(-100% + calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin) * 2));
-      margin-inline-end: calc(100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin) * 2));
+      margin-inline-start: calc(
+        -100% + calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) -
+          calc(var(--ant-switch-inner-max-margin) * 2)
+      );
+      margin-inline-end: calc(
+        100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) +
+          calc(var(--ant-switch-inner-max-margin) * 2)
+      );
     }
     .ant-switch-inner-unchecked {
       margin-top: calc(var(--ant-switch-track-height) * -1);
@@ -95,8 +109,14 @@
       margin-inline-end: 0;
     }
     .ant-switch-inner-unchecked {
-      margin-inline-start: calc(100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin) * 2));
-      margin-inline-end: calc(-100% + calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin) * 2));
+      margin-inline-start: calc(
+        100% - calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) +
+          calc(var(--ant-switch-inner-max-margin) * 2)
+      );
+      margin-inline-end: calc(
+        -100% + calc(var(--ant-switch-handle-size) + var(--ant-switch-track-padding) * 2) -
+          calc(var(--ant-switch-inner-max-margin) * 2)
+      );
     }
   }
   &:not(.ant-switch-disabled):active {
@@ -132,7 +152,7 @@
       border-radius: calc(var(--ant-switch-handle-size) / 2);
       box-shadow: var(--ant-switch-handle-shadow);
       transition: all var(--ant-motion-duration-mid) ease-in-out;
-      content: "";
+      content: '';
     }
   }
   &.ant-switch-checked .ant-switch-handle {
@@ -168,12 +188,19 @@
     .ant-switch-inner {
       padding-inline-start: var(--ant-switch-inner-max-margin-sm);
       padding-inline-end: var(--ant-switch-inner-min-margin-sm);
-      .ant-switch-inner-checked, .ant-switch-inner-unchecked {
+      .ant-switch-inner-checked,
+      .ant-switch-inner-unchecked {
         min-height: var(--ant-switch-track-height-sm);
       }
       .ant-switch-inner-checked {
-        margin-inline-start: calc(-100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin-sm) * 2));
-        margin-inline-end: calc(100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin-sm) * 2));
+        margin-inline-start: calc(
+          -100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) -
+            calc(var(--ant-switch-inner-max-margin-sm) * 2)
+        );
+        margin-inline-end: calc(
+          100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) +
+            calc(var(--ant-switch-inner-max-margin-sm) * 2)
+        );
       }
       .ant-switch-inner-unchecked {
         margin-top: calc(var(--ant-switch-track-height-sm) * -1);
@@ -198,8 +225,14 @@
           margin-inline-end: 0;
         }
         .ant-switch-inner-unchecked {
-          margin-inline-start: calc(100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) + calc(var(--ant-switch-inner-max-margin-sm) * 2));
-          margin-inline-end: calc(-100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-max-margin-sm) * 2));
+          margin-inline-start: calc(
+            100% - calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) +
+              calc(var(--ant-switch-inner-max-margin-sm) * 2)
+          );
+          margin-inline-end: calc(
+            -100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) -
+              calc(var(--ant-switch-inner-max-margin-sm) * 2)
+          );
         }
       }
       .ant-switch-handle {
