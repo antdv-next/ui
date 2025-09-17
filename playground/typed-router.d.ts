@@ -62,6 +62,17 @@ declare module 'vue-router/auto-routes' {
     '/popover/placement': RouteRecordInfo<'/popover/placement', '/popover/placement', Record<never, never>, Record<never, never>>,
     '/popover/shift': RouteRecordInfo<'/popover/shift', '/popover/shift', Record<never, never>, Record<never, never>>,
     '/popover/triggerType': RouteRecordInfo<'/popover/triggerType', '/popover/triggerType', Record<never, never>, Record<never, never>>,
+    '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
+    '/qrcode/base': RouteRecordInfo<'/qrcode/base', '/qrcode/base', Record<never, never>, Record<never, never>>,
+    '/qrcode/basic': RouteRecordInfo<'/qrcode/basic', '/qrcode/basic', Record<never, never>, Record<never, never>>,
+    '/qrcode/customColor': RouteRecordInfo<'/qrcode/customColor', '/qrcode/customColor', Record<never, never>, Record<never, never>>,
+    '/qrcode/customSize': RouteRecordInfo<'/qrcode/customSize', '/qrcode/customSize', Record<never, never>, Record<never, never>>,
+    '/qrcode/customStatusRender': RouteRecordInfo<'/qrcode/customStatusRender', '/qrcode/customStatusRender', Record<never, never>, Record<never, never>>,
+    '/qrcode/download': RouteRecordInfo<'/qrcode/download', '/qrcode/download', Record<never, never>, Record<never, never>>,
+    '/qrcode/errorLevel': RouteRecordInfo<'/qrcode/errorLevel', '/qrcode/errorLevel', Record<never, never>, Record<never, never>>,
+    '/qrcode/icon': RouteRecordInfo<'/qrcode/icon', '/qrcode/icon', Record<never, never>, Record<never, never>>,
+    '/qrcode/status': RouteRecordInfo<'/qrcode/status', '/qrcode/status', Record<never, never>, Record<never, never>>,
+    '/qrcode/type': RouteRecordInfo<'/qrcode/type', '/qrcode/type', Record<never, never>, Record<never, never>>,
     '/space/': RouteRecordInfo<'/space/', '/space', Record<never, never>, Record<never, never>>,
     '/space/align': RouteRecordInfo<'/space/align', '/space/align', Record<never, never>, Record<never, never>>,
     '/space/base': RouteRecordInfo<'/space/base', '/space/base', Record<never, never>, Record<never, never>>,
@@ -272,6 +283,48 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/popover/triggerType.vue': {
       routes: '/popover/triggerType'
+    'src/pages/flex/basic.vue': {
+      routes: '/flex/basic'
+      views: never
+    }
+    'src/pages/qrcode/base.vue': {
+      routes: '/qrcode/base'
+      views: never
+    }
+    'src/pages/qrcode/basic.vue': {
+      routes: '/qrcode/basic'
+      views: never
+    }
+    'src/pages/qrcode/customColor.vue': {
+      routes: '/qrcode/customColor'
+      views: never
+    }
+    'src/pages/qrcode/customSize.vue': {
+      routes: '/qrcode/customSize'
+      views: never
+    }
+    'src/pages/qrcode/customStatusRender.vue': {
+      routes: '/qrcode/customStatusRender'
+      views: never
+    }
+    'src/pages/qrcode/download.vue': {
+      routes: '/qrcode/download'
+      views: never
+    }
+    'src/pages/qrcode/errorLevel.vue': {
+      routes: '/qrcode/errorLevel'
+      views: never
+    }
+    'src/pages/qrcode/icon.vue': {
+      routes: '/qrcode/icon'
+      views: never
+    }
+    'src/pages/qrcode/status.vue': {
+      routes: '/qrcode/status'
+      views: never
+    }
+    'src/pages/qrcode/type.vue': {
+      routes: '/qrcode/type'
       views: never
     }
     'src/pages/space/index.vue': {

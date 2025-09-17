@@ -19,7 +19,7 @@
 ## 关于工具库
 
 1. 使用`es-toolkit`来代替`lodash`，因为`es-toolkit`是基于ES6+的原生方法封装的工具库，体积更小，性能更好。
-2. 如果遇到一些类似`rc-util`的工具，可以参开[@v-c/util](https://github.com/antdv-next/vue-components/tree/main/packages/util)来代替，这个库基本上涵盖了大部分`rc-util`的功能。
+2. 如果遇到一些类似`rc-util`的工具，可以参考[@v-c/util](https://github.com/antdv-next/vue-components/tree/main/packages/util)来代替，这个库基本上涵盖了大部分`rc-util`的功能。
 3. 关于`classnames`这个库，由于他是一个`cjs`的库，对于`vite@7`的兼容性并不是很好，所以我们不再使用这个库，并且`vue`本身就支持这种类名的绑定，所以我们不需要引入任何库来实现这个功能，如果要兼容写法，可以引用`import { classNames } from "相对路径/_utils/classNames"`。
 
 ## git 提交规范
