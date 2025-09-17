@@ -79,24 +79,6 @@ export default defineComponent({
     const titleNode = computed(() => slots.title?.() ?? getRenderPropValue(props.title))
     const descriptionNode = computed(() => slots.description?.() ?? getRenderPropValue(props.description))
 
-    const cancelTextNode = computed(() => {
-      const slot = slots.cancelText?.()
-      if (slot && slot.length) {
-        return slot
-      }
-      const value = getRenderPropValue(props.cancelText)
-      return value ?? contextLocale.value.cancelText
-    })
-
-    const okTextNode = computed(() => {
-      const slot = slots.okText?.()
-      if (slot && slot.length) {
-        return slot
-      }
-      const value = getRenderPropValue(props.okText)
-      return value ?? contextLocale.value.okText
-    })
-
     const showCancel = computed(() => props.showCancel !== false)
 
     const buttonPrefixCls = computed(() => configContext.getPrefixCls?.('btn') ?? 'ant-btn')
@@ -106,6 +88,24 @@ export default defineComponent({
     }
 
     return () => {
+      const okTextNodeFn = () => {
+        const slot = slots.okText?.()
+        if (slot && slot.length) {
+          return slot
+        }
+        const value = getRenderPropValue(props.okText)
+        return value ?? contextLocale.value.okText
+      }
+      const cancelTextNodeFn = () => {
+        const slot = slots.cancelText?.()
+        if (slot && slot.length) {
+          return slot
+        }
+        const value = getRenderPropValue(props.cancelText)
+        return value ?? contextLocale.value.cancelText
+      }
+      const cancelTextNode = cancelTextNodeFn()
+      const okTextNode = okTextNodeFn()
       const children = [] as any[]
 
       const messageChildren = [] as any[]
@@ -137,7 +137,9 @@ export default defineComponent({
               ...(props.cancelButtonProps ?? {}),
               onClick: handleCancel as any,
             },
-            () => cancelTextNode.value,
+            {
+              default: () => cancelTextNode,
+            },
           ),
         )
       }
@@ -157,7 +159,9 @@ export default defineComponent({
             quitOnNullishReturnValue: true,
             emitEvent: true,
           },
-          () => okTextNode.value,
+          {
+            default: () => okTextNode,
+          },
         ),
       )
 

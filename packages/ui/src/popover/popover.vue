@@ -17,6 +17,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   destroyOnHidden: false,
   autoAdjustOverflow: true,
   open: undefined,
+  icon: undefined,
 })
 
 const emit = defineEmits<PopoverEmits>()
