@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { Placement } from '@floating-ui/vue'
+import type { CSSProperties } from 'vue'
 import type { TooltipEmits, TooltipProps } from './define'
-import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue'
+import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from '@floating-ui/vue'
 import { computed, nextTick, onBeforeUnmount, ref, shallowRef, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig } from '../config-provider/context'
@@ -25,6 +26,8 @@ const props = withDefaults(
 const emit = defineEmits<TooltipEmits>()
 const slots = useSlots()
 
+const ARROW_EDGE_BUFFER = 10
+
 // 内部状态
 const isOpen = ref(props.open ?? props.defaultOpen)
 const parentContext = useComponentConfig('tooltip')
@@ -33,6 +36,7 @@ const delayTimer = ref<ReturnType<typeof setTimeout>>()
 // DOM 引用
 const reference = shallowRef<HTMLElement>()
 const floating = shallowRef<HTMLDivElement>()
+const arrowRef = shallowRef<HTMLDivElement>()
 
 // 计算属性
 const prefixCls = computed(() => {
@@ -55,24 +59,153 @@ const middleware = computed(() => {
   const offsetValue = props.arrow ? 8 : 4
   middlewares.push(offset(offsetValue))
 
-  // 自动调整位置
   if (props.autoAdjustOverflow) {
     middlewares.push(flip())
-    middlewares.push(shift({ padding: 5 }))
+
+    const shiftOptions: {
+      padding: number
+      crossAxis: boolean
+      limiter?: ReturnType<typeof limitShift>
+    } = {
+      padding: 5,
+      crossAxis: true,
+    }
+
+    if (props.arrow) {
+      shiftOptions.limiter = limitShift({
+        crossAxis: true,
+        offset: ({ placement, rects }) => {
+          const basePlacement = placement.split('-')[0]
+          const arrowEl = arrowRef.value
+          const arrowSize = (arrowEl?.offsetWidth ?? 16) / 2
+          const limit = basePlacement === 'top' || basePlacement === 'bottom'
+            ? rects.floating.width / 2 - arrowSize
+            : rects.floating.height / 2 - arrowSize
+
+          const constrainedLimit = Math.max(limit, 0)
+          const releaseBuffer = Math.min(ARROW_EDGE_BUFFER, constrainedLimit)
+
+          return {
+            crossAxis: Math.max(constrainedLimit - releaseBuffer, 0),
+          }
+        },
+      })
+    }
+
+    middlewares.push(shift(shiftOptions))
+  }
+
+  if (props.arrow) {
+    middlewares.push(arrow({
+      element: arrowRef,
+      padding: 4,
+    }))
   }
 
   return middlewares
 })
 
 // floating-ui
-const { floatingStyles, placement: actualPlacement } = useFloating(reference, floating, {
+const { floatingStyles, placement: actualPlacement, middlewareData } = useFloating(reference, floating, {
   placement: floatingPlacement,
   middleware,
   whileElementsMounted: autoUpdate,
 })
 
+const basePlacement = computed(() => {
+  const placement = actualPlacement.value || floatingPlacement.value
+  return (placement || 'top').split('-')[0]
+})
+
+const isVerticalPlacement = computed(() => basePlacement.value === 'top' || basePlacement.value === 'bottom')
+const isHorizontalPlacement = computed(() => basePlacement.value === 'left' || basePlacement.value === 'right')
+
 const colorInfo = computed(() => {
   return parseColor(prefixCls.value, props.color)
+})
+
+const arrowX = computed(() => {
+  const value = middlewareData.value?.arrow?.x
+  return typeof value === 'number' ? value : null
+})
+
+const arrowY = computed(() => {
+  const value = middlewareData.value?.arrow?.y
+  return typeof value === 'number' ? value : null
+})
+
+function clampValue(value: number, min: number, max: number) {
+  if (Number.isNaN(value))
+    return value
+
+  if (min > max)
+    return value
+
+  return Math.min(Math.max(value, min), max)
+}
+
+const resolvedArrowX = computed(() => {
+  if (arrowX.value == null)
+    return null
+
+  const floatingEl = floating.value
+  const arrowEl = arrowRef.value
+  if (!floatingEl || !arrowEl)
+    return arrowX.value
+
+  if (!isVerticalPlacement.value)
+    return arrowX.value
+
+  const floatingWidth = floatingEl.offsetWidth
+  const arrowWidth = arrowEl.offsetWidth || 0
+  if (!floatingWidth || !arrowWidth)
+    return arrowX.value
+
+  if (floatingWidth <= arrowWidth)
+    return floatingWidth / 2
+
+  const halfArrow = arrowWidth / 2
+  const available = Math.max((floatingWidth - arrowWidth) / 2, 0)
+  const inset = Math.min(ARROW_EDGE_BUFFER, available)
+  const min = halfArrow + inset
+  const max = floatingWidth - halfArrow - inset
+
+  if (min > max)
+    return floatingWidth / 2
+
+  return clampValue(arrowX.value, min, max)
+})
+
+const resolvedArrowY = computed(() => {
+  if (arrowY.value == null)
+    return null
+
+  const floatingEl = floating.value
+  const arrowEl = arrowRef.value
+  if (!floatingEl || !arrowEl)
+    return arrowY.value
+
+  if (!isHorizontalPlacement.value)
+    return arrowY.value
+
+  const floatingHeight = floatingEl.offsetHeight
+  const arrowHeight = arrowEl.offsetHeight || 0
+  if (!floatingHeight || !arrowHeight)
+    return arrowY.value
+
+  if (floatingHeight <= arrowHeight)
+    return floatingHeight / 2
+
+  const halfArrow = arrowHeight / 2
+  const available = Math.max((floatingHeight - arrowHeight) / 2, 0)
+  const inset = Math.min(ARROW_EDGE_BUFFER, available)
+  const min = halfArrow + inset
+  const max = floatingHeight - halfArrow - inset
+
+  if (min > max)
+    return floatingHeight / 2
+
+  return clampValue(arrowY.value, min, max)
 })
 
 // 监听 props.open 的变化
@@ -251,14 +384,35 @@ function convertFloatingPlacementToAntd(placement: string): string {
   }
 }
 
+type CssVars = CSSProperties & Record<string, string | number | undefined>
+
 const tooltipStyles = computed(() => {
-  return {
+  const style: CssVars = {
     ...floatingStyles.value,
     zIndex: props.zIndex || 1070,
     ...colorInfo.value.overlayStyle,
     ...props.overlayStyle,
     ...props.styles?.root,
   }
+
+  if (resolvedArrowX.value != null) {
+    style['--arrow-x'] = `${resolvedArrowX.value}px`
+    if (isVerticalPlacement.value)
+      style['--arrow-offset-horizontal'] = `${resolvedArrowX.value}px`
+    else
+      delete style['--arrow-offset-horizontal']
+  } else {
+    delete style['--arrow-x']
+    delete style['--arrow-offset-horizontal']
+  }
+
+  if (resolvedArrowY.value != null) {
+    style['--arrow-y'] = `${resolvedArrowY.value}px`
+  } else {
+    delete style['--arrow-y']
+  }
+
+  return style
 })
 
 const innerStyles = computed(() => {
@@ -282,9 +436,27 @@ const arrowStyles = computed(() => {
     return { display: 'none' }
   }
 
-  return {
+  const style: CssVars = {
     ...colorInfo.value.arrowStyle,
   }
+
+  if (resolvedArrowX.value != null) {
+    style.left = `${resolvedArrowX.value}px`
+    style.right = 'auto'
+  } else {
+    delete style.left
+    delete style.right
+  }
+
+  if (resolvedArrowY.value != null) {
+    style.top = `${resolvedArrowY.value}px`
+    style.bottom = 'auto'
+  } else {
+    delete style.top
+    delete style.bottom
+  }
+
+  return style
 })
 
 // Render content
@@ -327,6 +499,7 @@ defineExpose(tooltipRef)
         <!-- Arrow -->
         <div
           v-if="props.arrow"
+          ref="arrowRef"
           :class="`${prefixCls}-arrow`"
           :style="arrowStyles"
         >
