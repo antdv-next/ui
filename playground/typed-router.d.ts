@@ -57,6 +57,7 @@ declare module 'vue-router/auto-routes' {
     '/divider/variant': RouteRecordInfo<'/divider/variant', '/divider/variant', Record<never, never>, Record<never, never>>,
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
+    '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
     '/qrcode/base': RouteRecordInfo<'/qrcode/base', '/qrcode/base', Record<never, never>, Record<never, never>>,
     '/qrcode/basic': RouteRecordInfo<'/qrcode/basic', '/qrcode/basic', Record<never, never>, Record<never, never>>,
     '/qrcode/customColor': RouteRecordInfo<'/qrcode/customColor', '/qrcode/customColor', Record<never, never>, Record<never, never>>,
@@ -257,6 +258,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/divider/with-text.vue': {
       routes: '/divider/with-text'
+      views: never
+    }
+    'src/pages/flex/basic.vue': {
+      routes: '/flex/basic'
       views: never
     }
     'src/pages/qrcode/base.vue': {
