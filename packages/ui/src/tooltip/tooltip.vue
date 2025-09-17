@@ -1,12 +1,17 @@
 <script lang="ts" setup>
 import type { Placement } from '@floating-ui/vue'
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 import type { TooltipEmits, TooltipProps } from './define'
 import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from '@floating-ui/vue'
-import { computed, nextTick, onBeforeUnmount, ref, shallowRef, useSlots, watch } from 'vue'
+import { computed, defineComponent, defineOptions, nextTick, onBeforeUnmount, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig } from '../config-provider/context'
 import { convertPlacement, parseColor } from './util.ts'
+
+defineOptions({
+  name: 'ATooltip',
+  inheritAttrs: false,
+})
 
 const props = withDefaults(
   defineProps<TooltipProps>(),
@@ -23,8 +28,10 @@ const props = withDefaults(
     zIndex: 1070,
   },
 )
+
 const emit = defineEmits<TooltipEmits>()
 const slots = useSlots()
+const attrs = useAttrs()
 
 const ARROW_SAFE_INSET = 10
 const ARROW_ALIGNED_INSET = 4
@@ -41,7 +48,32 @@ const arrowRef = shallowRef<HTMLDivElement>()
 
 // 计算属性
 const prefixCls = computed(() => {
-  return parentContext.value?.getPrefixCls?.('tooltip') || 'ant-tooltip'
+  const getPrefixCls = parentContext.value?.getPrefixCls
+  const attrPrefix = (attrs.prefixCls as string | undefined) || (attrs['prefix-cls'] as string | undefined)
+  const customPrefix = props.prefixCls ?? attrPrefix
+
+  if (getPrefixCls) {
+    return getPrefixCls('tooltip', customPrefix)
+  }
+
+  return customPrefix || 'ant-tooltip'
+})
+
+const transitionName = computed(() => props.transitionName || 'ant-zoom-big-fast')
+
+const transitionClasses = computed(() => {
+  const base = transitionName.value
+  return {
+    enterFrom: `${base}-enter`,
+    enterActive: `${base}-enter ${base}-enter-active`,
+    enterTo: `${base}-enter ${base}-enter-active`,
+    leaveFrom: `${base}-leave`,
+    leaveActive: `${base}-leave ${base}-leave-active`,
+    leaveTo: `${base}-leave ${base}-leave-active`,
+    appearFrom: `${base}-appear`,
+    appearActive: `${base}-appear ${base}-appear-active`,
+    appearTo: `${base}-appear ${base}-appear-active`,
+  }
 })
 
 const floatingPlacement = computed(() => {
@@ -116,6 +148,7 @@ const middleware = computed(() => {
 const { floatingStyles, placement: actualPlacement, middlewareData } = useFloating(reference, floating, {
   placement: floatingPlacement,
   middleware,
+  transform: false,
   whileElementsMounted: autoUpdate,
 })
 
@@ -306,8 +339,8 @@ function getReferenceDom(el: Element) {
   if (reference.value) {
     removeEventListeners(reference.value)
   }
-  if (el?.nextSibling) {
-    reference.value = el.nextSibling as HTMLElement
+  if (el?.nextElementSibling) {
+    reference.value = el.nextElementSibling as HTMLElement
     addEventListeners(reference.value)
   }
 }
@@ -379,7 +412,6 @@ const tooltipStyles = computed(() => {
   } else {
     delete style['--arrow-y']
   }
-
   return style
 })
 
@@ -427,14 +459,23 @@ const arrowStyles = computed(() => {
   return style
 })
 
-// Render content
-function renderContent() {
-  const content = tooltipContent.value
-  if (typeof content === 'function') {
-    return (content as () => any)()
-  }
-  return content
-}
+const InlineRender = defineComponent({
+  name: 'ATooltipInlineRender',
+  props: {
+    content: {
+      type: [Function, Object, String, Number, Boolean] as PropType<any>,
+      default: undefined,
+    },
+  },
+  setup(props) {
+    return () => {
+      const value = props.content
+      if (typeof value === 'function')
+        return value()
+      return value ?? null
+    }
+  },
+})
 
 // Expose API for ref
 const tooltipRef = {
@@ -455,9 +496,20 @@ defineExpose(tooltipRef)
 <template>
   <component :is="$slots.default" :ref="getReferenceDom" />
   <Teleport :disabled="!reference" :to="props.getPopupContainer?.(reference!) || 'body'">
-    <Transition name="ant-zoom-big-fast" appear>
+    <Transition
+      appear
+      :enter-active-class="transitionClasses.enterActive"
+      :enter-from-class="transitionClasses.enterFrom"
+      :enter-to-class="transitionClasses.enterTo"
+      :leave-active-class="transitionClasses.leaveActive"
+      :leave-from-class="transitionClasses.leaveFrom"
+      :leave-to-class="transitionClasses.leaveTo"
+      :appear-active-class="transitionClasses.appearActive"
+      :appear-from-class="transitionClasses.appearFrom"
+      :appear-to-class="transitionClasses.appearTo"
+    >
       <div
-        v-show="mergedOpen"
+        v-if="mergedOpen"
         ref="floating"
         :class="cls"
         :style="tooltipStyles"
@@ -483,7 +535,7 @@ defineExpose(tooltipRef)
             <slot name="overlay" />
           </template>
           <template v-else>
-            {{ renderContent() }}
+            <InlineRender :content="tooltipContent" />
           </template>
         </div>
       </div>

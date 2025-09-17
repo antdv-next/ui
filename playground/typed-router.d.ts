@@ -57,6 +57,7 @@ declare module 'vue-router/auto-routes' {
     '/divider/variant': RouteRecordInfo<'/divider/variant', '/divider/variant', Record<never, never>, Record<never, never>>,
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
+    '/popover/basic': RouteRecordInfo<'/popover/basic', '/popover/basic', Record<never, never>, Record<never, never>>,
     '/space/': RouteRecordInfo<'/space/', '/space', Record<never, never>, Record<never, never>>,
     '/space/align': RouteRecordInfo<'/space/align', '/space/align', Record<never, never>, Record<never, never>>,
     '/space/base': RouteRecordInfo<'/space/base', '/space/base', Record<never, never>, Record<never, never>>,
@@ -247,6 +248,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/divider/with-text.vue': {
       routes: '/divider/with-text'
+      views: never
+    }
+    'src/pages/popover/basic.vue': {
+      routes: '/popover/basic'
       views: never
     }
     'src/pages/space/index.vue': {
