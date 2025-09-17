@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   showCancel: true,
   open: undefined,
   visible: undefined,
+  autoAdjustOverflow: true,
 })
 
 const emit = defineEmits<PopconfirmEmits>()
@@ -159,7 +160,6 @@ const mergedStyles = computed(() => {
 const popoverBindings = computed(() => {
   const base: Record<string, any> = {
     ...props,
-    prefixCls: prefixCls.value,
     classNames: mergedClassNames.value,
     styles: mergedStyles.value,
     content: overlayVNode.value,
