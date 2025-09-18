@@ -12,6 +12,7 @@ declare module 'vue' {
         AButton: typeof import('antdv-next')['Button'];
         AAlert: typeof import('antdv-next')['Alert'];
         ADivider: typeof import('antdv-next')['Divider'];
+        AFlex: typeof import('antdv-next')['Flex'];
         ASpace: typeof import('antdv-next')['Space'];
         ASpaceCompact: typeof import('antdv-next')['Compact'];
         AAnchor: typeof import('antdv-next')['Anchor'];
@@ -19,5 +20,15 @@ declare module 'vue' {
         ASpin: typeof import('antdv-next')['Spin'];
         APopover: typeof import('antdv-next')['Popover'];
         APopconfirm: typeof import('antdv-next')['Popconfirm'];
+        ALayout: typeof import('antdv-next')['Layout'];
+        ALayoutHeader: typeof import('antdv-next')['LayoutHeader'];
+        ALayoutFooter: typeof import('antdv-next')['LayoutFooter'];
+        ALayoutContent: typeof import('antdv-next')['LayoutContent'];
+        ALayoutSider: typeof import('antdv-next')['LayoutSider'];
+        AMenu: typeof import('antdv-next')['Menu'];
+        AMenuItem: typeof import('antdv-next')['MenuItem'];
+        AMenuSubMenu: typeof import('antdv-next')['SubMenu'];
+        AMenuDivider: typeof import('antdv-next')['MenuDivider'];
+        AMenuItemGroup: typeof import('antdv-next')['MenuItemGroup'];
     }
 }

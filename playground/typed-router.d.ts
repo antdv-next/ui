@@ -58,6 +58,11 @@ declare module 'vue-router/auto-routes' {
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
+    '/layout/basic': RouteRecordInfo<'/layout/basic', '/layout/basic', Record<never, never>, Record<never, never>>,
+    '/layout/collapsible': RouteRecordInfo<'/layout/collapsible', '/layout/collapsible', Record<never, never>, Record<never, never>>,
+    '/menu/basic': RouteRecordInfo<'/menu/basic', '/menu/basic', Record<never, never>, Record<never, never>>,
+    '/menu/nested': RouteRecordInfo<'/menu/nested', '/menu/nested', Record<never, never>, Record<never, never>>,
+    '/menu/nested': RouteRecordInfo<'/menu/nested', '/menu/nested', Record<never, never>, Record<never, never>>,
     '/popconfirm/basic': RouteRecordInfo<'/popconfirm/basic', '/popconfirm/basic', Record<never, never>, Record<never, never>>,
     '/popconfirm/dynamic-trigger': RouteRecordInfo<'/popconfirm/dynamic-trigger', '/popconfirm/dynamic-trigger', Record<never, never>, Record<never, never>>,
     '/popconfirm/icon': RouteRecordInfo<'/popconfirm/icon', '/popconfirm/icon', Record<never, never>, Record<never, never>>,
@@ -272,6 +277,26 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/flex/basic.vue': {
       routes: '/flex/basic'
+      views: never
+    }
+    'src/pages/layout/basic.vue': {
+      routes: '/layout/basic'
+      views: never
+    }
+    'src/pages/layout/collapsible.vue': {
+      routes: '/layout/collapsible'
+      views: never
+    }
+    'src/pages/menu/basic.vue': {
+      routes: '/menu/basic'
+      views: never
+    }
+    'src/pages/menu/nested.vue': {
+      routes: '/menu/nested'
+      views: never
+    }
+    'src/pages/menu/nested.vue': {
+      routes: '/menu/nested'
       views: never
     }
     'src/pages/popconfirm/basic.vue': {
