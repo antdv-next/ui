@@ -28,6 +28,7 @@ export interface MenuContextProps {
   onSubMenuToggle: (info: { key: Key, keyPath: Key[], open: boolean, event: Event | null }) => void
   registerPath: (key: Key, path: Key[]) => void
   unregisterPath: (key: Key) => void
+  getKeyPath: (key: Key) => Key[] | undefined
 }
 
 const defaultMenuContext: MenuContextProps = {
@@ -50,6 +51,7 @@ const defaultMenuContext: MenuContextProps = {
   onSubMenuToggle: () => {},
   registerPath: () => {},
   unregisterPath: () => {},
+  getKeyPath: () => undefined,
 }
 
 const MenuContextKey: InjectionKey<MenuContextProps> = Symbol('MenuContextKey')

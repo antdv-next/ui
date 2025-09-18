@@ -149,6 +149,18 @@ function handleTitleClick(event: MouseEvent) {
 }
 
 function handlePopupOpenChange(open: boolean) {
+  if (!open) {
+    const hasChildOpen = Array.from(openKeySet.value).some((key) => {
+      if (key === eventKey.value)
+        return false
+      const path = menuContext.getKeyPath?.(key)
+      return path?.includes(eventKey.value)
+    })
+
+    if (hasChildOpen)
+      return
+  }
+
   if (open !== isOpen.value)
     triggerOpen(open, null)
 }
@@ -179,7 +191,11 @@ useProvideMenuDisabled(computed(() => isDisabled.value))
 useProvideParentMode(computed(() => (isInlineMode.value ? 'inline' : 'vertical')))
 
 const titleClass = computed(() => `${prefixCls.value}-submenu-title`)
-const popupPlacement = computed(() => (mode.value === 'horizontal' ? 'bottomLeft' : 'rightTop'))
+const popupPlacement = computed(() => {
+  if (mode.value === 'horizontal' && levelRef.value === 1)
+    return 'bottomLeft'
+  return 'rightTop'
+})
 const popupClass = computed(() => classNames(prefixCls.value, props.popupClassName, mergedThemeClass.value).filter(Boolean).join(' '))
 const popupMotion = computed(() => (mode.value === 'horizontal' ? 'slide-down' : 'zoom-big'))
 
