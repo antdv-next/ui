@@ -3,6 +3,7 @@ import type { CSSProperties } from 'vue'
 import type { QRCodeEmits, QRCodeProps, QRCodeSlots, QRProps } from './define.ts'
 import { QRCodeCanvas, QRCodeSVG } from '@v-c/qrcode'
 import { computed, useAttrs, useTemplateRef } from 'vue'
+import { useLocale } from '../locale'
 import { QRCodeDefaultProps } from './define.ts'
 import QrcodeStatus from './QrcodeStatus.vue'
 
@@ -16,6 +17,7 @@ defineExpose({
   toDataURL: () => canvasRef.value?.toDataURL(),
 })
 
+const [localeContext] = useLocale('QRCode')
 const prefixCls = props.prefixCls
 const qrCodeProps = computed(() => {
   const { value, size, errorLevel, bgColor, color, icon, iconSize } = props
@@ -60,7 +62,7 @@ const mergedStyle = computed<CSSProperties>(() => {
   <div :class="mergedCls" :style="mergedStyle" v-bind="$attrs">
     <template v-if="status !== 'active'">
       <div :class="`${prefixCls}-mask`">
-        <slot name="statusRender" v-bind="{ status, onRefresh }">
+        <slot name="statusRender" v-bind="{ status, locale: localeContext, onRefresh }">
           <QrcodeStatus
             :prefix-cls="prefixCls"
             :status="status"
