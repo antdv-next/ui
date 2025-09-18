@@ -88,6 +88,49 @@ const floatingPlacement = computed(() => {
 const mergedOpen = computed(() => props.open ?? isOpen.value)
 const mergedTrigger = computed(() => Array.isArray(props.trigger) ? props.trigger : [props.trigger])
 
+const floatingReady = ref(false)
+const MAX_POSITION_ATTEMPTS = 5
+let rafId: number | null = null
+
+function cancelPositionRaf() {
+  if (rafId != null) {
+    cancelAnimationFrame(rafId)
+    rafId = null
+  }
+}
+
+function waitForPosition(attempt = 0) {
+  cancelPositionRaf()
+  rafId = requestAnimationFrame(() => {
+    if (!mergedOpen.value) {
+      rafId = null
+      return
+    }
+
+    const hasPosition = x.value != null && y.value != null
+
+    if (hasPosition || attempt >= MAX_POSITION_ATTEMPTS) {
+      floatingReady.value = true
+      rafId = null
+      return
+    }
+
+    waitForPosition(attempt + 1)
+  })
+}
+
+watch(mergedOpen, (open) => {
+  if (open) {
+    floatingReady.value = false
+    nextTick(() => {
+      waitForPosition()
+    })
+  } else {
+    cancelPositionRaf()
+    floatingReady.value = false
+  }
+})
+
 // floating-ui 中间件
 const middleware = computed(() => {
   const middlewares = []
@@ -150,7 +193,13 @@ const middleware = computed(() => {
 })
 
 // floating-ui
-const { floatingStyles, placement: actualPlacement, middlewareData } = useFloating(reference, floating, {
+const {
+  floatingStyles,
+  placement: actualPlacement,
+  middlewareData,
+  x,
+  y,
+} = useFloating(reference, floating, {
   placement: floatingPlacement,
   middleware,
   transform: false,
@@ -356,6 +405,7 @@ onBeforeUnmount(() => {
   if (reference.value) {
     removeEventListeners(reference.value)
   }
+  cancelPositionRaf()
 })
 
 // Styles and classes
@@ -418,6 +468,9 @@ const tooltipStyles = computed(() => {
   } else {
     delete style['--arrow-y']
   }
+
+  if (mergedOpen.value && !floatingReady.value)
+    style.visibility = 'hidden'
   return style
 })
 

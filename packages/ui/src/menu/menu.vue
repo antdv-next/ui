@@ -225,6 +225,7 @@ useProvideMenuContext({
   onSubMenuToggle: handleSubMenuToggle,
   registerPath,
   unregisterPath,
+  getKeyPath: key => keyPathMap.get(key),
 })
 
 useProvideMenuLevel(ref(1))
