@@ -1,5 +1,6 @@
-import type { VNode } from 'vue'
-import type { ScreenSizeMap } from '../_utils/responsiveObserve'
+import type { InjectionKey, VNode } from 'vue'
+import type { ScreenSizeMap } from '../_utils/responsiveObserve.ts'
+import { inject, provide } from 'vue'
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap
 
@@ -19,4 +20,17 @@ export interface AvatarProps {
   draggable?: boolean
   crossOrigin: string
   loadError: () => boolean
+}
+
+export interface AvatarContextType {
+  size?: AvatarSize
+  shape?: 'circle' | 'square'
+}
+const AvatarContextKey: InjectionKey<AvatarContextType> = Symbol('AvatarContextKey')
+
+export function useAvatarInjectContext() {
+  return inject(AvatarContextKey, {})
+}
+export function useAvatarProviderContext(context: AvatarContextType) {
+  return provide(AvatarContextKey, context)
 }
