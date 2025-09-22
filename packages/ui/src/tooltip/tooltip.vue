@@ -99,26 +99,6 @@ function cancelPositionRaf() {
   }
 }
 
-function waitForPosition(attempt = 0) {
-  cancelPositionRaf()
-  rafId = requestAnimationFrame(() => {
-    if (!mergedOpen.value) {
-      rafId = null
-      return
-    }
-
-    const hasPosition = x.value != null && y.value != null
-
-    if (hasPosition || attempt >= MAX_POSITION_ATTEMPTS) {
-      floatingReady.value = true
-      rafId = null
-      return
-    }
-
-    waitForPosition(attempt + 1)
-  })
-}
-
 watch(mergedOpen, (open) => {
   if (open) {
     floatingReady.value = false
@@ -205,7 +185,25 @@ const {
   transform: false,
   whileElementsMounted: autoUpdate,
 })
+function waitForPosition(attempt = 0) {
+  cancelPositionRaf()
+  rafId = requestAnimationFrame(() => {
+    if (!mergedOpen.value) {
+      rafId = null
+      return
+    }
 
+    const hasPosition = x.value != null && y.value != null
+
+    if (hasPosition || attempt >= MAX_POSITION_ATTEMPTS) {
+      floatingReady.value = true
+      rafId = null
+      return
+    }
+
+    waitForPosition(attempt + 1)
+  })
+}
 const basePlacement = computed(() => {
   const placement = actualPlacement.value || floatingPlacement.value
   return (placement || 'top').split('-')[0]
