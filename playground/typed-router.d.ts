@@ -62,7 +62,6 @@ declare module 'vue-router/auto-routes' {
     '/layout/collapsible': RouteRecordInfo<'/layout/collapsible', '/layout/collapsible', Record<never, never>, Record<never, never>>,
     '/menu/basic': RouteRecordInfo<'/menu/basic', '/menu/basic', Record<never, never>, Record<never, never>>,
     '/menu/nested': RouteRecordInfo<'/menu/nested', '/menu/nested', Record<never, never>, Record<never, never>>,
-    '/menu/nested': RouteRecordInfo<'/menu/nested', '/menu/nested', Record<never, never>, Record<never, never>>,
     '/popconfirm/basic': RouteRecordInfo<'/popconfirm/basic', '/popconfirm/basic', Record<never, never>, Record<never, never>>,
     '/popconfirm/dynamic-trigger': RouteRecordInfo<'/popconfirm/dynamic-trigger', '/popconfirm/dynamic-trigger', Record<never, never>, Record<never, never>>,
     '/popconfirm/icon': RouteRecordInfo<'/popconfirm/icon', '/popconfirm/icon', Record<never, never>, Record<never, never>>,
@@ -289,10 +288,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/menu/basic.vue': {
       routes: '/menu/basic'
-      views: never
-    }
-    'src/pages/menu/nested.vue': {
-      routes: '/menu/nested'
       views: never
     }
     'src/pages/menu/nested.vue': {
