@@ -197,38 +197,44 @@ const popupPlacement = computed(() => {
   return 'rightTop'
 })
 const popupClass = computed(() => classNames(prefixCls.value, props.popupClassName, mergedThemeClass.value).filter(Boolean).join(' '))
-const popupMotion = computed(() => (mode.value === 'horizontal' ? 'slide-down' : 'zoom-big'))
+const popupMotion = computed(() => (mode.value === 'horizontal' ? 'ant-slide-down' : 'ant-zoom-big'))
 
-function onInlineBeforeEnter(el: HTMLElement) {
-  el.style.height = '0px'
-  el.style.opacity = '0'
+function onInlineBeforeEnter(el: Element) {
+  const _el = el as HTMLElement
+  _el.style.height = '0px'
+  _el.style.opacity = '0'
 }
 
-function onInlineEnter(el: HTMLElement) {
+function onInlineEnter(el: Element, done: any) {
   const height = el.scrollHeight
-  el.style.height = `${height}px`
-  el.style.opacity = '1'
+  const _el = el as HTMLElement
+  _el.style.height = `${height}px`
+  _el.style.opacity = '1'
+  done()
 }
 
-function onInlineAfterEnter(el: HTMLElement) {
-  el.style.height = ''
-  el.style.opacity = ''
+function onInlineAfterEnter(el: Element) {
+  const _el = el as HTMLElement
+  _el.style.height = ''
+  _el.style.opacity = ''
 }
 
-function onInlineBeforeLeave(el: HTMLElement) {
-  el.style.height = `${el.scrollHeight}px`
-  el.style.opacity = '1'
+function onInlineBeforeLeave(el: Element) {
+  const _el = el as HTMLElement
+  _el.style.height = `${el.scrollHeight}px`
+  _el.style.opacity = '1'
 }
 
-function onInlineLeave(el: HTMLElement) {
-  void el.offsetHeight
-  el.style.height = '0px'
-  el.style.opacity = '0'
+function onInlineLeave(el: Element) {
+  const _el = el as HTMLElement
+  _el.style.height = '0px'
+  _el.style.opacity = '0'
 }
 
-function onInlineAfterLeave(el: HTMLElement) {
-  el.style.height = ''
-  el.style.opacity = ''
+function onInlineAfterLeave(el: Element) {
+  const _el = el as HTMLElement
+  _el.style.height = ''
+  _el.style.opacity = ''
 }
 </script>
 
@@ -316,7 +322,7 @@ function onInlineAfterLeave(el: HTMLElement) {
       </Popover>
     </template>
 
-    <transition
+    <Transition
       name="menu-collapse"
       @before-enter="onInlineBeforeEnter"
       @enter="onInlineEnter"
@@ -331,6 +337,6 @@ function onInlineAfterLeave(el: HTMLElement) {
       >
         <slot />
       </ul>
-    </transition>
+    </Transition>
   </li>
 </template>

@@ -8,10 +8,9 @@ import type {
   MenuItemGroupType,
   MenuItemType,
   MenuProps,
-  MenuSlots,
   SubMenuType,
 } from './define.ts'
-import { computed, h, isVNode, reactive, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
+import { computed, h, isVNode, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
@@ -48,7 +47,6 @@ const props = withDefaults(defineProps<MenuProps>(), {
 })
 
 const emit = defineEmits<MenuEmits>()
-const slots = useSlots() as MenuSlots
 const attrs = useAttrs()
 
 const configCtx = useConfigContext()
@@ -262,7 +260,7 @@ function renderItems(items?: ItemType[] | null): any[] {
   if (!items || !items.length)
     return []
   return items
-    .map((item, index) => {
+    .map((item) => {
       if (!item)
         return null
 

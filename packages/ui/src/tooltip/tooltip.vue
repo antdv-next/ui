@@ -67,8 +67,8 @@ const prefixCls = computed(() => {
 const transitionName = computed(() => props.transitionName || 'ant-zoom-big-fast')
 
 const transitionClasses = computed(() => {
-  const base = transitionName.value
-  return {
+  const base = `${transitionName.value}`
+  const cls = {
     enterFrom: `${base}-enter`,
     enterActive: `${base}-enter ${base}-enter-active`,
     enterTo: `${base}-enter ${base}-enter-active`,
@@ -79,6 +79,7 @@ const transitionClasses = computed(() => {
     appearActive: `${base}-appear ${base}-appear-active`,
     appearTo: `${base}-appear ${base}-appear-active`,
   }
+  return cls
 })
 
 const floatingPlacement = computed(() => {
@@ -450,6 +451,54 @@ const tooltipStyles = computed(() => {
     ...props.styles?.root,
   }
 
+  // 根据placement和transition类型设置transform-origin，让动画从正确的方向开始
+  const placement = actualPlacement.value || floatingPlacement.value
+  const currentTransitionName = transitionName.value
+  if (placement && currentTransitionName) {
+    const [basePlacement, alignment] = placement.split('-')
+    let transformOrigin = '50% 50%'
+    // 对于zoom-big类型的动画，需要设置合适的transform-origin
+    if (currentTransitionName.includes('zoom-big')) {
+      switch (basePlacement) {
+        case 'top':
+          transformOrigin = alignment === 'start'
+            ? '20% 100%'
+            : alignment === 'end'
+              ? '80% 100%'
+              : '50% 100%'
+          break
+        case 'bottom':
+          transformOrigin = alignment === 'start'
+            ? '20% 0%'
+            : alignment === 'end'
+              ? '80% 0%'
+              : '50% 0%'
+          break
+        case 'left':
+          transformOrigin = alignment === 'start'
+            ? '100% 20%'
+            : alignment === 'end'
+              ? '100% 80%'
+              : '100% 50%'
+          break
+        case 'right':
+          transformOrigin = alignment === 'start'
+            ? '0% 20%'
+            : alignment === 'end'
+              ? '0% 80%'
+              : '0% 50%'
+          break
+        default:
+          transformOrigin = '50% 50%'
+      }
+    }
+    // 对于slide-down类型的动画，保持CSS中的设置
+    else if (currentTransitionName.includes('slide-down')) {
+      transformOrigin = '0% 0%'
+    }
+    style.transformOrigin = `${transformOrigin} !important`
+  }
+
   if (arrowPosition.value.x != null) {
     style['--arrow-x'] = `${arrowPosition.value.x}px`
     if (isVerticalPlacement.value)
@@ -467,8 +516,11 @@ const tooltipStyles = computed(() => {
     delete style['--arrow-y']
   }
 
-  if (mergedOpen.value && !floatingReady.value)
+  if (mergedOpen.value && !floatingReady.value) {
     style.visibility = 'hidden'
+    style.transform = 'scale(0)'
+    style.opacity = '0'
+  }
   return style
 })
 
