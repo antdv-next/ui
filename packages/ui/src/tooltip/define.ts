@@ -46,11 +46,11 @@ export interface TooltipProps {
   // Style & appearance
   styles?: Partial<Record<SemanticName, CSSProperties>>
   classNames?: Partial<Record<SemanticName, string>>
-  rootClassName?: string
+  rootClassName?: string | any
   color?: LiteralUnion<PresetColorType>
   overlayStyle?: CSSProperties
   overlayInnerStyle?: CSSProperties
-  overlayClassName?: string
+  overlayClassName?: string | any
 
   // Arrow
   arrow?: boolean | { pointAtCenter?: boolean, arrowPointAtCenter?: boolean }
@@ -106,4 +106,10 @@ export interface TooltipEmits {
   // Legacy
   'update:visible': [boolean]
   'visibleChange': [boolean]
+}
+
+export interface TooltipSlots {
+  title?: () => any
+  default?: () => any
+  overlay?: () => any
 }

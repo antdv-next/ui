@@ -3,7 +3,7 @@ import type { Key, SubMenuProps, SubMenuSlots } from './define.ts'
 import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
-import Popover from '../popover/popover.vue'
+import Tooltip from '../tooltip/tooltip.vue'
 import {
   useMenuContext,
   useMenuDisabled,
@@ -77,12 +77,15 @@ const shouldUsePopover = computed(() => {
 
 const isOpen = computed(() => openKeySet.value.has(eventKey.value))
 const submenuClass = computed(() => classNames(
+  `${prefixCls.value}-item`,
   `${prefixCls.value}-submenu`,
   {
-    [`${prefixCls.value}-submenu-open`]: isOpen.value,
-    [`${prefixCls.value}-submenu-active`]: isOpen.value,
-    [`${prefixCls.value}-submenu-disabled`]: isDisabled.value,
-    [`${prefixCls.value}-submenu-selected`]: menuContext.selectedKeys.value.has(eventKey.value),
+    [`${prefixCls.value}-submenu-horizontal`]: mode.value === 'horizontal',
+    [`${prefixCls.value}-submenu-inline`]: isInlineMode.value,
+    [`${prefixCls.value}-open`]: isOpen.value,
+    [`${prefixCls.value}-active`]: isOpen.value,
+    [`${prefixCls.value}-disabled`]: isDisabled.value,
+    [`${prefixCls.value}-selected`]: menuContext.selectedKeys.value.has(eventKey.value),
   },
 ))
 
@@ -274,15 +277,19 @@ function onInlineAfterLeave(el: Element) {
       </div>
     </template>
     <template v-else>
-      <Popover
+      <Tooltip
         :trigger="mergedTriggerAction"
-        :open="isOpen"
+        :open="true"
         :placement="popupPlacement"
-        :overlay-class-name="popupClass"
-        :overlay-style="popupStyle"
         :mouse-enter-delay="openDelay"
         :mouse-leave-delay="closeDelay"
         :transition-name="popupMotion"
+        :root-class-name="{
+          [`${prefixCls}-submenu-popup`]: true,
+          [`${prefixCls}`]: true,
+          [`${mergedThemeClass}`]: true,
+        }"
+        :prefix-cls="`${prefixCls}-submenu`"
         destroy-on-hidden
         :arrow="false"
         @update:open="handlePopupOpenChange"
@@ -309,17 +316,23 @@ function onInlineAfterLeave(el: Element) {
                 />
               </template>
             </span>
-            <span v-if="expandIconNode" :class="`${prefixCls}-submenu-expand-icon`">
+            <span v-if="expandIconNode" :class="`${prefixCls}-expand-icon`">
               <component :is="expandIconNode" />
             </span>
           </div>
         </template>
-        <template #content>
-          <ul :class="`${prefixCls}-sub ${mergedThemeClass}`">
+        <template #title>
+          <ul
+            :class="{
+              [`${prefixCls}`]: true,
+              [`${prefixCls}-sub`]: true,
+              [`${prefixCls}-vertical`]: true,
+            }"
+          >
             <slot />
           </ul>
         </template>
-      </Popover>
+      </Tooltip>
     </template>
 
     <Transition
