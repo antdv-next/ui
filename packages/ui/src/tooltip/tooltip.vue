@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Placement } from '@floating-ui/vue'
 import type { CSSProperties, PropType } from 'vue'
-import type { TooltipEmits, TooltipProps } from './define'
+import type { TooltipEmits, TooltipProps, TooltipSlots } from './define'
 import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from '@floating-ui/vue'
 import { onClickOutside } from '@vueuse/core'
 import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
@@ -32,6 +32,8 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<TooltipEmits>()
+
+defineSlots<TooltipSlots>()
 const slots = useSlots()
 const attrs = useAttrs()
 
@@ -411,7 +413,6 @@ onBeforeUnmount(() => {
 const cls = computed(() => {
   // 将 floating-ui 的 placement 转换回 Ant Design 的格式
   const antdPlacement = convertFloatingPlacementToAntd(actualPlacement.value || props.placement)
-
   return classNames(
     prefixCls.value,
     `${prefixCls.value}-placement-${antdPlacement}`,
@@ -451,54 +452,6 @@ const tooltipStyles = computed(() => {
     ...props.styles?.root,
   }
 
-  // 根据placement和transition类型设置transform-origin，让动画从正确的方向开始
-  const placement = actualPlacement.value || floatingPlacement.value
-  const currentTransitionName = transitionName.value
-  if (placement && currentTransitionName) {
-    const [basePlacement, alignment] = placement.split('-')
-    let transformOrigin = '50% 50%'
-    // 对于zoom-big类型的动画，需要设置合适的transform-origin
-    if (currentTransitionName.includes('zoom-big')) {
-      switch (basePlacement) {
-        case 'top':
-          transformOrigin = alignment === 'start'
-            ? '20% 100%'
-            : alignment === 'end'
-              ? '80% 100%'
-              : '50% 100%'
-          break
-        case 'bottom':
-          transformOrigin = alignment === 'start'
-            ? '20% 0%'
-            : alignment === 'end'
-              ? '80% 0%'
-              : '50% 0%'
-          break
-        case 'left':
-          transformOrigin = alignment === 'start'
-            ? '100% 20%'
-            : alignment === 'end'
-              ? '100% 80%'
-              : '100% 50%'
-          break
-        case 'right':
-          transformOrigin = alignment === 'start'
-            ? '0% 20%'
-            : alignment === 'end'
-              ? '0% 80%'
-              : '0% 50%'
-          break
-        default:
-          transformOrigin = '50% 50%'
-      }
-    }
-    // 对于slide-down类型的动画，保持CSS中的设置
-    else if (currentTransitionName.includes('slide-down')) {
-      transformOrigin = '0% 0%'
-    }
-    style.transformOrigin = `${transformOrigin} !important`
-  }
-
   if (arrowPosition.value.x != null) {
     style['--arrow-x'] = `${arrowPosition.value.x}px`
     if (isVerticalPlacement.value)
@@ -516,11 +469,6 @@ const tooltipStyles = computed(() => {
     delete style['--arrow-y']
   }
 
-  if (mergedOpen.value && !floatingReady.value) {
-    style.visibility = 'hidden'
-    style.transform = 'scale(0)'
-    style.opacity = '0'
-  }
   return style
 })
 
