@@ -28,6 +28,7 @@ const props = withDefaults(
     defaultOpen: false,
     open: undefined,
     zIndex: 1070,
+    hasInner: true,
   },
 )
 
@@ -596,7 +597,7 @@ onClickOutside(
         </div>
 
         <!-- Content -->
-        <div :class="innerClasses" :style="innerStyles">
+        <div v-if="hasInner" :class="innerClasses" :style="innerStyles">
           <template v-if="$slots.title">
             <slot name="title" />
           </template>
@@ -607,6 +608,17 @@ onClickOutside(
             <InlineRender :content="tooltipContent" />
           </template>
         </div>
+        <template v-else>
+          <template v-if="$slots.title">
+            <slot name="title" />
+          </template>
+          <template v-else-if="$slots.overlay">
+            <slot name="overlay" />
+          </template>
+          <template v-else>
+            <InlineRender :content="tooltipContent" />
+          </template>
+        </template>
       </div>
     </Transition>
   </Teleport>
