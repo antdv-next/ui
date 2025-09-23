@@ -38,6 +38,10 @@ export interface TooltipProps {
   open?: boolean
   defaultOpen?: boolean
   afterOpenChange?: (open: boolean) => void
+  /**
+   * @private This is an internal property used to determine if the tooltip has an inner element.
+   */
+  hasInner?: boolean
 
   // Layout & positioning
   placement?: TooltipPlacement

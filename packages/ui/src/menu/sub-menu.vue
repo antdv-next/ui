@@ -279,7 +279,8 @@ function onInlineAfterLeave(el: Element) {
     <template v-else>
       <Tooltip
         :trigger="mergedTriggerAction"
-        :open="true"
+        :open="isOpen"
+        :has-inner="false"
         :placement="popupPlacement"
         :mouse-enter-delay="openDelay"
         :mouse-leave-delay="closeDelay"
