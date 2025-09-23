@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { ProviderChildrenProps } from './define.ts'
+import type { ProviderChildrenProps } from './define'
 import { computed, reactive, watchEffect } from 'vue'
-import { useConfigProvider } from './context.ts'
-import { PASSED_PROPS } from './define.ts'
-import { useSizeProvider } from './size-context.ts'
+import { useConfigProvider } from './context'
+import { PASSED_PROPS } from './define'
+import { useDisabledProvide } from './disabled-context'
+import { useSizeProvider } from './size-context'
 
 const props = defineProps<ProviderChildrenProps>()
 function getPrefixCls(suffixCls: string, customizePrefixCls?: string) {
@@ -44,6 +45,10 @@ watchEffect(() => {
 
 useSizeProvider({
   size: computed(() => props.componentSize),
+})
+
+useDisabledProvide({
+  disabled: computed(() => props.componentDisabled),
 })
 
 useConfigProvider(config)
