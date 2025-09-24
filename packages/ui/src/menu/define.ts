@@ -40,6 +40,7 @@ export interface SubMenuProps extends MenuItemProps {
   triggerSubMenuAction?: TriggerSubMenuAction
   disabled?: boolean
   expandable?: boolean
+  zIndex?: number
 }
 
 export interface MenuItemGroupProps {
