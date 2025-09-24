@@ -47,6 +47,7 @@ const parentPathValue = computed(() => parentPath?.value ?? [])
 const levelRef = useMenuLevel()
 
 const prefixCls = computed(() => menuContext.prefixCls?.value ?? 'ant-menu')
+const subMenuPrefixCls = computed(() => `${prefixCls.value}-submenu`)
 const mode = computed(() => menuContext.mode?.value ?? 'vertical')
 const inlineCollapsed = computed(() => menuContext.inlineCollapsed?.value ?? false)
 const inlineIndentValue = computed(() => menuContext.inlineIndent?.value ?? 24)
@@ -61,7 +62,9 @@ const keyPath = computed<Key[]>(() => [eventKey.value, ...parentPathValue.value]
 const mergedTriggerAction = computed(() => props.triggerSubMenuAction ?? menuContext.triggerSubMenuAction?.value ?? 'hover')
 const isDisabled = computed(() => parentDisabled.value || props.disabled)
 
-const isInlineMode = computed(() => mode.value === 'inline' || mode.value === 'vertical')
+const isInlineMode = computed(() => {
+  return mode.value === 'inline' || mode.value === 'vertical'
+})
 
 const shouldUsePopover = computed(() => {
   if (!props.expandable)
@@ -75,17 +78,21 @@ const shouldUsePopover = computed(() => {
   return false
 })
 
-const isOpen = computed(() => openKeySet.value.has(eventKey.value))
+const isOpen = computed(() => {
+  return openKeySet.value.has(eventKey.value)
+})
 const submenuClass = computed(() => classNames(
-  `${prefixCls.value}-item`,
-  `${prefixCls.value}-submenu`,
   {
-    [`${prefixCls.value}-submenu-horizontal`]: mode.value === 'horizontal',
-    [`${prefixCls.value}-submenu-inline`]: isInlineMode.value,
-    [`${prefixCls.value}-open`]: isOpen.value,
-    [`${prefixCls.value}-active`]: isOpen.value,
-    [`${prefixCls.value}-disabled`]: isDisabled.value,
-    [`${prefixCls.value}-selected`]: menuContext.selectedKeys.value.has(eventKey.value),
+    [`${prefixCls.value}-item`]: shouldUsePopover.value,
+  },
+  subMenuPrefixCls.value,
+  {
+    [`${subMenuPrefixCls.value}-horizontal`]: mode.value === 'horizontal',
+    [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value,
+    [`${subMenuPrefixCls.value}-open`]: isOpen.value,
+    // [`${subMenuPrefixCls.value}-active`]: isOpen.value,
+    [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
+    [`${subMenuPrefixCls.value}-selected`]: isOpen.value || menuContext.selectedKeys.value.has(eventKey.value),
   },
 ))
 
@@ -193,14 +200,15 @@ useProvideMenuLevel(childLevel)
 useProvideMenuDisabled(computed(() => isDisabled.value))
 useProvideParentMode(computed(() => (isInlineMode.value ? 'inline' : 'vertical')))
 
-const titleClass = computed(() => `${prefixCls.value}-submenu-title`)
+const titleClass = computed(() => `${subMenuPrefixCls.value}-title`)
 const popupPlacement = computed(() => {
   if (mode.value === 'horizontal' && levelRef.value === 1)
-    return 'bottomLeft'
+    return 'bottom'
   return 'rightTop'
 })
-const popupClass = computed(() => classNames(prefixCls.value, props.popupClassName, mergedThemeClass.value).filter(Boolean).join(' '))
-const popupMotion = computed(() => (mode.value === 'horizontal' ? 'ant-slide-down' : 'ant-zoom-big'))
+const popupMotion = computed(() => {
+  return mode.value === 'horizontal' ? 'ant-slide-up' : 'ant-zoom-big'
+})
 
 function onInlineBeforeEnter(el: Element) {
   const _el = el as HTMLElement
@@ -208,12 +216,11 @@ function onInlineBeforeEnter(el: Element) {
   _el.style.opacity = '0'
 }
 
-function onInlineEnter(el: Element, done: any) {
+function onInlineEnter(el: Element) {
   const height = el.scrollHeight
   const _el = el as HTMLElement
   _el.style.height = `${height}px`
   _el.style.opacity = '1'
-  done()
 }
 
 function onInlineAfterEnter(el: Element) {
@@ -239,6 +246,7 @@ function onInlineAfterLeave(el: Element) {
   _el.style.height = ''
   _el.style.opacity = ''
 }
+const transitionCls = 'ant-motion-collapse'
 </script>
 
 <template>
@@ -271,10 +279,37 @@ function onInlineAfterLeave(el: Element) {
             />
           </template>
         </span>
-        <span v-if="expandIconNode" :class="`${prefixCls}-submenu-expand-icon`">
+        <span v-if="expandIconNode" :class="`${subMenuPrefixCls}-expand-icon`">
           <component :is="expandIconNode" />
         </span>
+        <i v-else :class="`${subMenuPrefixCls}-arrow`" />
       </div>
+    </template>
+    <template v-if="!shouldUsePopover && isInlineMode">
+      <Transition
+        appear
+        :enter-to-class="transitionCls"
+        :enter-from-class="transitionCls"
+        :enter-active-class="transitionCls"
+        :leave-active-class="transitionCls"
+        :leave-from-class="transitionCls"
+        :leave-to-class="transitionCls"
+        @after-appear="onInlineAfterEnter"
+        @appear="onInlineEnter"
+        @before-enter="onInlineBeforeEnter"
+        @enter="onInlineEnter"
+        @after-enter="onInlineAfterEnter"
+        @before-leave="onInlineBeforeLeave"
+        @leave="onInlineLeave"
+        @after-leave="onInlineAfterLeave"
+      >
+        <ul
+          v-if="isOpen"
+          :class="`${prefixCls}-sub ${mergedThemeClass}`"
+        >
+          <slot />
+        </ul>
+      </Transition>
     </template>
     <template v-else>
       <Tooltip
@@ -285,11 +320,14 @@ function onInlineAfterLeave(el: Element) {
         :mouse-enter-delay="openDelay"
         :mouse-leave-delay="closeDelay"
         :transition-name="popupMotion"
-        :root-class-name="{
-          [`${prefixCls}-submenu-popup`]: true,
-          [`${prefixCls}`]: true,
-          [`${mergedThemeClass}`]: true,
-        }"
+        :root-class-name="[
+          {
+            [`${prefixCls}-submenu-popup`]: true,
+            [`${prefixCls}`]: true,
+            [`${mergedThemeClass}`]: true,
+          },
+          popupClassName,
+        ]"
         :prefix-cls="`${prefixCls}-submenu`"
         destroy-on-hidden
         :arrow="false"
@@ -324,33 +362,18 @@ function onInlineAfterLeave(el: Element) {
         </template>
         <template #title>
           <ul
-            :class="{
-              [`${prefixCls}`]: true,
-              [`${prefixCls}-sub`]: true,
-              [`${prefixCls}-vertical`]: true,
-            }"
+            :class="[
+              {
+                [`${prefixCls}`]: true,
+                [`${prefixCls}-sub`]: true,
+                [`${prefixCls}-vertical`]: true,
+              },
+            ]"
           >
             <slot />
           </ul>
         </template>
       </Tooltip>
     </template>
-
-    <Transition
-      name="menu-collapse"
-      @before-enter="onInlineBeforeEnter"
-      @enter="onInlineEnter"
-      @after-enter="onInlineAfterEnter"
-      @before-leave="onInlineBeforeLeave"
-      @leave="onInlineLeave"
-      @after-leave="onInlineAfterLeave"
-    >
-      <ul
-        v-if="isInlineMode && isOpen && !shouldUsePopover"
-        :class="`${prefixCls}-sub ${mergedThemeClass}`"
-      >
-        <slot />
-      </ul>
-    </Transition>
   </li>
 </template>

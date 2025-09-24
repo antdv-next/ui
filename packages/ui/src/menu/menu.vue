@@ -140,10 +140,8 @@ function triggerSelect(action: 'select' | 'deselect' | null, nextSelectedKeys: S
 
   if (action === 'select') {
     emit('select', emitInfo)
-    props.onSelect?.(emitInfo)
   } else if (action === 'deselect') {
     emit('deselect', emitInfo)
-    props.onDeselect?.(emitInfo)
   }
 }
 
@@ -181,7 +179,6 @@ function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSe
   }
 
   emit('click', clickInfo)
-  props.onClick?.(clickInfo)
 }
 
 function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: boolean, event: Event | null }) {
@@ -197,7 +194,6 @@ function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: bo
   const openKeysArray = toArray(nextOpen)
   emit('update:openKeys', openKeysArray)
   emit('openChange', openKeysArray)
-  props.onOpenChange?.(openKeysArray)
 }
 
 const selectedKeysRef = computed(() => selectedKeySet.value)
