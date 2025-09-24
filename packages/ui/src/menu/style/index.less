@@ -120,7 +120,7 @@
   --ant-menu-horizontal-item-border-radius: 0;
   --ant-menu-horizontal-item-hover-bg: transparent;
   --ant-menu-item-height: 40px;
-  --ant-menu-group-title-line-height: 1.5714285714285714px;
+  --ant-menu-group-title-line-height: 1.5714285714285714;
   --ant-menu-collapsed-width: 80px;
   --ant-menu-popup-bg: var(--ant-color-bg-elevated);
   --ant-menu-item-margin-block: 4px;
@@ -1165,9 +1165,9 @@
     transition:
       height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
       opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
-      // 添加 will-change 优化动画性能
+    // 添加 will-change 优化动画性能
     will-change: height, opacity;
-    
+
     // 确保子元素不会影响高度计算
     > * {
       will-change: auto;
