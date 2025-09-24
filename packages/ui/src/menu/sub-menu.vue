@@ -100,7 +100,7 @@ const titlePadding = computed(() => {
   if (isInlineMode.value) {
     const indent = inlineIndentValue.value * (levelRef.value - 1)
     return {
-      paddingInlineStart: `${Math.max(indent, 0)}px`,
+      padddingLeft: `${Math.max(indent, 0)}px`,
     }
   }
   return undefined
@@ -252,13 +252,14 @@ const transitionCls = 'ant-motion-collapse'
 <template>
   <li
     :class="submenuClass"
-    role="menuitem"
-    aria-haspopup="true"
+    role="none"
     :aria-disabled="isDisabled"
     :aria-expanded="isOpen"
   >
     <template v-if="!shouldUsePopover">
       <div
+        role="menuitem"
+        aria-haspopup="true"
         :class="titleClass"
         :style="titlePadding"
         @click="handleTitleClick"
@@ -287,7 +288,6 @@ const transitionCls = 'ant-motion-collapse'
     </template>
     <template v-if="!shouldUsePopover && isInlineMode">
       <Transition
-        appear
         :enter-to-class="transitionCls"
         :enter-from-class="transitionCls"
         :enter-active-class="transitionCls"
@@ -305,7 +305,9 @@ const transitionCls = 'ant-motion-collapse'
       >
         <ul
           v-if="isOpen"
-          :class="`${prefixCls}-sub ${mergedThemeClass}`"
+          data-menu-list="true"
+          role="menu"
+          :class="`${prefixCls} ${prefixCls}-sub ${prefixCls}-inline`"
         >
           <slot />
         </ul>
