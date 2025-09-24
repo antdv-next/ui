@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'vue'
 import type { VueNode } from '@v-c/util/dist/type'
+import type { CSSProperties } from 'vue'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
 export type MenuTheme = 'light' | 'dark'
@@ -92,7 +92,7 @@ export interface MenuProps {
   selectable?: boolean
   multiple?: boolean
   items?: ItemType[]
-  expandIcon?: VueNode | ((info: { isOpen: boolean; disabled: boolean; level: number }) => VueNode)
+  expandIcon?: VueNode | ((info: { isOpen: boolean, disabled: boolean, level: number }) => VueNode)
   triggerSubMenuAction?: TriggerSubMenuAction
   subMenuOpenDelay?: number
   subMenuCloseDelay?: number
@@ -103,10 +103,6 @@ export interface MenuProps {
   activeKey?: Key
   defaultActiveFirst?: boolean
   collapsedWidth?: number | string
-  onClick?: (info: MenuItemInfo & { selectedKeys: Key[] }) => void
-  onSelect?: (info: MenuItemInfo & { selectedKeys: Key[] }) => void
-  onDeselect?: (info: MenuItemInfo & { selectedKeys: Key[] }) => void
-  onOpenChange?: (openKeys: Key[]) => void
   classNames?: {
     root?: string
   }
