@@ -50,11 +50,11 @@ export interface TooltipProps {
   // Style & appearance
   styles?: Partial<Record<SemanticName, CSSProperties>>
   classNames?: Partial<Record<SemanticName, string>>
-  rootClassName?: string | any
+  rootClassName?: string | Record<string, any>
   color?: LiteralUnion<PresetColorType>
   overlayStyle?: CSSProperties
   overlayInnerStyle?: CSSProperties
-  overlayClassName?: string | any
+  overlayClassName?: string | Record<string, any>
 
   // Arrow
   arrow?: boolean | { pointAtCenter?: boolean, arrowPointAtCenter?: boolean }

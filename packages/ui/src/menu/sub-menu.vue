@@ -92,10 +92,10 @@ const submenuClass = computed(() => classNames(
     [`${subMenuPrefixCls.value}-horizontal`]: !shouldUsePopover.value && mode.value === 'horizontal',
     [`${subMenuPrefixCls.value}-vertical`]: mode.value === 'vertical' || shouldUsePopover.value,
     [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value,
-    [`${subMenuPrefixCls.value}-open`]: openPopup.value,
+    [`${subMenuPrefixCls.value}-open`]: isOpen.value,
     [`${subMenuPrefixCls.value}-active`]: isInlineMode.value,
     [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
-    [`${subMenuPrefixCls.value}-selected`]: isOpen.value || menuContext.selectedKeys.value.has(eventKey.value),
+    [`${subMenuPrefixCls.value}-selected`]: menuContext.selectedKeys.value.has(eventKey.value),
   },
 ))
 
@@ -323,7 +323,7 @@ const transitionCls = 'ant-motion-collapse'
     </template>
     <template v-else>
       <Tooltip
-        v-model:open="openPopup"
+        :open="isOpen"
         :trigger="mergedTriggerAction"
         :has-inner="false"
         :placement="popupPlacement"
