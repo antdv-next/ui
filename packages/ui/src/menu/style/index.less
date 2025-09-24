@@ -1160,19 +1160,18 @@
   }
 }
 .ant-menu {
-  .ant-motion-collapse-legacy {
-    overflow: hidden;
-    &-active {
-      transition:
-        height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
-        opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
-    }
-  }
   .ant-motion-collapse {
     overflow: hidden;
     transition:
       height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
       opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+      // 添加 will-change 优化动画性能
+    will-change: height, opacity;
+    
+    // 确保子元素不会影响高度计算
+    > * {
+      will-change: auto;
+    }
   }
 }
 .ant-slide-up-enter,

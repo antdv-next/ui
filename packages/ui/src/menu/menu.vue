@@ -10,7 +10,7 @@ import type {
   MenuProps,
   SubMenuType,
 } from './define.ts'
-import { computed, h, isVNode, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
+import { computed, h, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
@@ -228,11 +228,7 @@ useProvideMenuDisabled(ref(false))
 useProvideParentMode(mergedMode)
 
 function convertNode(node: any) {
-  if (isVNode(node))
-    return node
-  if (typeof node === 'string' || typeof node === 'number')
-    return h('span', node)
-  return null
+  return node
 }
 
 function renderLabel(label?: any) {
