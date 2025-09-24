@@ -57,7 +57,6 @@ const selectedKeySet = computed(() => menuContext.selectedKeys?.value ?? new Set
 const openKeySet = computed(() => menuContext.openKeys?.value ?? new Set<Key>())
 const openDelay = computed(() => menuContext.openDelay?.value ?? 0.1)
 const closeDelay = computed(() => menuContext.closeDelay?.value ?? 0.1)
-const openPopup = shallowRef(false)
 
 const eventKey = computed(() => props.eventKey ?? localKey.value)
 const keyPath = computed<Key[]>(() => [eventKey.value, ...parentPathValue.value])
