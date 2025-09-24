@@ -4,7 +4,7 @@ import type { CSSProperties, PropType } from 'vue'
 import type { TooltipEmits, TooltipProps, TooltipSlots } from './define'
 import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from '@floating-ui/vue'
 import { onClickOutside } from '@vueuse/core'
-import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
+import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useZIndex, useZIndexProvider } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig } from '../config-provider/context'
@@ -36,7 +36,6 @@ const emit = defineEmits<TooltipEmits>()
 
 defineSlots<TooltipSlots>()
 const slots = useSlots()
-const attrs = useAttrs()
 
 const ARROW_SAFE_INSET = 10
 const ARROW_ALIGNED_INSET = 4
@@ -57,8 +56,7 @@ const arrowRef = shallowRef<HTMLDivElement>()
 // 计算属性
 const prefixCls = computed(() => {
   const getPrefixCls = parentContext.value?.getPrefixCls
-  const attrPrefix = (attrs.prefixCls as string | undefined) || (attrs['prefix-cls'] as string | undefined)
-  const customPrefix = props.prefixCls ?? attrPrefix
+  const customPrefix = props.prefixCls
 
   if (getPrefixCls) {
     return getPrefixCls('tooltip', customPrefix)

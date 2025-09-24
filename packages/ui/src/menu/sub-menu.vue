@@ -99,7 +99,7 @@ const submenuClass = computed(() => classNames(
   {
     [`${subMenuPrefixCls.value}-horizontal`]: !shouldUsePopover.value && mode.value === 'horizontal',
     [`${subMenuPrefixCls.value}-vertical`]: mode.value === 'vertical' || shouldUsePopover.value,
-    [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value,
+    [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value && mode.value === 'inline',
     [`${subMenuPrefixCls.value}-open`]: isOpen.value,
     [`${subMenuPrefixCls.value}-active`]: isInlineMode.value,
     [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
@@ -273,7 +273,7 @@ const transitionCls = 'ant-motion-collapse'
     :aria-disabled="isDisabled"
     :aria-expanded="isOpen"
   >
-    <template v-if="!shouldUsePopover ">
+    <template v-if="!shouldUsePopover && mode === 'inline'">
       <div
         role="menuitem"
         aria-haspopup="true"
@@ -302,8 +302,6 @@ const transitionCls = 'ant-motion-collapse'
         </span>
         <i v-else :class="`${subMenuPrefixCls}-arrow`" />
       </div>
-    </template>
-    <template v-if="!shouldUsePopover && mode === 'inline'">
       <Transition
         :enter-to-class="transitionCls"
         :enter-from-class="transitionCls"
@@ -357,7 +355,6 @@ const transitionCls = 'ant-motion-collapse'
             role="menuitem"
             aria-haspopup="true"
             :class="titleClass"
-            :style="titlePadding"
             @click="handleTitleClick"
           >
             <span v-if="iconNodes.length" :class="`${prefixCls}-item-icon`">

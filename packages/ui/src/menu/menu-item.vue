@@ -46,10 +46,10 @@ const isDisabled = computed(() => parentDisabled.value || props.disabled)
 const isSelected = computed(() => selectedKeySet.value.has(eventKey.value))
 
 const paddingStyle = computed(() => {
-  if (mode.value === 'inline' || parentMode.value === 'inline') {
+  if (mode.value === 'inline') {
     const indent = inlineIndentValue.value * (levelRef.value - 1)
     return {
-      paddingInlineStart: `${Math.max(indent, 0)}px`,
+      paddingLeft: `${Math.max(indent, 0)}px`,
     }
   }
   return undefined
