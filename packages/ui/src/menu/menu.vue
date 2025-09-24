@@ -68,14 +68,18 @@ const inlineCollapsed = computed(() => {
   return !!props.inlineCollapsed
 })
 
+const openSelectedKeySet = ref(new Set<Key>())
 const selectedKeySet = ref(new Set<Key>(props.selectedKeys ?? props.defaultSelectedKeys ?? []))
 const openKeySet = ref(new Set<Key>(props.openKeys ?? props.defaultOpenKeys ?? []))
+const popoverSubmenuKeySet = new Set<Key>()
 
 watch(
   () => props.selectedKeys,
   (keys) => {
-    if (keys !== undefined)
+    if (keys !== undefined) {
       selectedKeySet.value = new Set(keys)
+    }
+    updateOpenSelectedKeySet(selectedKeySet.value)
   },
   { deep: true },
 )
@@ -88,6 +92,8 @@ watch(
   },
   { deep: true },
 )
+
+updateOpenSelectedKeySet(selectedKeySet.value)
 
 const inlineStoredOpenKeys = shallowRef<Key[]>([])
 
@@ -108,12 +114,40 @@ watch(
 
 const keyPathMap = reactive(new Map<Key, Key[]>())
 
+function updateOpenSelectedKeySet(source?: Set<Key>) {
+  const currentSelected = source ?? selectedKeySet.value
+  const merged = new Set<Key>()
+  currentSelected.forEach((key) => {
+    const path = keyPathMap.get(key)
+
+    if (path && path.length) {
+      path.forEach((pathKey) => {
+        merged.add(pathKey)
+      })
+    } else if (key !== undefined && key !== null) {
+      merged.add(key)
+    }
+  })
+
+  openSelectedKeySet.value = merged
+}
+
 function registerPath(key: Key, path: Key[]) {
   keyPathMap.set(key, path)
+  updateOpenSelectedKeySet()
 }
 
 function unregisterPath(key: Key) {
-  keyPathMap.delete(key)
+  if (!selectedKeySet.value.has(key))
+    keyPathMap.delete(key)
+  updateOpenSelectedKeySet()
+}
+
+function setPopoverSubmenu(key: Key, isPopover: boolean) {
+  if (isPopover)
+    popoverSubmenuKeySet.add(key)
+  else
+    popoverSubmenuKeySet.delete(key)
 }
 
 function toArray(set: Set<Key>) {
@@ -125,8 +159,13 @@ function triggerSelect(action: 'select' | 'deselect' | null, nextSelectedKeys: S
     return
 
   const selectedKeysArray = toArray(nextSelectedKeys)
-  if (props.selectedKeys === undefined)
-    selectedKeySet.value = new Set(nextSelectedKeys)
+  if (props.selectedKeys === undefined) {
+    const updatedSet = new Set(nextSelectedKeys)
+    selectedKeySet.value = updatedSet
+    updateOpenSelectedKeySet(updatedSet)
+  } else {
+    updateOpenSelectedKeySet(selectedKeySet.value)
+  }
 
   emit('update:selectedKeys', selectedKeysArray)
 
@@ -143,6 +182,39 @@ function triggerSelect(action: 'select' | 'deselect' | null, nextSelectedKeys: S
   } else if (action === 'deselect') {
     emit('deselect', emitInfo)
   }
+}
+
+function closePopoverSubmenus(keyPath: Key[]) {
+  if (!keyPath || keyPath.length <= 1)
+    return
+
+  const ancestorKeys = keyPath.slice(1)
+  const nextOpen = new Set(openKeySet.value)
+  const keysToClose: Key[] = []
+  let changed = false
+
+  ancestorKeys.forEach((key) => {
+    if (popoverSubmenuKeySet.has(key) && nextOpen.has(key)) {
+      nextOpen.delete(key)
+      keysToClose.push(key)
+      changed = true
+    }
+  })
+
+  if (!changed)
+    return
+
+  if (mergedMode.value === 'inline' && inlineCollapsed.value && inlineStoredOpenKeys.value.length) {
+    const keysToCloseSet = new Set(keysToClose)
+    inlineStoredOpenKeys.value = inlineStoredOpenKeys.value.filter(key => !keysToCloseSet.has(key))
+  }
+
+  if (props.openKeys === undefined)
+    openKeySet.value = nextOpen
+
+  const openKeysArray = toArray(nextOpen)
+  emit('update:openKeys', openKeysArray)
+  emit('openChange', openKeysArray)
 }
 
 function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSelected: boolean, item: any }) {
@@ -168,6 +240,7 @@ function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSe
   }
 
   triggerSelect(action, nextSelected, info)
+  closePopoverSubmenus(info.keyPath)
 
   const finalSelectedKeys = toArray(nextSelected)
   const clickInfo = {
@@ -198,6 +271,7 @@ function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: bo
 
 const selectedKeysRef = computed(() => selectedKeySet.value)
 const openKeysRef = computed(() => openKeySet.value)
+const openSelectedKeysRef = computed(() => openSelectedKeySet.value)
 
 useProvideMenuContext({
   prefixCls,
@@ -213,6 +287,7 @@ useProvideMenuContext({
   closeDelay,
   openKeys: openKeysRef,
   selectedKeys: selectedKeysRef,
+  openSelectedKeySet: openSelectedKeysRef,
   level: computed(() => 1),
   parentPath: computed(() => []),
   onMenuItemClick: handleItemClick,
@@ -220,6 +295,7 @@ useProvideMenuContext({
   registerPath,
   unregisterPath,
   getKeyPath: key => keyPathMap.get(key),
+  setPopoverSubmenu,
 })
 
 useProvideMenuLevel(ref(1))

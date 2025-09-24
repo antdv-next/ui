@@ -16,6 +16,7 @@ export interface MenuContextProps {
   closeDelay: Ref<number>
   openKeys: Ref<Set<Key>>
   selectedKeys: Ref<Set<Key>>
+  openSelectedKeySet: Ref<Set<Key>>
   level: Ref<number>
   parentPath: Ref<Key[]>
   onMenuItemClick: (info: {
@@ -29,6 +30,7 @@ export interface MenuContextProps {
   registerPath: (key: Key, path: Key[]) => void
   unregisterPath: (key: Key) => void
   getKeyPath: (key: Key) => Key[] | undefined
+  setPopoverSubmenu: (key: Key, isPopover: boolean) => void
 }
 
 const defaultMenuContext: MenuContextProps = {
@@ -45,6 +47,7 @@ const defaultMenuContext: MenuContextProps = {
   closeDelay: computed(() => 0.1),
   openKeys: computed(() => new Set<Key>()),
   selectedKeys: computed(() => new Set<Key>()),
+  openSelectedKeySet: computed(() => new Set<Key>()),
   level: computed(() => 1),
   parentPath: computed(() => []),
   onMenuItemClick: () => {},
@@ -52,6 +55,7 @@ const defaultMenuContext: MenuContextProps = {
   registerPath: () => {},
   unregisterPath: () => {},
   getKeyPath: () => undefined,
+  setPopoverSubmenu: () => {},
 }
 
 const MenuContextKey: InjectionKey<MenuContextProps> = Symbol('MenuContextKey')

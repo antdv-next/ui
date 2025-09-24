@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Key, SubMenuProps, SubMenuSlots } from './define.ts'
-import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots } from 'vue'
+import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import Tooltip from '../tooltip/tooltip.vue'
@@ -54,6 +54,7 @@ const mode = computed(() => menuContext.mode?.value ?? 'vertical')
 const inlineCollapsed = computed(() => menuContext.inlineCollapsed?.value ?? false)
 const inlineIndentValue = computed(() => menuContext.inlineIndent?.value ?? 24)
 const selectedKeySet = computed(() => menuContext.selectedKeys?.value ?? new Set<Key>())
+const openSelectedKeySet = computed(() => menuContext.openSelectedKeySet?.value ?? new Set<Key>())
 const openKeySet = computed(() => menuContext.openKeys?.value ?? new Set<Key>())
 const openDelay = computed(() => menuContext.openDelay?.value ?? 0.1)
 const closeDelay = computed(() => menuContext.closeDelay?.value ?? 0.1)
@@ -79,6 +80,14 @@ const isInlineMode = computed(() => {
   return mode.value === 'inline' || mode.value === 'vertical'
 })
 
+watch(
+  shouldUsePopover,
+  (isPopover) => {
+    menuContext.setPopoverSubmenu?.(eventKey.value, isPopover)
+  },
+  { immediate: true },
+)
+
 const isOpen = computed(() => {
   return openKeySet.value.has(eventKey.value)
 })
@@ -94,7 +103,7 @@ const submenuClass = computed(() => classNames(
     [`${subMenuPrefixCls.value}-open`]: isOpen.value,
     [`${subMenuPrefixCls.value}-active`]: isInlineMode.value,
     [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
-    [`${subMenuPrefixCls.value}-selected`]: menuContext.selectedKeys.value.has(eventKey.value),
+    [`${subMenuPrefixCls.value}-selected`]: openSelectedKeySet.value.has(eventKey.value),
   },
 ))
 
@@ -182,6 +191,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  menuContext.setPopoverSubmenu?.(eventKey.value, false)
   menuContext.unregisterPath?.(eventKey.value)
 })
 
