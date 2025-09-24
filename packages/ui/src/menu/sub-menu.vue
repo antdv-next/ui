@@ -273,7 +273,7 @@ const transitionCls = 'ant-motion-collapse'
     :aria-disabled="isDisabled"
     :aria-expanded="isOpen"
   >
-    <template v-if="!shouldUsePopover">
+    <template v-if="!shouldUsePopover ">
       <div
         role="menuitem"
         aria-haspopup="true"
@@ -303,7 +303,7 @@ const transitionCls = 'ant-motion-collapse'
         <i v-else :class="`${subMenuPrefixCls}-arrow`" />
       </div>
     </template>
-    <template v-if="!shouldUsePopover && isInlineMode">
+    <template v-if="!shouldUsePopover && mode === 'inline'">
       <Transition
         :enter-to-class="transitionCls"
         :enter-from-class="transitionCls"

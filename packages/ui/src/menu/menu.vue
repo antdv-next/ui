@@ -13,6 +13,7 @@ import type {
 import { computed, h, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
+import { useZIndex } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
 import {
   useProvideMenuContext,
@@ -56,16 +57,17 @@ const prefixCls = computed(() => configCtx.getPrefixCls('menu', props.prefixCls)
 const theme = computed(() => props.theme || 'light')
 const mergedMode = computed(() => props.mode || 'vertical')
 const inlineIndent = computed(() => props.inlineIndent ?? 24)
-const selectable = computed(() => props.selectable !== false)
-const multiple = computed(() => props.multiple === true)
+const selectable = computed(() => props.selectable)
+const multiple = computed(() => props.multiple)
 const triggerAction = computed(() => props.triggerSubMenuAction ?? 'hover')
 const openDelay = computed(() => props.subMenuOpenDelay ?? 0)
 const closeDelay = computed(() => props.subMenuCloseDelay ?? 0.1)
+const [zIndex] = useZIndex('Menu')
 
 const inlineCollapsed = computed(() => {
   if (mergedMode.value !== 'inline')
     return false
-  return !!props.inlineCollapsed
+  return props.inlineCollapsed
 })
 
 const openSelectedKeySet = ref(new Set<Key>())
@@ -368,6 +370,7 @@ function renderItems(items?: ItemType[] | null): any[] {
             triggerSubMenuAction: (menuItem as SubMenuType).triggerSubMenuAction,
             title: typeof menuItem.label === 'string' ? menuItem.label : undefined,
             theme: (menuItem as SubMenuType).theme,
+            zIndex: zIndex.value,
           },
           {
             title: menuItem.label
