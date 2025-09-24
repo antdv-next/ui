@@ -9,6 +9,7 @@ import {
   useMenuDisabled,
   useMenuLevel,
   useMenuPath,
+  useParentMode,
   useProvideMenuDisabled,
   useProvideMenuLevel,
   useProvideMenuPath,
@@ -45,6 +46,7 @@ const parentDisabled = useMenuDisabled()
 const parentPath = useMenuPath()
 const parentPathValue = computed(() => parentPath?.value ?? [])
 const levelRef = useMenuLevel()
+const parentMode = useParentMode()
 
 const prefixCls = computed(() => menuContext.prefixCls?.value ?? 'ant-menu')
 const subMenuPrefixCls = computed(() => `${prefixCls.value}-submenu`)
@@ -55,16 +57,13 @@ const selectedKeySet = computed(() => menuContext.selectedKeys?.value ?? new Set
 const openKeySet = computed(() => menuContext.openKeys?.value ?? new Set<Key>())
 const openDelay = computed(() => menuContext.openDelay?.value ?? 0.1)
 const closeDelay = computed(() => menuContext.closeDelay?.value ?? 0.1)
+const openPopup = shallowRef(false)
 
 const eventKey = computed(() => props.eventKey ?? localKey.value)
 const keyPath = computed<Key[]>(() => [eventKey.value, ...parentPathValue.value])
 
 const mergedTriggerAction = computed(() => props.triggerSubMenuAction ?? menuContext.triggerSubMenuAction?.value ?? 'hover')
 const isDisabled = computed(() => parentDisabled.value || props.disabled)
-
-const isInlineMode = computed(() => {
-  return mode.value === 'inline' || mode.value === 'vertical'
-})
 
 const shouldUsePopover = computed(() => {
   if (!props.expandable)
@@ -77,20 +76,24 @@ const shouldUsePopover = computed(() => {
     return true
   return false
 })
+const isInlineMode = computed(() => {
+  return mode.value === 'inline' || mode.value === 'vertical'
+})
 
 const isOpen = computed(() => {
   return openKeySet.value.has(eventKey.value)
 })
 const submenuClass = computed(() => classNames(
   {
-    [`${prefixCls.value}-item`]: shouldUsePopover.value,
+    [`${prefixCls.value}-item`]: shouldUsePopover.value && parentMode.value !== 'vertical',
   },
   subMenuPrefixCls.value,
   {
-    [`${subMenuPrefixCls.value}-horizontal`]: mode.value === 'horizontal',
+    [`${subMenuPrefixCls.value}-horizontal`]: !shouldUsePopover.value && mode.value === 'horizontal',
+    [`${subMenuPrefixCls.value}-vertical`]: mode.value === 'vertical' || shouldUsePopover.value,
     [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value,
-    [`${subMenuPrefixCls.value}-open`]: isOpen.value,
-    // [`${subMenuPrefixCls.value}-active`]: isOpen.value,
+    [`${subMenuPrefixCls.value}-open`]: openPopup.value,
+    [`${subMenuPrefixCls.value}-active`]: isInlineMode.value,
     [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
     [`${subMenuPrefixCls.value}-selected`]: isOpen.value || menuContext.selectedKeys.value.has(eventKey.value),
   },
@@ -100,7 +103,7 @@ const titlePadding = computed(() => {
   if (isInlineMode.value) {
     const indent = inlineIndentValue.value * (levelRef.value - 1)
     return {
-      padddingLeft: `${Math.max(indent, 0)}px`,
+      paddingLeft: `${Math.max(indent, 0)}px`,
     }
   }
   return undefined
@@ -198,7 +201,12 @@ const childPath = computed(() => [eventKey.value, ...parentPathValue.value])
 useProvideMenuPath(childPath)
 useProvideMenuLevel(childLevel)
 useProvideMenuDisabled(computed(() => isDisabled.value))
-useProvideParentMode(computed(() => (isInlineMode.value ? 'inline' : 'vertical')))
+useProvideParentMode(computed(() => {
+  if (shouldUsePopover.value) {
+    return 'vertical'
+  }
+  return isInlineMode.value ? 'inline' : 'vertical'
+}))
 
 const titleClass = computed(() => `${subMenuPrefixCls.value}-title`)
 const popupPlacement = computed(() => {
@@ -315,8 +323,8 @@ const transitionCls = 'ant-motion-collapse'
     </template>
     <template v-else>
       <Tooltip
+        v-model:open="openPopup"
         :trigger="mergedTriggerAction"
-        :open="isOpen"
         :has-inner="false"
         :placement="popupPlacement"
         :mouse-enter-delay="openDelay"
@@ -337,6 +345,8 @@ const transitionCls = 'ant-motion-collapse'
       >
         <template #default>
           <div
+            role="menuitem"
+            aria-haspopup="true"
             :class="titleClass"
             :style="titlePadding"
             @click="handleTitleClick"
@@ -360,6 +370,7 @@ const transitionCls = 'ant-motion-collapse'
             <span v-if="expandIconNode" :class="`${prefixCls}-expand-icon`">
               <component :is="expandIconNode" />
             </span>
+            <i v-else :class="`${subMenuPrefixCls}-arrow`" />
           </div>
         </template>
         <template #title>
