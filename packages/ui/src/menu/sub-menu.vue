@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Key, SubMenuProps, SubMenuSlots } from './define'
-import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots, watch } from 'vue'
+import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots, watch, watchEffect } from 'vue'
 import { flattenChildren } from '../_utils/checker'
 import { classNames } from '../_utils/classNames'
 import Tooltip from '../tooltip/tooltip.vue'
@@ -81,13 +81,34 @@ const isInlineMode = computed(() => {
   return mode.value === 'inline' || mode.value === 'vertical'
 })
 
+const isPopupMode = computed(() => {
+  if (mode.value !== 'inline')
+    return true
+  return shouldUsePopover.value
+})
+
+const triggerRef = shallowRef<HTMLElement>()
+const popupRef = shallowRef<HTMLElement>()
+
 watch(
-  shouldUsePopover,
+  isPopupMode,
   (isPopover) => {
     menuContext.setPopoverSubmenu?.(eventKey.value, isPopover)
   },
   { immediate: true },
 )
+
+watchEffect(() => {
+  if (!isPopupMode.value) {
+    menuContext.setPopoverElements?.(eventKey.value, null)
+    return
+  }
+
+  menuContext.setPopoverElements?.(eventKey.value, {
+    trigger: triggerRef.value ?? null,
+    popup: popupRef.value ?? null,
+  })
+})
 
 const isOpen = computed(() => {
   return openKeySet.value.has(eventKey.value)
@@ -185,6 +206,9 @@ function handlePopupOpenChange(open: boolean) {
 
   if (open !== isOpen.value)
     triggerOpen(open, null)
+
+  if (!open)
+    menuContext.closePopoverSubmenus?.(keyPath.value)
 }
 
 onMounted(() => {
@@ -194,6 +218,7 @@ onMounted(() => {
 onUnmounted(() => {
   menuContext.setPopoverSubmenu?.(eventKey.value, false)
   menuContext.unregisterPath?.(eventKey.value)
+  menuContext.setPopoverElements?.(eventKey.value, null)
 })
 
 const expandIconNode = computed(() => {
@@ -302,6 +327,7 @@ const popupMotion = computed(() => {
       >
         <template #default>
           <div
+            ref="triggerRef"
             role="menuitem"
             aria-haspopup="true"
             :class="titleClass"
@@ -330,6 +356,7 @@ const popupMotion = computed(() => {
         </template>
         <template #title>
           <ul
+            ref="popupRef"
             :class="[
               {
                 [`${prefixCls}`]: true,
