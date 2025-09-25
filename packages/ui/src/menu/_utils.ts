@@ -38,6 +38,7 @@ export function getCollapseMotionProps() {
   }
 
   return {
+    appear: true,
     enterToClass: transitionCls,
     enterFromClass: transitionCls,
     enterActiveClass: transitionCls,
