@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { MenuItemType } from 'antdv-next'
 import {
   AppstoreOutlined,
   CalendarOutlined,
@@ -11,7 +12,7 @@ import { h, ref } from 'vue'
 type MenuMode = 'inline' | 'vertical'
 type MenuTheme = 'light' | 'dark'
 
-const items = [
+const items: MenuItemType[] = [
   {
     key: '1',
     icon: () => h(MailOutlined),
@@ -63,20 +64,26 @@ const items = [
 const mode = ref<MenuMode>('inline')
 const theme = ref<MenuTheme>('light')
 
-function changeMode(value: boolean) {
-  mode.value = value ? 'vertical' : 'inline'
+function changeMode() {
+  mode.value = mode.value === 'inline' ? 'vertical' : 'inline'
 }
 
-function changeTheme(value: boolean) {
-  theme.value = value ? 'dark' : 'light'
+function changeTheme() {
+  theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 </script>
 
 <template>
   <div>
-    <a-switch :checked="mode === 'vertical'" @change="changeMode" /> Change Mode
+    <!--    <a-switch :checked="mode === 'vertical'" @change="changeMode" /> Change Mode -->
+    <a-button @click="changeMode">
+      Change Mod: {{ mode }}
+    </a-button>
     <a-divider type="vertical" />
-    <a-switch :checked="theme === 'dark'" @change="changeTheme" /> Change Style
+    <!--    <a-switch :checked="theme === 'dark'" @change="changeTheme" /> Change Style -->
+    <a-button @click="changeTheme">
+      Change Style: {{ theme }}
+    </a-button>
     <div class="mt-16px">
       <a-menu
         :items="items"

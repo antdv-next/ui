@@ -2,7 +2,7 @@
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import { h, ref } from 'vue'
 
-type LevelItem = {
+interface LevelItem {
   key?: string
   children?: LevelItem[]
 }

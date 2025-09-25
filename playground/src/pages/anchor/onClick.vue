@@ -34,7 +34,7 @@ function handleClick(e: Event, link: {
   href: string
 }) {
   e.preventDefault()
-  // eslint-disable-next-line no-console
+
   console.log(link)
 }
 </script>

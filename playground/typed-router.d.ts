@@ -60,6 +60,16 @@ declare module 'vue-router/auto-routes' {
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
     '/layout/basic': RouteRecordInfo<'/layout/basic', '/layout/basic', Record<never, never>, Record<never, never>>,
     '/layout/collapsible': RouteRecordInfo<'/layout/collapsible', '/layout/collapsible', Record<never, never>, Record<never, never>>,
+    '/layout/component-token': RouteRecordInfo<'/layout/component-token', '/layout/component-token', Record<never, never>, Record<never, never>>,
+    '/layout/custom-trigger': RouteRecordInfo<'/layout/custom-trigger', '/layout/custom-trigger', Record<never, never>, Record<never, never>>,
+    '/layout/custom-trigger-debug': RouteRecordInfo<'/layout/custom-trigger-debug', '/layout/custom-trigger-debug', Record<never, never>, Record<never, never>>,
+    '/layout/fixed': RouteRecordInfo<'/layout/fixed', '/layout/fixed', Record<never, never>, Record<never, never>>,
+    '/layout/fixed-sider': RouteRecordInfo<'/layout/fixed-sider', '/layout/fixed-sider', Record<never, never>, Record<never, never>>,
+    '/layout/responsive': RouteRecordInfo<'/layout/responsive', '/layout/responsive', Record<never, never>, Record<never, never>>,
+    '/layout/side': RouteRecordInfo<'/layout/side', '/layout/side', Record<never, never>, Record<never, never>>,
+    '/layout/top': RouteRecordInfo<'/layout/top', '/layout/top', Record<never, never>, Record<never, never>>,
+    '/layout/top-side': RouteRecordInfo<'/layout/top-side', '/layout/top-side', Record<never, never>, Record<never, never>>,
+    '/layout/top-side-2': RouteRecordInfo<'/layout/top-side-2', '/layout/top-side-2', Record<never, never>, Record<never, never>>,
     '/menu/basic': RouteRecordInfo<'/menu/basic', '/menu/basic', Record<never, never>, Record<never, never>>,
     '/menu/component-token': RouteRecordInfo<'/menu/component-token', '/menu/component-token', Record<never, never>, Record<never, never>>,
     '/menu/extra-style': RouteRecordInfo<'/menu/extra-style', '/menu/extra-style', Record<never, never>, Record<never, never>>,
@@ -297,6 +307,46 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/layout/collapsible.vue': {
       routes: '/layout/collapsible'
+      views: never
+    }
+    'src/pages/layout/component-token.vue': {
+      routes: '/layout/component-token'
+      views: never
+    }
+    'src/pages/layout/custom-trigger.vue': {
+      routes: '/layout/custom-trigger'
+      views: never
+    }
+    'src/pages/layout/custom-trigger-debug.vue': {
+      routes: '/layout/custom-trigger-debug'
+      views: never
+    }
+    'src/pages/layout/fixed.vue': {
+      routes: '/layout/fixed'
+      views: never
+    }
+    'src/pages/layout/fixed-sider.vue': {
+      routes: '/layout/fixed-sider'
+      views: never
+    }
+    'src/pages/layout/responsive.vue': {
+      routes: '/layout/responsive'
+      views: never
+    }
+    'src/pages/layout/side.vue': {
+      routes: '/layout/side'
+      views: never
+    }
+    'src/pages/layout/top.vue': {
+      routes: '/layout/top'
+      views: never
+    }
+    'src/pages/layout/top-side.vue': {
+      routes: '/layout/top-side'
+      views: never
+    }
+    'src/pages/layout/top-side-2.vue': {
+      routes: '/layout/top-side-2'
       views: never
     }
     'src/pages/menu/basic.vue': {
