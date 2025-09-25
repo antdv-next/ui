@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { Key, SubMenuProps, SubMenuSlots } from './define.ts'
+import type { Key, SubMenuProps, SubMenuSlots } from './define'
 import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots, watch } from 'vue'
-import { flattenChildren } from '../_utils/checker.ts'
-import { classNames } from '../_utils/classNames.ts'
+import { flattenChildren } from '../_utils/checker'
+import { classNames } from '../_utils/classNames'
 import Tooltip from '../tooltip/tooltip.vue'
+import { getCollapseMotionProps } from './_utils'
 import {
   useMenuContext,
   useMenuDisabled,
@@ -14,7 +15,7 @@ import {
   useProvideMenuLevel,
   useProvideMenuPath,
   useProvideParentMode,
-} from './context.ts'
+} from './context'
 
 defineOptions({
   name: 'AMenuSubMenu',
@@ -226,44 +227,6 @@ const popupPlacement = computed(() => {
 const popupMotion = computed(() => {
   return mode.value === 'horizontal' ? 'ant-slide-up' : 'ant-zoom-big'
 })
-
-function onInlineBeforeEnter(el: Element) {
-  const _el = el as HTMLElement
-  _el.style.height = '0px'
-  _el.style.opacity = '0'
-}
-
-function onInlineEnter(el: Element) {
-  const height = el.scrollHeight
-  const _el = el as HTMLElement
-  _el.style.height = `${height}px`
-  _el.style.opacity = '1'
-}
-
-function onInlineAfterEnter(el: Element) {
-  const _el = el as HTMLElement
-  _el.style.height = ''
-  _el.style.opacity = ''
-}
-
-function onInlineBeforeLeave(el: Element) {
-  const _el = el as HTMLElement
-  _el.style.height = `${el.scrollHeight}px`
-  _el.style.opacity = '1'
-}
-
-function onInlineLeave(el: Element) {
-  const _el = el as HTMLElement
-  _el.style.height = '0px'
-  _el.style.opacity = '0'
-}
-
-function onInlineAfterLeave(el: Element) {
-  const _el = el as HTMLElement
-  _el.style.height = ''
-  _el.style.opacity = ''
-}
-const transitionCls = 'ant-motion-collapse'
 </script>
 
 <template>
@@ -303,20 +266,7 @@ const transitionCls = 'ant-motion-collapse'
         <i v-else :class="`${subMenuPrefixCls}-arrow`" />
       </div>
       <Transition
-        :enter-to-class="transitionCls"
-        :enter-from-class="transitionCls"
-        :enter-active-class="transitionCls"
-        :leave-active-class="transitionCls"
-        :leave-from-class="transitionCls"
-        :leave-to-class="transitionCls"
-        @after-appear="onInlineAfterEnter"
-        @appear="onInlineEnter"
-        @before-enter="onInlineBeforeEnter"
-        @enter="onInlineEnter"
-        @after-enter="onInlineAfterEnter"
-        @before-leave="onInlineBeforeLeave"
-        @leave="onInlineLeave"
-        @after-leave="onInlineAfterLeave"
+        v-bind="getCollapseMotionProps()"
       >
         <ul
           v-if="isOpen"
@@ -355,7 +305,6 @@ const transitionCls = 'ant-motion-collapse'
             role="menuitem"
             aria-haspopup="true"
             :class="titleClass"
-            @click="handleTitleClick"
           >
             <span v-if="iconNodes.length" :class="`${prefixCls}-item-icon`">
               <component

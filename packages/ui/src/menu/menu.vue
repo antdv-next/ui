@@ -258,6 +258,12 @@ function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSe
 
 function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: boolean, event: Event | null }) {
   const nextOpen = new Set(openKeySet.value)
+  if (open && nextOpen.has(key)) {
+    return
+  }
+  if (!open && !nextOpen.has(key)) {
+    return
+  }
   if (open)
     nextOpen.add(key)
   else

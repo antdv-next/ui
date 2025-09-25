@@ -1,4 +1,4 @@
-import type { ComputedRef, CSSProperties, InjectionKey, Ref } from 'vue'
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 import type { Key, MenuMode, MenuTheme, TriggerSubMenuAction } from './define.ts'
 import { computed, inject, provide } from 'vue'
 
@@ -69,16 +69,6 @@ export function useMenuContext() {
   return inject(MenuContextKey, defaultMenuContext)
 }
 
-const defaultFirstLevel = computed(() => true)
-const MenuFirstLevelKey: InjectionKey<Ref<boolean>> = Symbol('MenuFirstLevelKey')
-export function useProvideFirstLevel(value: Ref<boolean>) {
-  provide(MenuFirstLevelKey, value)
-  return value
-}
-export function useFirstLevel() {
-  return inject(MenuFirstLevelKey, defaultFirstLevel)
-}
-
 const defaultMenuPath = computed<Key[]>(() => [])
 const MenuPathKey: InjectionKey<Ref<Key[]>> = Symbol('MenuPathKey')
 export function useProvideMenuPath(value: Ref<Key[]>) {
@@ -109,16 +99,6 @@ export function useParentMode() {
   return inject(MenuParentModeKey, defaultParentMode)
 }
 
-const defaultInlineCollapsed = computed(() => false)
-const MenuInlineCollapsedKey: InjectionKey<Ref<boolean>> = Symbol('MenuInlineCollapsedKey')
-export function useProvideInlineCollapsed(value: Ref<boolean>) {
-  provide(MenuInlineCollapsedKey, value)
-  return value
-}
-export function useInlineCollapsed() {
-  return inject(MenuInlineCollapsedKey, defaultInlineCollapsed)
-}
-
 const defaultLevel = computed(() => 1)
 const MenuLevelKey: InjectionKey<Ref<number>> = Symbol('MenuLevelKey')
 export function useProvideMenuLevel(value: Ref<number>) {
@@ -127,34 +107,4 @@ export function useProvideMenuLevel(value: Ref<number>) {
 }
 export function useMenuLevel() {
   return inject(MenuLevelKey, defaultLevel)
-}
-
-const defaultParentOpen = computed(() => false)
-const MenuParentOpenKey: InjectionKey<Ref<boolean>> = Symbol('MenuParentOpenKey')
-export function useProvideParentSubmenuOpen(value: Ref<boolean>) {
-  provide(MenuParentOpenKey, value)
-  return value
-}
-export function useParentSubmenuOpen() {
-  return inject(MenuParentOpenKey, defaultParentOpen)
-}
-
-const defaultPopupClass = computed(() => undefined as string | undefined)
-const MenuPopupClassKey: InjectionKey<Ref<string | undefined>> = Symbol('MenuPopupClassKey')
-export function useProvidePopupClass(value: Ref<string | undefined>) {
-  provide(MenuPopupClassKey, value)
-  return value
-}
-export function usePopupClass() {
-  return inject(MenuPopupClassKey, defaultPopupClass)
-}
-
-const defaultPopupStyle = computed(() => undefined as CSSProperties | undefined)
-const MenuPopupStyleKey: InjectionKey<Ref<CSSProperties | undefined>> = Symbol('MenuPopupStyleKey')
-export function useProvidePopupStyle(value: Ref<CSSProperties | undefined>) {
-  provide(MenuPopupStyleKey, value)
-  return value
-}
-export function usePopupStyle() {
-  return inject(MenuPopupStyleKey, defaultPopupStyle)
 }
