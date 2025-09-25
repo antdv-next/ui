@@ -12,13 +12,13 @@ import { CheckCircleFilled, CloseCircleFilled, ReloadOutlined } from '@ant-desig
     </template>
   </a-qrcode>
   <a-qrcode value="https://baidu.com" status="expired" @refresh="console.log('refresh')">
-    <template #statusRender="{ onRefresh }">
+    <template #statusRender="{ onRefresh, locale }">
       <div>
         <CloseCircleFilled style="color: red" />
         <span>二维码已过期</span>
         <a-button type="link" @click="onRefresh">
           <ReloadOutlined />
-          点击刷新
+          {{ locale.refresh }}
         </a-button>
       </div>
     </template>

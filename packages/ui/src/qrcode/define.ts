@@ -1,6 +1,6 @@
 import type { QRProps } from '@v-c/qrcode'
 
-// import type { Locale } from '../locale'
+import type { Locale } from '../locale'
 
 type ImageSettings = QRProps['imageSettings']
 
@@ -14,7 +14,7 @@ export type QRStatus = 'active' | 'expired' | 'loading' | 'scanned'
 
 export interface StatusRenderInfo {
   status: Exclude<QRStatus, 'active'>
-  // locale: Locale['QRCode']
+  locale: Locale['QRCode']
   onRefresh?: () => void
 }
 
@@ -51,7 +51,7 @@ export interface QRCodeSlots {
 
 export interface QRcodeStatusProps {
   prefixCls: string
-  // locale?: Locale['QRCode']
+  locale?: Locale['QRCode']
   onRefresh?: QRCodeProps['onRefresh']
   status: StatusRenderInfo['status']
 }
