@@ -75,6 +75,7 @@ const selectedKeySet = ref(new Set<Key>(props.selectedKeys ?? props.defaultSelec
 const openKeySet = ref(new Set<Key>(props.openKeys ?? props.defaultOpenKeys ?? []))
 const popoverSubmenuKeySet = new Set<Key>()
 const popoverSubmenuElements = new Map<Key, { trigger: HTMLElement | null, popup: HTMLElement | null }>()
+const keyPathMap = reactive(new Map<Key, Key[]>())
 
 watch(
   () => props.selectedKeys,
@@ -115,8 +116,6 @@ watch(
   },
 )
 
-const keyPathMap = reactive(new Map<Key, Key[]>())
-
 function updateOpenSelectedKeySet(source?: Set<Key>) {
   const currentSelected = source ?? selectedKeySet.value
   const merged = new Set<Key>()
@@ -147,8 +146,9 @@ function unregisterPath(key: Key) {
 }
 
 function setPopoverSubmenu(key: Key, isPopover: boolean) {
-  if (isPopover)
+  if (isPopover) {
     popoverSubmenuKeySet.add(key)
+  }
   else {
     popoverSubmenuKeySet.delete(key)
     popoverSubmenuElements.delete(key)
@@ -449,6 +449,7 @@ const attrStyle = computed(() => attrs.style as CSSProperties | undefined)
 
 const rootClassName = computed(() => classNames(
   prefixCls.value,
+  `${prefixCls.value}-root`,
   `${prefixCls.value}-${theme.value}`,
   `${prefixCls.value}-${mergedMode.value}`,
   {

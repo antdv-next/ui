@@ -3,7 +3,7 @@ import type { Key, MenuItemProps, MenuItemSlots } from './define.ts'
 import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
-import { useMenuContext, useMenuDisabled, useMenuLevel, useMenuPath, useParentMode } from './context.ts'
+import { useMenuContext, useMenuDisabled, useMenuPath } from './context.ts'
 
 defineOptions({
   name: 'AMenuItem',
@@ -28,32 +28,22 @@ const localKey = shallowRef(createLocalKey())
 const menuContext = useMenuContext()
 const parentPath = useMenuPath()
 const parentPathValue = computed(() => parentPath?.value ?? [])
-const levelRef = useMenuLevel()
 const parentDisabled = useMenuDisabled()
-const parentMode = useParentMode()
 
 const prefixCls = computed(() => menuContext.prefixCls?.value ?? 'ant-menu')
 const mode = computed(() => menuContext.mode?.value ?? 'vertical')
 const inlineIndentValue = computed(() => menuContext.inlineIndent?.value ?? 24)
+const inlineCollapsed = computed(() => menuContext.inlineCollapsed?.value ?? false)
 const selectedKeySet = computed(() => menuContext.selectedKeys?.value ?? new Set<Key>())
 
 const eventKey = computed(() => props.eventKey ?? localKey.value)
 
 const keyPath = computed<Key[]>(() => [eventKey.value, ...parentPathValue.value])
+const level = computed(() => parentPathValue.value.length + 1)
 
 const isDisabled = computed(() => parentDisabled.value || props.disabled)
 
 const isSelected = computed(() => selectedKeySet.value.has(eventKey.value))
-
-const paddingStyle = computed(() => {
-  if (mode.value === 'inline') {
-    const indent = inlineIndentValue.value * (levelRef.value - 1)
-    return {
-      paddingLeft: `${Math.max(indent, 0)}px`,
-    }
-  }
-  return undefined
-})
 
 const menuItemClass = computed(() => {
   return classNames(
@@ -62,6 +52,7 @@ const menuItemClass = computed(() => {
       [`${prefixCls.value}-item-selected`]: isSelected.value,
       [`${prefixCls.value}-item-disabled`]: isDisabled.value,
       [`${prefixCls.value}-item-danger`]: props.danger,
+      [`${prefixCls.value}-item-only-child`]: mode.value === 'inline',
     },
   )
 })
@@ -115,6 +106,17 @@ function resolveContent(content?: MenuItemProps['title'] | MenuItemProps['icon']
 
 const iconNodes = computed(() => resolveContent(props.icon, slots.icon))
 const titleNodes = computed(() => resolveContent(props.title, slots.default))
+
+const itemPaddingStyle = computed(() => {
+  if (mode.value !== 'inline')
+    return undefined
+
+  if (inlineCollapsed.value && level.value === 1)
+    return undefined
+
+  const indent = inlineIndentValue.value * level.value
+  return indent > 0 ? { paddingLeft: `${indent}px` } : undefined
+})
 </script>
 
 <template>
@@ -123,9 +125,10 @@ const titleNodes = computed(() => resolveContent(props.title, slots.default))
     role="menuitem"
     :title="titleAttr"
     :aria-disabled="isDisabled"
+    :style="itemPaddingStyle"
     @click="handleClick"
   >
-    <span :class="`${prefixCls}-item-content`" :style="paddingStyle">
+    <span :class="`${prefixCls}-item-content`">
       <span v-if="iconNodes.length" :class="`${prefixCls}-item-icon`">
         <component
           :is="node"

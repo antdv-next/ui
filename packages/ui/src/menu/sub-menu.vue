@@ -114,29 +114,41 @@ const isOpen = computed(() => {
   return openKeySet.value.has(eventKey.value)
 })
 const submenuClass = computed(() => classNames(
-  {
-    [`${prefixCls.value}-item`]: shouldUsePopover.value && parentMode.value !== 'vertical',
-  },
   subMenuPrefixCls.value,
   {
     [`${subMenuPrefixCls.value}-horizontal`]: !shouldUsePopover.value && mode.value === 'horizontal',
     [`${subMenuPrefixCls.value}-vertical`]: mode.value === 'vertical' || shouldUsePopover.value,
     [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value && mode.value === 'inline',
     [`${subMenuPrefixCls.value}-open`]: isOpen.value,
-    [`${subMenuPrefixCls.value}-active`]: isInlineMode.value,
+    [`${subMenuPrefixCls.value}-active`]: isOpen.value,
     [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
     [`${subMenuPrefixCls.value}-selected`]: openSelectedKeySet.value.has(eventKey.value),
   },
 ))
 
-const titlePadding = computed(() => {
-  if (isInlineMode.value) {
-    const indent = inlineIndentValue.value * (levelRef.value - 1)
-    return {
-      paddingLeft: `${Math.max(indent, 0)}px`,
-    }
+const itemPaddingStyle = computed(() => {
+  if (!isInlineMode.value)
+    return undefined
+
+  const depth = levelRef.value
+  const indentUnit = inlineIndentValue.value
+
+  if (mode.value === 'inline') {
+    if (inlineCollapsed.value && depth === 1)
+      return undefined
+    const indent = indentUnit * depth
+    return indent > 0
+      ? { paddingLeft: `${indent}px` }
+      : undefined
   }
-  return undefined
+
+  if (shouldUsePopover.value)
+    return undefined
+
+  const indent = indentUnit * (depth - 1)
+  return indent > 0
+    ? { paddingLeft: `${indent}px` }
+    : undefined
 })
 
 function resolveContent(content?: SubMenuProps['title'] | SubMenuProps['icon'], slot?: () => any) {
@@ -266,7 +278,7 @@ const popupMotion = computed(() => {
         role="menuitem"
         aria-haspopup="true"
         :class="titleClass"
-        :style="titlePadding"
+        :style="itemPaddingStyle"
         @click="handleTitleClick"
       >
         <span v-if="iconNodes.length" :class="`${prefixCls}-item-icon`">
