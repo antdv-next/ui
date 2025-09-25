@@ -10,7 +10,7 @@ import type {
   MenuProps,
   SubMenuType,
 } from './define.ts'
-import { computed, h, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
+import { computed, h, nextTick, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useZIndex } from '../_utils/hooks/useZIndex.ts'
@@ -70,12 +70,19 @@ const inlineCollapsed = computed(() => {
   return props.inlineCollapsed
 })
 
+const displayMode = computed(() => {
+  if (mergedMode.value === 'inline' && inlineCollapsed.value)
+    return 'vertical'
+  return mergedMode.value
+})
+
 const openSelectedKeySet = ref(new Set<Key>())
 const selectedKeySet = ref(new Set<Key>(props.selectedKeys ?? props.defaultSelectedKeys ?? []))
 const openKeySet = ref(new Set<Key>(props.openKeys ?? props.defaultOpenKeys ?? []))
 const popoverSubmenuKeySet = new Set<Key>()
 const popoverSubmenuElements = new Map<Key, { trigger: HTMLElement | null, popup: HTMLElement | null }>()
 const keyPathMap = reactive(new Map<Key, Key[]>())
+const collapsingKeySet = ref(new Set<Key>())
 
 watch(
   () => props.selectedKeys,
@@ -107,11 +114,16 @@ watch(
     if (mergedMode.value !== 'inline')
       return
     if (collapsed) {
+      collapsingKeySet.value = new Set(openKeySet.value)
       inlineStoredOpenKeys.value = Array.from(openKeySet.value)
       if (props.openKeys === undefined)
         openKeySet.value = new Set()
+      nextTick(() => {
+        collapsingKeySet.value = new Set()
+      })
     } else if (inlineStoredOpenKeys.value.length && props.openKeys === undefined) {
       openKeySet.value = new Set(inlineStoredOpenKeys.value)
+      collapsingKeySet.value = new Set()
     }
   },
 )
@@ -219,12 +231,13 @@ function closePopoverSubmenus(keyPath: Key[], force = false) {
   if (!keyPath || keyPath.length <= 1)
     return
 
-  const ancestorKeys = keyPath.slice(1)
+  const ancestorKeys = [...keyPath]
   const nextOpen = new Set(openKeySet.value)
   const keysToClose: Key[] = []
   let changed = false
 
-  for (const key of ancestorKeys) {
+  for (let i = ancestorKeys.length - 1; i >= 0; i -= 1) {
+    const key = ancestorKeys[i]
     if (!popoverSubmenuKeySet.has(key) || !nextOpen.has(key))
       continue
     if (!force && isSubmenuHovered(key))
@@ -311,6 +324,7 @@ function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: bo
 const selectedKeysRef = computed(() => selectedKeySet.value)
 const openKeysRef = computed(() => openKeySet.value)
 const openSelectedKeysRef = computed(() => openSelectedKeySet.value)
+const collapsingKeysRef = computed(() => collapsingKeySet.value)
 
 useProvideMenuContext({
   prefixCls,
@@ -327,6 +341,7 @@ useProvideMenuContext({
   openKeys: openKeysRef,
   selectedKeys: selectedKeysRef,
   openSelectedKeySet: openSelectedKeysRef,
+  collapsingKeys: collapsingKeysRef,
   level: computed(() => 1),
   parentPath: computed(() => []),
   onMenuItemClick: handleItemClick,
@@ -342,7 +357,7 @@ useProvideMenuContext({
 useProvideMenuLevel(ref(1))
 useProvideMenuPath(ref<Key[]>([]))
 useProvideMenuDisabled(ref(false))
-useProvideParentMode(mergedMode)
+useProvideParentMode(displayMode)
 
 function convertNode(node: any) {
   return node
@@ -451,7 +466,7 @@ const rootClassName = computed(() => classNames(
   prefixCls.value,
   `${prefixCls.value}-root`,
   `${prefixCls.value}-${theme.value}`,
-  `${prefixCls.value}-${mergedMode.value}`,
+  `${prefixCls.value}-${displayMode.value}`,
   {
     [`${prefixCls.value}-inline-collapsed`]: inlineCollapsed.value,
   },

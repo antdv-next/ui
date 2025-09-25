@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Key, SubMenuProps, SubMenuSlots } from './define'
-import { computed, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots, watch, watchEffect } from 'vue'
+import { computed, h, isVNode, onMounted, onUnmounted, ref, shallowRef, useSlots, watch, watchEffect } from 'vue'
 import { flattenChildren } from '../_utils/checker'
 import { classNames } from '../_utils/classNames'
 import Tooltip from '../tooltip/tooltip.vue'
@@ -65,6 +65,8 @@ const keyPath = computed<Key[]>(() => [eventKey.value, ...parentPathValue.value]
 
 const mergedTriggerAction = computed(() => props.triggerSubMenuAction ?? menuContext.triggerSubMenuAction?.value ?? 'hover')
 const isDisabled = computed(() => parentDisabled.value || props.disabled)
+const collapsingKeys = computed(() => menuContext.collapsingKeys?.value ?? new Set<Key>())
+const isHovering = ref(false)
 
 const shouldUsePopover = computed(() => {
   if (!props.expandable)
@@ -73,8 +75,11 @@ const shouldUsePopover = computed(() => {
     return false
   if (mode.value === 'horizontal')
     return true
-  if (inlineCollapsed.value && levelRef.value === 1)
+  if (inlineCollapsed.value) {
+    if (collapsingKeys.value.has(eventKey.value))
+      return false
     return true
+  }
   return false
 })
 const isInlineMode = computed(() => {
@@ -116,11 +121,11 @@ const isOpen = computed(() => {
 const submenuClass = computed(() => classNames(
   subMenuPrefixCls.value,
   {
-    [`${subMenuPrefixCls.value}-horizontal`]: !shouldUsePopover.value && mode.value === 'horizontal',
-    [`${subMenuPrefixCls.value}-vertical`]: mode.value === 'vertical' || shouldUsePopover.value,
-    [`${subMenuPrefixCls.value}-inline`]: isInlineMode.value && mode.value === 'inline',
+    [`${subMenuPrefixCls.value}-horizontal`]: mode.value === 'horizontal' && !shouldUsePopover.value,
+    [`${subMenuPrefixCls.value}-vertical`]: shouldUsePopover.value || parentMode.value === 'vertical',
+    [`${subMenuPrefixCls.value}-inline`]: mode.value === 'inline' && !shouldUsePopover.value && !inlineCollapsed.value,
     [`${subMenuPrefixCls.value}-open`]: isOpen.value,
-    [`${subMenuPrefixCls.value}-active`]: isOpen.value,
+    [`${subMenuPrefixCls.value}-active`]: isHovering.value && !isDisabled.value,
     [`${subMenuPrefixCls.value}-disabled`]: isDisabled.value,
     [`${subMenuPrefixCls.value}-selected`]: openSelectedKeySet.value.has(eventKey.value),
   },
@@ -134,7 +139,7 @@ const itemPaddingStyle = computed(() => {
   const indentUnit = inlineIndentValue.value
 
   if (mode.value === 'inline') {
-    if (inlineCollapsed.value && depth === 1)
+    if (inlineCollapsed.value)
       return undefined
     const indent = indentUnit * depth
     return indent > 0
@@ -256,6 +261,21 @@ useProvideParentMode(computed(() => {
 }))
 
 const titleClass = computed(() => `${subMenuPrefixCls.value}-title`)
+function handleMouseEnter() {
+  if (isDisabled.value)
+    return
+  isHovering.value = true
+}
+
+function handleMouseLeave() {
+  isHovering.value = false
+}
+
+watch(isDisabled, (disabled) => {
+  if (disabled)
+    isHovering.value = false
+})
+
 const popupPlacement = computed(() => {
   if (mode.value === 'horizontal' && levelRef.value === 1)
     return 'bottom'
@@ -264,6 +284,22 @@ const popupPlacement = computed(() => {
 const popupMotion = computed(() => {
   return mode.value === 'horizontal' ? 'ant-slide-up' : 'ant-zoom-big'
 })
+const hasTransition = ref(false)
+function handleBeforeLeave() {
+  hasTransition.value = true
+}
+function handleAfterLeave() {
+  hasTransition.value = false
+}
+function handleTransitionStart() {
+  hasTransition.value = true
+}
+
+function handleTransitionEnd() {
+  requestAnimationFrame(() => {
+    hasTransition.value = false
+  })
+}
 </script>
 
 <template>
@@ -272,22 +308,27 @@ const popupMotion = computed(() => {
     role="none"
     :aria-disabled="isDisabled"
     :aria-expanded="isOpen"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
-    <template v-if="!shouldUsePopover && mode === 'inline'">
+    <template v-if="(!shouldUsePopover && mode === 'inline') || hasTransition">
       <div
         role="menuitem"
         aria-haspopup="true"
         :class="titleClass"
-        :style="itemPaddingStyle"
+        :style="shouldUsePopover ? undefined : itemPaddingStyle"
+        @transitionstart="handleTransitionStart"
+        @transitionend="handleTransitionEnd"
         @click="handleTitleClick"
       >
-        <span v-if="iconNodes.length" :class="`${prefixCls}-item-icon`">
-          <component
-            :is="node"
-            v-for="(node, index) in iconNodes"
-            :key="index"
-          />
-        </span>
+        <component
+          :is="node"
+          v-for="(node, index) in iconNodes"
+          :key="index"
+          :class="{
+            [`${prefixCls}-item-icon`]: isVNode(node),
+          }"
+        />
         <span :class="`${prefixCls}-title-content`">
           <template v-if="titleNodes.length">
             <component
@@ -304,6 +345,8 @@ const popupMotion = computed(() => {
       </div>
       <Transition
         v-bind="getCollapseMotionProps()"
+        @before-leave="handleBeforeLeave"
+        @after-leave="handleAfterLeave"
       >
         <ul
           v-if="isOpen"

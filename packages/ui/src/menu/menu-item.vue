@@ -52,7 +52,7 @@ const menuItemClass = computed(() => {
       [`${prefixCls.value}-item-selected`]: isSelected.value,
       [`${prefixCls.value}-item-disabled`]: isDisabled.value,
       [`${prefixCls.value}-item-danger`]: props.danger,
-      [`${prefixCls.value}-item-only-child`]: mode.value === 'inline',
+      [`${prefixCls.value}-item-only-child`]: mode.value === 'inline' && level.value > 1,
     },
   )
 })
@@ -111,7 +111,7 @@ const itemPaddingStyle = computed(() => {
   if (mode.value !== 'inline')
     return undefined
 
-  if (inlineCollapsed.value && level.value === 1)
+  if (inlineCollapsed.value)
     return undefined
 
   const indent = inlineIndentValue.value * level.value
@@ -129,13 +129,14 @@ const itemPaddingStyle = computed(() => {
     @click="handleClick"
   >
     <span :class="`${prefixCls}-item-content`">
-      <span v-if="iconNodes.length" :class="`${prefixCls}-item-icon`">
-        <component
-          :is="node"
-          v-for="(node, index) in iconNodes"
-          :key="index"
-        />
-      </span>
+      <component
+        :is="node"
+        v-for="(node, index) in iconNodes"
+        :key="index"
+        :class="{
+          [`${prefixCls}-item-icon`]: isVNode(node),
+        }"
+      />
       <span :class="`${prefixCls}-title-content`">
         <template v-if="titleNodes.length">
           <component

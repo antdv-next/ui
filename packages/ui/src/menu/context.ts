@@ -17,6 +17,7 @@ export interface MenuContextProps {
   openKeys: Ref<Set<Key>>
   selectedKeys: Ref<Set<Key>>
   openSelectedKeySet: Ref<Set<Key>>
+  collapsingKeys: Ref<Set<Key>>
   level: Ref<number>
   parentPath: Ref<Key[]>
   onMenuItemClick: (info: {
@@ -50,6 +51,7 @@ const defaultMenuContext: MenuContextProps = {
   openKeys: computed(() => new Set<Key>()),
   selectedKeys: computed(() => new Set<Key>()),
   openSelectedKeySet: computed(() => new Set<Key>()),
+  collapsingKeys: computed(() => new Set<Key>()),
   level: computed(() => 1),
   parentPath: computed(() => []),
   onMenuItemClick: () => {},
