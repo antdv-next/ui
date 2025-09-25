@@ -300,6 +300,12 @@ function handleTransitionEnd() {
     hasTransition.value = false
   })
 }
+const appear = shallowRef(false)
+onMounted(() => {
+  requestAnimationFrame(() => {
+    appear.value = true
+  })
+})
 </script>
 
 <template>
@@ -345,6 +351,7 @@ function handleTransitionEnd() {
       </div>
       <Transition
         v-bind="getCollapseMotionProps()"
+        :appear="appear"
         @before-leave="handleBeforeLeave"
         @after-leave="handleAfterLeave"
       >
