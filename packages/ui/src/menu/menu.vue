@@ -74,6 +74,7 @@ const openSelectedKeySet = ref(new Set<Key>())
 const selectedKeySet = ref(new Set<Key>(props.selectedKeys ?? props.defaultSelectedKeys ?? []))
 const openKeySet = ref(new Set<Key>(props.openKeys ?? props.defaultOpenKeys ?? []))
 const popoverSubmenuKeySet = new Set<Key>()
+const popoverSubmenuElements = new Map<Key, { trigger: HTMLElement | null, popup: HTMLElement | null }>()
 
 watch(
   () => props.selectedKeys,
@@ -148,8 +149,36 @@ function unregisterPath(key: Key) {
 function setPopoverSubmenu(key: Key, isPopover: boolean) {
   if (isPopover)
     popoverSubmenuKeySet.add(key)
-  else
+  else {
     popoverSubmenuKeySet.delete(key)
+    popoverSubmenuElements.delete(key)
+  }
+}
+
+function setPopoverElements(key: Key, elements: { trigger: HTMLElement | null, popup: HTMLElement | null } | null) {
+  if (!elements) {
+    popoverSubmenuElements.delete(key)
+    return
+  }
+
+  popoverSubmenuElements.set(key, elements)
+}
+
+function isElementHovered(element: HTMLElement | null | undefined) {
+  if (!element)
+    return false
+  try {
+    return element.matches(':hover')
+  } catch {
+    return false
+  }
+}
+
+function isSubmenuHovered(key: Key) {
+  const entry = popoverSubmenuElements.get(key)
+  if (!entry)
+    return false
+  return isElementHovered(entry.trigger) || isElementHovered(entry.popup)
 }
 
 function toArray(set: Set<Key>) {
@@ -186,7 +215,7 @@ function triggerSelect(action: 'select' | 'deselect' | null, nextSelectedKeys: S
   }
 }
 
-function closePopoverSubmenus(keyPath: Key[]) {
+function closePopoverSubmenus(keyPath: Key[], force = false) {
   if (!keyPath || keyPath.length <= 1)
     return
 
@@ -195,13 +224,15 @@ function closePopoverSubmenus(keyPath: Key[]) {
   const keysToClose: Key[] = []
   let changed = false
 
-  ancestorKeys.forEach((key) => {
-    if (popoverSubmenuKeySet.has(key) && nextOpen.has(key)) {
-      nextOpen.delete(key)
-      keysToClose.push(key)
-      changed = true
-    }
-  })
+  for (const key of ancestorKeys) {
+    if (!popoverSubmenuKeySet.has(key) || !nextOpen.has(key))
+      continue
+    if (!force && isSubmenuHovered(key))
+      break
+    nextOpen.delete(key)
+    keysToClose.push(key)
+    changed = true
+  }
 
   if (!changed)
     return
@@ -242,7 +273,7 @@ function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSe
   }
 
   triggerSelect(action, nextSelected, info)
-  closePopoverSubmenus(info.keyPath)
+  closePopoverSubmenus(info.keyPath, true)
 
   const finalSelectedKeys = toArray(nextSelected)
   const clickInfo = {
@@ -304,6 +335,8 @@ useProvideMenuContext({
   unregisterPath,
   getKeyPath: key => keyPathMap.get(key),
   setPopoverSubmenu,
+  closePopoverSubmenus,
+  setPopoverElements,
 })
 
 useProvideMenuLevel(ref(1))

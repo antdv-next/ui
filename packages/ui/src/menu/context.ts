@@ -31,6 +31,8 @@ export interface MenuContextProps {
   unregisterPath: (key: Key) => void
   getKeyPath: (key: Key) => Key[] | undefined
   setPopoverSubmenu: (key: Key, isPopover: boolean) => void
+  closePopoverSubmenus: (keyPath: Key[], force?: boolean) => void
+  setPopoverElements: (key: Key, elements: { trigger: HTMLElement | null, popup: HTMLElement | null } | null) => void
 }
 
 const defaultMenuContext: MenuContextProps = {
@@ -56,6 +58,8 @@ const defaultMenuContext: MenuContextProps = {
   unregisterPath: () => {},
   getKeyPath: () => undefined,
   setPopoverSubmenu: () => {},
+  closePopoverSubmenus: () => {},
+  setPopoverElements: () => {},
 }
 
 const MenuContextKey: InjectionKey<MenuContextProps> = Symbol('MenuContextKey')
