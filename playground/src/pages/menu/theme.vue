@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { MenuItemType } from 'antdv-next'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import { h, ref } from 'vue'
 
 type MenuTheme = 'light' | 'dark'
 
-const items = [
+const items: MenuItemType[] = [
   {
     key: 'sub1',
     label: 'Navigation One',
@@ -53,8 +54,8 @@ const items = [
 const theme = ref<MenuTheme>('dark')
 const selectedKeys = ref<string[]>(['1'])
 
-function changeTheme(value: boolean) {
-  theme.value = value ? 'dark' : 'light'
+function changeTheme() {
+  theme.value = theme.value === 'dark' ? 'light' : 'dark'
 }
 
 function handleClick(info: { key: string | number }) {
@@ -64,20 +65,23 @@ function handleClick(info: { key: string | number }) {
 
 <template>
   <div>
-    <a-switch
-      :checked="theme === 'dark'"
-      checked-children="Dark"
-      un-checked-children="Light"
-      @change="changeTheme"
-    />
+    <!--    <a-switch -->
+    <!--      :checked="theme === 'dark'" -->
+    <!--      checked-children="Dark" -->
+    <!--      un-checked-children="Light" -->
+    <!--      @change="changeTheme" -->
+    <!--    /> -->
+    <a-button @click="changeTheme">
+      {{ theme === 'dark' ? 'Dark' : 'Light' }}
+    </a-button>
     <div class="mt-16px">
       <a-menu
+        v-model:selected-keys="selectedKeys"
         :theme="theme"
         mode="inline"
         style="width: 256px"
         :items="items"
         :default-open-keys="['sub1']"
-        v-model:selected-keys="selectedKeys"
         @click="handleClick"
       />
     </div>

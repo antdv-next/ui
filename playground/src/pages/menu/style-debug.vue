@@ -62,12 +62,12 @@ function handleClick(info: { key: string | number }) {
     />
     <div class="mt-16px">
       <a-menu
+        v-model:selected-keys="selectedKeys"
         :theme="menuTheme"
         mode="inline"
         inline-collapsed
         :items="items"
-        v-model:selected-keys="selectedKeys"
-        :root-class-name="'debug-menu'"
+        root-class-name="debug-menu"
         @click="handleClick"
       />
     </div>

@@ -14,18 +14,19 @@ export type {
   LayoutSiderTheme,
 } from './layout'
 export type {
-  ItemType as MenuItemType,
-  Key as MenuKey,
   MenuDividerProps,
   MenuEmits,
   MenuItemGroupProps,
   MenuItemProps,
+  ItemType as MenuItemType,
+  Key as MenuKey,
   MenuMode,
   MenuProps,
-  MenuTheme,
   SubMenuProps as MenuSubMenuProps,
+  MenuTheme,
   TriggerSubMenuAction,
 } from './menu'
+
 export type { PopconfirmProps, PopconfirmRef } from './popconfirm'
 export type { PopoverProps, PopoverRef } from './popover'
 export type { QRCodeProps } from './qrcode'

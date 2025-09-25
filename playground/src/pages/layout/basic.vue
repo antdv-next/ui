@@ -42,31 +42,49 @@ const layoutStyle: CSSProperties = {
 <template>
   <a-flex gap="middle" wrap="wrap">
     <a-layout :style="layoutStyle">
-      <a-layout-header :style="headerStyle">Header</a-layout-header>
-      <a-layout-content :style="contentStyle">Content</a-layout-content>
-      <a-layout-footer :style="footerStyle">Footer</a-layout-footer>
+      <a-layout-header :style="headerStyle">
+        Header
+      </a-layout-header>
+      <a-layout-content :style="contentStyle">
+        Content
+      </a-layout-content>
+      <a-layout-footer :style="footerStyle">
+        Footer
+      </a-layout-footer>
     </a-layout>
 
     <a-layout :style="layoutStyle">
-      <a-layout-header :style="headerStyle">Header</a-layout-header>
+      <a-layout-header :style="headerStyle">
+        Header
+      </a-layout-header>
       <a-layout>
         <a-layout-sider width="25%" :style="siderStyle">
           Sider
         </a-layout-sider>
-        <a-layout-content :style="contentStyle">Content</a-layout-content>
+        <a-layout-content :style="contentStyle">
+          Content
+        </a-layout-content>
       </a-layout>
-      <a-layout-footer :style="footerStyle">Footer</a-layout-footer>
+      <a-layout-footer :style="footerStyle">
+        Footer
+      </a-layout-footer>
     </a-layout>
 
     <a-layout :style="layoutStyle">
-      <a-layout-header :style="headerStyle">Header</a-layout-header>
+      <a-layout-header :style="headerStyle">
+        Header
+      </a-layout-header>
       <a-layout>
-        <a-layout-content :style="contentStyle">Content</a-layout-content>
+        <a-layout-content :style="contentStyle">
+          Content
+        </a-layout-content>
         <a-layout-sider width="25%" :style="siderStyle">
           Sider
         </a-layout-sider>
       </a-layout>
-      <a-layout-footer :style="footerStyle">Footer</a-layout-footer>
+      <a-layout-footer :style="footerStyle">
+        Footer
+      </a-layout-footer>
     </a-layout>
 
     <a-layout :style="layoutStyle">
@@ -74,9 +92,15 @@ const layoutStyle: CSSProperties = {
         Sider
       </a-layout-sider>
       <a-layout>
-        <a-layout-header :style="headerStyle">Header</a-layout-header>
-        <a-layout-content :style="contentStyle">Content</a-layout-content>
-        <a-layout-footer :style="footerStyle">Footer</a-layout-footer>
+        <a-layout-header :style="headerStyle">
+          Header
+        </a-layout-header>
+        <a-layout-content :style="contentStyle">
+          Content
+        </a-layout-content>
+        <a-layout-footer :style="footerStyle">
+          Footer
+        </a-layout-footer>
       </a-layout>
     </a-layout>
   </a-flex>
