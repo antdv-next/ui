@@ -27,6 +27,12 @@ export type {
   TriggerSubMenuAction,
 } from './menu'
 
+export type {
+  DropdownButtonProps,
+  DropdownProps,
+  DropdownExpose,
+} from './dropdown'
+
 export type { PopconfirmProps, PopconfirmRef } from './popconfirm'
 export type { PopoverProps, PopoverRef } from './popover'
 export type { QRCodeProps } from './qrcode'

@@ -57,6 +57,11 @@ declare module 'vue-router/auto-routes' {
     '/divider/variant': RouteRecordInfo<'/divider/variant', '/divider/variant', Record<never, never>, Record<never, never>>,
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
+    '/dropdown/basic': RouteRecordInfo<'/dropdown/basic', '/dropdown/basic', Record<never, never>, Record<never, never>>,
+    '/dropdown/button': RouteRecordInfo<'/dropdown/button', '/dropdown/button', Record<never, never>, Record<never, never>>,
+    '/dropdown/context-menu': RouteRecordInfo<'/dropdown/context-menu', '/dropdown/context-menu', Record<never, never>, Record<never, never>>,
+    '/dropdown/placement': RouteRecordInfo<'/dropdown/placement', '/dropdown/placement', Record<never, never>, Record<never, never>>,
+    '/dropdown/trigger': RouteRecordInfo<'/dropdown/trigger', '/dropdown/trigger', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
     '/layout/basic': RouteRecordInfo<'/layout/basic', '/layout/basic', Record<never, never>, Record<never, never>>,
     '/layout/collapsible': RouteRecordInfo<'/layout/collapsible', '/layout/collapsible', Record<never, never>, Record<never, never>>,
@@ -295,6 +300,26 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/divider/with-text.vue': {
       routes: '/divider/with-text'
+      views: never
+    }
+    'src/pages/dropdown/basic.vue': {
+      routes: '/dropdown/basic'
+      views: never
+    }
+    'src/pages/dropdown/button.vue': {
+      routes: '/dropdown/button'
+      views: never
+    }
+    'src/pages/dropdown/context-menu.vue': {
+      routes: '/dropdown/context-menu'
+      views: never
+    }
+    'src/pages/dropdown/placement.vue': {
+      routes: '/dropdown/placement'
+      views: never
+    }
+    'src/pages/dropdown/trigger.vue': {
+      routes: '/dropdown/trigger'
       views: never
     }
     'src/pages/flex/basic.vue': {
