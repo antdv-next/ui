@@ -58,6 +58,33 @@ declare module 'vue-router/auto-routes' {
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
+    '/layout/basic': RouteRecordInfo<'/layout/basic', '/layout/basic', Record<never, never>, Record<never, never>>,
+    '/layout/collapsible': RouteRecordInfo<'/layout/collapsible', '/layout/collapsible', Record<never, never>, Record<never, never>>,
+    '/layout/component-token': RouteRecordInfo<'/layout/component-token', '/layout/component-token', Record<never, never>, Record<never, never>>,
+    '/layout/custom-trigger': RouteRecordInfo<'/layout/custom-trigger', '/layout/custom-trigger', Record<never, never>, Record<never, never>>,
+    '/layout/custom-trigger-debug': RouteRecordInfo<'/layout/custom-trigger-debug', '/layout/custom-trigger-debug', Record<never, never>, Record<never, never>>,
+    '/layout/fixed': RouteRecordInfo<'/layout/fixed', '/layout/fixed', Record<never, never>, Record<never, never>>,
+    '/layout/fixed-sider': RouteRecordInfo<'/layout/fixed-sider', '/layout/fixed-sider', Record<never, never>, Record<never, never>>,
+    '/layout/responsive': RouteRecordInfo<'/layout/responsive', '/layout/responsive', Record<never, never>, Record<never, never>>,
+    '/layout/side': RouteRecordInfo<'/layout/side', '/layout/side', Record<never, never>, Record<never, never>>,
+    '/layout/top': RouteRecordInfo<'/layout/top', '/layout/top', Record<never, never>, Record<never, never>>,
+    '/layout/top-side': RouteRecordInfo<'/layout/top-side', '/layout/top-side', Record<never, never>, Record<never, never>>,
+    '/layout/top-side-2': RouteRecordInfo<'/layout/top-side-2', '/layout/top-side-2', Record<never, never>, Record<never, never>>,
+    '/menu/basic': RouteRecordInfo<'/menu/basic', '/menu/basic', Record<never, never>, Record<never, never>>,
+    '/menu/component-token': RouteRecordInfo<'/menu/component-token', '/menu/component-token', Record<never, never>, Record<never, never>>,
+    '/menu/extra-style': RouteRecordInfo<'/menu/extra-style', '/menu/extra-style', Record<never, never>, Record<never, never>>,
+    '/menu/horizontal': RouteRecordInfo<'/menu/horizontal', '/menu/horizontal', Record<never, never>, Record<never, never>>,
+    '/menu/horizontal-dark': RouteRecordInfo<'/menu/horizontal-dark', '/menu/horizontal-dark', Record<never, never>, Record<never, never>>,
+    '/menu/inline': RouteRecordInfo<'/menu/inline', '/menu/inline', Record<never, never>, Record<never, never>>,
+    '/menu/inline-collapsed': RouteRecordInfo<'/menu/inline-collapsed', '/menu/inline-collapsed', Record<never, never>, Record<never, never>>,
+    '/menu/menu-v4': RouteRecordInfo<'/menu/menu-v4', '/menu/menu-v4', Record<never, never>, Record<never, never>>,
+    '/menu/nested': RouteRecordInfo<'/menu/nested', '/menu/nested', Record<never, never>, Record<never, never>>,
+    '/menu/sider-current': RouteRecordInfo<'/menu/sider-current', '/menu/sider-current', Record<never, never>, Record<never, never>>,
+    '/menu/style-debug': RouteRecordInfo<'/menu/style-debug', '/menu/style-debug', Record<never, never>, Record<never, never>>,
+    '/menu/submenu-theme': RouteRecordInfo<'/menu/submenu-theme', '/menu/submenu-theme', Record<never, never>, Record<never, never>>,
+    '/menu/switch-mode': RouteRecordInfo<'/menu/switch-mode', '/menu/switch-mode', Record<never, never>, Record<never, never>>,
+    '/menu/theme': RouteRecordInfo<'/menu/theme', '/menu/theme', Record<never, never>, Record<never, never>>,
+    '/menu/vertical': RouteRecordInfo<'/menu/vertical', '/menu/vertical', Record<never, never>, Record<never, never>>,
     '/popconfirm/basic': RouteRecordInfo<'/popconfirm/basic', '/popconfirm/basic', Record<never, never>, Record<never, never>>,
     '/popconfirm/dynamic-trigger': RouteRecordInfo<'/popconfirm/dynamic-trigger', '/popconfirm/dynamic-trigger', Record<never, never>, Record<never, never>>,
     '/popconfirm/icon': RouteRecordInfo<'/popconfirm/icon', '/popconfirm/icon', Record<never, never>, Record<never, never>>,
@@ -283,6 +310,114 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/flex/basic.vue': {
       routes: '/flex/basic'
+      views: never
+    }
+    'src/pages/layout/basic.vue': {
+      routes: '/layout/basic'
+      views: never
+    }
+    'src/pages/layout/collapsible.vue': {
+      routes: '/layout/collapsible'
+      views: never
+    }
+    'src/pages/layout/component-token.vue': {
+      routes: '/layout/component-token'
+      views: never
+    }
+    'src/pages/layout/custom-trigger.vue': {
+      routes: '/layout/custom-trigger'
+      views: never
+    }
+    'src/pages/layout/custom-trigger-debug.vue': {
+      routes: '/layout/custom-trigger-debug'
+      views: never
+    }
+    'src/pages/layout/fixed.vue': {
+      routes: '/layout/fixed'
+      views: never
+    }
+    'src/pages/layout/fixed-sider.vue': {
+      routes: '/layout/fixed-sider'
+      views: never
+    }
+    'src/pages/layout/responsive.vue': {
+      routes: '/layout/responsive'
+      views: never
+    }
+    'src/pages/layout/side.vue': {
+      routes: '/layout/side'
+      views: never
+    }
+    'src/pages/layout/top.vue': {
+      routes: '/layout/top'
+      views: never
+    }
+    'src/pages/layout/top-side.vue': {
+      routes: '/layout/top-side'
+      views: never
+    }
+    'src/pages/layout/top-side-2.vue': {
+      routes: '/layout/top-side-2'
+      views: never
+    }
+    'src/pages/menu/basic.vue': {
+      routes: '/menu/basic'
+      views: never
+    }
+    'src/pages/menu/component-token.vue': {
+      routes: '/menu/component-token'
+      views: never
+    }
+    'src/pages/menu/extra-style.vue': {
+      routes: '/menu/extra-style'
+      views: never
+    }
+    'src/pages/menu/horizontal.vue': {
+      routes: '/menu/horizontal'
+      views: never
+    }
+    'src/pages/menu/horizontal-dark.vue': {
+      routes: '/menu/horizontal-dark'
+      views: never
+    }
+    'src/pages/menu/inline.vue': {
+      routes: '/menu/inline'
+      views: never
+    }
+    'src/pages/menu/inline-collapsed.vue': {
+      routes: '/menu/inline-collapsed'
+      views: never
+    }
+    'src/pages/menu/menu-v4.vue': {
+      routes: '/menu/menu-v4'
+      views: never
+    }
+    'src/pages/menu/nested.vue': {
+      routes: '/menu/nested'
+      views: never
+    }
+    'src/pages/menu/sider-current.vue': {
+      routes: '/menu/sider-current'
+      views: never
+    }
+    'src/pages/menu/style-debug.vue': {
+      routes: '/menu/style-debug'
+      views: never
+    }
+    'src/pages/menu/submenu-theme.vue': {
+      routes: '/menu/submenu-theme'
+      views: never
+    }
+    'src/pages/menu/switch-mode.vue': {
+      routes: '/menu/switch-mode'
+      views: never
+    }
+    'src/pages/menu/theme.vue': {
+      routes: '/menu/theme'
+      views: never
+    }
+    'src/pages/menu/vertical.vue': {
+      routes: '/menu/vertical'
       views: never
     }
     'src/pages/popconfirm/basic.vue': {

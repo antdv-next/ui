@@ -46,7 +46,7 @@ export interface ConfigComponentProps {
   result?: ComponentStyleConfig
   // slider?: SliderConfig;
   breadcrumb?: ComponentStyleConfig
-  // menu?: MenuConfig;
+  menu?: ComponentStyleConfig
   checkbox?: ComponentStyleConfig
   // descriptions?: DescriptionsConfig;
   // empty?: EmptyConfig;
@@ -196,6 +196,8 @@ export function useComponentConfig<T extends keyof ConfigComponentProps>(propNam
 export interface ComponentStyleConfig {
   className?: string
   style?: CSSProperties
+  classNames?: Record<string, string>
+  styles?: Record<string, CSSProperties>
 }
 export type ButtonConfig = ComponentStyleConfig
   & Pick<ButtonProps, 'classNames' | 'styles' | 'autoInsertSpace' | 'variant' | 'color' | 'shape'>

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { Placement } from '@floating-ui/vue'
 import type { CSSProperties, PropType } from 'vue'
-import type { TooltipEmits, TooltipProps } from './define'
+import type { TooltipEmits, TooltipProps, TooltipSlots } from './define'
 import { arrow, autoUpdate, flip, limitShift, offset, shift, useFloating } from '@floating-ui/vue'
 import { onClickOutside } from '@vueuse/core'
-import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, useAttrs, useSlots, watch } from 'vue'
+import { computed, defineComponent, nextTick, onBeforeUnmount, ref, shallowRef, useSlots, watch } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import { useZIndex, useZIndexProvider } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig } from '../config-provider/context'
@@ -28,12 +28,14 @@ const props = withDefaults(
     defaultOpen: false,
     open: undefined,
     zIndex: 1070,
+    hasInner: true,
   },
 )
 
 const emit = defineEmits<TooltipEmits>()
+
+defineSlots<TooltipSlots>()
 const slots = useSlots()
-const attrs = useAttrs()
 
 const ARROW_SAFE_INSET = 10
 const ARROW_ALIGNED_INSET = 4
@@ -54,8 +56,7 @@ const arrowRef = shallowRef<HTMLDivElement>()
 // 计算属性
 const prefixCls = computed(() => {
   const getPrefixCls = parentContext.value?.getPrefixCls
-  const attrPrefix = (attrs.prefixCls as string | undefined) || (attrs['prefix-cls'] as string | undefined)
-  const customPrefix = props.prefixCls ?? attrPrefix
+  const customPrefix = props.prefixCls
 
   if (getPrefixCls) {
     return getPrefixCls('tooltip', customPrefix)
@@ -67,8 +68,8 @@ const prefixCls = computed(() => {
 const transitionName = computed(() => props.transitionName || 'ant-zoom-big-fast')
 
 const transitionClasses = computed(() => {
-  const base = transitionName.value
-  return {
+  const base = `${transitionName.value}`
+  const cls = {
     enterFrom: `${base}-enter`,
     enterActive: `${base}-enter ${base}-enter-active`,
     enterTo: `${base}-enter ${base}-enter-active`,
@@ -79,6 +80,7 @@ const transitionClasses = computed(() => {
     appearActive: `${base}-appear ${base}-appear-active`,
     appearTo: `${base}-appear ${base}-appear-active`,
   }
+  return cls
 })
 
 const floatingPlacement = computed(() => {
@@ -87,6 +89,29 @@ const floatingPlacement = computed(() => {
 
 const mergedOpen = computed(() => props.open ?? isOpen.value)
 const mergedTrigger = computed(() => Array.isArray(props.trigger) ? props.trigger : [props.trigger])
+
+const floatingReady = ref(false)
+const MAX_POSITION_ATTEMPTS = 5
+let rafId: number | null = null
+
+function cancelPositionRaf() {
+  if (rafId != null) {
+    cancelAnimationFrame(rafId)
+    rafId = null
+  }
+}
+
+watch(mergedOpen, (open) => {
+  if (open) {
+    floatingReady.value = false
+    nextTick(() => {
+      waitForPosition()
+    })
+  } else {
+    cancelPositionRaf()
+    floatingReady.value = false
+  }
+})
 
 // floating-ui 中间件
 const middleware = computed(() => {
@@ -150,13 +175,37 @@ const middleware = computed(() => {
 })
 
 // floating-ui
-const { floatingStyles, placement: actualPlacement, middlewareData } = useFloating(reference, floating, {
+const {
+  floatingStyles,
+  placement: actualPlacement,
+  middlewareData,
+  x,
+  y,
+} = useFloating(reference, floating, {
   placement: floatingPlacement,
   middleware,
   transform: false,
   whileElementsMounted: autoUpdate,
 })
+function waitForPosition(attempt = 0) {
+  cancelPositionRaf()
+  rafId = requestAnimationFrame(() => {
+    if (!mergedOpen.value) {
+      rafId = null
+      return
+    }
 
+    const hasPosition = x.value != null && y.value != null
+
+    if (hasPosition || attempt >= MAX_POSITION_ATTEMPTS) {
+      floatingReady.value = true
+      rafId = null
+      return
+    }
+
+    waitForPosition(attempt + 1)
+  })
+}
 const basePlacement = computed(() => {
   const placement = actualPlacement.value || floatingPlacement.value
   return (placement || 'top').split('-')[0]
@@ -356,13 +405,13 @@ onBeforeUnmount(() => {
   if (reference.value) {
     removeEventListeners(reference.value)
   }
+  cancelPositionRaf()
 })
 
 // Styles and classes
 const cls = computed(() => {
   // 将 floating-ui 的 placement 转换回 Ant Design 的格式
   const antdPlacement = convertFloatingPlacementToAntd(actualPlacement.value || props.placement)
-
   return classNames(
     prefixCls.value,
     `${prefixCls.value}-placement-${antdPlacement}`,
@@ -418,6 +467,7 @@ const tooltipStyles = computed(() => {
   } else {
     delete style['--arrow-y']
   }
+
   return style
 })
 
@@ -545,7 +595,7 @@ onClickOutside(
         </div>
 
         <!-- Content -->
-        <div :class="innerClasses" :style="innerStyles">
+        <div v-if="hasInner" :class="innerClasses" :style="innerStyles">
           <template v-if="$slots.title">
             <slot name="title" />
           </template>
@@ -556,6 +606,17 @@ onClickOutside(
             <InlineRender :content="tooltipContent" />
           </template>
         </div>
+        <template v-else>
+          <template v-if="$slots.title">
+            <slot name="title" />
+          </template>
+          <template v-else-if="$slots.overlay">
+            <slot name="overlay" />
+          </template>
+          <template v-else>
+            <InlineRender :content="tooltipContent" />
+          </template>
+        </template>
       </div>
     </Transition>
   </Teleport>

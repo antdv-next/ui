@@ -120,7 +120,7 @@
   --ant-menu-horizontal-item-border-radius: 0;
   --ant-menu-horizontal-item-hover-bg: transparent;
   --ant-menu-item-height: 40px;
-  --ant-menu-group-title-line-height: 1.5714285714285714px;
+  --ant-menu-group-title-line-height: 1.5714285714285714;
   --ant-menu-collapsed-width: 80px;
   --ant-menu-popup-bg: var(--ant-color-bg-elevated);
   --ant-menu-item-margin-block: 4px;
@@ -130,8 +130,8 @@
   --ant-menu-icon-margin-inline-end: 10px;
   --ant-menu-collapsed-icon-size: 16px;
   --ant-menu-group-title-font-size: 14px;
-  --ant-menu-dark-item-disabled-color: rgba(0, 0, 0, 0.25);
-  --ant-menu-dark-item-color: rgba(0, 0, 0, 0.65);
+  --ant-menu-dark-item-disabled-color: rgba(255, 255, 255, 0.25);
+  --ant-menu-dark-item-color: rgba(255, 255, 255, 0.65);
   --ant-menu-dark-danger-item-color: var(--ant-color-error);
   --ant-menu-dark-item-bg: #001529;
   --ant-menu-dark-popup-bg: #001529;
@@ -140,13 +140,14 @@
   --ant-menu-dark-item-selected-bg: var(--ant-color-primary);
   --ant-menu-dark-danger-item-selected-bg: var(--ant-color-error);
   --ant-menu-dark-item-hover-bg: transparent;
-  --ant-menu-dark-group-title-color: rgba(0, 0, 0, 0.65);
+  --ant-menu-dark-group-title-color: rgba(255, 255, 255, 0.65);
   --ant-menu-dark-item-hover-color: var(--ant-color-text-light-solid);
   --ant-menu-dark-danger-item-hover-color: var(--ant-color-error-hover);
   --ant-menu-dark-danger-item-selected-color: var(--ant-color-text-light-solid);
   --ant-menu-dark-danger-item-active-bg: var(--ant-color-error);
   --ant-menu-item-width: calc(100% - 8px);
 }
+
 .ant-menu {
   &::before {
     display: table;
@@ -352,6 +353,7 @@
       border-radius: var(--ant-border-radius-lg);
       box-shadow: none;
       transform-origin: 0 0;
+
       &.ant-menu-submenu {
         background: transparent;
       }
@@ -366,6 +368,7 @@
       }
       > .ant-menu {
         border-radius: var(--ant-border-radius-lg);
+
         .ant-menu-item,
         .ant-menu-submenu-title {
           position: relative;
@@ -1158,19 +1161,18 @@
   }
 }
 .ant-menu {
-  .ant-motion-collapse-legacy {
-    overflow: hidden;
-    &-active {
-      transition:
-        height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
-        opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
-    }
-  }
   .ant-motion-collapse {
     overflow: hidden;
     transition:
       height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
       opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+    // 添加 will-change 优化动画性能
+    will-change: height, opacity;
+
+    // 确保子元素不会影响高度计算
+    > * {
+      will-change: auto;
+    }
   }
 }
 .ant-slide-up-enter,

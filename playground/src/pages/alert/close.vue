@@ -2,7 +2,6 @@
 import { CloseSquareOutlined } from '@ant-design/icons-vue'
 
 function onClose(e: MouseEvent) {
-  // eslint-disable-next-line no-console
   console.log(e, 'I was closed.')
 }
 </script>

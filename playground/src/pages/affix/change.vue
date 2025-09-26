@@ -1,6 +1,5 @@
 <script setup lang="ts">
 function handleChange(affixed?: boolean) {
-  // eslint-disable-next-line no-console
   console.log('Affix status changed:', affixed)
 }
 </script>
