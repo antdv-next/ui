@@ -15,6 +15,7 @@ import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useZIndex } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
+import { useLayoutSider } from '../layout/context.ts'
 import {
   useProvideMenuContext,
   useProvideMenuDisabled,
@@ -38,6 +39,7 @@ const props = withDefaults(defineProps<MenuProps>(), {
   inlineIndent: 24,
   selectable: true,
   multiple: false,
+  inlineCollapsed: undefined,
   triggerSubMenuAction: 'hover',
   subMenuOpenDelay: 0.1,
   subMenuCloseDelay: 0.1,
@@ -64,10 +66,14 @@ const openDelay = computed(() => props.subMenuOpenDelay ?? 0)
 const closeDelay = computed(() => props.subMenuCloseDelay ?? 0.1)
 const [zIndex] = useZIndex('Menu')
 
+const layoutSider = useLayoutSider()
+
 const inlineCollapsed = computed(() => {
   if (mergedMode.value !== 'inline')
     return false
-  return props.inlineCollapsed
+  if (props.inlineCollapsed !== undefined)
+    return props.inlineCollapsed
+  return layoutSider.siderCollapsed?.value ?? false
 })
 
 const displayMode = computed(() => {

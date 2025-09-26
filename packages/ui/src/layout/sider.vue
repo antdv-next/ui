@@ -6,7 +6,7 @@ import { computed, defineComponent, h, onBeforeUnmount, ref, shallowRef, watch }
 import { classNames } from '../_utils/classNames'
 import { addMediaQueryListener, removeMediaQueryListener } from '../_utils/mediaQueryUtil'
 import { useConfigContext } from '../config-provider/context'
-import { useLayoutContext } from './context'
+import { useLayoutContext, useProviderLayoutSider } from './context'
 import { dimensionMaxMap } from './define'
 
 let siderId = 0
@@ -182,6 +182,10 @@ export default defineComponent({
       get collapsed() {
         return mergedCollapsed.value
       },
+    })
+
+    useProviderLayoutSider({
+      siderCollapsed: mergedCollapsed,
     })
 
     return () => {

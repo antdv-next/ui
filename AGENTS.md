@@ -55,10 +55,10 @@ pnpm -F antdv-next test -t "Button disabled"
 	•	Cover new props, events, and visual states in tests.
 	•	Assertions should be based on rendered output or emitted events, not internal implementation details.
 
-Commit & Pull Request Guidelines
-•	Follow commit conventions: prefix with feat:, fix:, docs:, etc., followed by a concise summary.
-•	Group related changes into a single commit, and ensure linting and tests pass before pushing.
-•	Pull Requests should include:
+## Commit & Pull Request Guidelines
+*	Follow commit conventions: prefix with feat:, fix:, docs:, etc., followed by a concise summary.
+*	Group related changes into a single commit, and ensure linting and tests pass before pushing.
+*	Pull Requests should include:
 1.	A clear description of the change
 2.	Links to related issues or RFCs
 3.	Test notes (including snapshot updates)

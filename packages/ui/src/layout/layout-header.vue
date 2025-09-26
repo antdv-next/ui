@@ -22,24 +22,13 @@ const prefixCls = computed(() => configCtx.getPrefixCls('layout', props.prefixCl
 const prefixWithSuffix = computed(() => (props.suffixCls ? `${prefixCls.value}-${props.suffixCls}` : prefixCls.value))
 const baseCls = computed(() => props.prefixCls ?? prefixWithSuffix.value)
 
-const attrClass = computed(() => attrs.class)
-const attrStyle = computed(() => attrs.style as StyleValue | undefined)
-
 const className = computed(() => classNames(
   baseCls.value,
-  props.className,
   props.rootClassName,
-  attrClass.value,
 ))
 
 const mergedStyle = computed<StyleValue | undefined>(() => {
   const styleList = [] as StyleValue[]
-  if (attrStyle.value) {
-    styleList.push(attrStyle.value)
-  }
-  if (props.style) {
-    styleList.push(props.style)
-  }
   if (styleList.length === 0) {
     return undefined
   }
@@ -60,8 +49,8 @@ const TagName = computed(() => props.tagName ?? 'header')
   <component
     :is="TagName"
     v-bind="restAttrs"
-    :class="className"
-    :style="mergedStyle"
+    :class="[className, $attrs.class]"
+    :style="[mergedStyle, $attrs.style]"
   >
     <slot />
   </component>
