@@ -52,11 +52,12 @@ const footerText = `Ant Design ©${new Date().getFullYear()} Created by Ant UED`
       />
     </a-layout-header>
     <a-layout-content :style="contentStyle">
-      <a-breadcrumb :style="breadcrumbStyle">
-        <a-breadcrumb-item>Home</a-breadcrumb-item>
-        <a-breadcrumb-item>List</a-breadcrumb-item>
-        <a-breadcrumb-item>App</a-breadcrumb-item>
-      </a-breadcrumb>
+      <div :style="breadcrumbStyle" />
+      <!--      <a-breadcrumb :style="breadcrumbStyle"> -->
+      <!--        <a-breadcrumb-item>Home</a-breadcrumb-item> -->
+      <!--        <a-breadcrumb-item>List</a-breadcrumb-item> -->
+      <!--        <a-breadcrumb-item>App</a-breadcrumb-item> -->
+      <!--      </a-breadcrumb> -->
       <div :style="innerContentStyle">
         Content
       </div>

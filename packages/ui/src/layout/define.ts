@@ -5,11 +5,9 @@ export type LayoutTagType = 'header' | 'footer' | 'main' | 'div'
 
 export interface LayoutBasicProps {
   prefixCls?: string
-  className?: string
   rootClassName?: string
   suffixCls?: string
   tagName?: LayoutTagType
-  style?: CSSProperties
 }
 
 export interface LayoutProps extends LayoutBasicProps {
