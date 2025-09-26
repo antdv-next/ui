@@ -2,53 +2,66 @@
 
 ## External References
 For easier referencing and consistency checks, include the upstream repositories:
-- Ant Design (React) — https://github.com/ant-design/ant-design  [oai_citation:0‡GitHub](https://github.com/ant-design/ant-design?utm_source=chatgpt.com)
-- react-component (React component utilities) — https://github.com/react-component  [oai_citation:1‡GitHub](https://github.com/react-component?utm_source=chatgpt.com)
+- Ant Design (React) — https://github.com/ant-design/ant-design
+- react-component (React component utilities) — https://github.com/react-component
 
 ## Project Structure & Module Organization
 This repository is managed with **pnpm workspaces**.  
 The core source code lives in `packages/ui/src`, organized by component (`button/`, `tooltip/`, etc.), with shared utilities in `_utils/`.  
-Tests mirror component structure under `packages/ui/tests`, shared fixtures in `shared/`.  
+Tests are located in `packages/ui/tests`, mirroring the feature folder structure (e.g. `button/`), with shared fixtures in `shared/`.  
 Use the `playground/` app for manual QA and demos, wired via the workspace.  
-Key config files (`eslint.config.ts`, `vitest.config.ts`, `tsconfig*.json`) sit at the repository root for central control.
+Key configuration files (`eslint.config.ts`, `vitest.config.ts`, `tsconfig*.json`) are placed at the repository root for centralized management.
 
 ## Component Development Rules
 - **Translation Principle**
     - Components are derived from **Ant Design**, and their usage and business logic must stay consistent with upstream.
-    - When Ant Design internally depends on `react-component`, preserve corresponding logic paths so the behavior matches.
-    - **Do not modify styles** — all CSS/LESS or design-level styling is pre-established. Focus strictly on component behavior and logic.
+    - Logic originally implemented inside `react-component` must be preserved.
+    - **Do not modify styles** — all CSS/LESS or design-level styling has already been created. Focus exclusively on component business logic.
 
 - **Vue 3 Implementation Conventions**
     - Use `<script setup lang="ts">` in Single-File Components (SFCs) with 2-space indentation.
     - Vue file names use `kebab-case` (e.g. `wave-effect.vue`); utility / TS helper names use `camelCase`.
-    - Each component should be exported via a top-level `index.ts` entry for consistency.
+    - Each component should be exported via a top-level `index.ts` entry file.
 
-- **Props / Slots / Emits Convention**
-    - For Ant Design props that accept *node elements* (React’s `ReactNode` or JSX children), offer **both a prop and a slot** in Vue, so consumers may choose either prop-based or slot-based insertion.
-    - For *event handlers*, **do not** declare callback-type props. Instead, use Vue’s `emit` mechanism (via `defineEmits`) to expose events in the Vue style.
+- **Props / Slots / Emits Conventions**
+    - For Ant Design props that accept **node elements** (React’s `ReactNode`), provide **both a prop and a slot** in Vue. This ensures compatibility with both JSX usage and template-based usage.
+    - For **event handlers**, do **not** define callback-style props. Instead, expose events using Vue’s `emit` mechanism (`defineEmits`).
 
 ## Build, Test, and Development Commands
-- `pnpm install` — install workspace dependencies
-- `pnpm dev` — launch Vite-powered playground for interactive development
-- `pnpm lint` — apply the shared `@antfu/eslint-config` ruleset
+- `pnpm install` → install workspace dependencies
+- `pnpm dev` → launch the Vite-powered playground for interactive development
+- `pnpm lint` → apply the shared `@antfu/eslint-config` ruleset
 - Use workspace filters for package-specific tasks:
-    - `pnpm --filter antdv-next test` — run Vitest for this package
-    - `pnpm --filter antdv-next gen:less` — regenerate bundled Less themes
+    - `pnpm --filter antdv-next test` → run Vitest for this package
 
 ## Testing Guidelines
-- Use **Vitest + @vue/test-utils**
-- Place tests in `feature-name.test.ts` files under `packages/ui/tests`
-- Use a shared setup file in `tests/setup.ts`
-- Update snapshots with `pnpm --filter antdv-next test -- --update`
-- Test new props, events, visual states; assertions should rely on rendered output or emitted events, *not* internal implementation details
+- Use **Vitest + @vue/test-utils** for component tests.
+- Place tests in `feature-name.test.ts` files under `packages/ui/tests`.
+- Use a shared setup file in `tests/setup.ts`.
+- Update snapshots with:
+  ```bash
+  pnpm --filter antdv-next test -- --update
 
-## Commit & Pull Request Guidelines
-- Use conventional commit prefixes: `feat:`, `fix:`, `docs:`, etc. + concise summary
-- Keep related changes grouped; ensure lint and test pass before pushing
-- PRs should include:
-    1. Clear change description
-    2. Links to any related issue or RFC
-    3. Testing notes (including snapshot updates)
-    4. Screenshots or video when UI changes
-    5. Explicit marking of breaking changes (if any)
-    6. Follow-up tasks or TODO notes when required  
+	•	To run a single test file during development:
+
+pnpm -F antdv-next test button/base.test.ts
+
+
+	•	To run a single test case by name (pattern matching against it() descriptions):
+
+pnpm -F antdv-next test -t "Button disabled"
+
+
+	•	Cover new props, events, and visual states in tests.
+	•	Assertions should be based on rendered output or emitted events, not internal implementation details.
+
+Commit & Pull Request Guidelines
+•	Follow commit conventions: prefix with feat:, fix:, docs:, etc., followed by a concise summary.
+•	Group related changes into a single commit, and ensure linting and tests pass before pushing.
+•	Pull Requests should include:
+1.	A clear description of the change
+2.	Links to related issues or RFCs
+3.	Test notes (including snapshot updates)
+4.	Screenshots or recordings when UI output changes
+5.	Explicit notice of breaking changes (if any)
+6.	Follow-up tasks or TODO notes if applicable
