@@ -19,7 +19,7 @@ function handleMenuClick(info: any) {
 
 const tooltipComponent = resolveComponent('a-tooltip') as any
 
-const buttonsRender = (buttons: any[]) => {
+function buttonsRender(buttons: any[]) {
   const [left, right] = buttons
   return [
     h(tooltipComponent, { title: 'tooltip' }, { default: () => left }),

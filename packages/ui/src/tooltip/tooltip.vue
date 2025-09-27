@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { ReferenceElement } from '@floating-ui/dom'
 import type { Placement } from '@floating-ui/vue'
 import type { CSSProperties, PropType } from 'vue'
 import type { TooltipEmits, TooltipProps, TooltipSlots } from './define'
@@ -49,9 +50,47 @@ const parentContext = useComponentConfig('tooltip')
 const delayTimer = ref<ReturnType<typeof setTimeout>>()
 
 // DOM 引用
-const reference = shallowRef<HTMLElement>()
+const triggerRef = shallowRef<HTMLElement>()
+const floatingReference = shallowRef<ReferenceElement | null>(null)
 const floating = shallowRef<HTMLDivElement>()
 const arrowRef = shallowRef<HTMLDivElement>()
+
+type ContextMenuPoint = {
+  x: number
+  y: number
+}
+
+const contextMenuPoint = ref<ContextMenuPoint | null>(null)
+
+watch(
+  [triggerRef, contextMenuPoint],
+  () => {
+    if (contextMenuPoint.value && triggerRef.value) {
+      floatingReference.value = createContextMenuReference(contextMenuPoint.value, triggerRef.value)
+    } else {
+      floatingReference.value = triggerRef.value ?? null
+    }
+  },
+  { immediate: true },
+)
+
+watch(contextMenuPoint, (point) => {
+  if (point && mergedOpen.value) {
+    floatingReady.value = false
+    nextTick(() => {
+      waitForPosition()
+    })
+  }
+})
+
+function createContextMenuReference(point: ContextMenuPoint, context: HTMLElement): ReferenceElement {
+  const { x, y } = point
+  const domRect = new DOMRect(x, y, 0, 0)
+  return {
+    contextElement: context,
+    getBoundingClientRect: () => domRect,
+  }
+}
 
 // 计算属性
 const prefixCls = computed(() => {
@@ -110,6 +149,7 @@ watch(mergedOpen, (open) => {
   } else {
     cancelPositionRaf()
     floatingReady.value = false
+    contextMenuPoint.value = null
   }
 })
 
@@ -181,7 +221,7 @@ const {
   middlewareData,
   x,
   y,
-} = useFloating(reference, floating, {
+} = useFloating(floatingReference, floating, {
   placement: floatingPlacement,
   middleware,
   transform: false,
@@ -320,6 +360,9 @@ function setOpenImmediately(open: boolean) {
   emit('update:visible', finalOpen)
   emit('visibleChange', finalOpen)
 
+  if (!finalOpen)
+    contextMenuPoint.value = null
+
   nextTick(() => {
     props.afterOpenChange?.(finalOpen)
   })
@@ -359,6 +402,10 @@ function onBlur() {
 function onContextMenu(e: MouseEvent) {
   if (mergedTrigger.value.includes('contextMenu')) {
     e.preventDefault()
+    contextMenuPoint.value = {
+      x: e.clientX,
+      y: e.clientY,
+    }
     setOpen(true)
   }
 }
@@ -391,20 +438,21 @@ function removeEventListeners(el: HTMLElement) {
 }
 
 function getReferenceDom(el: Element) {
-  if (reference.value) {
-    removeEventListeners(reference.value)
-  }
+  if (triggerRef.value)
+    removeEventListeners(triggerRef.value)
+
   if (el?.nextElementSibling) {
-    reference.value = el.nextElementSibling as HTMLElement
-    addEventListeners(reference.value)
+    triggerRef.value = el.nextElementSibling as HTMLElement
+    addEventListeners(triggerRef.value)
+  } else {
+    triggerRef.value = undefined
   }
 }
 
 onBeforeUnmount(() => {
   clearDelayTimer()
-  if (reference.value) {
-    removeEventListeners(reference.value)
-  }
+  if (triggerRef.value)
+    removeEventListeners(triggerRef.value)
   cancelPositionRaf()
 })
 
@@ -539,7 +587,7 @@ const tooltipRef = {
     // floating-ui auto updates, no manual align needed
   },
   get nativeElement() {
-    return reference.value || null
+    return triggerRef.value || null
   },
   get popupElement() {
     return floating.value || null
@@ -556,14 +604,14 @@ onClickOutside(
     }
   },
   {
-    ignore: [reference, arrowRef],
+    ignore: [triggerRef, arrowRef],
   },
 )
 </script>
 
 <template>
   <component :is="$slots.default" :ref="getReferenceDom" />
-  <Teleport :disabled="!reference" :to="props.getPopupContainer?.(reference!) || 'body'">
+  <Teleport :disabled="!triggerRef" :to="triggerRef ? props.getPopupContainer?.(triggerRef) || 'body' : 'body'">
     <Transition
       appear
       :enter-active-class="transitionClasses.enterActive"

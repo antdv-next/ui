@@ -108,15 +108,10 @@ function triggerPopup(nextOpen: boolean, source: 'trigger' | 'menu') {
   // props.onVisibleChange?.(nextOpen)
 }
 
-function handleMenuClick(info: MenuEmits['click'][0]) {
-  props.menu?.onClick?.(info)
+function handleMenuClick() {
   const shouldKeep = props.menu?.selectable && props.menu?.multiple
   if (!shouldKeep)
     triggerPopup(false, 'menu')
-}
-
-function handleMenuOpenChange(openKeys: MenuEmits['openChange'][0]) {
-  props.menu?.onOpenChange?.(openKeys)
 }
 
 const expandIcon = computed(() => {
@@ -149,15 +144,14 @@ const overlayNode = computed(() => {
       ...rest,
       onClick: (info: MenuEmits['click'][0]) => {
         onClick?.(info)
-        handleMenuClick(info)
+        handleMenuClick()
       },
       onOpenChange: (openKeys: MenuEmits['openChange'][0]) => {
         onOpenChange?.(openKeys)
-        handleMenuOpenChange(openKeys)
       },
     })
   } else if (typeof props.overlay === 'function') {
-    overlay = props.overlay()
+    overlay = (props as any).overlay?.()
   } else {
     overlay = props.overlay as any
   }

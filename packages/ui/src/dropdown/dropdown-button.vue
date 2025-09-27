@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { VNode } from 'vue'
-import type { DropdownButtonProps } from './define'
+import type { DropdownButtonProps, DropdownEmits } from './define'
 import { EllipsisOutlined } from '@ant-design/icons-vue'
-import { computed, h, useAttrs, useSlots } from 'vue'
+import { computed, h, useSlots } from 'vue'
 import { classNames } from '../_utils/classNames.ts'
 import Button from '../button/button.vue'
 import { useConfigContext } from '../config-provider/context.ts'
@@ -22,10 +22,13 @@ const props = withDefaults(defineProps<DropdownButtonProps>(), {
   autoFocus: false,
   block: false,
   buttonsRender: (buttons: any[]) => buttons,
+  visible: undefined,
+  open: undefined,
 })
 
+defineEmits<DropdownEmits>()
+
 const slots = useSlots()
-const attrs = useAttrs()
 
 const configCtx = useConfigContext()
 
@@ -105,13 +108,19 @@ const wrapperClass = computed(() => classNames(
 
 <template>
   <Compact
-    v-bind="attrs"
+    v-bind="$attrs"
     :class="wrapperClass"
     :size="props.size ?? compactSize"
     :block="props.block"
   >
     <component :is="renderedButtons[0]" />
-    <Dropdown v-bind="dropdownBindings">
+    <Dropdown
+      v-bind="dropdownBindings"
+      @update:open="$emit('update:open', $event)"
+      @update:visible="$emit('update:visible', $event)"
+      @open-change="(open, info) => $emit('openChange', open, info)"
+      @visible-change="$emit('visibleChange', $event)"
+    >
       <component :is="renderedButtons[1]" />
     </Dropdown>
   </Compact>
