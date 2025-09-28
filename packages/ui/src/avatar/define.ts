@@ -1,4 +1,4 @@
-import type { InjectionKey, VNode } from 'vue'
+import type { CSSProperties, InjectionKey, VNode } from 'vue'
 import type { ScreenSizeMap } from '../_utils/responsiveObserve.ts'
 import { inject, provide } from 'vue'
 
@@ -33,4 +33,14 @@ export function useAvatarInjectContext() {
 }
 export function useAvatarProviderContext(context: AvatarContextType) {
   return provide(AvatarContextKey, context)
+}
+
+export interface AvatarGroupProps {
+  prefixCls: string
+  maxCount: number
+  size?: AvatarSize
+  maxStyle?: CSSProperties
+  maxPopoverPlacement?: 'top' | 'bottom'
+  maxPopoverTrigger?: 'hover' | 'click' | 'focus'
+  shape?: 'circle' | 'square'
 }
