@@ -131,7 +131,7 @@ const expandIcon = computed(() => {
   )
 })
 
-function containsDropdownItem(nodes: Array<any>) {
+function containsDropdownItem(nodes: any) {
   return nodes.some((node: any) => {
     if (!node)
       return false
@@ -299,7 +299,7 @@ const overlayNode = computed(() => {
       },
     })
   } else if (typeof props.overlay === 'function') {
-    overlay = props.overlay()
+    overlay = (props as any).overlay?.()
   } else {
     overlay = props.overlay as any
   }
