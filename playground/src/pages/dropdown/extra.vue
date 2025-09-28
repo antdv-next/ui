@@ -1,23 +1,18 @@
 <script setup lang="ts">
+import type { MenuItemType } from 'antdv-next'
 import { DownOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
-function renderExtraRow(label: string, extra: string) {
-  return () => h('div', { class: 'dropdown-extra-item' }, [
-    h('span', { class: 'dropdown-extra-item__label' }, label),
-    h('span', { class: 'dropdown-extra-item__extra' }, extra),
-  ])
-}
-
-const items = [
+const items: MenuItemType[] = [
   { key: '1', label: 'My Account', disabled: true },
   { type: 'divider' },
-  { key: '2', label: renderExtraRow('Profile', '⌘P') },
-  { key: '3', label: renderExtraRow('Billing', '⌘B') },
+  { key: '2', label: 'Profile', extra: '⌘P' },
+  { key: '3', label: 'Billing', extra: '⌘B' },
   {
     key: '4',
-    label: renderExtraRow('Settings', '⌘S'),
+    label: 'Settings',
     icon: () => h(SettingOutlined),
+    extra: '⌘S',
   },
 ]
 
@@ -40,17 +35,5 @@ function handleClick(event: MouseEvent) {
 <style scoped>
 .dropdown-link {
   color: var(--ant-color-primary);
-}
-
-.dropdown-extra-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-width: 160px;
-}
-
-.dropdown-extra-item__extra {
-  color: var(--ant-color-text-description);
 }
 </style>

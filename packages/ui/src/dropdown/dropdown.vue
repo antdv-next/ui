@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import type { VNode } from 'vue'
-import type { MenuEmits } from '../menu'
+import type {
+  ItemType,
+  MenuDividerType,
+  MenuEmits,
+  MenuItemGroupType,
+  MenuItemType,
+  SubMenuType,
+} from '../menu/define.ts'
 import type { TooltipRef } from '../tooltip'
 import type { DropdownEmits, DropdownProps, DropdownSlots } from './define'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
-import { cloneVNode, computed, h, isVNode, nextTick, shallowRef, useSlots, watch } from 'vue'
+import { cloneVNode, computed, Fragment, h, isVNode, nextTick, shallowRef, useSlots, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
 import Menu from '../menu/menu.vue'
 import { Tooltip } from '../tooltip'
+import DropdownOverlay from './dropdown-overlay.vue'
 
 defineOptions({
   name: 'ADropdown',
@@ -104,14 +112,8 @@ function triggerPopup(nextOpen: boolean, source: 'trigger' | 'menu') {
   emit('openChange', nextOpen, { source })
   emit('visibleChange', nextOpen)
 
-  // props.onOpenChange?.(nextOpen, { source })
-  // props.onVisibleChange?.(nextOpen)
-}
-
-function handleMenuClick() {
-  const shouldKeep = props.menu?.selectable && props.menu?.multiple
-  if (!shouldKeep)
-    triggerPopup(false, 'menu')
+  props.onOpenChange?.(nextOpen, { source })
+  props.onVisibleChange?.(nextOpen)
 }
 
 const expandIcon = computed(() => {
@@ -129,29 +131,175 @@ const expandIcon = computed(() => {
   )
 })
 
+function containsDropdownItem(nodes: Array<any>) {
+  return nodes.some((node: any) => {
+    if (!node)
+      return false
+    if (isVNode(node)) {
+      const type = node.type as any
+      if (type?.name === 'ADropdownItem' || type?.__ANT_DROPDOWN_ITEM)
+        return true
+      if (Array.isArray(node.children))
+        return containsDropdownItem(node.children as any)
+    }
+    return false
+  })
+}
+
+function wrapOverlay(content: () => VNode[] | VNode | null | string | undefined) {
+  return h(DropdownOverlay, {
+    prefixCls: prefixCls.value,
+    onItemClick: handleOverlayItemClick,
+  }, { default: content })
+}
+
+function toSingleNode(node: VNode | VNode[] | string | null | undefined) {
+  if (Array.isArray(node)) {
+    if (node.length === 0)
+      return null
+    if (node.length === 1)
+      return node[0]
+    return h(Fragment, node)
+  }
+  return node ?? null
+}
+
+function normalizeNodes(content: any): VNode[] {
+  if (content === undefined || content === null)
+    return []
+
+  const resolved = typeof content === 'function' ? content() : content
+  const nodes = flattenChildren(resolved as any, true)
+
+  return nodes
+    .map((node) => {
+      if (isVNode(node))
+        return node
+      if (typeof node === 'string' || typeof node === 'number')
+        return h('span', node)
+      return null
+    })
+    .filter(Boolean) as VNode[]
+}
+
+function renderMenuItemLabel(
+  labelContent: MenuItemType['label'],
+  extraContent: MenuItemType['extra'],
+  menuPrefix: string,
+) {
+  const labelNodes = normalizeNodes(labelContent)
+  const extraNodes = normalizeNodes(extraContent)
+
+  const children: VNode[] = []
+
+  if (labelNodes.length)
+    children.push(...labelNodes)
+
+  if (extraNodes.length) {
+    children.push(
+      h('span', { class: `${menuPrefix}-item-extra` }, extraNodes),
+    )
+  }
+
+  return h('span', { class: `${menuPrefix}-title-content-with-extra` }, children)
+}
+
+function enhanceMenuItems(items: ItemType[] | undefined, menuPrefix: string): ItemType[] | undefined {
+  if (!Array.isArray(items))
+    return items
+
+  let changed = false
+
+  const mapped = items.map((item) => {
+    if (!item)
+      return item
+
+    if ((item as MenuDividerType).type === 'divider')
+      return item
+
+    if ((item as MenuItemGroupType).type === 'group') {
+      const group = item as MenuItemGroupType
+      const children = enhanceMenuItems(group.children, menuPrefix)
+      if (children !== group.children) {
+        changed = true
+        return {
+          ...group,
+          children,
+        }
+      }
+      return group
+    }
+
+    if ((item as SubMenuType).type === 'submenu') {
+      const submenu = item as SubMenuType
+      const children = enhanceMenuItems(submenu.children, menuPrefix)
+      if (children !== submenu.children) {
+        changed = true
+        return {
+          ...submenu,
+          children: children ?? [],
+        }
+      }
+      return submenu
+    }
+
+    const menuItem = item as MenuItemType
+    const extra = menuItem.extra
+
+    if (extra === undefined || extra === null)
+      return menuItem
+
+    changed = true
+
+    return {
+      ...menuItem,
+      label: () => renderMenuItemLabel(menuItem.label, extra, menuPrefix),
+    }
+  })
+
+  return changed ? mapped : items
+}
+
 const overlayNode = computed(() => {
-  let overlay: VNode | null | VNode[] | string | undefined
+  let overlay: VNode | VNode[] | string | null | undefined
 
   if (slots.overlay) {
-    overlay = slots.overlay()
+    const rendered = slots.overlay()
+    const flat = flattenChildren(rendered, false)
+    if (containsDropdownItem(flat as any))
+      overlay = wrapOverlay(() => slots.overlay?.() ?? [])
+    else
+      overlay = rendered
   } else if (props.menu) {
-    const { onClick, onOpenChange, selectable, mode, prefixCls: menuPrefixCls, expandIcon: menuExpandIcon, ...rest } = props.menu
+    const {
+      onClick,
+      onOpenChange,
+      selectable,
+      mode,
+      prefixCls: menuPrefixCls,
+      expandIcon: menuExpandIcon,
+      items,
+      ...rest
+    } = props.menu
+    const resolvedMenuPrefix = menuPrefixCls ?? `${prefixCls.value}-menu`
     overlay = h(Menu, {
       mode: mode ?? 'vertical',
       selectable: selectable ?? false,
-      prefixCls: menuPrefixCls ?? `${prefixCls.value}-menu`,
+      prefixCls: resolvedMenuPrefix,
       expandIcon: menuExpandIcon ?? expandIcon.value,
       ...rest,
+      items: enhanceMenuItems(items, resolvedMenuPrefix),
       onClick: (info: MenuEmits['click'][0]) => {
         onClick?.(info)
-        handleMenuClick()
+        if (!(props.menu?.selectable && props.menu?.multiple))
+          triggerPopup(false, 'menu')
       },
       onOpenChange: (openKeys: MenuEmits['openChange'][0]) => {
         onOpenChange?.(openKeys)
       },
     })
   } else if (typeof props.overlay === 'function') {
-    overlay = (props as any).overlay?.()
+    overlay = props.overlay()
   } else {
     overlay = props.overlay as any
   }
@@ -160,17 +308,15 @@ const overlayNode = computed(() => {
     return null
 
   let result = overlay as any
-  if (Array.isArray(result) && result.length === 1)
-    [result] = result
-
-  if (typeof result === 'string')
-    result = h('span', result)
-
   if (popupTransform.value)
     result = popupTransform.value(result)
 
-  return result
+  return toSingleNode(result)
 })
+
+function handleOverlayItemClick() {
+  triggerPopup(false, 'menu')
+}
 
 const triggerInfo = computed(() => {
   const children = flattenChildren(slots.default?.() ?? [])
@@ -196,6 +342,7 @@ const triggerInfo = computed(() => {
   const triggerCls = classNames(
     `${prefixCls.value}-trigger`,
     { [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
+    props.className,
     first.props?.class,
     props.openClassName && mergedOpen.value ? props.openClassName : null,
     { [`${prefixCls.value}-disabled`]: mergedDisabled },

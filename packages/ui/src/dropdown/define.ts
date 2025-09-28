@@ -4,6 +4,7 @@ import type { ButtonProps } from '../button'
 import type { ButtonHTMLType } from '../button/buttonHelpers.ts'
 import type { SizeType } from '../config-provider/size-context'
 import type { MenuEmits, MenuProps } from '../menu'
+import type { Key } from '../menu/define'
 import type { TooltipAlignConfig, TooltipProps } from '../tooltip'
 
 export type DropdownTriggerType = 'click' | 'hover' | 'contextMenu'
@@ -22,7 +23,6 @@ export interface DropdownArrowOptions {
 
 export interface DropdownMenuProps extends MenuProps {
   activeKey?: MenuProps['activeKey']
-  /** 兼容 antd，用于监听菜单事件 */
   onClick?: MenuEmits['click'][0] extends infer T ? (info: T) => void : (info: any) => void
   onOpenChange?: MenuEmits['openChange'][0] extends infer T ? (openKeys: T) => void : (openKeys: any) => void
 }
@@ -34,7 +34,7 @@ export interface DropdownProps {
   trigger?: DropdownTriggerType | DropdownTriggerType[]
   dropdownRender?: (originNode: VueNode) => VueNode
   popupRender?: (originNode: VueNode) => VueNode
-  // onOpenChange?: (open: boolean, info: { source: 'trigger' | 'menu' }) => void
+  onOpenChange?: (open: boolean, info: { source: 'trigger' | 'menu' }) => void
   open?: boolean
   disabled?: boolean
   destroyPopupOnHide?: boolean
@@ -42,7 +42,7 @@ export interface DropdownProps {
   align?: TooltipAlignConfig
   getPopupContainer?: TooltipProps['getPopupContainer']
   prefixCls?: string
-  // className?: string
+  className?: string
   rootClassName?: string
   transitionName?: string
   placement?: DropdownPlacement
@@ -55,7 +55,7 @@ export interface DropdownProps {
   autoAdjustOverflow?: TooltipProps['autoAdjustOverflow']
   overlay?: VueNode | (() => VueNode)
   visible?: boolean
-  // onVisibleChange?: (open: boolean) => void
+  onVisibleChange?: (open: boolean) => void
 }
 
 export interface DropdownSlots {
@@ -91,4 +91,37 @@ export interface DropdownButtonProps extends DropdownProps {
   buttonsRender?: (buttons: VueNode[]) => VueNode[]
   size?: SizeType
   block?: boolean
+}
+
+export interface DropdownOverlayProps {
+  prefixCls: string
+  onItemClick?: (info: DropdownItemClickInfo) => void
+  role?: string
+}
+
+export interface DropdownItemProps {
+  eventKey?: Key
+  danger?: boolean
+  disabled?: boolean
+  icon?: VueNode | (() => VueNode)
+}
+
+export interface DropdownItemSlots {
+  default?: () => any
+  extra?: () => any
+  icon?: () => any
+}
+
+export interface DropdownItemClickInfo {
+  key?: Key
+  event: MouseEvent
+}
+
+export interface DropdownItemEmits {
+  click: [
+    {
+      key?: Key
+      domEvent: MouseEvent
+    },
+  ]
 }

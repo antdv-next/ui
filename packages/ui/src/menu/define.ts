@@ -57,6 +57,7 @@ export interface MenuDividerProps {
 export interface MenuItemType extends MenuItemProps {
   key?: Key
   label?: VueNode | (() => VueNode)
+  extra?: VueNode | (() => VueNode)
   children?: ItemType[]
   type?: 'item'
 }
