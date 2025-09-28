@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import type { CSSProperties } from 'vue'
 import type { Breakpoint } from '../_utils/responsiveObserve'
 import type { AvatarProps } from './define'
+import ResizeObserver from '@v-c/resize-observer'
 import { computed, h, nextTick, onMounted, ref, shallowRef, toRefs, useAttrs, useSlots, watch } from 'vue'
 import eagerComputed from '../_utils/eagerComputed'
 import useBreakpoints from '../_utils/hooks/useBreakpoint'
@@ -63,7 +65,7 @@ const sizeStyle = computed(() => {
 
 const childrenNode = computed(() => slots.default?.())
 
-const childrenRedner = computed(() => {
+const childrenRender = computed(() => {
   if (src.value && isImgExist.value) {
     return h('img', {
       draggable: draggable.value,
@@ -80,15 +82,34 @@ const childrenRedner = computed(() => {
   }
 
   if (isMounted.value || scale.value !== 1) {
-    // TODO: resize observer component
-    return null
-    // return h(Resiz)
+    const transformString = `scale(${scale.value}) translateX(-50%)`
+    const childrenStyle: CSSProperties = {
+      msTransform: transformString,
+      WebkitTransform: transformString,
+      transform: transformString,
+    }
+    const sizeChildrenStyle
+      = typeof size.value === 'number'
+        ? {
+            lineHeight: `${size.value}px`,
+          }
+        : {}
+    return h(ResizeObserver, {
+      onResize: setScaleParam,
+    }, [h('span', {
+      class: `${prefixCls.value}-string`,
+      ref: avatarChildrenRef,
+      style: {
+        ...sizeChildrenStyle,
+        ...childrenStyle,
+      },
+    }, [childrenNode.value])])
   }
 
   return h('span', {
     ref: avatarChildrenRef,
     class: `${prefixCls.value}-string`,
-    style: 'opcity:0',
+    style: 'opacity:0',
   }, [childrenNode.value])
 })
 
@@ -173,6 +194,6 @@ onMounted(() => {
     v-bind="$attrs" ref="avatarNodeRef" :class="classString"
     :style="{ ...sizeStyle, ...responsiveSizeStyle, ...($attrs.style || {}) }"
   >
-    <component :is="childrenRedner" />
+    <component :is="childrenRender" />
   </span>
 </template>

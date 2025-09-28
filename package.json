@@ -14,6 +14,7 @@
     "@types/fs-extra": "catalog:",
     "@types/jsdom": "catalog:",
     "@types/node": "catalog:",
+    "@v-c/resize-observer": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
     "@vue/tsconfig": "catalog:",
