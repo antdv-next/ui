@@ -451,6 +451,7 @@ function renderItems(items?: ItemType[] | null): any[] {
           icon: menuItem.icon,
           title: typeof menuItem.label === 'string' ? menuItem.label : menuItem.title,
           item: menuItem,
+          extra: menuItem.extra,
         },
         {
           default: menuItem.label

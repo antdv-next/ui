@@ -323,7 +323,7 @@ const triggerInfo = computed(() => {
   if (!children.length) {
     return {
       node: h('span', { class: `${prefixCls.value}-trigger` }),
-      disabled: !!props.disabled,
+      disabled: props.disabled,
     }
   }
 
@@ -332,7 +332,7 @@ const triggerInfo = computed(() => {
   if (!isVNode(first)) {
     return {
       node: h('span', { class: `${prefixCls.value}-trigger` }, children as any),
-      disabled: !!props.disabled,
+      disabled: props.disabled,
     }
   }
 

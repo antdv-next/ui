@@ -32,6 +32,6 @@ declare module 'vue' {
         AMenuItemGroup: typeof import('antdv-next')['MenuItemGroup'];
         ADropdown: typeof import('antdv-next')['Dropdown'];
         ADropdownButton: typeof import('antdv-next')['DropdownButton'];
-        // ADropdownDivider: typeof import('antdv-next')['DropdownDivider'];
+        ADropdownItem: typeof import('antdv-next')['DropdownItem'];
     }
 }
