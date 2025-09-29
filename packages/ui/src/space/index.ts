@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, Plugin } from 'vue'
 import Compact from './compact.vue'
 import Space from './space.vue'
 
@@ -8,14 +8,13 @@ Space.Compact = Compact
 
 Space.install = function (app: App) {
   app.component(Space.name!, Space)
-  return app
-}
-
-Compact.install = function (app: App) {
   app.component(Compact.name!, Compact)
   return app
 }
 
-export { Compact }
+export { Compact, Space }
 
-export { Space }
+export default Space as typeof Space
+  & Plugin & {
+    readonly Compact: typeof Compact
+  }

@@ -38,6 +38,12 @@ declare module 'vue-router/auto-routes' {
     '/anchor/replace': RouteRecordInfo<'/anchor/replace', '/anchor/replace', Record<never, never>, Record<never, never>>,
     '/anchor/static': RouteRecordInfo<'/anchor/static', '/anchor/static', Record<never, never>, Record<never, never>>,
     '/anchor/target-offset': RouteRecordInfo<'/anchor/target-offset', '/anchor/target-offset', Record<never, never>, Record<never, never>>,
+    '/avatar/badge': RouteRecordInfo<'/avatar/badge', '/avatar/badge', Record<never, never>, Record<never, never>>,
+    '/avatar/basic': RouteRecordInfo<'/avatar/basic', '/avatar/basic', Record<never, never>, Record<never, never>>,
+    '/avatar/dynamic': RouteRecordInfo<'/avatar/dynamic', '/avatar/dynamic', Record<never, never>, Record<never, never>>,
+    '/avatar/group': RouteRecordInfo<'/avatar/group', '/avatar/group', Record<never, never>, Record<never, never>>,
+    '/avatar/responsive': RouteRecordInfo<'/avatar/responsive', '/avatar/responsive', Record<never, never>, Record<never, never>>,
+    '/avatar/type': RouteRecordInfo<'/avatar/type', '/avatar/type', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -219,6 +225,30 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/anchor/target-offset.vue': {
       routes: '/anchor/target-offset'
+      views: never
+    }
+    'src/pages/avatar/badge.vue': {
+      routes: '/avatar/badge'
+      views: never
+    }
+    'src/pages/avatar/basic.vue': {
+      routes: '/avatar/basic'
+      views: never
+    }
+    'src/pages/avatar/dynamic.vue': {
+      routes: '/avatar/dynamic'
+      views: never
+    }
+    'src/pages/avatar/group.vue': {
+      routes: '/avatar/group'
+      views: never
+    }
+    'src/pages/avatar/responsive.vue': {
+      routes: '/avatar/responsive'
+      views: never
+    }
+    'src/pages/avatar/type.vue': {
+      routes: '/avatar/type'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {

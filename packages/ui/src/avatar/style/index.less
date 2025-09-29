@@ -8,6 +8,9 @@
   --ant-avatar-icon-font-size: 18px;
   --ant-avatar-icon-font-size-lg: 24px;
   --ant-avatar-icon-font-size-sm: 14px;
+}
+
+.ant-avatar-group { 
   --ant-avatar-group-space: 4px;
   --ant-avatar-group-overlapping: -8px;
   --ant-avatar-group-border-color: var(--ant-color-border-bg);
@@ -35,6 +38,13 @@
   &-image {
     background: transparent;
   }
+
+  &-string {
+    position: absolute;
+    left: 50%;
+    transform-origin: 0 center;
+  }
+
   .ant-image-img {
     display: block;
   }
@@ -58,6 +68,11 @@
     &.ant-avatar-square {
       border-radius: var(--ant-border-radius-lg);
     }
+    &.ant-avatar-string {
+      position: absolute;
+      left: 50%;
+      transform-origin: 0 center;
+    }
     &.ant-avatar-icon {
       font-size: var(--ant-avatar-icon-font-size-lg);
       > .anticon {
@@ -72,6 +87,11 @@
     font-size: var(--ant-avatar-text-font-size-sm);
     &.ant-avatar-square {
       border-radius: var(--ant-border-radius-sm);
+    }
+    &.ant-avatar-string {
+      position: absolute;
+      left: 50%;
+      transform-origin: 0 center;
     }
     &.ant-avatar-icon {
       font-size: var(--ant-avatar-icon-font-size-sm);
