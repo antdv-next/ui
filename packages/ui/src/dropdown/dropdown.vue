@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { VNode } from 'vue'
-import type { MenuEmits } from '../menu/define.ts'
+import type { MenuEmits } from '../menu'
 import type { TooltipRef } from '../tooltip'
 import type { DropdownEmits, DropdownProps, DropdownSlots } from './define'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
@@ -116,13 +116,7 @@ const expandIcon = computed(() => {
 
   const arrowClass = `${prefixCls.value}-menu-submenu-arrow`
   const iconClass = `${prefixCls.value}-menu-submenu-arrow-icon`
-  return () => h(
-    'span',
-    { class: arrowClass },
-    direction.value === 'rtl'
-      ? h(LeftOutlined, { class: iconClass })
-      : h(RightOutlined, { class: iconClass }),
-  )
+  return () => direction.value === 'rtl' ? h(LeftOutlined, { class: [arrowClass, iconClass] }) : h(RightOutlined, { class: [arrowClass, iconClass] })
 })
 
 function normalizeSlotValue(value: any): any[] {
