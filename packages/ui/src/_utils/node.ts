@@ -1,4 +1,4 @@
-import type { VNode, VNodeArrayChildren, VNodeNormalizedChildren, VNodeProps } from 'vue'
+import type { VNode, VNodeNormalizedChildren, VNodeProps } from 'vue'
 import type { VNodeChildAtom } from './checker'
 import { warning } from '@v-c/util'
 import { filterEmpty } from '@v-c/util/dist/props-util'
