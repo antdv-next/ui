@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DropdownItemEmits, DropdownItemProps, DropdownItemSlots } from './define'
+import { filterEmpty } from '@v-c/util/dist/props-util'
 import { computed, getCurrentInstance, h, isVNode, useAttrs, useSlots } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
@@ -33,7 +34,7 @@ const hasIcon = computed(() => !!slots.icon || props.icon !== undefined)
 
 function resolveNodes(source?: (() => any) | any) {
   const content = typeof source === 'function' ? source() : source
-  const nodes = flattenChildren(content, true)
+  const nodes = flattenChildren(filterEmpty(Array.isArray(content) ? content : [content]), true)
   return nodes
     .map((node) => {
       if (isVNode(node))

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { Key, MenuItemProps, MenuItemSlots } from './define.ts'
 import type { PropType, VNode } from 'vue'
-import { Text, cloneVNode, computed, defineComponent, h, isVNode, onMounted, onUnmounted, shallowRef, useSlots } from 'vue'
+import type { Key, MenuItemProps, MenuItemSlots } from './define.ts'
+import { filterEmpty } from '@v-c/util/dist/props-util'
+import { cloneVNode, computed, defineComponent, h, isVNode, onMounted, onUnmounted, shallowRef, Text, useSlots } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useMenuContext, useMenuDisabled, useMenuPath } from './context.ts'
@@ -85,14 +86,24 @@ onUnmounted(() => {
   menuContext.unregisterPath?.(eventKey.value)
 })
 
+function normalizeChildren(value: any): any[] {
+  if (value === undefined || value === null)
+    return []
+
+  const arrayValue = Array.isArray(value) ? value : [value]
+  return filterEmpty(arrayValue as any)
+}
+
 function resolveContent(content?: any, slot?: () => any) {
   let nodes: any[] = []
-  if (slot)
-    nodes = flattenChildren(slot())
-  else if (typeof content === 'function')
-    nodes = flattenChildren((content as () => any)())
-  else if (content !== undefined)
-    nodes = flattenChildren(content as any)
+  if (slot) {
+    const slotContent = slot() ?? []
+    nodes = flattenChildren(normalizeChildren(slotContent))
+  } else if (typeof content === 'function') {
+    nodes = flattenChildren(normalizeChildren((content as () => any)()))
+  } else if (content !== undefined) {
+    nodes = flattenChildren(normalizeChildren(content))
+  }
 
   return nodes.filter(node => node !== null && node !== undefined && node !== false)
 }
@@ -144,8 +155,6 @@ const extraNodes = computed(() => {
 const hasExtra = computed(() => extraNodes.value.length > 0)
 
 const shouldUseCustomTitle = computed(() => {
-  if (hasExtra.value)
-    return false
   if (labelNodes.value.length !== 1)
     return false
   const first = labelNodes.value[0]

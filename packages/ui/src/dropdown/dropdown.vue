@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import type { VNode } from 'vue'
-import type {
-  ItemType,
-  MenuDividerType,
-  MenuEmits,
-  MenuItemGroupType,
-  MenuItemType,
-  SubMenuType,
-} from '../menu/define.ts'
+import type { MenuEmits } from '../menu/define.ts'
 import type { TooltipRef } from '../tooltip'
 import type { DropdownEmits, DropdownProps, DropdownSlots } from './define'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue'
+import { filterEmpty } from '@v-c/util/dist/props-util'
 import { cloneVNode, computed, Fragment, h, isVNode, nextTick, shallowRef, useSlots, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
@@ -131,7 +125,14 @@ const expandIcon = computed(() => {
   )
 })
 
-function containsDropdownItem(nodes: any) {
+function normalizeSlotValue(value: any): any[] {
+  if (value === undefined || value === null)
+    return []
+  const arrayValue = Array.isArray(value) ? value : [value]
+  return filterEmpty(arrayValue)
+}
+
+function containsDropdownItem(nodes: any[]): any {
   return nodes.some((node: any) => {
     if (!node)
       return false
@@ -140,7 +141,7 @@ function containsDropdownItem(nodes: any) {
       if (type?.name === 'ADropdownItem' || type?.__ANT_DROPDOWN_ITEM)
         return true
       if (Array.isArray(node.children))
-        return containsDropdownItem(node.children as any)
+        return containsDropdownItem(normalizeSlotValue(node.children as any))
     }
     return false
   })
@@ -164,112 +165,16 @@ function toSingleNode(node: VNode | VNode[] | string | null | undefined) {
   return node ?? null
 }
 
-function normalizeNodes(content: any): VNode[] {
-  if (content === undefined || content === null)
-    return []
-
-  const resolved = typeof content === 'function' ? content() : content
-  const nodes = flattenChildren(resolved as any, true)
-
-  return nodes
-    .map((node) => {
-      if (isVNode(node))
-        return node
-      if (typeof node === 'string' || typeof node === 'number')
-        return h('span', node)
-      return null
-    })
-    .filter(Boolean) as VNode[]
-}
-
-function renderMenuItemLabel(
-  labelContent: MenuItemType['label'],
-  extraContent: MenuItemType['extra'],
-  menuPrefix: string,
-) {
-  const labelNodes = normalizeNodes(labelContent)
-  const extraNodes = normalizeNodes(extraContent)
-
-  const children: VNode[] = []
-
-  if (labelNodes.length)
-    children.push(...labelNodes)
-
-  if (extraNodes.length) {
-    children.push(
-      h('span', { class: `${menuPrefix}-item-extra` }, extraNodes),
-    )
-  }
-
-  return h('span', { class: `${menuPrefix}-title-content-with-extra` }, children)
-}
-
-function enhanceMenuItems(items: ItemType[] | undefined, menuPrefix: string): ItemType[] | undefined {
-  if (!Array.isArray(items))
-    return items
-
-  let changed = false
-
-  const mapped = items.map((item) => {
-    if (!item)
-      return item
-
-    if ((item as MenuDividerType).type === 'divider')
-      return item
-
-    if ((item as MenuItemGroupType).type === 'group') {
-      const group = item as MenuItemGroupType
-      const children = enhanceMenuItems(group.children, menuPrefix)
-      if (children !== group.children) {
-        changed = true
-        return {
-          ...group,
-          children,
-        }
-      }
-      return group
-    }
-
-    if ((item as SubMenuType).type === 'submenu') {
-      const submenu = item as SubMenuType
-      const children = enhanceMenuItems(submenu.children, menuPrefix)
-      if (children !== submenu.children) {
-        changed = true
-        return {
-          ...submenu,
-          children: children ?? [],
-        }
-      }
-      return submenu
-    }
-
-    const menuItem = item as MenuItemType
-    const extra = menuItem.extra
-
-    if (extra === undefined || extra === null)
-      return menuItem
-
-    changed = true
-
-    return {
-      ...menuItem,
-      label: () => renderMenuItemLabel(menuItem.label, extra, menuPrefix),
-    }
-  })
-
-  return changed ? mapped : items
-}
-
 const overlayNode = computed(() => {
   let overlay: VNode | VNode[] | string | null | undefined
 
   if (slots.overlay) {
-    const rendered = slots.overlay()
-    const flat = flattenChildren(rendered, false)
+    const overlayContent = normalizeSlotValue(slots.overlay?.())
+    const flat = flattenChildren(overlayContent, false)
     if (containsDropdownItem(flat as any))
-      overlay = wrapOverlay(() => slots.overlay?.() ?? [])
+      overlay = wrapOverlay(() => normalizeSlotValue(slots.overlay?.()))
     else
-      overlay = rendered
+      overlay = overlayContent
   } else if (props.menu) {
     const {
       onClick,
@@ -288,7 +193,7 @@ const overlayNode = computed(() => {
       prefixCls: resolvedMenuPrefix,
       expandIcon: menuExpandIcon ?? expandIcon.value,
       ...rest,
-      items: enhanceMenuItems(items, resolvedMenuPrefix),
+      items,
       onClick: (info: MenuEmits['click'][0]) => {
         onClick?.(info)
         if (!(props.menu?.selectable && props.menu?.multiple))
@@ -319,7 +224,7 @@ function handleOverlayItemClick() {
 }
 
 const triggerInfo = computed(() => {
-  const children = flattenChildren(slots.default?.() ?? [])
+  const children = flattenChildren(normalizeSlotValue(slots.default?.()))
   if (!children.length) {
     return {
       node: h('span', { class: `${prefixCls.value}-trigger` }),
