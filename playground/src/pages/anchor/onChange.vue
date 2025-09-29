@@ -30,7 +30,6 @@ const items = [
   },
 ]
 function onChange(link: string) {
-  // eslint-disable-next-line no-console
   console.log('Anchor:OnChange', link)
 }
 </script>

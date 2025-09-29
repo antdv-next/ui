@@ -39,7 +39,9 @@
     &:focus-visible {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
   }
   li:last-child {
@@ -51,7 +53,7 @@
   }
   .ant-breadcrumb-link {
     > .anticon + span,
-              > .anticon + a {
+    > .anticon + a {
       margin-inline-start: var(--ant-margin-xxs);
     }
   }

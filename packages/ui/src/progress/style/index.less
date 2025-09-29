@@ -1,29 +1,31 @@
-@keyframes antProgressLTRActive{
-0% {
-  transform: translateX(-100%) scaleX(0);
-  opacity: 0.1;
+@keyframes antProgressLTRActive {
+  0% {
+    transform: translateX(-100%) scaleX(0);
+    opacity: 0.1;
+  }
+  20% {
+    transform: translateX(-100%) scaleX(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(0) scaleX(1);
+    opacity: 0;
+  }
 }
-20% {
-  transform: translateX(-100%) scaleX(0);
-  opacity: 0.5;
+@keyframes antProgressRTLActive {
+  0% {
+    transform: translateX(100%) scaleX(0);
+    opacity: 0.1;
+  }
+  20% {
+    transform: translateX(100%) scaleX(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(0) scaleX(1);
+    opacity: 0;
+  }
 }
-to {
-  transform: translateX(0) scaleX(1);
-  opacity: 0;
-}}
-@keyframes antProgressRTLActive{
-0% {
-  transform: translateX(100%) scaleX(0);
-  opacity: 0.1;
-}
-20% {
-  transform: translateX(100%) scaleX(0);
-  opacity: 0.5;
-}
-to {
-  transform: translateX(0) scaleX(1);
-  opacity: 0;
-}}
 .ant-progress {
   --ant-progress-circle-text-color: var(--ant-color-text);
   --ant-progress-default-color: var(--ant-color-info);
@@ -70,7 +72,8 @@ to {
       stroke: var(--ant-progress-default-color);
     }
   }
-  .ant-progress-success-bg, .ant-progress-bg {
+  .ant-progress-success-bg,
+  .ant-progress-bg {
     position: relative;
     background: var(--ant-progress-default-color);
     border-radius: var(--ant-progress-line-border-radius);
@@ -90,7 +93,7 @@ to {
   .ant-progress-bg {
     overflow: hidden;
     &::after {
-      content: "";
+      content: '';
       background: inherit;
       background: var(--progress-line-stroke-color);
       height: 100%;
@@ -164,7 +167,7 @@ to {
       animation-duration: 2.4s;
       animation-timing-function: var(--ant-motion-ease-out-quint);
       animation-iteration-count: infinite;
-      content: "";
+      content: '';
     }
   }
   &.ant-progress-rtl.ant-progress-status-active {
@@ -263,7 +266,8 @@ to {
   }
 }
 .ant-progress {
-  .ant-progress-small&-line, .ant-progress-small&-line .ant-progress-text .anticon {
+  .ant-progress-small&-line,
+  .ant-progress-small&-line .ant-progress-text .anticon {
     font-size: var(--ant-font-size-sm);
   }
 }

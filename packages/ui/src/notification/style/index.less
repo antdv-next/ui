@@ -1,51 +1,56 @@
-@keyframes antNotificationFadeOut{
-0% {
-  max-height: 150px;
-  margin-bottom: var(--ant-margin);
+@keyframes antNotificationFadeOut {
+  0% {
+    max-height: 150px;
+    margin-bottom: var(--ant-margin);
+  }
+  100% {
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+  }
 }
-100% {
-  max-height: 0;
-  margin-bottom: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  opacity: 0;
-}}
-@keyframes antNotificationTopFadeIn{
-0% {
-  top: -150px;
-  opacity: 0;
+@keyframes antNotificationTopFadeIn {
+  0% {
+    top: -150px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
 }
-100% {
-  top: 0;
-  opacity: 1;
-}}
-@keyframes antNotificationBottomFadeIn{
-0% {
-  bottom: calc(150px * -1);
-  opacity: 0;
+@keyframes antNotificationBottomFadeIn {
+  0% {
+    bottom: calc(150px * -1);
+    opacity: 0;
+  }
+  100% {
+    bottom: 0;
+    opacity: 1;
+  }
 }
-100% {
-  bottom: 0;
-  opacity: 1;
-}}
-@keyframes antNotificationFadeIn{
-0% {
-  transform: translate3d(100%, 0, 0);
-  opacity: 0;
+@keyframes antNotificationFadeIn {
+  0% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
-100% {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
-}}
-@keyframes antNotificationLeftFadeIn{
-0% {
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
+@keyframes antNotificationLeftFadeIn {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
-100% {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
-}}
 .ant-notification {
   --ant-notification-z-index-popup: 2050;
   --ant-notification-width: 384px;
@@ -68,7 +73,8 @@
   .ant-notification-fade-appear-prepare {
     opacity: 0 !important;
   }
-  .ant-notification-fade-enter, .ant-notification-fade-appear {
+  .ant-notification-fade-enter,
+  .ant-notification-fade-appear {
     animation-duration: var(--ant-motion-duration-mid);
     animation-timing-function: var(--ant-motion-ease-in-out);
     animation-fill-mode: both;
@@ -81,7 +87,8 @@
     animation-duration: var(--ant-motion-duration-mid);
     animation-play-state: paused;
   }
-  .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+  .ant-notification-fade-enter.ant-notification-fade-enter-active,
+  .ant-notification-fade-appear.ant-notification-fade-appear-active {
     animation-play-state: running;
   }
   .ant-notification-fade-leave.ant-notification-fade-leave-active {
@@ -158,7 +165,9 @@
       width: calc(var(--ant-control-height-lg) * 0.55);
       height: calc(var(--ant-control-height-lg) * 0.55);
       border-radius: var(--ant-border-radius-sm);
-      transition: background-color var(--ant-motion-duration-mid), color var(--ant-motion-duration-mid);
+      transition:
+        background-color var(--ant-motion-duration-mid),
+        color var(--ant-motion-duration-mid);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -174,7 +183,9 @@
       &:focus-visible {
         outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
         outline-offset: 1px;
-        transition: outline-offset 0s, outline 0s;
+        transition:
+          outline-offset 0s,
+          outline 0s;
       }
     }
     .ant-notification-notice-progress {
@@ -187,7 +198,8 @@
       bottom: 0;
       block-size: 2px;
       border: 0;
-      &, &::-webkit-progress-bar {
+      &,
+      &::-webkit-progress-bar {
         border-radius: var(--ant-border-radius-lg);
         background-color: rgba(0, 0, 0, 0.04);
       }
@@ -206,45 +218,54 @@
   }
 }
 .ant-notification {
-  &.ant-notification-top, &.ant-notification-bottom {
+  &.ant-notification-top,
+  &.ant-notification-bottom {
     margin-inline: 0;
     .ant-notification-notice {
       margin-inline: auto auto;
     }
   }
   &.ant-notification-top {
-    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active,
+    .ant-notification-fade-appear.ant-notification-fade-appear-active {
       animation-name: antNotificationTopFadeIn;
     }
   }
   &.ant-notification-bottom {
-    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active,
+    .ant-notification-fade-appear.ant-notification-fade-appear-active {
       animation-name: antNotificationBottomFadeIn;
     }
   }
-  &.ant-notification-topRight, &.ant-notification-bottomRight {
-    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+  &.ant-notification-topRight,
+  &.ant-notification-bottomRight {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active,
+    .ant-notification-fade-appear.ant-notification-fade-appear-active {
       animation-name: antNotificationFadeIn;
     }
   }
-  &.ant-notification-topLeft, &.ant-notification-bottomLeft {
+  &.ant-notification-topLeft,
+  &.ant-notification-bottomLeft {
     margin-right: 0;
     margin-left: var(--ant-margin-lg);
     .ant-notification-notice {
       margin-inline-end: auto;
       margin-inline-start: 0;
     }
-    .ant-notification-fade-enter.ant-notification-fade-enter-active, .ant-notification-fade-appear.ant-notification-fade-appear-active {
+    .ant-notification-fade-enter.ant-notification-fade-enter-active,
+    .ant-notification-fade-appear.ant-notification-fade-appear-active {
       animation-name: antNotificationLeftFadeIn;
     }
   }
 }
 .ant-notification-stack {
   & > .ant-notification-notice-wrapper {
-    transition: transform var(--ant-motion-duration-slow), backdrop-filter 0s;
+    transition:
+      transform var(--ant-motion-duration-slow),
+      backdrop-filter 0s;
     will-change: transform, opacity;
     position: absolute;
-    &:not(:nth-last-child(-n+3)) {
+    &:not(:nth-last-child(-n + 3)) {
       opacity: 0;
       overflow: hidden;
       color: transparent;
@@ -292,7 +313,7 @@
       }
     }
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       height: var(--ant-margin);
       width: 100%;

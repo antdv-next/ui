@@ -3,6 +3,7 @@ import util from 'node:util'
 import { vi } from 'vitest'
 import { version } from 'vue'
 
+// eslint-disable-next-line no-console
 console.log('Current Vue Version:', version)
 type Writeable<T> = { -readonly [P in keyof T]: T[P] }
 

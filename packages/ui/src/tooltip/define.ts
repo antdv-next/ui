@@ -32,11 +32,16 @@ export interface TooltipAlignConfig {
 }
 
 export interface TooltipProps {
+  prefixCls?: string
   // Basic props
   trigger?: ActionType | ActionType[]
   open?: boolean
   defaultOpen?: boolean
   afterOpenChange?: (open: boolean) => void
+  /**
+   * @private This is an internal property used to determine if the tooltip has an inner element.
+   */
+  hasInner?: boolean
 
   // Layout & positioning
   placement?: TooltipPlacement
@@ -45,11 +50,11 @@ export interface TooltipProps {
   // Style & appearance
   styles?: Partial<Record<SemanticName, CSSProperties>>
   classNames?: Partial<Record<SemanticName, string>>
-  rootClassName?: string
+  rootClassName?: string | Record<string, any>
   color?: LiteralUnion<PresetColorType>
   overlayStyle?: CSSProperties
   overlayInnerStyle?: CSSProperties
-  overlayClassName?: string
+  overlayClassName?: string | Record<string, any>
 
   // Arrow
   arrow?: boolean | { pointAtCenter?: boolean, arrowPointAtCenter?: boolean }
@@ -105,4 +110,10 @@ export interface TooltipEmits {
   // Legacy
   'update:visible': [boolean]
   'visibleChange': [boolean]
+}
+
+export interface TooltipSlots {
+  title?: () => any
+  default?: () => any
+  overlay?: () => any
 }

@@ -1,4 +1,4 @@
-@keyframes ant-skeleton-loading{
+@keyframes ant-skeleton-loading {
   0% {
     background-position: 100% 50%;
   }
@@ -70,12 +70,13 @@
         }
       }
     }
-    .ant-skeleton-paragraph> li:last-child:not(:first-child):not(:nth-child(2)) {
+    .ant-skeleton-paragraph > li:last-child:not(:first-child):not(:nth-child(2)) {
       width: 61%;
     }
   }
   &-round .ant-skeleton-content {
-    .ant-skeleton-title, .ant-skeleton-paragraph > li {
+    .ant-skeleton-title,
+    .ant-skeleton-paragraph > li {
       border-radius: 100px;
     }
   }
@@ -224,7 +225,12 @@
   .ant-skeleton-button,
   .ant-skeleton-input,
   .ant-skeleton-image {
-    background: linear-gradient(90deg, var(--ant-skeleton-gradient-from-color) 25%, var(--ant-skeleton-gradient-to-color) 37%, var(--ant-skeleton-gradient-from-color) 63%);
+    background: linear-gradient(
+      90deg,
+      var(--ant-skeleton-gradient-from-color) 25%,
+      var(--ant-skeleton-gradient-to-color) 37%,
+      var(--ant-skeleton-gradient-from-color) 63%
+    );
     background-size: 400% 100%;
     animation-name: ant-skeleton-loading;
     animation-duration: 1.4s;

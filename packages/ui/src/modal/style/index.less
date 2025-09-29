@@ -1,39 +1,43 @@
-@keyframes antFadeIn{
-0% {
-  opacity: 0;
+@keyframes antFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-100% {
-  opacity: 1;
-}}
-@keyframes antFadeOut{
-0% {
-  opacity: 1;
+@keyframes antFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-100% {
-  opacity: 0;
-}}
 
-@keyframes antZoomIn{
-0% {
-  transform: scale(0.2);
-  opacity: 0;
+@keyframes antZoomIn {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
-100% {
-  transform: scale(1);
-  opacity: 1;
-}}
-@keyframes antZoomOut{
-0% {
-  transform: scale(1);
+@keyframes antZoomOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
 }
-100% {
-  transform: scale(0.2);
-  opacity: 0;
-}}
 .ant-modal {
   --ant-modal-footer-bg: transparent;
   --ant-modal-header-bg: var(--ant-color-bg-elevated);
-  --ant-modal-title-line-height: 1.5px;
+  --ant-modal-title-line-height: 1.5;
   --ant-modal-title-font-size: 16px;
   --ant-modal-content-bg: var(--ant-color-bg-elevated);
   --ant-modal-title-color: var(--ant-color-text-heading);
@@ -61,7 +65,7 @@
       width: 0;
       height: 100%;
       vertical-align: middle;
-      content: "";
+      content: '';
     }
     .ant-modal {
       top: 0;
@@ -118,8 +122,20 @@
   }
   .ant-modal-close {
     position: absolute;
-    top: calc((calc(calc(var(--ant-line-height-heading-5) * var(--ant-font-size-heading-5)) + calc(var(--ant-padding) * 2)) - var(--ant-control-height)) / 2);
-    inset-inline-end: calc((calc(calc(var(--ant-line-height-heading-5) * var(--ant-font-size-heading-5)) + calc(var(--ant-padding) * 2)) - var(--ant-control-height)) / 2);
+    top: calc(
+      (
+          calc(calc(var(--ant-line-height-heading-5) * var(--ant-font-size-heading-5)) + calc(var(--ant-padding) * 2)) -
+            var(--ant-control-height)
+        ) /
+        2
+    );
+    inset-inline-end: calc(
+      (
+          calc(calc(var(--ant-line-height-heading-5) * var(--ant-font-size-heading-5)) + calc(var(--ant-padding) * 2)) -
+            var(--ant-control-height)
+        ) /
+        2
+    );
     z-index: 1010;
     padding: 0;
     color: var(--ant-color-icon);
@@ -133,7 +149,9 @@
     border: 0;
     outline: 0;
     cursor: pointer;
-    transition: color var(--ant-motion-duration-mid), background-color var(--ant-motion-duration-mid);
+    transition:
+      color var(--ant-motion-duration-mid),
+      background-color var(--ant-motion-duration-mid);
     &-x {
       display: flex;
       font-size: var(--ant-font-size-lg);
@@ -157,7 +175,9 @@
     &:focus-visible {
       outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border);
       outline-offset: 1px;
-      transition: outline-offset 0s, outline 0s;
+      transition:
+        outline-offset 0s,
+        outline 0s;
     }
   }
   .ant-modal-header {
@@ -203,8 +223,8 @@
   display: flex;
   flex-direction: column;
   .ant-modal-content,
-            .ant-modal-body,
-            .ant-modal-confirm-body-wrapper {
+  .ant-modal-body,
+  .ant-modal-confirm-body-wrapper {
     display: flex;
     flex-direction: column;
     flex: auto;
@@ -222,7 +242,8 @@
   }
 }
 .ant-modal-root {
-  .ant-modal.ant-zoom-enter, .ant-modal.ant-zoom-appear {
+  .ant-modal.ant-zoom-enter,
+  .ant-modal.ant-zoom-appear {
     transform: none;
     opacity: 0;
     animation-duration: var(--ant-motion-duration-slow);
@@ -252,7 +273,8 @@
   }
 }
 .ant-modal-root {
-  .ant-fade-enter, .ant-fade-appear {
+  .ant-fade-enter,
+  .ant-fade-appear {
     animation-duration: var(--ant-motion-duration-mid);
     animation-fill-mode: both;
     animation-play-state: paused;
@@ -263,7 +285,7 @@
     animation-play-state: paused;
   }
   .ant-fade-enter.ant-fade-enter-active,
-        .ant-fade-appear.ant-fade-appear-active {
+  .ant-fade-appear.ant-fade-appear-active {
     animation-name: antFadeIn;
     animation-play-state: running;
   }
@@ -273,7 +295,7 @@
     pointer-events: none;
   }
   .ant-fade-enter,
-          .ant-fade-appear {
+  .ant-fade-appear {
     opacity: 0;
     animation-timing-function: linear;
   }
@@ -282,7 +304,7 @@
   }
 }
 .ant-zoom-enter,
-      .ant-zoom-appear {
+.ant-zoom-appear {
   animation-duration: var(--ant-motion-duration-mid);
   animation-fill-mode: both;
   animation-play-state: paused;
@@ -293,7 +315,7 @@
   animation-play-state: paused;
 }
 .ant-zoom-enter.ant-zoom-enter-active,
-      .ant-zoom-appear.ant-zoom-appear-active {
+.ant-zoom-appear.ant-zoom-appear-active {
   animation-name: antZoomIn;
   animation-play-state: running;
 }
@@ -303,7 +325,7 @@
   pointer-events: none;
 }
 .ant-zoom-enter,
-        .ant-zoom-appear {
+.ant-zoom-appear {
   transform: scale(0);
   opacity: 0;
   animation-timing-function: var(--ant-motion-ease-out-circ);

@@ -7,7 +7,7 @@ const buttonWidth = 80
   <div class="demo mt-100px flex flex-col justify-center items-center">
     <!-- Top row -->
     <div class="flex justify-center items-center whitespace-nowrap">
-      <a-tooltip placement="topLeft" :title="text">
+      <a-tooltip placement="topLeft" :title="text" trigger="click">
         <a-button class="w-20 m-1">
           TL
         </a-button>

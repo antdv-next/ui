@@ -12,11 +12,11 @@
       }
       &-rtl {
         .ant-calendar-prev-icon,
-                      .ant-calendar-super-prev-icon {
+        .ant-calendar-super-prev-icon {
           transform: rotate(45deg);
         }
         .ant-calendar-next-icon,
-                      .ant-calendar-super-next-icon {
+        .ant-calendar-super-next-icon {
           transform: rotate(-135deg);
         }
         .ant-calendar-time-panel {
@@ -30,12 +30,12 @@
       }
     }
     &-decade-panel,
-            &-year-panel,
-            &-quarter-panel,
-            &-month-panel,
-            &-week-panel,
-            &-date-panel,
-            &-time-panel {
+    &-year-panel,
+    &-quarter-panel,
+    &-month-panel,
+    &-week-panel,
+    &-date-panel,
+    &-time-panel {
       display: flex;
       flex-direction: column;
       width: calc(var(--ant-calendar-cell-width) * 7 + calc(var(--ant-padding) + var(--ant-padding-xxs) / 2) * 2);
@@ -93,9 +93,9 @@
       }
     }
     &-prev-icon,
-            &-next-icon,
-            &-super-prev-icon,
-            &-super-next-icon {
+    &-next-icon,
+    &-super-prev-icon,
+    &-super-next-icon {
       position: relative;
       width: 7px;
       height: 7px;
@@ -108,11 +108,11 @@
         border: 0 solid currentcolor;
         border-block-start-width: 1.5px;
         border-inline-start-width: 1.5px;
-        content: "";
+        content: '';
       }
     }
     &-super-prev-icon,
-            &-super-next-icon {
+    &-super-next-icon {
       &::after {
         position: absolute;
         top: 4px;
@@ -123,20 +123,23 @@
         border: 0 solid currentcolor;
         border-block-start-width: 1.5px;
         border-inline-start-width: 1.5px;
-        content: "";
+        content: '';
       }
     }
-    &-prev-icon, &-super-prev-icon {
+    &-prev-icon,
+    &-super-prev-icon {
       transform: rotate(-45deg);
     }
-    &-next-icon, &-super-next-icon {
+    &-next-icon,
+    &-super-next-icon {
       transform: rotate(135deg);
     }
     &-content {
       width: 100%;
       table-layout: fixed;
       border-collapse: collapse;
-      th, td {
+      th,
+      td {
         position: relative;
         min-width: var(--ant-calendar-cell-height);
         font-weight: normal;
@@ -162,7 +165,7 @@
         z-index: 1;
         height: var(--ant-calendar-cell-height);
         transform: translateY(-50%);
-        content: "";
+        content: '';
         pointer-events: none;
       }
       .ant-calendar-cell-inner {
@@ -176,7 +179,9 @@
         transition: background var(--ant-motion-duration-mid);
       }
       &:hover:not(.ant-calendar-cell-in-view):not(.ant-calendar-cell-disabled),
-          &:hover:not(.ant-calendar-cell-selected):not(.ant-calendar-cell-range-start):not(.ant-calendar-cell-range-end):not(.ant-calendar-cell-disabled) {
+      &:hover:not(.ant-calendar-cell-selected):not(.ant-calendar-cell-range-start):not(
+          .ant-calendar-cell-range-end
+        ):not(.ant-calendar-cell-disabled) {
         .ant-calendar-cell-inner {
           background: var(--ant-calendar-cell-hover-bg);
         }
@@ -191,20 +196,20 @@
           z-index: 1;
           border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-primary);
           border-radius: var(--ant-border-radius-sm);
-          content: "";
+          content: '';
         }
       }
       &-in-view.ant-calendar-cell-in-range,
-            &-in-view.ant-calendar-cell-range-start,
-            &-in-view.ant-calendar-cell-range-end {
+      &-in-view.ant-calendar-cell-range-start,
+      &-in-view.ant-calendar-cell-range-end {
         position: relative;
         &:not(.ant-calendar-cell-disabled):before {
           background: var(--ant-calendar-cell-active-with-range-bg);
         }
       }
       &-in-view.ant-calendar-cell-selected,
-            &-in-view.ant-calendar-cell-range-start,
-            &-in-view.ant-calendar-cell-range-end {
+      &-in-view.ant-calendar-cell-range-start,
+      &-in-view.ant-calendar-cell-range-end {
         &:not(.ant-calendar-cell-disabled) .ant-calendar-cell-inner {
           color: var(--ant-color-text-light-solid);
           background: var(--ant-color-primary);
@@ -246,9 +251,9 @@
       }
     }
     &-decade-panel,
-            &-year-panel,
-            &-quarter-panel,
-            &-month-panel {
+    &-year-panel,
+    &-quarter-panel,
+    &-month-panel {
       .ant-calendar-content {
         height: calc(var(--ant-calendar-without-time-cell-height) * 4);
       }
@@ -270,8 +275,8 @@
       }
     }
     &-year-panel,
-            &-quarter-panel,
-            &-month-panel {
+    &-quarter-panel,
+    &-month-panel {
       .ant-calendar-body {
         padding: 0 var(--ant-padding-xs);
       }
@@ -305,7 +310,10 @@
       &:hover td:before {
         background: var(--ant-calendar-cell-hover-bg);
       }
-      &-range-start td, &-range-end td, &-selected td, &-hover td {
+      &-range-start td,
+      &-range-end td,
+      &-selected td,
+      &-hover td {
         &.ant-calendar-cell {
           &:before {
             background: var(--ant-color-primary);
@@ -322,7 +330,8 @@
         background: var(--ant-control-item-bg-active);
       }
     }
-    &-week-panel, &-date-panel-show-week {
+    &-week-panel,
+    &-date-panel-show-week {
       .ant-calendar-body {
         padding: var(--ant-padding-xs) var(--ant-padding-sm);
       }
@@ -336,12 +345,12 @@
         border-inline-start: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
       }
       .ant-calendar-date-panel,
-                .ant-calendar-time-panel {
+      .ant-calendar-time-panel {
         transition: opacity var(--ant-motion-duration-slow);
       }
       &-active {
         .ant-calendar-date-panel,
-                    .ant-calendar-time-panel {
+        .ant-calendar-time-panel {
           opacity: 0.3;
           &-active {
             opacity: 1;
@@ -382,7 +391,7 @@
         &::after {
           display: block;
           height: calc(100% - var(--ant-calendar-time-cell-height));
-          content: "";
+          content: '';
         }
         &:not(:first-child) {
           border-inline-start: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
@@ -405,7 +414,9 @@
               margin: 0;
               padding-block: 0;
               padding-inline-end: 0;
-              padding-inline-start: calc((var(--ant-calendar-time-column-width) - var(--ant-calendar-time-cell-height)) / 2);
+              padding-inline-start: calc(
+                (var(--ant-calendar-time-column-width) - var(--ant-calendar-time-cell-height)) / 2
+              );
               color: var(--ant-color-text);
               line-height: var(--ant-calendar-time-cell-height);
               border-radius: var(--ant-border-radius-sm);
@@ -465,7 +476,8 @@
   border: 0;
   border-top: var(--ant-line-width) var(--ant-line-type) var(--ant-color-split);
   border-radius: 0;
-  .ant-calendar-month-panel, .ant-calendar-date-panel {
+  .ant-calendar-month-panel,
+  .ant-calendar-date-panel {
     width: auto;
   }
   .ant-calendar-body {
@@ -504,7 +516,8 @@
     background: var(--ant-calendar-full-bg);
     border: 0;
     .ant-calendar-body {
-      th, td {
+      th,
+      td {
         padding: 0;
       }
       th {
@@ -520,7 +533,11 @@
     border-radius: 0;
     border-top: var(--ant-line-width-bold) var(--ant-line-type) var(--ant-color-split);
     width: 100%;
-    height: calc(var(--ant-control-height-sm) + calc((var(--ant-font-height-sm) + var(--ant-margin-xs)) * 3 + var(--ant-line-width) * 2) + var(--ant-padding-xs) / 2 + var(--ant-line-width-bold));
+    height: calc(
+      var(--ant-control-height-sm) +
+        calc((var(--ant-font-height-sm) + var(--ant-margin-xs)) * 3 + var(--ant-line-width) * 2) +
+        var(--ant-padding-xs) / 2 + var(--ant-line-width-bold)
+    );
   }
   .ant-calendar-cell {
     &::before {
@@ -535,12 +552,15 @@
       display: none;
     }
     &-in-view.ant-calendar-cell-selected {
-      .ant-calendar-calendar-date, .ant-calendar-calendar-date-today {
+      .ant-calendar-calendar-date,
+      .ant-calendar-calendar-date-today {
         background: var(--ant-calendar-item-active-bg);
       }
     }
-    &-selected, &-selected:hover {
-      .ant-calendar-calendar-date, .ant-calendar-calendar-date-today {
+    &-selected,
+    &-selected:hover {
+      .ant-calendar-calendar-date,
+      .ant-calendar-calendar-date-today {
         .ant-calendar-calendar-date-value {
           color: var(--ant-color-primary);
         }

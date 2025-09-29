@@ -24,7 +24,9 @@
   &.ant-tag-rtl {
     direction: rtl;
   }
-  &, a, a:hover {
+  &,
+  a,
+  a:hover {
     color: var(--ant-tag-default-color);
   }
   .ant-tag-close-icon {
@@ -39,7 +41,11 @@
   }
   &.ant-tag-has-color {
     border-color: transparent;
-    &, a, a:hover, .anticon-close, .anticon-close:hover {
+    &,
+    a,
+    a:hover,
+    .anticon-close,
+    .anticon-close:hover {
       color: var(--ant-color-text-light-solid);
     }
   }
@@ -51,7 +57,8 @@
       color: var(--ant-color-primary);
       background-color: var(--ant-color-fill-secondary);
     }
-    &:active, &-checked {
+    &:active,
+    &-checked {
       color: var(--ant-color-text-light-solid);
     }
     &-checked {
@@ -67,7 +74,8 @@
   &-hidden {
     display: none;
   }
-  > .anticon + span, > span + .anticon {
+  > .anticon + span,
+  > span + .anticon {
     margin-inline-start: calc(8px - var(--ant-line-width));
   }
 }

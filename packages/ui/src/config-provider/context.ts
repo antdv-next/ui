@@ -1,5 +1,7 @@
 import type { CSSProperties, InjectionKey } from 'vue'
 import type { ButtonProps } from '../button/define.ts'
+import type { Locale } from '../locale'
+import type { PopoverProps } from '../popover'
 import type { TooltipProps } from '../tooltip'
 import { computed, inject, provide } from 'vue'
 import { generateKey } from '../_utils/env.ts'
@@ -44,7 +46,7 @@ export interface ConfigComponentProps {
   result?: ComponentStyleConfig
   // slider?: SliderConfig;
   breadcrumb?: ComponentStyleConfig
-  // menu?: MenuConfig;
+  menu?: ComponentStyleConfig
   checkbox?: ComponentStyleConfig
   // descriptions?: DescriptionsConfig;
   // empty?: EmptyConfig;
@@ -63,8 +65,8 @@ export interface ConfigComponentProps {
   // timePicker?: TimePickerConfig;
   // tour?: TourConfig;
   tooltip?: TooltipConfig
-  // popover?: PopoverConfig;
-  // popconfirm?: PopconfirmConfig;
+  popover?: PopoverConfig
+  popconfirm?: PopconfirmConfig
   // upload?: UploadConfig;
   // notification?: NotificationConfig;
   tree?: ComponentStyleConfig
@@ -92,7 +94,7 @@ export interface ConfigConsumerProps extends ConfigComponentProps {
   autoInsertSpaceInButton?: boolean
   // variant?: Variant;
   virtual?: boolean
-  // locale?: Locale;
+  locale?: Locale
   direction?: DirectionType
   popupMatchSelectWidth?: boolean
   // popupOverflow?: PopupOverflow;
@@ -194,8 +196,12 @@ export function useComponentConfig<T extends keyof ConfigComponentProps>(propNam
 export interface ComponentStyleConfig {
   className?: string
   style?: CSSProperties
+  classNames?: Record<string, string>
+  styles?: Record<string, CSSProperties>
 }
 export type ButtonConfig = ComponentStyleConfig
   & Pick<ButtonProps, 'classNames' | 'styles' | 'autoInsertSpace' | 'variant' | 'color' | 'shape'>
 
 export type TooltipConfig = ComponentStyleConfig & Pick<TooltipProps, 'classNames' | 'styles'>
+export type PopoverConfig = ComponentStyleConfig & Pick<PopoverProps, 'classNames' | 'styles'>
+export type PopconfirmConfig = ComponentStyleConfig & Pick<PopoverProps, 'classNames' | 'styles'>

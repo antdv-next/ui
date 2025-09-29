@@ -1,33 +1,37 @@
-@keyframes uploadAnimateInlineIn{
-from {
-  width: 0;
-  height: 0;
-  padding: 0;
-  opacity: 0;
-  margin: calc(var(--ant-margin-xs) / -2);
-}}
-@keyframes uploadAnimateInlineOut{
-to {
-  width: 0;
-  height: 0;
-  padding: 0;
-  opacity: 0;
-  margin: calc(var(--ant-margin-xs) / -2);
-}}
-@keyframes antFadeIn{
-0% {
-  opacity: 0;
+@keyframes uploadAnimateInlineIn {
+  from {
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    margin: calc(var(--ant-margin-xs) / -2);
+  }
 }
-100% {
-  opacity: 1;
-}}
-@keyframes antFadeOut{
-0% {
-  opacity: 1;
+@keyframes uploadAnimateInlineOut {
+  to {
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    margin: calc(var(--ant-margin-xs) / -2);
+  }
 }
-100% {
-  opacity: 0;
-}}
+@keyframes antFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes antFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .ant-upload {
   --ant-upload-actions-color: var(--ant-color-icon);
 }
@@ -86,7 +90,7 @@ to {
       vertical-align: middle;
     }
     &:not(.ant-upload-disabled):hover,
-              &-hover:not(.ant-upload-disabled) {
+    &-hover:not(.ant-upload-disabled) {
       border-color: var(--ant-color-primary-hover);
     }
     p.ant-upload-drag-icon {
@@ -107,8 +111,8 @@ to {
     }
     &.ant-upload-disabled {
       p.ant-upload-drag-icon .anticon,
-                  p.ant-upload-text,
-                  p.ant-upload-hint {
+      p.ant-upload-text,
+      p.ant-upload-hint {
         color: var(--ant-color-text-disabled);
       }
     }
@@ -116,8 +120,8 @@ to {
 }
 .ant-upload-wrapper {
   .ant-upload-list.ant-upload-list-picture,
-          .ant-upload-list.ant-upload-list-picture-card,
-          .ant-upload-list.ant-upload-list-picture-circle {
+  .ant-upload-list.ant-upload-list-picture-card,
+  .ant-upload-list.ant-upload-list-picture-circle {
     .ant-upload-list-item {
       position: relative;
       height: calc(calc(var(--ant-font-size-heading-3) * 2) + var(--ant-line-width) * 2 + var(--ant-padding-xs) * 2);
@@ -173,21 +177,23 @@ to {
     }
   }
   .ant-upload-list.ant-upload-list-picture-circle .ant-upload-list-item {
-    &, &::before, .ant-upload-list-item-thumbnail {
+    &,
+    &::before,
+    .ant-upload-list-item-thumbnail {
       border-radius: 50%;
     }
   }
 }
 .ant-upload-wrapper.ant-upload-picture-card-wrapper,
-      .ant-upload-wrapper.ant-upload-picture-circle-wrapper {
+.ant-upload-wrapper.ant-upload-picture-circle-wrapper {
   &::before {
     display: table;
-    content: "";
+    content: '';
   }
   &::after {
     display: table;
     clear: both;
-    content: "";
+    content: '';
   }
   display: block;
   .ant-upload.ant-upload-select {
@@ -211,7 +217,8 @@ to {
       border-color: var(--ant-color-primary);
     }
   }
-  .ant-upload-list.ant-upload-list-picture-card, .ant-upload-list.ant-upload-list-picture-circle {
+  .ant-upload-list.ant-upload-list-picture-card,
+  .ant-upload-list.ant-upload-list-picture-circle {
     display: flex;
     flex-wrap: wrap;
     @supports not (gap: 1px) {
@@ -246,11 +253,12 @@ to {
         background-color: var(--ant-color-bg-mask);
         opacity: 0;
         transition: all var(--ant-motion-duration-slow);
-        content: " ";
+        content: ' ';
       }
     }
     .ant-upload-list-item:hover {
-      &::before, .ant-upload-list-item-actions {
+      &::before,
+      .ant-upload-list-item-actions {
         opacity: 1;
       }
     }
@@ -264,8 +272,8 @@ to {
       opacity: 0;
       transition: all var(--ant-motion-duration-slow);
       .anticon-eye,
-                  .anticon-download,
-                  .anticon-delete {
+      .anticon-download,
+      .anticon-delete {
         z-index: 10;
         width: var(--ant-font-size-lg);
         margin: 0 var(--ant-margin-xxs);
@@ -281,7 +289,8 @@ to {
         }
       }
     }
-    .ant-upload-list-item-thumbnail, .ant-upload-list-item-thumbnail img {
+    .ant-upload-list-item-thumbnail,
+    .ant-upload-list-item-thumbnail img {
       position: static;
       display: block;
       width: 100%;
@@ -302,7 +311,10 @@ to {
       &.ant-upload-list-item {
         background-color: var(--ant-color-fill-alter);
       }
-      &::before, .anticon-eye, .anticon-download, .anticon-delete {
+      &::before,
+      .anticon-eye,
+      .anticon-download,
+      .anticon-delete {
         display: none;
       }
     }
@@ -322,12 +334,12 @@ to {
   .ant-upload-list {
     &::before {
       display: table;
-      content: "";
+      content: '';
     }
     &::after {
       display: table;
       clear: both;
-      content: "";
+      content: '';
     }
     line-height: var(--ant-line-height);
     .ant-upload-list-item {
@@ -361,7 +373,7 @@ to {
           transition: all var(--ant-motion-duration-slow);
         }
         .ant-upload-list-item-action:focus-visible,
-                      &.picture .ant-upload-list-item-action {
+        &.picture .ant-upload-list-item-action {
           opacity: 1;
         }
       }
@@ -387,11 +399,13 @@ to {
     }
     .ant-upload-list-item-error {
       color: var(--ant-color-error);
-      .ant-upload-list-item-name, .ant-upload-icon .anticon {
+      .ant-upload-list-item-name,
+      .ant-upload-icon .anticon {
         color: var(--ant-color-error);
       }
       .ant-upload-list-item-actions {
-        .anticon, .anticon:hover {
+        .anticon,
+        .anticon:hover {
           color: var(--ant-color-error);
         }
         .ant-upload-list-item-action {
@@ -400,23 +414,28 @@ to {
       }
     }
     .ant-upload-list-item-container {
-      transition: opacity var(--ant-motion-duration-slow), height var(--ant-motion-duration-slow);
+      transition:
+        opacity var(--ant-motion-duration-slow),
+        height var(--ant-motion-duration-slow);
       &::before {
         display: table;
         width: 0;
         height: 0;
-        content: "";
+        content: '';
       }
     }
   }
 }
 .ant-upload-wrapper {
-  .ant-upload-animate-inline-appear, .ant-upload-animate-inline-enter, .ant-upload-animate-inline-leave {
+  .ant-upload-animate-inline-appear,
+  .ant-upload-animate-inline-enter,
+  .ant-upload-animate-inline-leave {
     animation-duration: var(--ant-motion-duration-slow);
     animation-timing-function: var(--ant-motion-ease-in-out-circ);
     animation-fill-mode: forwards;
   }
-  .ant-upload-animate-inline-appear, .ant-upload-animate-inline-enter {
+  .ant-upload-animate-inline-appear,
+  .ant-upload-animate-inline-enter {
     animation-name: uploadAnimateInlineIn;
   }
   .ant-upload-animate-inline-leave {
@@ -425,7 +444,7 @@ to {
 }
 .ant-upload-wrapper {
   .ant-fade-enter,
-        .ant-fade-appear {
+  .ant-fade-appear {
     animation-duration: var(--ant-motion-duration-mid);
     animation-fill-mode: both;
     animation-play-state: paused;
@@ -436,7 +455,7 @@ to {
     animation-play-state: paused;
   }
   .ant-fade-enter.ant-fade-enter-active,
-        .ant-fade-appear.ant-fade-appear-active {
+  .ant-fade-appear.ant-fade-appear-active {
     animation-name: antFadeIn;
     animation-play-state: running;
   }
@@ -446,7 +465,7 @@ to {
     pointer-events: none;
   }
   .ant-fade-enter,
-          .ant-fade-appear {
+  .ant-fade-appear {
     opacity: 0;
     animation-timing-function: linear;
   }
@@ -461,13 +480,15 @@ to {
   .ant-motion-collapse-legacy {
     overflow: hidden;
     &-active {
-      transition: height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
-              opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+      transition:
+        height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+        opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
     }
   }
   .ant-motion-collapse {
     overflow: hidden;
-    transition: height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
-            opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
+    transition:
+      height var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out),
+      opacity var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out) !important;
   }
 }
