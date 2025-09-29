@@ -6,6 +6,7 @@ import ResizeObserver from '@v-c/resize-observer'
 import { computed, h, nextTick, onMounted, ref, shallowRef, toRefs, useAttrs, useSlots, watch } from 'vue'
 import eagerComputed from '../_utils/eagerComputed'
 import useBreakpoints from '../_utils/hooks/useBreakpoint'
+import RenderComponent from '../_utils/renderComponent.vue'
 import { responsiveArray } from '../_utils/responsiveObserve'
 import { useConfigContext } from '../config-provider/context'
 import { useAvatarInjectContext } from './define'
@@ -15,7 +16,10 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = defineProps<AvatarProps>()
+const props = withDefaults(defineProps<AvatarProps>(), {
+  shape: 'circle',
+  size: 'default',
+})
 
 const { size: _size, shape, src, alt, srcset, draggable, crossOrigin } = toRefs(props)
 
@@ -31,7 +35,7 @@ const prefixCls = computed(() => ctx.getPrefixCls('avatar', props.prefixCls))
 
 const avatarCtx = useAvatarInjectContext()
 
-const mergeShape = computed(() => avatarCtx.shape ?? shape)
+const mergeShape = computed(() => avatarCtx.shape ?? shape.value)
 
 const size = computed(() => {
   return _size.value === 'default' ? avatarCtx.size : _size.value
@@ -194,6 +198,6 @@ onMounted(() => {
     v-bind="$attrs" ref="avatarNodeRef" :class="classString"
     :style="{ ...sizeStyle, ...responsiveSizeStyle, ...($attrs.style || {}) }"
   >
-    <component :is="childrenRender" />
+    <RenderComponent :render="childrenRender" />
   </span>
 </template>

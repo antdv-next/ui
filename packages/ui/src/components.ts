@@ -1,6 +1,7 @@
 export { Affix } from './affix'
 export { Alert } from './alert'
 export { Anchor } from './anchor'
+export { Avatar } from './avatar'
 export { Button } from './button'
 export { Divider } from './divider'
 export { Compact, Space } from './space'

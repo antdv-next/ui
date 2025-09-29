@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import type { VNode } from 'vue'
+import type { CSSProperties, VNode } from 'vue'
 import type { AvatarGroupProps } from './define'
-import { computed, h, toRefs, useAttrs, useSlots, watchEffect } from 'vue'
+import { computed, toRefs, useAttrs, useSlots, watchEffect } from 'vue'
 import { flattenChildren } from '../_utils/checker'
 import { cloneElement } from '../_utils/node'
+import RenderComponent from '../_utils/renderComponent.vue'
 import { useConfigContext } from '../config-provider/context'
+import Avatar from './avatar.vue'
 import { useAvatarProviderContext } from './define'
 
 defineOptions({
@@ -43,42 +45,47 @@ const cls = computed(() => {
 
 const slots = useSlots()
 
-const childernShow = computed(() => {
+const childrenFlatNodes = computed(() => {
   const children = Reflect.get(props, 'default') || slots.default?.()
-  const childrenWithProps = flattenChildren(children).map((child, index) =>
-    cloneElement(child as VNode, {
-      key: `avatar-key-${index}`,
-    }),
-  )
+  return flattenChildren(children).map((child, index) => cloneElement(child as VNode, { key: `avatar-group-key-${index}` }))
+})
 
-  const numOfChildren = childrenWithProps.length
+const numOfChildren = computed(() => childrenFlatNodes.value.length)
 
-  if (maxCount.value && numOfChildren > maxCount.value) {
-    const childrenShow = childrenWithProps.slice(0, maxCount.value)
-    const childrenHidden = childrenWithProps.slice(maxCount.value, numOfChildren)
-    // TODO: Popover
-    childrenShow.push(
-      h(
-        'Popover',
-        {
-          key: 'avatar-popover-key',
-          content: childrenHidden,
-          trigger: maxPopoverTrigger.value,
-          placement: maxPopoverPlacement.value,
-          overlayClassName: `${groupPrefixCls.value}-popover`,
-        },
-        {
-          default: () => h('Avatar', { style: maxStyle.value, shape: shape.value }, { default: () => `+${numOfChildren - maxCount.value}` }),
-        },
-      ),
-    )
-
-    return h('div', { ...attrs, class: cls.value, style: attrs.style }, childrenShow)
+const maxChildrenShow = computed(() => {
+  if (maxCount.value && numOfChildren.value > maxCount.value) {
+    return childrenFlatNodes.value.slice(0, maxCount.value)
   }
-  return h('div', { ...attrs, class: cls.value, style: attrs.style }, childrenWithProps)
+  return childrenFlatNodes.value
+})
+
+const maxChildrenHidden = computed(() => {
+  if (maxCount.value && numOfChildren.value > maxCount.value) {
+    return childrenFlatNodes.value.slice(maxCount.value, numOfChildren.value)
+  }
+  return null
 })
 </script>
 
 <template>
-  <component :is="childernShow" />
+  <div v-if="maxCount && numOfChildren > maxCount" v-bind="$attrs" :class="cls" :style="$attrs.style as CSSProperties">
+    <RenderComponent :render="maxChildrenShow" />
+    <Popover
+      key="avatar-popover-key"
+      :trigger="maxPopoverTrigger"
+      :placement="maxPopoverPlacement"
+      :overlay-class-name="`${groupPrefixCls}-popover`"
+    >
+      <Avatar :style="maxStyle" :shape="shape">
+        +{{ numOfChildren - maxCount }}
+      </Avatar>
+      <template #content>
+        <RenderComponent :render="maxChildrenHidden" />
+      </template>
+    </Popover>
+  </div>
+
+  <div v-else v-bind="$attrs" :class="cls" :style="$attrs.style as CSSProperties">
+    <RenderComponent :render="childrenFlatNodes" />
+  </div>
 </template>

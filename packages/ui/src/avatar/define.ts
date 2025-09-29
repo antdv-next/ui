@@ -5,21 +5,21 @@ import { inject, provide } from 'vue'
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap
 
 export interface AvatarProps {
-  prefixCls: string
+  prefixCls?: string
   shape?: 'circle' | 'square'
-  size: AvatarSize
-  src: string
+  size?: AvatarSize
+  src?: string
 
   /** Srcset of image avatar */
-  srcset: string
+  srcset?: string
 
-  icon: VNode
+  icon?: VNode
 
-  alt: string
-  gap: number
+  alt?: string
+  gap?: number
   draggable?: boolean
-  crossOrigin: string
-  loadError: () => boolean
+  crossOrigin?: string
+  loadError?: () => boolean
 }
 
 export interface AvatarContextType {
