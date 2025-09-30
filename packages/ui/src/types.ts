@@ -3,6 +3,13 @@ export type { AlertProps } from './alert'
 export type { AnchorProps } from './anchor'
 export type { ButtonProps } from './button'
 export type { SizeType } from './config-provider/size-context'
+export type {
+  DropdownButtonProps,
+  DropdownExpose,
+  DropdownItemEmits,
+  DropdownItemProps,
+  DropdownProps,
+} from './dropdown'
 export type { FlexProps } from './flex'
 export type {
   CollapseType,
@@ -13,6 +20,7 @@ export type {
   LayoutSiderProps,
   LayoutSiderTheme,
 } from './layout'
+
 export type {
   MenuDividerProps,
   MenuEmits,

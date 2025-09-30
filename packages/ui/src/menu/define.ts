@@ -30,6 +30,7 @@ export interface MenuItemProps {
   icon?: VueNode
   title?: string | VueNode
   item?: Record<string, any>
+  extra?: VueNode | (() => VueNode)
 }
 
 export interface SubMenuProps extends MenuItemProps {
@@ -57,6 +58,7 @@ export interface MenuDividerProps {
 export interface MenuItemType extends MenuItemProps {
   key?: Key
   label?: VueNode | (() => VueNode)
+  extra?: VueNode | (() => VueNode)
   children?: ItemType[]
   type?: 'item'
 }

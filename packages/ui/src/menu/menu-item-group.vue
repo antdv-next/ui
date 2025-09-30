@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MenuItemGroupProps, MenuItemGroupSlots } from './define.ts'
+import { filterEmpty } from '@v-c/util/dist/props-util'
 import { computed, h, isVNode, useSlots } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { useMenuContext, useMenuLevel, useMenuPath, useProvideMenuLevel, useProvideMenuPath } from './context.ts'
@@ -18,14 +19,21 @@ const parentPath = useMenuPath()
 
 const prefixCls = computed(() => menuContext.prefixCls.value)
 
+function normalizeChildren(value: any): any[] {
+  if (value === undefined || value === null)
+    return []
+  const arrayValue = Array.isArray(value) ? value : [value]
+  return filterEmpty(arrayValue as any)
+}
+
 const titleNodes = computed(() => {
   let nodes: any[] = []
   if (slots.title)
-    nodes = flattenChildren(slots.title())
+    nodes = flattenChildren(normalizeChildren(slots.title?.()))
   else if (typeof props.title === 'function')
-    nodes = flattenChildren((props.title as () => any)())
+    nodes = flattenChildren(normalizeChildren((props.title as () => any)?.()))
   else if (props.title !== undefined)
-    nodes = flattenChildren(props.title as any)
+    nodes = flattenChildren(normalizeChildren(props.title))
 
   return nodes
     .map((node) => {

@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { MenuItemType } from 'antdv-next'
 import { computed, ref } from 'vue'
 
-const inlineItems = [
+const inlineItems: MenuItemType[] = [
   {
     key: '1',
     label: 'Navigation One',
@@ -26,7 +27,7 @@ const inlineItems = [
   },
 ]
 
-const horizontalItems = [
+const horizontalItems: MenuItemType[] = [
   { key: 'h1', label: 'Navigation One' },
   { key: 'h2', label: 'Navigation Two' },
   {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Key, SubMenuProps, SubMenuSlots } from './define'
+import { filterEmpty } from '@v-c/util/dist/props-util'
 import { computed, h, isVNode, onMounted, onUnmounted, ref, shallowRef, useSlots, watch, watchEffect } from 'vue'
 import { flattenChildren } from '../_utils/checker'
 import { classNames } from '../_utils/classNames'
@@ -156,14 +157,21 @@ const itemPaddingStyle = computed(() => {
     : undefined
 })
 
+function normalizeChildren(value: any): any[] {
+  if (value === undefined || value === null)
+    return []
+  const arrayValue = Array.isArray(value) ? value : [value]
+  return filterEmpty(arrayValue as any)
+}
+
 function resolveContent(content?: SubMenuProps['title'] | SubMenuProps['icon'], slot?: () => any) {
   let nodes: any[] = []
   if (slot)
-    nodes = flattenChildren(slot())
+    nodes = flattenChildren(normalizeChildren(slot?.()))
   else if (typeof content === 'function')
-    nodes = flattenChildren((content as () => any)())
+    nodes = flattenChildren(normalizeChildren((content as () => any)?.()))
   else if (content !== undefined)
-    nodes = flattenChildren(content as any)
+    nodes = flattenChildren(normalizeChildren(content))
 
   return nodes
     .map((node) => {

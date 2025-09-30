@@ -194,7 +194,8 @@ const cls = computed(() => {
 const RenderText = defineComponent({
   setup(_, { slots }) {
     return () => {
-      const children = filterEmpty(slots.default?.() ?? [])
+      const slotValue = slots.default?.()
+      const children = filterEmpty(Array.isArray(slotValue) ? slotValue : [slotValue])
       if (!children.length) {
         return null
       }
