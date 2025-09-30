@@ -47,8 +47,6 @@ const dropdownBindings = computed(() => ({
   align: props.align,
   trigger: props.disabled ? [] : props.trigger,
   popupRender: props.popupRender ?? props.dropdownRender,
-  // onOpenChange: props.onOpenChange,
-  // onVisibleChange: props.onVisibleChange,
   open: props.open,
   visible: props.visible,
   disabled: props.disabled,
