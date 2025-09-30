@@ -134,6 +134,10 @@ declare module 'vue-router/auto-routes' {
     '/tooltip/colorful': RouteRecordInfo<'/tooltip/colorful', '/tooltip/colorful', Record<never, never>, Record<never, never>>,
     '/tooltip/placement': RouteRecordInfo<'/tooltip/placement', '/tooltip/placement', Record<never, never>, Record<never, never>>,
     '/tooltip/shift': RouteRecordInfo<'/tooltip/shift', '/tooltip/shift', Record<never, never>, Record<never, never>>,
+    '/watermark/basic': RouteRecordInfo<'/watermark/basic', '/watermark/basic', Record<never, never>, Record<never, never>>,
+    '/watermark/custom': RouteRecordInfo<'/watermark/custom', '/watermark/custom', Record<never, never>, Record<never, never>>,
+    '/watermark/image': RouteRecordInfo<'/watermark/image', '/watermark/image', Record<never, never>, Record<never, never>>,
+    '/watermark/multi-line': RouteRecordInfo<'/watermark/multi-line', '/watermark/multi-line', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -609,6 +613,22 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/tooltip/shift.vue': {
       routes: '/tooltip/shift'
+      views: never
+    }
+    'src/pages/watermark/basic.vue': {
+      routes: '/watermark/basic'
+      views: never
+    }
+    'src/pages/watermark/custom.vue': {
+      routes: '/watermark/custom'
+      views: never
+    }
+    'src/pages/watermark/image.vue': {
+      routes: '/watermark/image'
+      views: never
+    }
+    'src/pages/watermark/multi-line.vue': {
+      routes: '/watermark/multi-line'
       views: never
     }
   }
