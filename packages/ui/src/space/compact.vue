@@ -45,8 +45,10 @@ function getChildrenKey(child: VNodeChildAtom | VNodeNormalizedChildren, index: 
 <template>
   <div v-if="flattenChildrenItem.length > 0" v-bind="$attrs" :class="[clx, $attrs.class]">
     <CompactItem
-      v-for="(item, index) in flattenChildrenItem" :key="getChildrenKey(item, index)"
-      :compact-size="size ?? 'middle'" :compact-direction="direction"
+      v-for="(item, index) in flattenChildrenItem"
+      :key="getChildrenKey(item, index)"
+      :compact-size="size ?? 'middle'"
+      :compact-direction="direction"
       :is-first-item="index === 0 && (noCompactItemContext || compactItemContext.isFirstItem)"
       :is-last-item="index === flattenChildrenItem.length - 1 && (noCompactItemContext || compactItemContext?.isLastItem)"
     >

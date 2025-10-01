@@ -38,6 +38,12 @@ declare module 'vue-router/auto-routes' {
     '/anchor/replace': RouteRecordInfo<'/anchor/replace', '/anchor/replace', Record<never, never>, Record<never, never>>,
     '/anchor/static': RouteRecordInfo<'/anchor/static', '/anchor/static', Record<never, never>, Record<never, never>>,
     '/anchor/target-offset': RouteRecordInfo<'/anchor/target-offset', '/anchor/target-offset', Record<never, never>, Record<never, never>>,
+    '/avatar/badge': RouteRecordInfo<'/avatar/badge', '/avatar/badge', Record<never, never>, Record<never, never>>,
+    '/avatar/basic': RouteRecordInfo<'/avatar/basic', '/avatar/basic', Record<never, never>, Record<never, never>>,
+    '/avatar/dynamic': RouteRecordInfo<'/avatar/dynamic', '/avatar/dynamic', Record<never, never>, Record<never, never>>,
+    '/avatar/group': RouteRecordInfo<'/avatar/group', '/avatar/group', Record<never, never>, Record<never, never>>,
+    '/avatar/responsive': RouteRecordInfo<'/avatar/responsive', '/avatar/responsive', Record<never, never>, Record<never, never>>,
+    '/avatar/type': RouteRecordInfo<'/avatar/type', '/avatar/type', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -139,6 +145,10 @@ declare module 'vue-router/auto-routes' {
     '/tooltip/colorful': RouteRecordInfo<'/tooltip/colorful', '/tooltip/colorful', Record<never, never>, Record<never, never>>,
     '/tooltip/placement': RouteRecordInfo<'/tooltip/placement', '/tooltip/placement', Record<never, never>, Record<never, never>>,
     '/tooltip/shift': RouteRecordInfo<'/tooltip/shift', '/tooltip/shift', Record<never, never>, Record<never, never>>,
+    '/watermark/basic': RouteRecordInfo<'/watermark/basic', '/watermark/basic', Record<never, never>, Record<never, never>>,
+    '/watermark/custom': RouteRecordInfo<'/watermark/custom', '/watermark/custom', Record<never, never>, Record<never, never>>,
+    '/watermark/image': RouteRecordInfo<'/watermark/image', '/watermark/image', Record<never, never>, Record<never, never>>,
+    '/watermark/multi-line': RouteRecordInfo<'/watermark/multi-line', '/watermark/multi-line', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -230,6 +240,30 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/anchor/target-offset.vue': {
       routes: '/anchor/target-offset'
+      views: never
+    }
+    'src/pages/avatar/badge.vue': {
+      routes: '/avatar/badge'
+      views: never
+    }
+    'src/pages/avatar/basic.vue': {
+      routes: '/avatar/basic'
+      views: never
+    }
+    'src/pages/avatar/dynamic.vue': {
+      routes: '/avatar/dynamic'
+      views: never
+    }
+    'src/pages/avatar/group.vue': {
+      routes: '/avatar/group'
+      views: never
+    }
+    'src/pages/avatar/responsive.vue': {
+      routes: '/avatar/responsive'
+      views: never
+    }
+    'src/pages/avatar/type.vue': {
+      routes: '/avatar/type'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {
@@ -634,6 +668,22 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/tooltip/shift.vue': {
       routes: '/tooltip/shift'
+      views: never
+    }
+    'src/pages/watermark/basic.vue': {
+      routes: '/watermark/basic'
+      views: never
+    }
+    'src/pages/watermark/custom.vue': {
+      routes: '/watermark/custom'
+      views: never
+    }
+    'src/pages/watermark/image.vue': {
+      routes: '/watermark/image'
+      views: never
+    }
+    'src/pages/watermark/multi-line.vue': {
+      routes: '/watermark/multi-line'
       views: never
     }
   }

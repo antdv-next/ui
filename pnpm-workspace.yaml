@@ -16,6 +16,7 @@ catalog:
   '@vue/test-utils': ^2.4.6
   '@vue/tsconfig': ^0.7.0
   '@vueuse/core': ^13.9.0
+  '@v-c/resize-observer': ^0.0.2
   es-toolkit: ^1.39.10
   eslint: ^9.35.0
   eslint-plugin-format: ^1.0.1
