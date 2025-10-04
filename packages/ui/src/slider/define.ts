@@ -75,6 +75,8 @@ export interface SliderBaseProps {
   ariaRequired?: VcSliderProps['ariaRequired']
   ariaValueTextFormatterForHandle?: VcSliderProps['ariaValueTextFormatterForHandle']
   range?: boolean
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement
+  tooltipPopupContainer?: (triggerNode: HTMLElement) => HTMLElement
 }
 
 export interface SliderSingleProps extends SliderBaseProps {
@@ -93,7 +95,7 @@ export interface SliderSingleProps extends SliderBaseProps {
   railStyle?: CSSProperties
 }
 
-export interface SliderRangeProps extends SliderBaseProps {
+export interface SliderRangeProps extends Omit<SliderBaseProps, 'range'> {
   range: true | SliderRange
   value?: number[]
   defaultValue?: number[]
@@ -114,9 +116,15 @@ type SliderRange = Exclude<GetProp<VcSliderProps, 'range'>, boolean>
 export interface Opens { [index: number]: boolean }
 
 export interface SliderEmits {
+  change: [(value: number | number[]) => void]
   changeComplete: [(value: number | number[]) => void]
-  focus: [FocusEvent]
-  blur: [FocusEvent]
+  focus: [FocusEvent, boolean]
+  blur: [FocusEvent, boolean]
+  mouseenter: [MouseEvent]
+  mouseleave: [MouseEvent]
+  mousemove: [MouseEvent]
+  mouseup: [MouseEvent]
+  mousedown: [MouseEvent]
 }
 
 export interface SliderSlots {

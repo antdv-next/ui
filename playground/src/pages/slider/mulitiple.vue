@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const data = ref([0, 10, 20])
 function getGradientColor(percentage: number) {

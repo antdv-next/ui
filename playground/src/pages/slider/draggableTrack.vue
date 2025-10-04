@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 
+const data = ref([20, 50])
 </script>
 
 <template>
-  <a-slider :range="{ draggableTrack: true }" :value="[20, 50]" />
+  <a-slider v-model:value="data" :range="{ draggableTrack: true }" />
 </template>
 
 <style scoped>

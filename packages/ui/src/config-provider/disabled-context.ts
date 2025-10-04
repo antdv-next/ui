@@ -6,9 +6,9 @@ export interface DisabledContextProps {
 }
 const DisabledContext: InjectionKey<DisabledContextProps> = Symbol('DisabledContext')
 
-export function useDisabledProvide(props?: DisabledContextProps) {
-  provide(DisabledContext, props ?? { disabled: ref(false) })
+export function useDisabledProvide(props: DisabledContextProps) {
+  provide(DisabledContext, props)
 }
 export function useDisabled() {
-  return inject(DisabledContext)
+  return inject(DisabledContext, { disabled: ref() })
 }

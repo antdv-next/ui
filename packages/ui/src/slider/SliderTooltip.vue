@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { SliderTooltipProps as TooltipProps } from './define'
-import raf from '@v-c/util/dist/raf'
-import { computed, ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { Tooltip } from '../tooltip'
 
 type SliderTooltipProps = TooltipProps & {
@@ -9,33 +8,17 @@ type SliderTooltipProps = TooltipProps & {
   value?: number
 }
 const props = defineProps<SliderTooltipProps>()
-const innerRef = ref(null)
-const mergedOpen = computed(() => props.open || !props.draggingDelete)
-const rafRef = ref<null | unknown>(null)
-function cancelKeepAlign() {
-  raf.cancel(rafRef.value!)
-  rafRef.value = null
+const emit = defineEmits<{
+  'update:open': [boolean]
+}>()
+const mergedOpen = ref(props.open || !props.draggingDelete)
+function change(value: boolean) {
+  emit('update:open', value)
 }
-
-function keepAlign() {
-  rafRef.value = raf(() => {
-    innerRef.value?.forceAlign()
-    rafRef.value = null
-  })
-}
-
-watchEffect((onCleanup) => {
-  if (mergedOpen.value) {
-    keepAlign()
-  } else {
-    cancelKeepAlign()
-  }
-  onCleanup(() => cancelKeepAlign())
-})
 </script>
 
 <template>
-  <Tooltip red="innerRef" v-bind="[$props, $attrs]" :open="mergedOpen">
+  <Tooltip v-bind="[$props, $attrs]" v-model:open="mergedOpen" @open-change="change">
     <slot />
   </Tooltip>
 </template>

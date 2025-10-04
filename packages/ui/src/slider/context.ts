@@ -14,5 +14,5 @@ export function useProvideSliderInternal(props: SliderInternalContextProps) {
 }
 
 export function useInjectSliderInternal() {
-  return inject(SliderInternalContext)
+  return inject(SliderInternalContext, {})
 }
