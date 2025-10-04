@@ -595,7 +595,7 @@ onClickOutside(
         </div>
 
         <!-- Content -->
-        <div v-if="hasInner" :class="innerClasses" :style="innerStyles">
+        <div v-if="props.hasInner" :class="innerClasses" :style="innerStyles">
           <template v-if="$slots.title">
             <slot name="title" />
           </template>

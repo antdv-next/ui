@@ -111,6 +111,17 @@ declare module 'vue-router/auto-routes' {
     '/qrcode/icon': RouteRecordInfo<'/qrcode/icon', '/qrcode/icon', Record<never, never>, Record<never, never>>,
     '/qrcode/status': RouteRecordInfo<'/qrcode/status', '/qrcode/status', Record<never, never>, Record<never, never>>,
     '/qrcode/type': RouteRecordInfo<'/qrcode/type', '/qrcode/type', Record<never, never>, Record<never, never>>,
+    '/slider/basic': RouteRecordInfo<'/slider/basic', '/slider/basic', Record<never, never>, Record<never, never>>,
+    '/slider/draggableTrack': RouteRecordInfo<'/slider/draggableTrack', '/slider/draggableTrack', Record<never, never>, Record<never, never>>,
+    '/slider/editable': RouteRecordInfo<'/slider/editable', '/slider/editable', Record<never, never>, Record<never, never>>,
+    '/slider/event': RouteRecordInfo<'/slider/event', '/slider/event', Record<never, never>, Record<never, never>>,
+    '/slider/icon-slider': RouteRecordInfo<'/slider/icon-slider', '/slider/icon-slider', Record<never, never>, Record<never, never>>,
+    '/slider/marks': RouteRecordInfo<'/slider/marks', '/slider/marks', Record<never, never>, Record<never, never>>,
+    '/slider/mulitiple': RouteRecordInfo<'/slider/mulitiple', '/slider/mulitiple', Record<never, never>, Record<never, never>>,
+    '/slider/reverse': RouteRecordInfo<'/slider/reverse', '/slider/reverse', Record<never, never>, Record<never, never>>,
+    '/slider/show-tooltip': RouteRecordInfo<'/slider/show-tooltip', '/slider/show-tooltip', Record<never, never>, Record<never, never>>,
+    '/slider/tip-formatter': RouteRecordInfo<'/slider/tip-formatter', '/slider/tip-formatter', Record<never, never>, Record<never, never>>,
+    '/slider/vertical': RouteRecordInfo<'/slider/vertical', '/slider/vertical', Record<never, never>, Record<never, never>>,
     '/space/': RouteRecordInfo<'/space/', '/space', Record<never, never>, Record<never, never>>,
     '/space/align': RouteRecordInfo<'/space/align', '/space/align', Record<never, never>, Record<never, never>>,
     '/space/base': RouteRecordInfo<'/space/base', '/space/base', Record<never, never>, Record<never, never>>,
@@ -521,6 +532,50 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/qrcode/type.vue': {
       routes: '/qrcode/type'
+      views: never
+    }
+    'src/pages/slider/basic.vue': {
+      routes: '/slider/basic'
+      views: never
+    }
+    'src/pages/slider/draggableTrack.vue': {
+      routes: '/slider/draggableTrack'
+      views: never
+    }
+    'src/pages/slider/editable.vue': {
+      routes: '/slider/editable'
+      views: never
+    }
+    'src/pages/slider/event.vue': {
+      routes: '/slider/event'
+      views: never
+    }
+    'src/pages/slider/icon-slider.vue': {
+      routes: '/slider/icon-slider'
+      views: never
+    }
+    'src/pages/slider/marks.vue': {
+      routes: '/slider/marks'
+      views: never
+    }
+    'src/pages/slider/mulitiple.vue': {
+      routes: '/slider/mulitiple'
+      views: never
+    }
+    'src/pages/slider/reverse.vue': {
+      routes: '/slider/reverse'
+      views: never
+    }
+    'src/pages/slider/show-tooltip.vue': {
+      routes: '/slider/show-tooltip'
+      views: never
+    }
+    'src/pages/slider/tip-formatter.vue': {
+      routes: '/slider/tip-formatter'
+      views: never
+    }
+    'src/pages/slider/vertical.vue': {
+      routes: '/slider/vertical'
       views: never
     }
     'src/pages/space/index.vue': {

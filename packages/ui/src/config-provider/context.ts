@@ -44,7 +44,7 @@ export interface ConfigComponentProps {
   // modal?: ModalConfig;
   progress?: ComponentStyleConfig
   result?: ComponentStyleConfig
-  // slider?: SliderConfig;
+  slider?: ComponentStyleConfig
   breadcrumb?: ComponentStyleConfig
   menu?: ComponentStyleConfig
   checkbox?: ComponentStyleConfig
