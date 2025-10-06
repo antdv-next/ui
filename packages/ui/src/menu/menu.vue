@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CSSProperties, StyleValue } from 'vue'
+import type { StyleValue } from 'vue'
 import type {
   ItemType,
   Key,
@@ -465,9 +465,6 @@ function renderItems(items?: ItemType[] | null): any[] {
 const itemsNodes = computed(() => renderItems(props.items))
 const hasItems = computed(() => Array.isArray(props.items) && props.items.length > 0)
 
-const attrClass = computed(() => (attrs.class as string | undefined))
-const attrStyle = computed(() => attrs.style as CSSProperties | undefined)
-
 const rootClassName = computed(() => classNames(
   prefixCls.value,
   `${prefixCls.value}-root`,
@@ -480,7 +477,6 @@ const rootClassName = computed(() => classNames(
   componentConfig.value?.classNames?.root,
   props.rootClassName,
   props.classNames?.root,
-  attrClass.value,
 ))
 
 const mergedStyle = computed<StyleValue | undefined>(() => {
@@ -491,12 +487,8 @@ const mergedStyle = computed<StyleValue | undefined>(() => {
   const configStyle = componentConfig.value?.styles?.root as StyleValue | undefined
   if (configStyle)
     styles.push(configStyle)
-  if (props.style)
-    styles.push(props.style)
   if (props.styles?.root)
     styles.push(props.styles.root)
-  if (attrStyle.value)
-    styles.push(attrStyle.value)
   if (styles.length === 0)
     return undefined
   if (styles.length === 1)
@@ -513,8 +505,8 @@ const restAttrs = computed(() => {
 <template>
   <ul
     v-bind="restAttrs"
-    :class="rootClassName"
-    :style="mergedStyle"
+    :class="[rootClassName, $attrs.class] as any[]"
+    :style="[mergedStyle, $attrs.style] as any[]"
     role="menu"
   >
     <template v-if="hasItems">

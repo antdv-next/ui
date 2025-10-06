@@ -27,9 +27,10 @@ export interface MenuItemProps {
   eventKey?: Key
   disabled?: boolean
   danger?: boolean
-  icon?: VueNode
-  title?: string | VueNode
+  icon?: VueNode | (() => VueNode)
+  title?: string | VueNode | (() => VueNode)
   item?: Record<string, any>
+  extra?: VueNode | (() => VueNode)
 }
 
 export interface SubMenuProps extends MenuItemProps {
@@ -85,7 +86,6 @@ export type ItemType = MenuItemType | SubMenuType | MenuItemGroupType | MenuDivi
 export interface MenuProps {
   prefixCls?: string
   rootClassName?: string
-  style?: CSSProperties
   theme?: MenuTheme
   mode?: MenuMode
   inlineIndent?: number
