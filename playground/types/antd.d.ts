@@ -30,5 +30,9 @@ declare module 'vue' {
         AMenuSubMenu: typeof import('antdv-next')['SubMenu'];
         AMenuDivider: typeof import('antdv-next')['MenuDivider'];
         AMenuItemGroup: typeof import('antdv-next')['MenuItemGroup'];
+        AWatermark: typeof import('antdv-next')['Watermark'];
+        AAvatar: typeof import('antdv-next')['Avatar'];
+        AQRCode: typeof import('antdv-next')['QRCode'];
+        ASlider: typeof import('antdv-next')['Slider'];
     }
 }

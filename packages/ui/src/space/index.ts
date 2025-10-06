@@ -11,6 +11,9 @@ Space.install = function (app: App) {
   app.component(Compact.name!, Compact)
   return app
 }
+Compact.install = () => {
+  // TODO
+}
 
 export { Compact, Space }
 
