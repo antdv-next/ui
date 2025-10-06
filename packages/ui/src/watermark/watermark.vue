@@ -17,13 +17,14 @@ const props = withDefaults(defineProps<WatermarkProps>(), {
   rotate: -22,
   font: () => ({} as WatermarkFontType),
   gap: () => [100, 100],
+  prefixCls: 'ant',
 })
 
-const { gap, font, offset } = toRefs(props)
+const { gap, font, offset, prefixCls } = toRefs(props)
 
 // ========= FIXME: relace reactive css var ========================
-const colorFill = getCssVar('--ant-color-fill')
-const fontSizeLG = getCssVarNumber('--ant-font-size-lg')
+const colorFill = computed(() => getCssVar(`--${prefixCls.value}-color-fill`))
+const fontSizeLG = computed(() => getCssVarNumber(`--${prefixCls.value}-font-size-lg`))
 
 // =================================================================
 
@@ -36,11 +37,11 @@ const gapXCenter = computed(() => gapX.value / 2)
 const gapYCenter = computed(() => gapY.value / 2)
 const offsetLeft = computed(() => offset.value?.[0] ?? gapXCenter.value)
 const offsetTop = computed(() => offset.value?.[1] ?? gapYCenter.value)
-const fontSize = computed(() => font.value?.fontSize ?? fontSizeLG)
+const fontSize = computed(() => font.value?.fontSize ?? fontSizeLG.value)
 const fontWeight = computed(() => font.value?.fontWeight ?? 'normal')
 const fontStyle = computed(() => font.value?.fontStyle ?? 'normal')
 const fontFamily = computed(() => font.value?.fontFamily ?? 'sans-serif')
-const color = computed(() => font.value?.color ?? colorFill)
+const color = computed(() => font.value?.color ?? colorFill.value)
 const markStyle = computed(() => {
   const markStyle: CSSProperties = {
     zIndex: props.zIndex ?? 9,

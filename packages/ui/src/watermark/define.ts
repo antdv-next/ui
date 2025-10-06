@@ -7,6 +7,7 @@ export interface WatermarkFontType {
 }
 
 export interface WatermarkProps {
+  prefixCls?: string
   zIndex: number
   rotate: number
   width: number
