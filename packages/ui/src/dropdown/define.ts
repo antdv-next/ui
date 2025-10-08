@@ -1,4 +1,5 @@
 import type { VueNode } from '@v-c/util/dist/type'
+import type { ButtonProps } from '../button'
 import type { MenuProps } from '../menu'
 import type { TooltipPlacement } from '../tooltip'
 
@@ -35,5 +36,32 @@ export interface DropdownEmits {
 
 export interface DropdownSlots {
   default?: () => any
+  overlay?: () => any
+}
+
+export type DropdownButtonType = 'default' | 'primary' | 'dashed' | 'link' | 'text'
+
+export interface DropdownButtonProps extends DropdownProps {
+  type?: DropdownButtonType
+  danger?: boolean
+  disabled?: boolean
+  loading?: ButtonProps['loading']
+  htmlType?: ButtonProps['htmlType']
+  href?: string
+  title?: string
+  icon?: VueNode | (() => VueNode)
+  buttonsRender?: (buttons: VueNode[]) => VueNode[]
+  size?: ButtonProps['size']
+}
+
+export interface DropdownButtonEmits {
+  click: [e: MouseEvent]
+  openChange: [open: boolean, info: { source: 'trigger' | 'menu' }]
+  'update:open': [open: boolean]
+}
+
+export interface DropdownButtonSlots {
+  default?: () => any
+  icon?: () => any
   overlay?: () => any
 }
