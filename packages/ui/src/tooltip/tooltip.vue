@@ -53,6 +53,10 @@ const reference = shallowRef<HTMLElement>()
 const floating = shallowRef<HTMLDivElement>()
 const arrowRef = shallowRef<HTMLDivElement>()
 
+// Virtual reference for context menu follow mode
+const virtualReference = shallowRef<{ getBoundingClientRect: () => DOMRect } | null>(null)
+const contextMenuPosition = ref<{ x: number, y: number } | null>(null)
+
 // 计算属性
 const prefixCls = computed(() => {
   const getPrefixCls = parentContext.value?.getPrefixCls
@@ -175,13 +179,21 @@ const middleware = computed(() => {
 })
 
 // floating-ui
+// Compute the reference element - use virtual reference for context menu follow mode
+const computedReference = computed(() => {
+  if (props.contextMenuMode === 'follow' && virtualReference.value) {
+    return virtualReference.value
+  }
+  return reference.value
+})
+
 const {
   floatingStyles,
   placement: actualPlacement,
   middlewareData,
   x,
   y,
-} = useFloating(reference, floating, {
+} = useFloating(computedReference, floating, {
   placement: floatingPlacement,
   middleware,
   transform: false,
@@ -315,6 +327,12 @@ function setOpenImmediately(open: boolean) {
 
   isOpen.value = finalOpen
 
+  // Clean up virtual reference when closing
+  if (!finalOpen && props.contextMenuMode === 'follow') {
+    virtualReference.value = null
+    contextMenuPosition.value = null
+  }
+
   emit('update:open', finalOpen)
   emit('openChange', finalOpen)
   emit('update:visible', finalOpen)
@@ -359,6 +377,26 @@ function onBlur() {
 function onContextMenu(e: MouseEvent) {
   if (mergedTrigger.value.includes('contextMenu')) {
     e.preventDefault()
+
+    // If follow mode, create virtual reference at mouse position
+    if (props.contextMenuMode === 'follow') {
+      contextMenuPosition.value = { x: e.clientX, y: e.clientY }
+
+      // Create virtual element that returns a DOMRect at the mouse position
+      virtualReference.value = {
+        getBoundingClientRect: () => ({
+          width: 0,
+          height: 0,
+          x: e.clientX,
+          y: e.clientY,
+          top: e.clientY,
+          left: e.clientX,
+          right: e.clientX,
+          bottom: e.clientY,
+        } as DOMRect),
+      }
+    }
+
     setOpen(true)
   }
 }

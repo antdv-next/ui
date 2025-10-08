@@ -42,6 +42,12 @@ export interface TooltipProps {
    * @private This is an internal property used to determine if the tooltip has an inner element.
    */
   hasInner?: boolean
+  /**
+   * @private Context menu mode for right-click dropdown
+   * - 'follow': Follow mouse position
+   * - undefined/false: Use trigger element position (default)
+   */
+  contextMenuMode?: 'follow' | false
 
   // Layout & positioning
   placement?: TooltipPlacement
