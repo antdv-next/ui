@@ -154,6 +154,25 @@ const overlayNode = computed(() => {
       mode: 'vertical',
       selectable: false,
       onClick: handleMenuClick,
+      onOpenChange(openKeys: any) {
+        // When all submenus are closed (no open keys)
+        if (openKeys.length < 1) {
+          // Check if mouse is still hovering the dropdown tooltip/menu area
+          // If yes, don't close the dropdown
+          if (!isMenuAreaHovered()) {
+            // Mouse has left the menu area, close the dropdown
+            if (props.open !== undefined) {
+              emit('openChange', false, { source: 'menu' })
+              emit('update:open', false)
+            }
+            else {
+              internalOpen.value = false
+              emit('openChange', false, { source: 'menu' })
+              emit('update:open', false)
+            }
+          }
+        }
+      },
       onVnodeMounted: (vnode: any) => {
         // Capture menu element for hover checking
         if (vnode.el) {
