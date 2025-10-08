@@ -63,6 +63,8 @@ declare module 'vue-router/auto-routes' {
     '/divider/variant': RouteRecordInfo<'/divider/variant', '/divider/variant', Record<never, never>, Record<never, never>>,
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
+    '/dropdown/basic': RouteRecordInfo<'/dropdown/basic', '/dropdown/basic', Record<never, never>, Record<never, never>>,
+    '/dropdown/submenu-test': RouteRecordInfo<'/dropdown/submenu-test', '/dropdown/submenu-test', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
     '/layout/basic': RouteRecordInfo<'/layout/basic', '/layout/basic', Record<never, never>, Record<never, never>>,
     '/layout/collapsible': RouteRecordInfo<'/layout/collapsible', '/layout/collapsible', Record<never, never>, Record<never, never>>,
@@ -340,6 +342,14 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/divider/with-text.vue': {
       routes: '/divider/with-text'
+      views: never
+    }
+    'src/pages/dropdown/basic.vue': {
+      routes: '/dropdown/basic'
+      views: never
+    }
+    'src/pages/dropdown/submenu-test.vue': {
+      routes: '/dropdown/submenu-test'
       views: never
     }
     'src/pages/flex/basic.vue': {

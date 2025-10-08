@@ -34,5 +34,6 @@ declare module 'vue' {
         AAvatar: typeof import('antdv-next')['Avatar'];
         AQRCode: typeof import('antdv-next')['QRCode'];
         ASlider: typeof import('antdv-next')['Slider'];
+        ADropdown: typeof import('antdv-next')['Dropdown'];
     }
 }

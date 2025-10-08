@@ -10,11 +10,12 @@ import type {
   MenuProps,
   SubMenuType,
 } from './define.ts'
-import { computed, h, nextTick, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
+import { computed, h, nextTick, onBeforeUnmount, onMounted, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useZIndex } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
+import { useDropdownContext } from '../dropdown/context.ts'
 import { useLayoutSider } from '../layout/context.ts'
 import {
   useProvideMenuContext,
@@ -54,6 +55,9 @@ const attrs = useAttrs()
 
 const configCtx = useConfigContext()
 const componentConfig = useComponentConfig('menu')
+
+// Try to get dropdown context if Menu is inside a Dropdown
+const dropdownCtx = useDropdownContext()
 
 const prefixCls = computed(() => configCtx.getPrefixCls('menu', props.prefixCls))
 const theme = computed(() => props.theme || 'light')
@@ -197,6 +201,30 @@ function isSubmenuHovered(key: Key) {
   if (!entry)
     return false
   return isElementHovered(entry.trigger) || isElementHovered(entry.popup)
+}
+
+// Check if any submenu is hovered - used by Dropdown to prevent closing
+function isAnySubmenuHovered(): boolean {
+  if (popoverSubmenuElements.size === 0)
+    return false
+
+  for (const [key] of popoverSubmenuElements.entries()) {
+    if (isSubmenuHovered(key))
+      return true
+  }
+
+  return false
+}
+
+// Register hover check with dropdown context if inside a dropdown
+if (dropdownCtx) {
+  onMounted(() => {
+    dropdownCtx.registerSubmenuHoverCheck(isAnySubmenuHovered)
+  })
+
+  onBeforeUnmount(() => {
+    dropdownCtx.unregisterSubmenuHoverCheck()
+  })
 }
 
 function toArray(set: Set<Key>) {
