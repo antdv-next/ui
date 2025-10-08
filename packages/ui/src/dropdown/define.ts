@@ -27,6 +27,12 @@ export interface DropdownProps {
   mouseLeaveDelay?: number
   openClassName?: string
   autoAdjustOverflow?: boolean | { adjustX?: boolean, adjustY?: boolean }
+  /**
+   * Context menu behavior mode
+   * - 'follow': Menu follows mouse position on right-click
+   * - undefined/false: Menu appears at trigger element (default)
+   */
+  contextMenuMode?: 'follow' | false
 }
 
 export interface DropdownEmits {

@@ -291,6 +291,7 @@ function renderTrigger() {
     :transition-name="transitionName"
     :auto-adjust-overflow="autoAdjustOverflow"
     :has-inner="false"
+    :context-menu-mode="contextMenuMode"
     @open-change="handleOpenChange"
   >
     <template #overlay>
