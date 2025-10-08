@@ -344,9 +344,15 @@ onMounted(() => {
             />
           </template>
         </span>
-        <span v-if="expandIconNode" :class="`${subMenuPrefixCls}-expand-icon`">
-          <component :is="expandIconNode" />
-        </span>
+        <template v-if="expandIconNode">
+          <span v-if="isVNode(expandIconNode)" :class="classNames(`${subMenuPrefixCls}-expand-icon`, `${subMenuPrefixCls}-arrow`)">
+            <component :is="expandIconNode" />
+          </span>
+          <template v-else>
+            <component :is="expandIconNode" :class="classNames(`${subMenuPrefixCls}-expand-icon`, `${subMenuPrefixCls}-arrow`)" />
+          </template>
+        </template>
+
         <i v-else :class="`${subMenuPrefixCls}-arrow`" />
       </div>
       <Transition
@@ -410,9 +416,14 @@ onMounted(() => {
                 />
               </template>
             </span>
-            <span v-if="expandIconNode" :class="`${prefixCls}-expand-icon`">
-              <component :is="expandIconNode" />
-            </span>
+            <template v-if="expandIconNode">
+              <span v-if="isVNode(expandIconNode)" :class="classNames(`${subMenuPrefixCls}-expand-icon`, `${subMenuPrefixCls}-arrow`)">
+                <component :is="expandIconNode" />
+              </span>
+              <template v-else>
+                <component :is="expandIconNode" :class="classNames(`${subMenuPrefixCls}-expand-icon`, `${subMenuPrefixCls}-arrow`)" />
+              </template>
+            </template>
             <i v-else :class="`${subMenuPrefixCls}-arrow`" />
           </div>
         </template>
