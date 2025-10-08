@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Button, Dropdown } from 'antdv-next'
-
 const items = [
   {
     key: '1',
@@ -76,79 +74,79 @@ function handleMenuClick(info: any) {
 
     <section>
       <h2>Basic Dropdown</h2>
-      <Dropdown :menu="{ items }">
-        <Button>Hover me</Button>
-      </Dropdown>
+      <a-dropdown :menu="{ items }">
+        <a-button>Hover me</a-button>
+      </a-dropdown>
     </section>
 
     <section>
       <h2>Click Trigger</h2>
-      <Dropdown :menu="{ items }" :trigger="['click']">
-        <Button>Click me</Button>
-      </Dropdown>
+      <a-dropdown :menu="{ items }" :trigger="['click']">
+        <a-button>Click me</a-button>
+      </a-dropdown>
     </section>
 
     <section>
       <h2>With Arrow</h2>
-      <Dropdown :menu="{ items }" :arrow="true">
-        <Button>Arrow Dropdown</Button>
-      </Dropdown>
+      <a-dropdown :menu="{ items }" :arrow="true">
+        <a-button>Arrow Dropdown</a-button>
+      </a-dropdown>
     </section>
 
     <section>
       <h2>Placement Variations</h2>
       <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <Dropdown :menu="{ items }" placement="topLeft">
-          <Button>Top Left</Button>
-        </Dropdown>
-        <Dropdown :menu="{ items }" placement="top">
-          <Button>Top</Button>
-        </Dropdown>
-        <Dropdown :menu="{ items }" placement="topRight">
-          <Button>Top Right</Button>
-        </Dropdown>
-        <Dropdown :menu="{ items }" placement="bottomLeft">
-          <Button>Bottom Left</Button>
-        </Dropdown>
-        <Dropdown :menu="{ items }" placement="bottom">
-          <Button>Bottom</Button>
-        </Dropdown>
-        <Dropdown :menu="{ items }" placement="bottomRight">
-          <Button>Bottom Right</Button>
-        </Dropdown>
+        <a-dropdown :menu="{ items }" placement="topLeft">
+          <a-button>Top Left</a-button>
+        </a-dropdown>
+        <a-dropdown :menu="{ items }" placement="top">
+          <a-button>Top</a-button>
+        </a-dropdown>
+        <a-dropdown :menu="{ items }" placement="topRight">
+          <a-button>Top Right</a-button>
+        </a-dropdown>
+        <a-dropdown :menu="{ items }" placement="bottomLeft">
+          <a-button>Bottom Left</a-button>
+        </a-dropdown>
+        <a-dropdown :menu="{ items }" placement="bottom">
+          <a-button>Bottom</a-button>
+        </a-dropdown>
+        <a-dropdown :menu="{ items }" placement="bottomRight">
+          <a-button>Bottom Right</a-button>
+        </a-dropdown>
       </div>
     </section>
 
     <section>
       <h2>With Submenu</h2>
-      <Dropdown :menu="{ items: itemsWithSubmenu, onClick: handleMenuClick }">
-        <Button>Dropdown with Submenu</Button>
-      </Dropdown>
+      <a-dropdown :menu="{ items: itemsWithSubmenu, onClick: handleMenuClick }">
+        <a-button>a-dropdown with Submenu</a-button>
+      </a-dropdown>
     </section>
 
     <section>
       <h2>Disabled</h2>
-      <Dropdown :menu="{ items }" disabled>
-        <Button>Disabled Dropdown</Button>
-      </Dropdown>
+      <a-dropdown :menu="{ items }" disabled>
+        <a-button>Disabled a-dropdown</a-button>
+      </a-dropdown>
     </section>
 
     <section>
       <h2>Custom Overlay using Slot</h2>
-      <Dropdown>
+      <a-dropdown>
         <template #overlay>
           <div style="background: white; padding: 16px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
             <h3 style="margin-top: 0;">
               Custom Content
             </h3>
             <p>This is a custom overlay content</p>
-            <Button size="small">
+            <a-button size="small">
               Action
-            </Button>
+            </a-button>
           </div>
         </template>
-        <Button>Custom Overlay</Button>
-      </Dropdown>
+        <a-button>Custom Overlay</a-button>
+      </a-dropdown>
     </section>
   </div>
 </template>
