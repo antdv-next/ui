@@ -1,8 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 import { h, nextTick } from 'vue'
-import { Dropdown } from '../../src/dropdown'
 import { Button } from '../../src/button'
+import { Dropdown } from '../../src/dropdown'
 
 describe('dropdown - Submenu Hover Interaction', () => {
   it('should keep dropdown open when mouse moves to submenu', async () => {

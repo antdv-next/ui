@@ -19,6 +19,9 @@ export type {
   TriggerSubMenuAction,
 } from './define'
 
+export type { MenuOverrideContext } from './override-context'
+export { useMenuOverride, useProvideMenuOverride } from './override-context'
+
 const MenuWithInstall = Menu as typeof Menu & {
   Item: typeof MenuItem
   SubMenu: typeof SubMenu

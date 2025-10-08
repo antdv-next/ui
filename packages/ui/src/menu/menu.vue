@@ -27,6 +27,7 @@ import {
 import MenuDivider from './menu-divider.vue'
 import MenuItemGroup from './menu-item-group.vue'
 import MenuItem from './menu-item.vue'
+import { useMenuOverride, useProvideMenuOverride } from './override-context'
 import SubMenu from './sub-menu.vue'
 
 defineOptions({
@@ -59,11 +60,22 @@ const componentConfig = useComponentConfig('menu')
 // Try to get dropdown context if Menu is inside a Dropdown
 const dropdownCtx = useDropdownContext()
 
-const prefixCls = computed(() => configCtx.getPrefixCls('menu', props.prefixCls))
+// Try to get override context from parent (e.g., Dropdown)
+const overrideCtx = useMenuOverride()
+
+const prefixCls = computed(() => {
+  const customPrefixCls = props.prefixCls || overrideCtx.prefixCls.value
+  return configCtx.getPrefixCls('menu', customPrefixCls)
+})
 const theme = computed(() => props.theme || 'light')
-const mergedMode = computed(() => props.mode || 'vertical')
+const mergedMode = computed(() => overrideCtx.mode.value || props.mode || 'vertical')
 const inlineIndent = computed(() => props.inlineIndent ?? 24)
-const selectable = computed(() => props.selectable)
+const selectable = computed(() => {
+  if (overrideCtx.selectable.value !== undefined) {
+    return overrideCtx.selectable.value
+  }
+  return props.selectable
+})
 const multiple = computed(() => props.multiple)
 const triggerAction = computed(() => props.triggerSubMenuAction ?? 'hover')
 const openDelay = computed(() => props.subMenuOpenDelay ?? 0)
@@ -332,6 +344,11 @@ function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSe
   }
 
   emit('click', clickInfo)
+
+  // Call override onClick if available
+  if (overrideCtx.onClick) {
+    overrideCtx.onClick()
+  }
 }
 
 function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: boolean, event: Event | null }) {
@@ -369,7 +386,17 @@ useProvideMenuContext({
   selectable,
   multiple,
   triggerSubMenuAction: triggerAction,
-  expandIcon: computed(() => props.expandIcon ?? null),
+  expandIcon: computed(() => {
+    // Priority: props.expandIcon > overrideCtx.expandIcon > null
+    if (props.expandIcon !== undefined && props.expandIcon !== null) {
+      return props.expandIcon
+    }
+    const overrideExpandIcon = overrideCtx.expandIcon.value
+    if (overrideExpandIcon !== undefined && overrideExpandIcon !== null) {
+      return overrideExpandIcon
+    }
+    return null
+  }),
   openDelay,
   closeDelay,
   openKeys: openKeysRef,
@@ -387,6 +414,9 @@ useProvideMenuContext({
   closePopoverSubmenus,
   setPopoverElements,
 })
+
+// Clear override context for nested menus to prevent cascading
+useProvideMenuOverride()
 
 useProvideMenuLevel(ref(1))
 useProvideMenuPath(ref<Key[]>([]))
@@ -506,6 +536,7 @@ const rootClassName = computed(() => classNames(
   componentConfig.value?.classNames?.root,
   props.rootClassName,
   props.classNames?.root,
+  overrideCtx.rootClassName.value,
 ))
 
 const mergedStyle = computed<StyleValue | undefined>(() => {

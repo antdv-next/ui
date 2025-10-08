@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
 import { h, nextTick } from 'vue'
-import { Dropdown } from '../../src/dropdown'
 import { Button } from '../../src/button'
+import { Dropdown } from '../../src/dropdown'
 
 describe('dropdown - menu extra', () => {
   it('should render menu items with extra', async () => {

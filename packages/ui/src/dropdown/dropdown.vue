@@ -2,11 +2,12 @@
 import type { CSSProperties } from 'vue'
 import type { TooltipRef } from '../tooltip'
 import type { DropdownEmits, DropdownProps } from './define.ts'
+import RightOutlined from '@ant-design/icons-vue/RightOutlined'
 import { computed, h, onBeforeUnmount, ref, shallowRef, useSlots, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useConfigContext } from '../config-provider/context.ts'
-import { Menu } from '../menu'
+import { Menu, useProvideMenuOverride } from '../menu'
 import { Tooltip } from '../tooltip'
 import { useProvideDropdownContext } from './context'
 
@@ -33,13 +34,16 @@ const slots = useSlots()
 
 const configCtx = useConfigContext()
 const prefixCls = computed(() => configCtx.getPrefixCls('dropdown', props.prefixCls))
-const direction = computed(() => configCtx.direction?.value)
+const direction = computed(() => configCtx.direction)
 
 const tooltipRef = shallowRef<TooltipRef>()
 const menuRef = shallowRef<any>()
 
 // Internal open state for handling submenu interactions
 const internalOpen = ref(props.open)
+
+// Menu element reference for hover checking
+const menuElementRef = shallowRef<HTMLElement | null>(null)
 
 // Submenu hover checker function registered by Menu
 const submenuHoverChecker = ref<(() => boolean) | null>(null)
@@ -54,8 +58,48 @@ useProvideDropdownContext({
   },
 })
 
+// Check if menu area (including submenus) is hovered
+function isMenuAreaHovered(): boolean {
+  // Check main menu element
+  if (menuElementRef.value) {
+    try {
+      if (menuElementRef.value.matches(':hover')) {
+        return true
+      }
+    } catch {
+      // Ignore
+    }
+  }
+
+  // Check submenus
+  if (submenuHoverChecker.value && submenuHoverChecker.value()) {
+    return true
+  }
+
+  return false
+}
+
+// Provide menu override context for sub-menu styling
+const dropdownExpandIcon = computed(() => {
+  return h('span', { class: `${prefixCls.value}-menu-submenu-arrow` }, [
+    h(RightOutlined, { class: `${prefixCls.value}-menu-submenu-arrow-icon` }),
+  ])
+})
+
+const dropdownMenuPrefixCls = computed(() => `${prefixCls.value}-menu`)
+
+useProvideMenuOverride(
+  dropdownMenuPrefixCls.value,
+  dropdownExpandIcon.value,
+  'vertical',
+  false,
+  handleMenuClick,
+  undefined,
+)
+
 onBeforeUnmount(() => {
   submenuHoverChecker.value = null
+  menuElementRef.value = null
 })
 
 // Compute transition name based on placement
@@ -110,6 +154,12 @@ const overlayNode = computed(() => {
       mode: 'vertical',
       selectable: false,
       onClick: handleMenuClick,
+      onVnodeMounted: (vnode: any) => {
+        // Capture menu element for hover checking
+        if (vnode.el) {
+          menuElementRef.value = vnode.el as HTMLElement
+        }
+      },
     })
   }
   else if (slots.overlay) {
@@ -126,11 +176,12 @@ const overlayNode = computed(() => {
 
 // Custom open change handler that checks submenu hover state
 function handleOpenChange(open: boolean) {
-  // If closing and we have hover trigger, check if submenu is hovered
+  // When Tooltip wants to close and trigger is hover
   if (!open && props.trigger.includes('hover')) {
-    // Check if any submenu is hovered
-    if (submenuHoverChecker.value && submenuHoverChecker.value()) {
-      // Don't close if submenu is hovered
+    // Check if mouse is still in menu area (including submenus)
+    // This prevents closing when user moves from trigger to menu
+    if (isMenuAreaHovered()) {
+      // Mouse is still in menu area, don't close yet
       return
     }
   }

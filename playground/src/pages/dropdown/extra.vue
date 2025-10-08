@@ -31,7 +31,7 @@ const items = [
 </script>
 
 <template>
-  <a-dropdown :menu="{ items }" :open="true">
+  <a-dropdown :menu="{ items }">
     <a @click.prevent>
       <a-space>
         Hover me

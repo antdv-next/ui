@@ -1,8 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 import { h, nextTick, ref } from 'vue'
-import { Dropdown } from '../../src/dropdown'
 import { Button } from '../../src/button'
+import { Dropdown } from '../../src/dropdown'
 
 describe('dropdown - Events', () => {
   it('should emit openChange and update:open when visibility changes', async () => {

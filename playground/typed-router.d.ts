@@ -65,6 +65,7 @@ declare module 'vue-router/auto-routes' {
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
     '/dropdown/arrow': RouteRecordInfo<'/dropdown/arrow', '/dropdown/arrow', Record<never, never>, Record<never, never>>,
     '/dropdown/basic': RouteRecordInfo<'/dropdown/basic', '/dropdown/basic', Record<never, never>, Record<never, never>>,
+    '/dropdown/custom-expand-icon': RouteRecordInfo<'/dropdown/custom-expand-icon', '/dropdown/custom-expand-icon', Record<never, never>, Record<never, never>>,
     '/dropdown/dropdown-button': RouteRecordInfo<'/dropdown/dropdown-button', '/dropdown/dropdown-button', Record<never, never>, Record<never, never>>,
     '/dropdown/extra': RouteRecordInfo<'/dropdown/extra', '/dropdown/extra', Record<never, never>, Record<never, never>>,
     '/dropdown/placement': RouteRecordInfo<'/dropdown/placement', '/dropdown/placement', Record<never, never>, Record<never, never>>,
@@ -355,6 +356,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/dropdown/basic.vue': {
       routes: '/dropdown/basic'
+      views: never
+    }
+    'src/pages/dropdown/custom-expand-icon.vue': {
+      routes: '/dropdown/custom-expand-icon'
       views: never
     }
     'src/pages/dropdown/dropdown-button.vue': {
