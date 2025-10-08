@@ -478,6 +478,7 @@ function renderItems(items?: ItemType[] | null): any[] {
           danger: menuItem.danger,
           icon: menuItem.icon,
           title: typeof menuItem.label === 'string' ? menuItem.label : menuItem.title,
+          extra: menuItem.extra,
           item: menuItem,
         },
         {

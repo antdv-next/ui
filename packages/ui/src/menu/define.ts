@@ -129,6 +129,7 @@ export interface MenuItemGroupSlots {
 export interface MenuItemSlots {
   icon?: () => any
   default?: () => any
+  extra?: () => any
 }
 
 export interface SubMenuSlots extends MenuItemSlots {

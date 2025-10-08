@@ -106,6 +106,7 @@ function resolveContent(content?: MenuItemProps['title'] | MenuItemProps['icon']
 
 const iconNodes = computed(() => resolveContent(props.icon, slots.icon))
 const titleNodes = computed(() => resolveContent(props.title, slots.default))
+const extraNodes = computed(() => resolveContent(props.extra, slots.extra))
 
 const itemPaddingStyle = computed(() => {
   if (mode.value !== 'inline')
@@ -116,6 +117,11 @@ const itemPaddingStyle = computed(() => {
 
   const indent = inlineIndentValue.value * level.value
   return indent > 0 ? { paddingLeft: `${indent}px` } : undefined
+})
+
+// Check if item has extra content
+const hasExtra = computed(() => {
+  return extraNodes.value.length > 0 || props.extra === 0
 })
 </script>
 
@@ -128,24 +134,47 @@ const itemPaddingStyle = computed(() => {
     :style="itemPaddingStyle"
     @click="handleClick"
   >
-    <span :class="`${prefixCls}-item-content`">
-      <component
-        :is="node"
-        v-for="(node, index) in iconNodes"
-        :key="index"
-        :class="{
-          [`${prefixCls}-item-icon`]: isVNode(node),
-        }"
-      />
-      <span :class="`${prefixCls}-title-content`">
-        <template v-if="titleNodes.length">
-          <component
-            :is="node"
-            v-for="(node, index) in titleNodes"
-            :key="index"
-          />
+    <component
+      :is="node"
+      v-for="(node, index) in iconNodes"
+      :key="index"
+      :class="{
+        [`${prefixCls}-item-icon`]: isVNode(node),
+      }"
+    />
+    <span
+      :class="classNames(
+        `${prefixCls}-title-content`, {
+          [`${prefixCls}-title-content-with-extra`]: hasExtra,
+        })"
+    >
+
+      <template v-if="titleNodes.length">
+        <component
+          :is="node"
+          v-for="(node, index) in titleNodes"
+          :key="index"
+        />
+      </template>
+      <template v-if="hasExtra">
+        <template v-for="(node, index) in extraNodes" :key="index">
+          <template v-if="isVNode(node)">
+            <component
+              :is="node"
+              :class="`${prefixCls}-item-extra`"
+            />
+          </template>
+          <template v-else>
+            <span
+              :class="`${prefixCls}-item-extra`"
+            >
+              <component
+                :is="node"
+              />
+            </span>
+          </template>
         </template>
-      </span>
+      </template>
     </span>
   </li>
 </template>
