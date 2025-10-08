@@ -52,7 +52,7 @@ const menuItemClass = computed(() => {
       [`${prefixCls.value}-item-selected`]: isSelected.value,
       [`${prefixCls.value}-item-disabled`]: isDisabled.value,
       [`${prefixCls.value}-item-danger`]: props.danger,
-      [`${prefixCls.value}-item-only-child`]: mode.value === 'inline' && level.value > 1,
+      [`${prefixCls.value}-item-only-child`]: level.value > 1,
     },
   )
 })
