@@ -66,6 +66,7 @@ declare module 'vue-router/auto-routes' {
     '/dropdown/arrow': RouteRecordInfo<'/dropdown/arrow', '/dropdown/arrow', Record<never, never>, Record<never, never>>,
     '/dropdown/basic': RouteRecordInfo<'/dropdown/basic', '/dropdown/basic', Record<never, never>, Record<never, never>>,
     '/dropdown/dropdown-button': RouteRecordInfo<'/dropdown/dropdown-button', '/dropdown/dropdown-button', Record<never, never>, Record<never, never>>,
+    '/dropdown/extra': RouteRecordInfo<'/dropdown/extra', '/dropdown/extra', Record<never, never>, Record<never, never>>,
     '/dropdown/placement': RouteRecordInfo<'/dropdown/placement', '/dropdown/placement', Record<never, never>, Record<never, never>>,
     '/dropdown/sub-menu': RouteRecordInfo<'/dropdown/sub-menu', '/dropdown/sub-menu', Record<never, never>, Record<never, never>>,
     '/dropdown/trigger': RouteRecordInfo<'/dropdown/trigger', '/dropdown/trigger', Record<never, never>, Record<never, never>>,
@@ -358,6 +359,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/dropdown/dropdown-button.vue': {
       routes: '/dropdown/dropdown-button'
+      views: never
+    }
+    'src/pages/dropdown/extra.vue': {
+      routes: '/dropdown/extra'
       views: never
     }
     'src/pages/dropdown/placement.vue': {
