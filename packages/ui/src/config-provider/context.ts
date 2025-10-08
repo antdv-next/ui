@@ -1,5 +1,5 @@
 import type { CSSProperties, InjectionKey } from 'vue'
-import type { ButtonProps } from '../button/define.ts'
+import type { ButtonProps } from '../button'
 import type { Locale } from '../locale'
 import type { PopoverProps } from '../popover'
 import type { TooltipProps } from '../tooltip'
