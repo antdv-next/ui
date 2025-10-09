@@ -131,6 +131,7 @@ declare module 'vue-router/auto-routes' {
     '/qrcode/icon': RouteRecordInfo<'/qrcode/icon', '/qrcode/icon', Record<never, never>, Record<never, never>>,
     '/qrcode/status': RouteRecordInfo<'/qrcode/status', '/qrcode/status', Record<never, never>, Record<never, never>>,
     '/qrcode/type': RouteRecordInfo<'/qrcode/type', '/qrcode/type', Record<never, never>, Record<never, never>>,
+    '/select/basic': RouteRecordInfo<'/select/basic', '/select/basic', Record<never, never>, Record<never, never>>,
     '/slider/basic': RouteRecordInfo<'/slider/basic', '/slider/basic', Record<never, never>, Record<never, never>>,
     '/slider/draggableTrack': RouteRecordInfo<'/slider/draggableTrack', '/slider/draggableTrack', Record<never, never>, Record<never, never>>,
     '/slider/editable': RouteRecordInfo<'/slider/editable', '/slider/editable', Record<never, never>, Record<never, never>>,
@@ -632,6 +633,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/qrcode/type.vue': {
       routes: '/qrcode/type'
+      views: never
+    }
+    'src/pages/select/basic.vue': {
+      routes: '/select/basic'
       views: never
     }
     'src/pages/slider/basic.vue': {

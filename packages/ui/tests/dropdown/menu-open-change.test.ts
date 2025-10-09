@@ -33,7 +33,7 @@ describe('dropdown - Auto Close via onOpenChange', () => {
     await nextTick()
 
     // Dropdown should be open
-    let dropdownMenu = document.querySelector('.ant-dropdown-menu')
+    const dropdownMenu = document.querySelector('.ant-dropdown-menu')
     expect(dropdownMenu).toBeTruthy()
 
     // Find and hover on submenu
@@ -47,7 +47,7 @@ describe('dropdown - Auto Close via onOpenChange', () => {
     }
 
     // Submenu should be open
-    let submenuPopup = document.querySelector('.ant-dropdown-menu-submenu-popup')
+    const submenuPopup = document.querySelector('.ant-dropdown-menu-submenu-popup')
     expect(submenuPopup).toBeTruthy()
 
     // Leave submenu popup (mouse leaves menu area completely)

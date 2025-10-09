@@ -29,6 +29,7 @@ const props = withDefaults(
     open: undefined,
     zIndex: 1070,
     hasInner: true,
+    matchReferenceWidth: false,
   },
 )
 
@@ -487,6 +488,15 @@ const tooltipStyles = computed(() => {
     ...colorInfo.value.overlayStyle,
     ...props.overlayStyle,
     ...props.styles?.root,
+  }
+
+  // Match reference width for dropdowns (like Select)
+  if (props.matchReferenceWidth && reference.value) {
+    if (typeof props.matchReferenceWidth === 'number') {
+      style.width = `${props.matchReferenceWidth}px`
+    } else {
+      style.width = `${reference.value.offsetWidth}px`
+    }
   }
 
   if (arrowPosition.value.x != null) {

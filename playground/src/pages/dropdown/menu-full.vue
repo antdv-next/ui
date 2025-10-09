@@ -2,7 +2,7 @@
 import { AppstoreOutlined, DownOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
-type MenuItem = {
+interface MenuItem {
   key: string
   label?: string
   icon?: () => any

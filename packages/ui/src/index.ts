@@ -8,7 +8,9 @@ export default {
   install(app: App) {
     Object.keys(components).forEach((key) => {
       const component = (components as any)[key]
-      app.use(component)
+      if ('install' in component) {
+        app.use(component)
+      }
     })
   },
 }

@@ -4,7 +4,7 @@ import type { PresetColorType } from '../_utils/colors.ts'
 import type { LiteralUnion } from '../_utils/type.ts'
 
 export type ActionType = 'hover' | 'focus' | 'click' | 'contextMenu'
-
+export type AlignType = any
 export type TooltipPlacement
   = | 'top'
     | 'left'
@@ -86,6 +86,9 @@ export interface TooltipProps {
   zIndex?: number
   fresh?: boolean
   openClassName?: string
+
+  // Width matching for dropdowns (like Select)
+  matchReferenceWidth?: boolean | number
 
   // Legacy support (deprecated but compatible)
   /** @deprecated Please use `open` instead. */

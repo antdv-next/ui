@@ -26,7 +26,7 @@ describe('dropdown - Context Menu Follow Mode', () => {
 
     // Find the trigger element
     const trigger = wrapper.find('div')
-    
+
     // Simulate right-click at specific position
     const contextMenuEvent = new MouseEvent('contextmenu', {
       bubbles: true,
@@ -34,7 +34,7 @@ describe('dropdown - Context Menu Follow Mode', () => {
       clientX: 150,
       clientY: 200,
     })
-    
+
     trigger.element.dispatchEvent(contextMenuEvent)
     await nextTick()
     await nextTick()
@@ -69,7 +69,7 @@ describe('dropdown - Context Menu Follow Mode', () => {
     await nextTick()
 
     const trigger = wrapper.find('div')
-    
+
     // Simulate right-click
     await trigger.trigger('contextmenu')
     await nextTick()
@@ -101,7 +101,7 @@ describe('dropdown - Context Menu Follow Mode', () => {
     await nextTick()
 
     const trigger = wrapper.find('div')
-    
+
     // Open with right-click
     const contextMenuEvent = new MouseEvent('contextmenu', {
       bubbles: true,
@@ -109,7 +109,7 @@ describe('dropdown - Context Menu Follow Mode', () => {
       clientX: 100,
       clientY: 100,
     })
-    
+
     trigger.element.dispatchEvent(contextMenuEvent)
     await nextTick()
     await nextTick()
