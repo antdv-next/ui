@@ -2,6 +2,7 @@
 import type { VNodeNormalizedChildren } from 'vue'
 import type { VNodeChildAtom } from '../_utils/checker'
 import type { SpaceCompactProps } from './define'
+import { omit } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
 import { computed, toRefs, useSlots } from 'vue'
 import { flattenChildren } from '../_utils/checker'
@@ -43,7 +44,7 @@ function getChildrenKey(child: VNodeChildAtom | VNodeNormalizedChildren, index: 
 </script>
 
 <template>
-  <div v-if="flattenChildrenItem.length > 0" v-bind="$attrs" :class="[clx, $attrs.class]">
+  <div v-if="flattenChildrenItem.length > 0" v-bind="omit($attrs, ['class'])" :class="[clx, $attrs.class]">
     <CompactItem
       v-for="(item, index) in flattenChildrenItem"
       :key="getChildrenKey(item, index)"
