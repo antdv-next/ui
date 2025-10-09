@@ -1,6 +1,6 @@
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/internal'
 import { genStyleHooks, mergeToken } from '../../theme/internal'
-import genSpaceCompactStyle from './compact'
+import genSpaceCompactStyle from './compact-fill'
 
 /** Component only token. Which will handle additional calculation of alias token */
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
