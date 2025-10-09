@@ -36,8 +36,6 @@ const props = withDefaults(defineProps<SelectProps<ValueType, OptionType>>(), {
 
 const emit = defineEmits<SelectEmits<ValueType, OptionType>>()
 
-// const slots = useSlots()
-
 const configCtx = useConfigContext()
 const prefixCls = computed(() => configCtx.getPrefixCls('select', props.prefixCls))
 const direction = computed(() => configCtx.direction)
@@ -276,6 +274,46 @@ watch(() => props.searchValue, (newSearchValue) => {
   }
 }, { immediate: true })
 
+// Compute display value for select content
+const displayValue = computed(() => {
+  if (mergedValue.value === undefined || mergedValue.value === null) {
+    return ''
+  }
+
+  if (Array.isArray(mergedValue.value)) {
+    return mergedValue.value.join(', ')
+  }
+
+  if (typeof mergedValue.value === 'object' && 'label' in mergedValue.value) {
+    return mergedValue.value.label
+  }
+
+  return String(mergedValue.value)
+})
+
+// Filter options based on search value
+const filteredOptions = computed(() => {
+  const { options } = props
+  if (!options || options.length === 0) {
+    return []
+  }
+
+  if (!mergedSearchValue.value || !props.filterOption) {
+    return options
+  }
+
+  if (typeof props.filterOption === 'function') {
+    return options.filter(option => props.filterOption!(mergedSearchValue.value, option))
+  }
+
+  // Default filter by label
+  const searchLower = mergedSearchValue.value.toLowerCase()
+  return options.filter((option) => {
+    const label = option.label || option.value
+    return String(label).toLowerCase().includes(searchLower)
+  })
+})
+
 // Expose methods
 const selectRef = ref<HTMLDivElement>()
 
@@ -294,25 +332,6 @@ defineExpose<SelectRef>({
 
 // Render select content
 function renderSelectContent(): VNode {
-  // For now, we'll use a simple input-like structure
-  // In a full implementation, this would integrate with rc-select or a custom select implementation
-
-  const displayValue = computed(() => {
-    if (mergedValue.value === undefined || mergedValue.value === null) {
-      return ''
-    }
-
-    if (Array.isArray(mergedValue.value)) {
-      return mergedValue.value.join(', ')
-    }
-
-    if (typeof mergedValue.value === 'object' && 'label' in mergedValue.value) {
-      return mergedValue.value.label
-    }
-
-    return String(mergedValue.value)
-  })
-
   const children = [
     // Prefix
     props.prefix && h('span', { class: `${prefixCls.value}-prefix` }, [props.prefix]),
@@ -371,30 +390,11 @@ function renderDropdown(): VNode | null {
     ])
   }
 
-  const filteredOptions = computed(() => {
-    if (!mergedSearchValue.value || !props.filterOption) {
-      return options
-    }
-
-    if (typeof props.filterOption === 'function') {
-      return options.filter(option => props.filterOption!(mergedSearchValue.value, option))
-    }
-
-    // Default filter by label
-    const searchLower = mergedSearchValue.value.toLowerCase()
-    return options.filter((option) => {
-      const label = option.label || option.value
-      return String(label).toLowerCase().includes(searchLower)
-    })
-  })
-
   const optionNodes = filteredOptions.value.map((option, index) => {
-    const isSelected = computed(() => {
-      if (isMultiple.value) {
-        return Array.isArray(mergedValue.value) && mergedValue.value.includes(option.value)
-      }
-      return mergedValue.value === option.value
-    })
+    // Check if option is selected
+    const isSelected = isMultiple.value
+      ? Array.isArray(mergedValue.value) && mergedValue.value.includes(option.value)
+      : mergedValue.value === option.value
 
     const optionContent = props.optionRender
       ? props.optionRender(option, { index })
@@ -405,7 +405,7 @@ function renderDropdown(): VNode | null {
       {
         key: option.value ?? index,
         class: classNames(`${prefixCls.value}-item`, `${prefixCls.value}-item-option`, {
-          [`${prefixCls.value}-item-option-selected`]: isSelected.value,
+          [`${prefixCls.value}-item-option-selected`]: isSelected,
           [`${prefixCls.value}-item-option-disabled`]: option.disabled,
         }),
         onClick: () => {
@@ -416,7 +416,7 @@ function renderDropdown(): VNode | null {
           if (isMultiple.value) {
             let newValue: any[]
             if (Array.isArray(mergedValue.value)) {
-              if (isSelected.value) {
+              if (isSelected) {
                 newValue = mergedValue.value.filter(v => v !== option.value)
                 handleDeselect(option.value, option as OptionType)
               }
@@ -440,7 +440,7 @@ function renderDropdown(): VNode | null {
       },
       [
         h('div', { class: `${prefixCls.value}-item-option-content` }, [optionContent]),
-        isSelected.value && icons.value.itemIcon
+        isSelected && icons.value.itemIcon
           ? h('span', { class: `${prefixCls.value}-item-option-state` }, [icons.value.itemIcon])
           : null,
       ],
