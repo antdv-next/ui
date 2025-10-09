@@ -11,7 +11,6 @@ describe('dropdown - Submenu Hover Interaction', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
         ],
@@ -45,7 +44,6 @@ describe('dropdown - Submenu Hover Interaction', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
         ],
@@ -77,7 +75,6 @@ describe('dropdown - Submenu Hover Interaction', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Item' },
         ],

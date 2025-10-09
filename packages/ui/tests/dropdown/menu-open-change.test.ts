@@ -10,7 +10,6 @@ describe('dropdown - Auto Close via onOpenChange', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Sub Item 1' },
           { key: 'sub1-2', label: 'Sub Item 2' },
@@ -69,7 +68,6 @@ describe('dropdown - Auto Close via onOpenChange', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Sub Item 1' },
         ],
@@ -134,7 +132,6 @@ describe('dropdown - Auto Close via onOpenChange', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Sub Item 1' },
         ],

@@ -11,7 +11,6 @@ describe('dropdown - Submenu', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
           { key: 'sub1-2', label: 'Submenu Item 2' },
@@ -45,13 +44,11 @@ describe('dropdown - Submenu', () => {
       {
         key: 'sub1',
         label: 'Submenu Level 1',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Item 1-1' },
           {
             key: 'sub1-2',
             label: 'Submenu Level 2',
-            type: 'submenu' as const,
             children: [
               { key: 'sub1-2-1', label: 'Item 1-2-1' },
               { key: 'sub1-2-2', label: 'Item 1-2-2' },
@@ -84,7 +81,6 @@ describe('dropdown - Submenu', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
         ],

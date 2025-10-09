@@ -15,7 +15,6 @@ const items = computed<MenuItemType[]>(() => [
     icon: () => h(MailOutlined),
     label: 'Navigation One',
     theme: menuTheme.value,
-    type: 'submenu',
     children: [
       { key: '1', label: 'Option 1' },
       { key: '2', label: 'Option 2' },

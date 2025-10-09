@@ -10,7 +10,6 @@ describe('dropdown - Submenu ExpandIcon', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
           { key: 'sub1-2', label: 'Submenu Item 2' },
@@ -43,7 +42,6 @@ describe('dropdown - Submenu ExpandIcon', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
         ],
@@ -76,7 +74,6 @@ describe('dropdown - Submenu ExpandIcon', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           { key: 'sub1-1', label: 'Submenu Item 1' },
         ],
@@ -108,12 +105,10 @@ describe('dropdown - Submenu ExpandIcon', () => {
       {
         key: 'sub1',
         label: 'Level 1',
-        type: 'submenu' as const,
         children: [
           {
             key: 'sub1-1',
             label: 'Level 2',
-            type: 'submenu' as const,
             children: [
               { key: 'sub1-1-1', label: 'Item' },
             ],

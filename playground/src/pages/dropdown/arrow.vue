@@ -1,16 +1,45 @@
-<script lang="ts" setup>
+<script setup lang="ts">
+import { h } from 'vue'
+
 const items = [
   {
     key: '1',
-    label: '1st menu item',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://www.antgroup.com',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
+        '1st menu item',
+      ),
   },
   {
     key: '2',
-    label: '2nd menu item',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://www.aliyun.com',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
+        '2nd menu item',
+      ),
   },
   {
     key: '3',
-    label: '3rd menu item',
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://www.luohanacademy.com',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
+        '3rd menu item',
+      ),
   },
 ]
 </script>

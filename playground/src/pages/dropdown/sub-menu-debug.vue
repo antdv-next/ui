@@ -38,7 +38,7 @@ const items = [
     children: [
       {
         key: '3-1',
-        label: '5th menu item',
+        label: '5d menu item',
       },
       {
         key: '3-2',
@@ -50,12 +50,18 @@ const items = [
 </script>
 
 <template>
-  <a-dropdown :menu="{ items }">
-    <a @click.prevent>
-      <a-space>
-        Cascading menu
-        <DownOutlined />
-      </a-space>
-    </a>
-  </a-dropdown>
+  <div style="height: 200px">
+    <a-dropdown
+      :menu="{ items, openKeys: ['2'] }"
+      :open="true"
+      :auto-adjust-overflow="false"
+    >
+      <a @click.prevent>
+        <a-space>
+          Cascading menu
+          <DownOutlined />
+        </a-space>
+      </a>
+    </a-dropdown>
+  </div>
 </template>

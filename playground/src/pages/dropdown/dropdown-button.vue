@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { DownOutlined, UserOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 

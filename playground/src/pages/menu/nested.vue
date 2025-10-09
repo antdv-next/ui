@@ -8,21 +8,18 @@ const nestedItems = [
   {
     key: 'app',
     label: 'Navigation Two',
-    type: 'submenu',
     children: [
       { key: 'app1', label: 'Option 1' },
       { key: 'app2', label: 'Option 2' },
       {
         key: 'app3',
         label: 'Option 3',
-        type: 'submenu',
         children: [
           { key: 'app3-1', label: 'Inner Option 1' },
           { key: 'app3-2', label: 'Inner Option 2' },
           {
             key: 'app3-3',
             label: 'Level 3',
-            type: 'submenu',
             children: [
               { key: 'app3-3-1', label: 'Item 1' },
               { key: 'app3-3-2', label: 'Item 2' },
@@ -35,7 +32,6 @@ const nestedItems = [
   {
     key: 'settings',
     label: 'Navigation Three',
-    type: 'submenu',
     children: [
       {
         key: 'group1',

@@ -47,24 +47,24 @@ const items = [
 <template>
   <a-space direction="vertical">
     <a-space wrap>
-      <a-dropdown :menu="{ items }" placement="bottomLeft">
+      <a-dropdown :menu="{ items }" placement="bottomLeft" :arrow="{ pointAtCenter: true }">
         <a-button>bottomLeft</a-button>
       </a-dropdown>
-      <a-dropdown :menu="{ items }" placement="bottom">
+      <a-dropdown :menu="{ items }" placement="bottom" :arrow="{ pointAtCenter: true }">
         <a-button>bottom</a-button>
       </a-dropdown>
-      <a-dropdown :menu="{ items }" placement="bottomRight">
+      <a-dropdown :menu="{ items }" placement="bottomRight" :arrow="{ pointAtCenter: true }">
         <a-button>bottomRight</a-button>
       </a-dropdown>
     </a-space>
     <a-space wrap>
-      <a-dropdown :menu="{ items }" placement="topLeft">
+      <a-dropdown :menu="{ items }" placement="topLeft" :arrow="{ pointAtCenter: true }">
         <a-button>topLeft</a-button>
       </a-dropdown>
-      <a-dropdown :menu="{ items }" placement="top">
+      <a-dropdown :menu="{ items }" placement="top" :arrow="{ pointAtCenter: true }">
         <a-button>top</a-button>
       </a-dropdown>
-      <a-dropdown :menu="{ items }" placement="topRight">
+      <a-dropdown :menu="{ items }" placement="topRight" :arrow="{ pointAtCenter: true }">
         <a-button>topRight</a-button>
       </a-dropdown>
     </a-space>

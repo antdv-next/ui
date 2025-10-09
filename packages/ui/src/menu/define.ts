@@ -66,7 +66,6 @@ export interface SubMenuType extends Omit<SubMenuProps, 'children'> {
   key?: Key
   label?: VueNode | (() => VueNode)
   children: ItemType[]
-  type: 'submenu'
 }
 
 export interface MenuItemGroupType extends MenuItemGroupProps {

@@ -17,7 +17,6 @@ const inlineItems = [
   {
     key: 'sub1',
     label: 'Navigation Four',
-    type: 'submenu',
     children: [
       { key: '4', label: 'Option 1' },
       { key: '5', label: 'Option 2' },
@@ -32,7 +31,6 @@ const horizontalItems = [
   {
     key: 'h-sub',
     label: 'Sub Menu',
-    type: 'submenu',
     children: [
       { key: 'h3', label: 'Option 1' },
       { key: 'h4', label: 'Option 2' },

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { DownOutlined, StarOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
@@ -11,7 +11,6 @@ const defaultItems = [
   {
     key: 'sub1',
     label: 'Submenu (Default Icon)',
-    type: 'submenu' as const,
     children: [
       {
         key: 'sub1-1',
@@ -20,7 +19,6 @@ const defaultItems = [
       {
         key: 'sub1-2',
         label: 'Nested Submenu',
-        type: 'submenu' as const,
         children: [
           {
             key: 'sub1-2-1',
@@ -45,7 +43,6 @@ const customItems = [
   {
     key: 'sub1',
     label: 'Submenu (Custom Icon)',
-    type: 'submenu' as const,
     children: [
       {
         key: 'sub1-1',
@@ -54,7 +51,6 @@ const customItems = [
       {
         key: 'sub1-2',
         label: 'Nested Submenu',
-        type: 'submenu' as const,
         children: [
           {
             key: 'sub1-2-1',

@@ -64,13 +64,24 @@ declare module 'vue-router/auto-routes' {
     '/divider/vertical': RouteRecordInfo<'/divider/vertical', '/divider/vertical', Record<never, never>, Record<never, never>>,
     '/divider/with-text': RouteRecordInfo<'/divider/with-text', '/divider/with-text', Record<never, never>, Record<never, never>>,
     '/dropdown/arrow': RouteRecordInfo<'/dropdown/arrow', '/dropdown/arrow', Record<never, never>, Record<never, never>>,
+    '/dropdown/arrow-center': RouteRecordInfo<'/dropdown/arrow-center', '/dropdown/arrow-center', Record<never, never>, Record<never, never>>,
     '/dropdown/basic': RouteRecordInfo<'/dropdown/basic', '/dropdown/basic', Record<never, never>, Record<never, never>>,
     '/dropdown/context-menu': RouteRecordInfo<'/dropdown/context-menu', '/dropdown/context-menu', Record<never, never>, Record<never, never>>,
+    '/dropdown/custom-dropdown': RouteRecordInfo<'/dropdown/custom-dropdown', '/dropdown/custom-dropdown', Record<never, never>, Record<never, never>>,
     '/dropdown/custom-expand-icon': RouteRecordInfo<'/dropdown/custom-expand-icon', '/dropdown/custom-expand-icon', Record<never, never>, Record<never, never>>,
     '/dropdown/dropdown-button': RouteRecordInfo<'/dropdown/dropdown-button', '/dropdown/dropdown-button', Record<never, never>, Record<never, never>>,
+    '/dropdown/event': RouteRecordInfo<'/dropdown/event', '/dropdown/event', Record<never, never>, Record<never, never>>,
     '/dropdown/extra': RouteRecordInfo<'/dropdown/extra', '/dropdown/extra', Record<never, never>, Record<never, never>>,
+    '/dropdown/icon-debug': RouteRecordInfo<'/dropdown/icon-debug', '/dropdown/icon-debug', Record<never, never>, Record<never, never>>,
+    '/dropdown/item': RouteRecordInfo<'/dropdown/item', '/dropdown/item', Record<never, never>, Record<never, never>>,
+    '/dropdown/loading': RouteRecordInfo<'/dropdown/loading', '/dropdown/loading', Record<never, never>, Record<never, never>>,
+    '/dropdown/menu-full': RouteRecordInfo<'/dropdown/menu-full', '/dropdown/menu-full', Record<never, never>, Record<never, never>>,
+    '/dropdown/overlay-open': RouteRecordInfo<'/dropdown/overlay-open', '/dropdown/overlay-open', Record<never, never>, Record<never, never>>,
     '/dropdown/placement': RouteRecordInfo<'/dropdown/placement', '/dropdown/placement', Record<never, never>, Record<never, never>>,
+    '/dropdown/render-panel': RouteRecordInfo<'/dropdown/render-panel', '/dropdown/render-panel', Record<never, never>, Record<never, never>>,
+    '/dropdown/selectable': RouteRecordInfo<'/dropdown/selectable', '/dropdown/selectable', Record<never, never>, Record<never, never>>,
     '/dropdown/sub-menu': RouteRecordInfo<'/dropdown/sub-menu', '/dropdown/sub-menu', Record<never, never>, Record<never, never>>,
+    '/dropdown/sub-menu-debug': RouteRecordInfo<'/dropdown/sub-menu-debug', '/dropdown/sub-menu-debug', Record<never, never>, Record<never, never>>,
     '/dropdown/trigger': RouteRecordInfo<'/dropdown/trigger', '/dropdown/trigger', Record<never, never>, Record<never, never>>,
     '/flex/basic': RouteRecordInfo<'/flex/basic', '/flex/basic', Record<never, never>, Record<never, never>>,
     '/layout/basic': RouteRecordInfo<'/layout/basic', '/layout/basic', Record<never, never>, Record<never, never>>,
@@ -355,12 +366,20 @@ declare module 'vue-router/auto-routes' {
       routes: '/dropdown/arrow'
       views: never
     }
+    'src/pages/dropdown/arrow-center.vue': {
+      routes: '/dropdown/arrow-center'
+      views: never
+    }
     'src/pages/dropdown/basic.vue': {
       routes: '/dropdown/basic'
       views: never
     }
     'src/pages/dropdown/context-menu.vue': {
       routes: '/dropdown/context-menu'
+      views: never
+    }
+    'src/pages/dropdown/custom-dropdown.vue': {
+      routes: '/dropdown/custom-dropdown'
       views: never
     }
     'src/pages/dropdown/custom-expand-icon.vue': {
@@ -371,16 +390,52 @@ declare module 'vue-router/auto-routes' {
       routes: '/dropdown/dropdown-button'
       views: never
     }
+    'src/pages/dropdown/event.vue': {
+      routes: '/dropdown/event'
+      views: never
+    }
     'src/pages/dropdown/extra.vue': {
       routes: '/dropdown/extra'
+      views: never
+    }
+    'src/pages/dropdown/icon-debug.vue': {
+      routes: '/dropdown/icon-debug'
+      views: never
+    }
+    'src/pages/dropdown/item.vue': {
+      routes: '/dropdown/item'
+      views: never
+    }
+    'src/pages/dropdown/loading.vue': {
+      routes: '/dropdown/loading'
+      views: never
+    }
+    'src/pages/dropdown/menu-full.vue': {
+      routes: '/dropdown/menu-full'
+      views: never
+    }
+    'src/pages/dropdown/overlay-open.vue': {
+      routes: '/dropdown/overlay-open'
       views: never
     }
     'src/pages/dropdown/placement.vue': {
       routes: '/dropdown/placement'
       views: never
     }
+    'src/pages/dropdown/render-panel.vue': {
+      routes: '/dropdown/render-panel'
+      views: never
+    }
+    'src/pages/dropdown/selectable.vue': {
+      routes: '/dropdown/selectable'
+      views: never
+    }
     'src/pages/dropdown/sub-menu.vue': {
       routes: '/dropdown/sub-menu'
+      views: never
+    }
+    'src/pages/dropdown/sub-menu-debug.vue': {
+      routes: '/dropdown/sub-menu-debug'
       views: never
     }
     'src/pages/dropdown/trigger.vue': {

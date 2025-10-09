@@ -73,7 +73,6 @@ describe('dropdown - menu extra', () => {
       {
         key: 'sub1',
         label: 'Submenu',
-        type: 'submenu' as const,
         children: [
           {
             key: 'sub1-1',

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { DownOutlined, SmileOutlined } from '@ant-design/icons-vue'
+import { DownOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
 const items = [
   {
-    key: '1',
+    key: '0',
     label: () =>
       h(
         'a',
@@ -17,7 +17,7 @@ const items = [
       ),
   },
   {
-    key: '2',
+    key: '1',
     label: () =>
       h(
         'a',
@@ -26,29 +26,16 @@ const items = [
           target: '_blank',
           rel: 'noopener noreferrer',
         },
-        '2nd menu item (disabled)',
+        '2nd menu item',
       ),
-    icon: () => h(SmileOutlined),
-    disabled: true,
+  },
+  {
+    type: 'divider' as const,
   },
   {
     key: '3',
-    label: () =>
-      h(
-        'a',
-        {
-          href: 'https://www.luohanacademy.com',
-          target: '_blank',
-          rel: 'noopener noreferrer',
-        },
-        '3rd menu item (disabled)',
-      ),
+    label: '3rd menu item（disabled）',
     disabled: true,
-  },
-  {
-    key: '4',
-    danger: true,
-    label: 'a danger item',
   },
 ]
 </script>

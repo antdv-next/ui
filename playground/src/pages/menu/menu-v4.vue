@@ -25,7 +25,6 @@ const items = [
     key: 'sub1',
     icon: () => h(AppstoreOutlined),
     label: 'Navigation Two',
-    type: 'submenu',
     children: [
       {
         key: '3',
@@ -44,7 +43,6 @@ const items = [
       {
         key: 'sub1-2',
         label: 'Submenu',
-        type: 'submenu',
         children: [
           { key: '5', label: 'Option 5' },
           { key: '6', label: 'Option 6' },
@@ -56,7 +54,6 @@ const items = [
     key: 'sub2',
     label: 'Navigation Three',
     icon: () => h(SettingOutlined),
-    type: 'submenu',
     children: [
       { key: '7', label: 'Option 7' },
       { key: '8', label: 'Option 8' },

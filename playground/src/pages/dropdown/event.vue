@@ -1,30 +1,32 @@
 <script setup lang="ts">
 import { DownOutlined } from '@ant-design/icons-vue'
 
+function handleClick({ key }: { key: string }) {
+  console.log(`Click on item ${key}`)
+  // message.info(`Click on item ${key}`)
+}
+
 const items = [
   {
-    label: '1st menu item',
-    key: '0',
-  },
-  {
-    label: '2nd menu item',
     key: '1',
+    label: '1st menu item',
   },
   {
-    type: 'divider' as const,
+    key: '2',
+    label: '2nd menu item',
   },
   {
-    label: '3rd menu item',
     key: '3',
+    label: '3rd menu item',
   },
 ]
 </script>
 
 <template>
-  <a-dropdown :menu="{ items }" :trigger="['click']">
+  <a-dropdown :menu="{ items, onClick: handleClick }">
     <a @click.prevent>
       <a-space>
-        Click me
+        Hover me, Click menu item
         <DownOutlined />
       </a-space>
     </a>

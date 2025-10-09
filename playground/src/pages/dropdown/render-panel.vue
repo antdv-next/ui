@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DownOutlined, SmileOutlined } from '@ant-design/icons-vue'
+import { SmileOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
 const items = [
@@ -54,12 +54,21 @@ const items = [
 </script>
 
 <template>
-  <a-dropdown :menu="{ items }">
-    <a @click.prevent>
-      <a-space>
-        Hover me
-        <DownOutlined />
-      </a-space>
-    </a>
-  </a-dropdown>
+  <div class="dropdown-panel">
+    <a-menu mode="vertical" :selectable="false" :items="items" class="ant-dropdown-menu" />
+  </div>
 </template>
+
+<style scoped>
+.dropdown-panel {
+  width: 240px;
+  padding: 4px 0;
+  border-radius: var(--ant-border-radius-lg);
+  background: var(--ant-color-bg-elevated);
+  box-shadow: var(--ant-box-shadow-secondary);
+}
+
+:deep(.ant-menu) {
+  border-inline-end: 0;
+}
+</style>

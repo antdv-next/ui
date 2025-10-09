@@ -36,10 +36,6 @@ MenuWithInstall.ItemGroup = MenuItemGroup
 
 MenuWithInstall.install = (app: App) => {
   app.component(Menu.name!, Menu)
-  // app.component('AMenuItem', MenuItem)
-  // app.component('AMenuSubMenu', SubMenu)
-  // app.component('AMenuDivider', MenuDivider)
-  // app.component('AMenuItemGroup', MenuItemGroup)
   return app
 }
 

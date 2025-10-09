@@ -18,7 +18,6 @@ const items = [
     key: 'SubMenu',
     label: 'Navigation Three - Submenu',
     icon: () => h(SettingOutlined),
-    type: 'submenu',
     children: [
       {
         key: 'group1',

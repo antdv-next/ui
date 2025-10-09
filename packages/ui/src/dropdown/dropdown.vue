@@ -26,6 +26,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   disabled: false,
   autoFocus: false,
   open: undefined,
+  contextMenuMode: 'follow',
 })
 
 const emit = defineEmits<DropdownEmits>()
