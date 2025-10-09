@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { VNodeNormalizedChildren } from 'vue'
-import type { VNodeChildAtom } from '../_utils/checker'
+import type { VNodeChild, VNodeNormalizedChildren } from 'vue'
 import type { SpaceCompactProps } from './define'
 import { omit } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
@@ -36,9 +35,10 @@ const clx = computed(() => {
 
 const slots = useSlots()
 const flattenChildrenItem = computed(() => flattenChildren(slots.default?.() || []))
+
 const noCompactItemContext = computed(() => !compactItemContext || isEmpty(compactItemContext))
 
-function getChildrenKey(child: VNodeChildAtom | VNodeNormalizedChildren, index: number) {
+function getChildrenKey(child: VNodeChild | VNodeNormalizedChildren, index: number) {
   return (child && typeof child === 'object' && 'key' in child && child.key as PropertyKey) || `${prefixCls.value}-item-${index}`
 }
 </script>
