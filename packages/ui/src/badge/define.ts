@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, VNode } from 'vue'
 import type { PresetStatusColorType } from '../_utils/colors'
 import type { LiteralUnion } from '../_utils/type'
 import type { PresetColorKey } from '../theme/interface'
@@ -33,4 +33,14 @@ export interface SingleNumberProps {
   prefixCls?: string
   value?: string
   count?: number
+}
+
+export interface ScrollNumberProps {
+  prefixCls?: string
+  count?: number
+  component?: string
+  title?: string | VNode
+  show?: boolean
+  style?: string | CSSProperties
+  class?: string
 }
