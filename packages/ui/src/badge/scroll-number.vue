@@ -10,6 +10,11 @@ import { cloneElement } from '../_utils/node'
 import { useConfigContext } from '../config-provider/context'
 import SingleNumber from './single-number.vue'
 
+defineOptions({
+  name: 'ScrollNumber',
+  inheritAttrs: false,
+})
+
 const props = defineProps<ScrollNumberProps>()
 
 const Tag = toRef(props, 'component')
@@ -19,7 +24,15 @@ const prefixCls = computed(() => ctx.getPrefixCls('space', props.prefixCls))
 const attrs = useAttrs()
 
 const newProps = computed(() => {
-  const restProps = omit({ ...props, ...attrs }, ['prefixCls', 'count', 'title', 'show', 'component', 'class', 'style'])
+  const restProps = omit({ ...props, ...attrs }, [
+    'prefixCls',
+    'count',
+    'title',
+    'show',
+    'component',
+    'class',
+    'style',
+  ])
 
   const styles = {
     ...restProps,
@@ -61,9 +74,13 @@ const slots = useSlots()
 const childrenNodes = computed(() => {
   const children = filterEmpty(slots.default?.() ?? [])
   if (Array.isArray(children) && children.length) {
-    return cloneElement(children, {
-      class: [`${prefixCls.value}-custom-component`],
-    }, false)
+    return cloneElement(
+      children,
+      {
+        class: [`${prefixCls.value}-custom-component`],
+      },
+      false,
+    )
   }
   return null
 })

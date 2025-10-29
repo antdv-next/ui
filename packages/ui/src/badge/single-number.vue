@@ -138,7 +138,11 @@ const unitNodes = computed(() => {
 </script>
 
 <template>
-  <span :class="[`${prefixCls}-only`]" :style="offsetStyle" @transitionend="onTransitionEnd">
+  <span
+    :class="[`${prefixCls}-only`]"
+    :style="offsetStyle"
+    @transitionend="onTransitionEnd"
+  >
     <RenderComponent :render="unitNodes" />
   </span>
 </template>

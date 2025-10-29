@@ -2,12 +2,14 @@
 import type { CSSProperties } from 'vue'
 import type { BadgeProps } from './define'
 import { flattenChildren } from '@v-c/util/dist/props-util'
-import { computed, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
+import { computed, h, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
 import { isPresetColor } from '../_utils/colors'
 import isNumeric from '../_utils/isNumeric'
+import { cloneElement } from '../_utils/node'
 import RenderComponent from '../_utils/renderComponent.vue'
 import { getTransitionProps } from '../_utils/transition'
 import { useConfigContext } from '../config-provider/context'
+import ScrollNumber from './scroll-number.vue'
 
 defineOptions({
   name: 'ABadge',
@@ -20,7 +22,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   size: 'default',
 })
 // size
-const { prefixCls: _prefixCls, offset, count, overflowCount, showZero, status, color, dot } = toRefs(props)
+const { prefixCls: _prefixCls, offset, count, overflowCount, showZero, status, color, dot, title } = toRefs(props)
 const ctx = useConfigContext()
 const prefixCls = computed(() => ctx.getPrefixCls('badge', _prefixCls.value))
 const direction = computed(() => ctx.direction)
@@ -90,17 +92,9 @@ const statusStyle = computed(() => {
   }
 })
 
-// const scrollNumberCls = computed(() => ({
-//   [`${prefixCls.value}-dot`]: isDotRef.value,
-//   [`${prefixCls.value}-count`]: !isDotRef.value,
-//   [`${prefixCls.value}-count-sm`]: size.value === 'small',
-//   [`${prefixCls.value}-multiple-words`]:
-//         !isDotRef.value && displayCount.value && displayCount.value.toString().length > 1,
-//   [`${prefixCls.value}-status-${status.value}`]: !!status.value,
-//   [`${prefixCls.value}-color-${color.value}`]: isInternalColor.value,
-// }))
-
 const slots = useSlots()
+const visible = ref(!!(!isHidden.value || slots.count))
+
 const childrenNodes = computed(() => {
   return flattenChildren(slots.default?.())
 })
@@ -126,6 +120,17 @@ const mergedStyles = computed(() => {
     ...style,
   }
 })
+
+const scrollNumberStyle = computed(() => {
+  let styles: CSSProperties = { ...mergedStyles, ...props.numberStyle }
+
+  if (color.value && !isInternalColor.value) {
+    styles = styles || {}
+    styles.background = color.value
+  }
+
+  return styles
+})
 const badgeClassNames = computed(() => [
   !!hasStatus.value && `${prefixCls.value}-status`,
   !childrenNodes.value && `${prefixCls.value}-not-a-wrapper`,
@@ -136,15 +141,46 @@ const badgeClassNames = computed(() => [
 const transitionProps = computed(() => getTransitionProps(childrenNodes.value ? `${prefixCls.value}-zoom` : '', {
   appear: false,
 }))
+
+const titleNode
+  = computed(() => {
+    return title.value ?? (typeof count.value === 'string' || typeof count.value === 'number' ? count.value : undefined)
+  })
+
+const scrollNumberCls = computed(() => ({
+  [`${prefixCls.value}-dot`]: isDotRef.value,
+  [`${prefixCls.value}-count`]: !isDotRef.value,
+  [`${prefixCls.value}-count-sm`]: props.size === 'small',
+  [`${prefixCls.value}-multiple-words`]:
+    !isDotRef.value && displayCount.value && displayCount.value.toString().length > 1,
+  [`${prefixCls.value}-status-${props.status}`]: !!props.status,
+  [`${prefixCls.value}-color-${props.color}`]: isInternalColor.value,
+}))
+
+const displayNode = computed(() => {
+  return typeof count.value === 'object' || (count.value === undefined && slots.count)
+    ? cloneElement(
+        (count.value ?? slots.count?.()) || [],
+        {
+          style: mergedStyles.value,
+        },
+        false,
+      )
+    : null
+})
+
+const statusTextNode = computed(() => {
+  const text = props.text ?? slots.text?.()
+  return visible.value || !text.value
+    ? null
+    : h('span', {
+        class: [`${prefixCls.value}-status-text`],
+      }, [text.value])
+})
 </script>
 
 <template>
-  <span
-    v-if="childrenNodes.length > 0 && hasStatus"
-    v-bind="$attrs"
-    :class="badgeClassNames"
-    :style="mergedStyles"
-  >
+  <span v-if="childrenNodes.length > 0 && hasStatus" v-bind="$attrs" :class="badgeClassNames" :style="mergedStyles">
     <span :class="statusCls" :style="statusStyle" />
     <span :style="{ color: mergedStyles.color }" :class="[`${prefixCls}-status-text`]">
       {{ text }}
@@ -154,7 +190,20 @@ const transitionProps = computed(() => getTransitionProps(childrenNodes.value ? 
   <span v-bind="$attrs" :class="badgeClassNames">
     <RenderComponent :render="childrenNodes" />
     <Transition v-bind="transitionProps">
-      <!-- scrollNumber -->
+
+      <ScrollNumber
+        v-show="visible"
+        key="scrollNumber"
+        :prefix-cls="scrollNumberPrefixCls"
+        :show="visible"
+        :class="scrollNumberCls"
+        :count="displayCount"
+        :title="titleNode"
+        :style="scrollNumberStyle"
+      >
+        <RenderComponent :render="displayNode" />
+      </ScrollNumber>
+      <RenderComponent :render="statusTextNode" />
     </Transition>
   </span>
 </template>

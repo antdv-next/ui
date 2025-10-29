@@ -1,7 +1,7 @@
-import type { CSSProperties, VNode } from 'vue'
+import type { CSSProperties } from 'vue'
 import type { PresetStatusColorType } from '../_utils/colors'
 import type { LiteralUnion } from '../_utils/type'
-import type { PresetColorKey } from '../theme/interface'
+import type { PresetColorKey, PresetColorType } from '../theme/interface'
 
 export interface BadgeProps {
   /** Number to show in badge */
@@ -37,10 +37,17 @@ export interface SingleNumberProps {
 
 export interface ScrollNumberProps {
   prefixCls?: string
-  count?: number
+  count?: number | string | null
   component?: string
-  title?: string | VNode
+  title?: string | number
   show?: boolean
   style?: string | CSSProperties
-  class?: string
+  class?: string | Record<string, unknown>
+}
+
+export interface RibbonProps {
+  prefixCls?: string
+  color?: LiteralUnion<keyof PresetColorType>
+  text?: string
+  placement?: 'start' | 'end'
 }
