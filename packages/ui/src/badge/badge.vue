@@ -93,7 +93,8 @@ const statusStyle = computed(() => {
 })
 
 const slots = useSlots()
-const visible = ref(!!(!isHidden.value || slots.count))
+
+const visible = computed(() => !!(!isHidden.value || slots.count))
 
 const childrenNodes = computed(() => {
   return flattenChildren(slots.default?.())
@@ -132,6 +133,7 @@ const scrollNumberStyle = computed(() => {
   return styles
 })
 const badgeClassNames = computed(() => [
+  prefixCls.value,
   !!hasStatus.value && `${prefixCls.value}-status`,
   !childrenNodes.value && `${prefixCls.value}-not-a-wrapper`,
   direction.value === 'rtl' && `${prefixCls.value}-rtl`,
@@ -201,9 +203,10 @@ const statusTextNode = computed(() => {
         :title="titleNode"
         :style="scrollNumberStyle"
       >
-        <RenderComponent :render="displayNode" />
+        <RenderComponent v-if="!!displayNode" :render="displayNode" />
       </ScrollNumber>
-      <RenderComponent :render="statusTextNode" />
     </Transition>
+
+    <RenderComponent :render="statusTextNode" />
   </span>
 </template>

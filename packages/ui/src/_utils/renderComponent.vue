@@ -14,8 +14,8 @@ interface Props {
 
 <template>
   <template v-if="Array.isArray(render)">
-    <component :is="item" v-for="(item, index) in render" :key="index" />
+    <component :is="item" v-for="(item, index) in render" :key="index" v-bind="$attrs" />
   </template>
 
-  <component :is="render" />
+  <component :is="render" v-bind="$attrs" />
 </template>

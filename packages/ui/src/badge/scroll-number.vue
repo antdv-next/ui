@@ -3,10 +3,11 @@ import type { CSSProperties } from 'vue'
 import type { ScrollNumberProps } from './define'
 
 import { omit } from 'es-toolkit'
+import { computed, h, useAttrs, useSlots } from 'vue'
 
-import { computed, h, toRef, useAttrs, useSlots } from 'vue'
 import { filterEmpty } from '../_utils/checker'
 import { cloneElement } from '../_utils/node'
+import RenderComponent from '../_utils/renderComponent.vue'
 import { useConfigContext } from '../config-provider/context'
 import SingleNumber from './single-number.vue'
 
@@ -17,9 +18,9 @@ defineOptions({
 
 const props = defineProps<ScrollNumberProps>()
 
-const Tag = toRef(props, 'component')
+const Tag = computed(() => props.component || 'sup')
 const ctx = useConfigContext()
-const prefixCls = computed(() => ctx.getPrefixCls('space', props.prefixCls))
+const prefixCls = computed(() => ctx.getPrefixCls('scroll-number', props.prefixCls))
 
 const attrs = useAttrs()
 
@@ -73,11 +74,12 @@ const numberNodes = computed(() => {
 const slots = useSlots()
 const childrenNodes = computed(() => {
   const children = filterEmpty(slots.default?.() ?? [])
+
   if (Array.isArray(children) && children.length) {
     return cloneElement(
       children,
       {
-        class: [`${prefixCls.value}-custom-component`],
+        class: `${prefixCls.value}-custom-component`,
       },
       false,
     )

@@ -44,6 +44,8 @@ declare module 'vue-router/auto-routes' {
     '/avatar/group': RouteRecordInfo<'/avatar/group', '/avatar/group', Record<never, never>, Record<never, never>>,
     '/avatar/responsive': RouteRecordInfo<'/avatar/responsive', '/avatar/responsive', Record<never, never>, Record<never, never>>,
     '/avatar/type': RouteRecordInfo<'/avatar/type', '/avatar/type', Record<never, never>, Record<never, never>>,
+    '/badge/': RouteRecordInfo<'/badge/', '/badge', Record<never, never>, Record<never, never>>,
+    '/badge/basic': RouteRecordInfo<'/badge/basic', '/badge/basic', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -284,6 +286,14 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/avatar/type.vue': {
       routes: '/avatar/type'
+      views: never
+    }
+    'src/pages/badge/index.vue': {
+      routes: '/badge/'
+      views: never
+    }
+    'src/pages/badge/basic.vue': {
+      routes: '/badge/basic'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {
