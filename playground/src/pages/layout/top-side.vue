@@ -17,7 +17,6 @@ const sideMenuItems: ItemType[] = [UserOutlined, LaptopOutlined, NotificationOut
     key: `sub${key}`,
     icon: () => h(icon),
     label: `subnav ${key}`,
-    type: 'submenu',
     children: Array.from({ length: 4 }).map((_, j) => {
       const subKey = index * 4 + j + 1
       return {

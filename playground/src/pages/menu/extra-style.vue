@@ -7,7 +7,6 @@ const items1 = [
     key: 'sub1',
     icon: () => h(MailOutlined),
     label: 'Navigation One',
-    type: 'submenu',
     children: [
       {
         key: '1',

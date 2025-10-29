@@ -27,14 +27,12 @@ const items: MenuItemType[] = [
     key: 'sub1',
     label: 'Navigation Two',
     icon: () => h(AppstoreOutlined),
-    type: 'submenu',
     children: [
       { key: '3', label: 'Option 3' },
       { key: '4', label: 'Option 4' },
       {
         key: 'sub1-2',
         label: 'Submenu',
-        type: 'submenu',
         children: [
           { key: '5', label: 'Option 5' },
           { key: '6', label: 'Option 6' },
@@ -46,7 +44,6 @@ const items: MenuItemType[] = [
     key: 'sub2',
     label: 'Navigation Three',
     icon: () => h(SettingOutlined),
-    type: 'submenu',
     children: [
       { key: '7', label: 'Option 7' },
       { key: '8', label: 'Option 8' },

@@ -19,6 +19,9 @@ export type {
   TriggerSubMenuAction,
 } from './define'
 
+export type { MenuOverrideContext } from './override-context'
+export { useMenuOverride, useProvideMenuOverride } from './override-context'
+
 const MenuWithInstall = Menu as typeof Menu & {
   Item: typeof MenuItem
   SubMenu: typeof SubMenu
@@ -33,10 +36,6 @@ MenuWithInstall.ItemGroup = MenuItemGroup
 
 MenuWithInstall.install = (app: App) => {
   app.component(Menu.name!, Menu)
-  // app.component('AMenuItem', MenuItem)
-  // app.component('AMenuSubMenu', SubMenu)
-  // app.component('AMenuDivider', MenuDivider)
-  // app.component('AMenuItemGroup', MenuItemGroup)
   return app
 }
 

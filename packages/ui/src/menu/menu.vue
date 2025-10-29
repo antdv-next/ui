@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CSSProperties, StyleValue } from 'vue'
+import type { StyleValue } from 'vue'
 import type {
   ItemType,
   Key,
@@ -10,11 +10,12 @@ import type {
   MenuProps,
   SubMenuType,
 } from './define.ts'
-import { computed, h, nextTick, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
+import { computed, h, nextTick, onBeforeUnmount, onMounted, reactive, ref, shallowRef, useAttrs, watch } from 'vue'
 import { flattenChildren } from '../_utils/checker.ts'
 import { classNames } from '../_utils/classNames.ts'
 import { useZIndex } from '../_utils/hooks/useZIndex.ts'
 import { useComponentConfig, useConfigContext } from '../config-provider/context.ts'
+import { useDropdownContext } from '../dropdown/context.ts'
 import { useLayoutSider } from '../layout/context.ts'
 import {
   useProvideMenuContext,
@@ -26,6 +27,7 @@ import {
 import MenuDivider from './menu-divider.vue'
 import MenuItemGroup from './menu-item-group.vue'
 import MenuItem from './menu-item.vue'
+import { useMenuOverride, useProvideMenuOverride } from './override-context'
 import SubMenu from './sub-menu.vue'
 
 defineOptions({
@@ -55,11 +57,25 @@ const attrs = useAttrs()
 const configCtx = useConfigContext()
 const componentConfig = useComponentConfig('menu')
 
-const prefixCls = computed(() => configCtx.getPrefixCls('menu', props.prefixCls))
+// Try to get dropdown context if Menu is inside a Dropdown
+const dropdownCtx = useDropdownContext()
+
+// Try to get override context from parent (e.g., Dropdown)
+const overrideCtx = useMenuOverride()
+
+const prefixCls = computed(() => {
+  const customPrefixCls = props.prefixCls || overrideCtx.prefixCls.value
+  return configCtx.getPrefixCls('menu', customPrefixCls)
+})
 const theme = computed(() => props.theme || 'light')
-const mergedMode = computed(() => props.mode || 'vertical')
+const mergedMode = computed(() => overrideCtx.mode.value || props.mode || 'vertical')
 const inlineIndent = computed(() => props.inlineIndent ?? 24)
-const selectable = computed(() => props.selectable)
+const selectable = computed(() => {
+  if (overrideCtx.selectable.value !== undefined) {
+    return overrideCtx.selectable.value
+  }
+  return props.selectable
+})
 const multiple = computed(() => props.multiple)
 const triggerAction = computed(() => props.triggerSubMenuAction ?? 'hover')
 const openDelay = computed(() => props.subMenuOpenDelay ?? 0)
@@ -199,6 +215,30 @@ function isSubmenuHovered(key: Key) {
   return isElementHovered(entry.trigger) || isElementHovered(entry.popup)
 }
 
+// Check if any submenu is hovered - used by Dropdown to prevent closing
+function isAnySubmenuHovered(): boolean {
+  if (popoverSubmenuElements.size === 0)
+    return false
+
+  for (const [key] of popoverSubmenuElements.entries()) {
+    if (isSubmenuHovered(key))
+      return true
+  }
+
+  return false
+}
+
+// Register hover check with dropdown context if inside a dropdown
+if (dropdownCtx) {
+  onMounted(() => {
+    dropdownCtx.registerSubmenuHoverCheck(isAnySubmenuHovered)
+  })
+
+  onBeforeUnmount(() => {
+    dropdownCtx.unregisterSubmenuHoverCheck()
+  })
+}
+
 function toArray(set: Set<Key>) {
   return Array.from(set)
 }
@@ -304,6 +344,11 @@ function handleItemClick(info: { key: Key, keyPath: Key[], domEvent: Event, isSe
   }
 
   emit('click', clickInfo)
+
+  // Call override onClick if available
+  if (overrideCtx.onClick) {
+    overrideCtx.onClick()
+  }
 }
 
 function handleSubMenuToggle({ key, open }: { key: Key, keyPath: Key[], open: boolean, event: Event | null }) {
@@ -341,7 +386,17 @@ useProvideMenuContext({
   selectable,
   multiple,
   triggerSubMenuAction: triggerAction,
-  expandIcon: computed(() => props.expandIcon ?? null),
+  expandIcon: computed(() => {
+    // Priority: props.expandIcon > overrideCtx.expandIcon > null
+    if (props.expandIcon !== undefined && props.expandIcon !== null) {
+      return props.expandIcon
+    }
+    const overrideExpandIcon = overrideCtx.expandIcon.value
+    if (overrideExpandIcon !== undefined && overrideExpandIcon !== null) {
+      return overrideExpandIcon
+    }
+    return null
+  }),
   openDelay,
   closeDelay,
   openKeys: openKeysRef,
@@ -359,6 +414,9 @@ useProvideMenuContext({
   closePopoverSubmenus,
   setPopoverElements,
 })
+
+// Clear override context for nested menus to prevent cascading
+useProvideMenuOverride()
 
 useProvideMenuLevel(ref(1))
 useProvideMenuPath(ref<Key[]>([]))
@@ -450,6 +508,7 @@ function renderItems(items?: ItemType[] | null): any[] {
           danger: menuItem.danger,
           icon: menuItem.icon,
           title: typeof menuItem.label === 'string' ? menuItem.label : menuItem.title,
+          extra: menuItem.extra,
           item: menuItem,
         },
         {
@@ -465,9 +524,6 @@ function renderItems(items?: ItemType[] | null): any[] {
 const itemsNodes = computed(() => renderItems(props.items))
 const hasItems = computed(() => Array.isArray(props.items) && props.items.length > 0)
 
-const attrClass = computed(() => (attrs.class as string | undefined))
-const attrStyle = computed(() => attrs.style as CSSProperties | undefined)
-
 const rootClassName = computed(() => classNames(
   prefixCls.value,
   `${prefixCls.value}-root`,
@@ -480,7 +536,7 @@ const rootClassName = computed(() => classNames(
   componentConfig.value?.classNames?.root,
   props.rootClassName,
   props.classNames?.root,
-  attrClass.value,
+  overrideCtx.rootClassName.value,
 ))
 
 const mergedStyle = computed<StyleValue | undefined>(() => {
@@ -491,12 +547,8 @@ const mergedStyle = computed<StyleValue | undefined>(() => {
   const configStyle = componentConfig.value?.styles?.root as StyleValue | undefined
   if (configStyle)
     styles.push(configStyle)
-  if (props.style)
-    styles.push(props.style)
   if (props.styles?.root)
     styles.push(props.styles.root)
-  if (attrStyle.value)
-    styles.push(attrStyle.value)
   if (styles.length === 0)
     return undefined
   if (styles.length === 1)
@@ -513,8 +565,8 @@ const restAttrs = computed(() => {
 <template>
   <ul
     v-bind="restAttrs"
-    :class="rootClassName"
-    :style="mergedStyle"
+    :class="[rootClassName, $attrs.class] as any[]"
+    :style="[mergedStyle, $attrs.style] as any[]"
     role="menu"
   >
     <template v-if="hasItems">

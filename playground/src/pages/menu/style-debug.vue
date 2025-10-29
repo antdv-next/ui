@@ -9,7 +9,6 @@ const items = [
     key: 'sub1',
     label: 'Navigation One Long Long Long Long',
     icon: () => h(MailOutlined),
-    type: 'submenu',
     children: [
       { key: '1', label: 'Option 1' },
       { key: '2', label: 'Option 2' },
@@ -21,14 +20,12 @@ const items = [
     key: 'sub2',
     label: 'Navigation Two',
     icon: () => h(AppstoreOutlined),
-    type: 'submenu',
     children: [
       { key: '5', label: 'Option 5' },
       { key: '6', label: 'Option 6' },
       {
         key: 'sub3',
         label: 'Submenu',
-        type: 'submenu',
         children: [
           { key: '7', label: 'Option 7' },
           { key: '8', label: 'Option 8' },

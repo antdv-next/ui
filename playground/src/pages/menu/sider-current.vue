@@ -12,7 +12,6 @@ const items = [
     key: '1',
     icon: () => h(MailOutlined),
     label: 'Navigation One',
-    type: 'submenu',
     children: [
       { key: '11', label: 'Option 1' },
       { key: '12', label: 'Option 2' },
@@ -24,14 +23,12 @@ const items = [
     key: '2',
     icon: () => h(AppstoreOutlined),
     label: 'Navigation Two',
-    type: 'submenu',
     children: [
       { key: '21', label: 'Option 1' },
       { key: '22', label: 'Option 2' },
       {
         key: '23',
         label: 'Submenu',
-        type: 'submenu',
         children: [
           { key: '231', label: 'Option 1' },
           { key: '232', label: 'Option 2' },
@@ -41,7 +38,6 @@ const items = [
       {
         key: '24',
         label: 'Submenu 2',
-        type: 'submenu',
         children: [
           { key: '241', label: 'Option 1' },
           { key: '242', label: 'Option 2' },
@@ -54,7 +50,6 @@ const items = [
     key: '3',
     icon: () => h(SettingOutlined),
     label: 'Navigation Three',
-    type: 'submenu',
     children: [
       { key: '31', label: 'Option 1' },
       { key: '32', label: 'Option 2' },

@@ -25,7 +25,6 @@ const horizontalItems = [
     key: 'SubMenu',
     label: 'Navigation Three - Submenu',
     icon: () => h(SettingOutlined),
-    type: 'submenu',
     children: [
       {
         key: 'group1',
@@ -61,7 +60,6 @@ const inlineItems = [
     key: 'sub1',
     label: 'Navigation One',
     icon: () => h(MailOutlined),
-    type: 'submenu',
     children: [
       { key: '5', label: 'Option 5' },
       { key: '6', label: 'Option 6' },
@@ -73,14 +71,12 @@ const inlineItems = [
     key: 'sub2',
     label: 'Navigation Two',
     icon: () => h(AppstoreOutlined),
-    type: 'submenu',
     children: [
       { key: '9', label: 'Option 9' },
       { key: '10', label: 'Option 10' },
       {
         key: 'sub3',
         label: 'Submenu',
-        type: 'submenu',
         children: [
           { key: '11', label: 'Option 11' },
           { key: '12', label: 'Option 12' },

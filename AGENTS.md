@@ -6,10 +6,10 @@ For easier referencing and consistency checks, include the upstream repositories
 - react-component (React component utilities) — https://github.com/react-component
 
 ## Project Structure & Module Organization
-This repository is managed with **pnpm workspaces**.  
-The core source code lives in `packages/ui/src`, organized by component (`button/`, `tooltip/`, etc.), with shared utilities in `_utils/`.  
-Tests are located in `packages/ui/tests`, mirroring the feature folder structure (e.g. `button/`), with shared fixtures in `shared/`.  
-Use the `playground/` app for manual QA and demos, wired via the workspace.  
+This repository is managed with **pnpm workspaces**.
+The core source code lives in `packages/ui/src`, organized by component (`button/`, `tooltip/`, etc.), with shared utilities in `_utils/`.
+Tests are located in `packages/ui/tests`, mirroring the feature folder structure (e.g. `button/`), with shared fixtures in `shared/`.
+Use the `playground/` app for manual QA and demos, wired via the workspace.
 Key configuration files (`eslint.config.ts`, `vitest.config.ts`, `tsconfig*.json`) are placed at the repository root for centralized management.
 
 ## Component Development Rules
@@ -46,11 +46,9 @@ Key configuration files (`eslint.config.ts`, `vitest.config.ts`, `tsconfig*.json
 
 pnpm -F antdv-next test button/base.test.ts
 
-
 	•	To run a single test case by name (pattern matching against it() descriptions):
 
 pnpm -F antdv-next test -t "Button disabled"
-
 
 	•	Cover new props, events, and visual states in tests.
 	•	Assertions should be based on rendered output or emitted events, not internal implementation details.

@@ -29,7 +29,6 @@ const menuItems: ItemType[] = [
     key: 'sub1',
     icon: () => h(UserOutlined),
     label: 'User',
-    type: 'submenu',
     children: [
       { key: '3', label: 'Tom' },
       { key: '4', label: 'Bill' },
@@ -40,7 +39,6 @@ const menuItems: ItemType[] = [
     key: 'sub2',
     icon: () => h(TeamOutlined),
     label: 'Team',
-    type: 'submenu',
     children: [
       { key: '6', label: 'Team 1' },
       { key: '8', label: 'Team 2' },

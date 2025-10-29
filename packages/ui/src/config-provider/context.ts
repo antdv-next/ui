@@ -1,5 +1,5 @@
 import type { CSSProperties, InjectionKey } from 'vue'
-import type { ButtonProps } from '../button/define.ts'
+import type { ButtonProps } from '../button'
 import type { Locale } from '../locale'
 import type { PopoverProps } from '../popover'
 import type { TooltipProps } from '../tooltip'
@@ -44,7 +44,7 @@ export interface ConfigComponentProps {
   // modal?: ModalConfig;
   progress?: ComponentStyleConfig
   result?: ComponentStyleConfig
-  // slider?: SliderConfig;
+  slider?: ComponentStyleConfig
   breadcrumb?: ComponentStyleConfig
   menu?: ComponentStyleConfig
   checkbox?: ComponentStyleConfig
