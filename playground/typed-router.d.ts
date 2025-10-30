@@ -44,10 +44,16 @@ declare module 'vue-router/auto-routes' {
     '/avatar/group': RouteRecordInfo<'/avatar/group', '/avatar/group', Record<never, never>, Record<never, never>>,
     '/avatar/responsive': RouteRecordInfo<'/avatar/responsive', '/avatar/responsive', Record<never, never>, Record<never, never>>,
     '/avatar/type': RouteRecordInfo<'/avatar/type', '/avatar/type', Record<never, never>, Record<never, never>>,
-    '/badge/': RouteRecordInfo<'/badge/', '/badge', Record<never, never>, Record<never, never>>,
     '/badge/basic': RouteRecordInfo<'/badge/basic', '/badge/basic', Record<never, never>, Record<never, never>>,
     '/badge/change': RouteRecordInfo<'/badge/change', '/badge/change', Record<never, never>, Record<never, never>>,
     '/badge/colors': RouteRecordInfo<'/badge/colors', '/badge/colors', Record<never, never>, Record<never, never>>,
+    '/badge/dot': RouteRecordInfo<'/badge/dot', '/badge/dot', Record<never, never>, Record<never, never>>,
+    '/badge/link': RouteRecordInfo<'/badge/link', '/badge/link', Record<never, never>, Record<never, never>>,
+    '/badge/no-wrapper': RouteRecordInfo<'/badge/no-wrapper', '/badge/no-wrapper', Record<never, never>, Record<never, never>>,
+    '/badge/overflow': RouteRecordInfo<'/badge/overflow', '/badge/overflow', Record<never, never>, Record<never, never>>,
+    '/badge/ribbon': RouteRecordInfo<'/badge/ribbon', '/badge/ribbon', Record<never, never>, Record<never, never>>,
+    '/badge/status': RouteRecordInfo<'/badge/status', '/badge/status', Record<never, never>, Record<never, never>>,
+    '/badge/title': RouteRecordInfo<'/badge/title', '/badge/title', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -290,10 +296,6 @@ declare module 'vue-router/auto-routes' {
       routes: '/avatar/type'
       views: never
     }
-    'src/pages/badge/index.vue': {
-      routes: '/badge/'
-      views: never
-    }
     'src/pages/badge/basic.vue': {
       routes: '/badge/basic'
       views: never
@@ -304,6 +306,34 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/badge/colors.vue': {
       routes: '/badge/colors'
+      views: never
+    }
+    'src/pages/badge/dot.vue': {
+      routes: '/badge/dot'
+      views: never
+    }
+    'src/pages/badge/link.vue': {
+      routes: '/badge/link'
+      views: never
+    }
+    'src/pages/badge/no-wrapper.vue': {
+      routes: '/badge/no-wrapper'
+      views: never
+    }
+    'src/pages/badge/overflow.vue': {
+      routes: '/badge/overflow'
+      views: never
+    }
+    'src/pages/badge/ribbon.vue': {
+      routes: '/badge/ribbon'
+      views: never
+    }
+    'src/pages/badge/status.vue': {
+      routes: '/badge/status'
+      views: never
+    }
+    'src/pages/badge/title.vue': {
+      routes: '/badge/title'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {

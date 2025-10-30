@@ -5,7 +5,7 @@ import type { PresetColorKey, PresetColorType } from '../theme/interface'
 
 export interface BadgeProps {
   /** Number to show in badge */
-  count?: number | null
+  count?: number | string | null
   showZero?: boolean
   /** Max count to show */
   overflowCount?: number
@@ -32,7 +32,7 @@ export interface UnitNumberProps {
 export interface SingleNumberProps {
   prefixCls?: string
   value?: string
-  count?: number
+  count?: number | string
 }
 
 export interface ScrollNumberProps {

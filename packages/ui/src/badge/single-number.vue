@@ -12,7 +12,7 @@ defineOptions({
 const props = defineProps<SingleNumberProps>()
 
 const originValue = computed(() => Number(props.value))
-const originCount = computed(() => Math.abs(props.count!))
+const originCount = computed(() => Math.abs(Number(props.count)))
 
 const state = reactive({
   prevValue: originValue.value,

@@ -19,6 +19,7 @@ defineOptions({
 const props = defineProps<ScrollNumberProps>()
 
 const Tag = computed(() => props.component || 'sup')
+
 const ctx = useConfigContext()
 const prefixCls = computed(() => ctx.getPrefixCls('scroll-number', props.prefixCls))
 
@@ -61,7 +62,7 @@ const numberNodes = computed(() => {
     return numberList.map((num, i) => {
       return h(SingleNumber, {
         prefixCls: prefixCls.value,
-        count: Number(count),
+        count,
         value: num,
         key: numberList.length - i,
       })
