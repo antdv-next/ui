@@ -46,6 +46,8 @@ declare module 'vue-router/auto-routes' {
     '/avatar/type': RouteRecordInfo<'/avatar/type', '/avatar/type', Record<never, never>, Record<never, never>>,
     '/badge/': RouteRecordInfo<'/badge/', '/badge', Record<never, never>, Record<never, never>>,
     '/badge/basic': RouteRecordInfo<'/badge/basic', '/badge/basic', Record<never, never>, Record<never, never>>,
+    '/badge/change': RouteRecordInfo<'/badge/change', '/badge/change', Record<never, never>, Record<never, never>>,
+    '/badge/colors': RouteRecordInfo<'/badge/colors', '/badge/colors', Record<never, never>, Record<never, never>>,
     '/button/auto-insert-space': RouteRecordInfo<'/button/auto-insert-space', '/button/auto-insert-space', Record<never, never>, Record<never, never>>,
     '/button/basic': RouteRecordInfo<'/button/basic', '/button/basic', Record<never, never>, Record<never, never>>,
     '/button/block': RouteRecordInfo<'/button/block', '/button/block', Record<never, never>, Record<never, never>>,
@@ -294,6 +296,14 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/badge/basic.vue': {
       routes: '/badge/basic'
+      views: never
+    }
+    'src/pages/badge/change.vue': {
+      routes: '/badge/change'
+      views: never
+    }
+    'src/pages/badge/colors.vue': {
+      routes: '/badge/colors'
       views: never
     }
     'src/pages/button/auto-insert-space.vue': {
