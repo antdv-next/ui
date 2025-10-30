@@ -171,6 +171,11 @@ declare module 'vue-router/auto-routes' {
     '/spin/nested': RouteRecordInfo<'/spin/nested', '/spin/nested', Record<never, never>, Record<never, never>>,
     '/spin/size': RouteRecordInfo<'/spin/size', '/spin/size', Record<never, never>, Record<never, never>>,
     '/spin/tip': RouteRecordInfo<'/spin/tip', '/spin/tip', Record<never, never>, Record<never, never>>,
+    '/switch/basic': RouteRecordInfo<'/switch/basic', '/switch/basic', Record<never, never>, Record<never, never>>,
+    '/switch/disabled': RouteRecordInfo<'/switch/disabled', '/switch/disabled', Record<never, never>, Record<never, never>>,
+    '/switch/loading': RouteRecordInfo<'/switch/loading', '/switch/loading', Record<never, never>, Record<never, never>>,
+    '/switch/size': RouteRecordInfo<'/switch/size', '/switch/size', Record<never, never>, Record<never, never>>,
+    '/switch/text': RouteRecordInfo<'/switch/text', '/switch/text', Record<never, never>, Record<never, never>>,
     '/tooltip/basic': RouteRecordInfo<'/tooltip/basic', '/tooltip/basic', Record<never, never>, Record<never, never>>,
     '/tooltip/colorful': RouteRecordInfo<'/tooltip/colorful', '/tooltip/colorful', Record<never, never>, Record<never, never>>,
     '/tooltip/placement': RouteRecordInfo<'/tooltip/placement', '/tooltip/placement', Record<never, never>, Record<never, never>>,
@@ -802,6 +807,26 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/spin/tip.vue': {
       routes: '/spin/tip'
+      views: never
+    }
+    'src/pages/switch/basic.vue': {
+      routes: '/switch/basic'
+      views: never
+    }
+    'src/pages/switch/disabled.vue': {
+      routes: '/switch/disabled'
+      views: never
+    }
+    'src/pages/switch/loading.vue': {
+      routes: '/switch/loading'
+      views: never
+    }
+    'src/pages/switch/size.vue': {
+      routes: '/switch/size'
+      views: never
+    }
+    'src/pages/switch/text.vue': {
+      routes: '/switch/text'
       views: never
     }
     'src/pages/tooltip/basic.vue': {

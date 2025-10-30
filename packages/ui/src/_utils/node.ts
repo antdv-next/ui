@@ -39,3 +39,7 @@ export function cloneElement<T, U>(
   warning(typeof node.props?.class !== 'object', 'class must be string')
   return node
 }
+
+export function getPropsSlot<T extends Record<PropertyKey, unknown>, U extends Record<PropertyKey, undefined | ((...args: any[]) => any)>>(slots: U, props: T, prop = 'default') {
+  return props[prop] ?? slots[prop]?.()
+}
